@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Center, Locale } from '../../data/types';
+import { courses } from '../../data/courses';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+interface Props {
+  center: Center;
+  locale: Locale;
+}
+
+const { center, locale } = Astro.props;
+
+const centerCourses = courses.filter(c => c.centerId === center.id);
+
+// Helper for tags
+function getCourseTags(courseId: string) {
+  const course = courses.find(c => c.id === courseId);
+  return course?.tags || [];
+}
+---
+
+<BaseLayout title={`${center.name[locale]} - Apex Education`}>
+  <!-- Hero -->
+  <section class="bg-primary-blue text-white py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/20"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">{center.name[locale]}</h1>
+      {center.slogan && <p class="text-xl md:text-2xl text-blue-100 max-w-3xl">{center.slogan[locale]}</p>}
+    </div>
+  </section>
+
+  <!-- Description -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-text-main mb-8">
+          {locale === 'zh' ? '中心介绍' : 'Center Introduction'}
+        </h2>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          {center.description[locale]}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses Grid -->
+  <section class="py-16 bg-bg-light">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-text-main mb-12 text-center">
+        {locale === 'zh' ? '精选课程' : 'Featured Courses'}
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {centerCourses.map(course => (
+          <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden flex flex-col border border-gray-100">
+            <div class="p-6 flex-grow">
+              <div class="flex gap-2 mb-4">
+                {course.tags?.slice(0, 2).map(tag => (
+                  <span class="text-xs font-medium bg-blue-50 text-primary-blue px-2 py-1 rounded">
+                    {tag[locale]}
+                  </span>
+                ))}
+              </div>
+              
+              <h3 class="text-xl font-bold text-text-main mb-2">
+                {course.name[locale]}
+              </h3>
+              
+              <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+                {course.shortDescription[locale]}
+              </p>
+              
+              {course.level && (
+                <div class="flex items-center text-sm text-gray-500 mb-4">
+                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                  {course.level[locale]}
+                </div>
+              )}
+            </div>
+            
+            <div class="p-6 pt-0 mt-auto">
+              <a 
+                href={getRelativeLocaleUrl(locale, `${center.slug}/courses/${course.slug}`)} 
+                class="block w-full text-center bg-gray-50 hover:bg-primary-blue text-gray-700 hover:text-white font-medium py-3 rounded-lg transition-colors duration-300"
+              >
+                {locale === 'zh' ? '了解详情' : 'View Details'}
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

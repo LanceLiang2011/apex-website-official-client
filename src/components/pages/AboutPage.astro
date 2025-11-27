@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Locale } from '../../data/types';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const title = locale === 'zh' ? '关于我们 - Apex Education' : 'About Us - Apex Education';
+---
+
+<BaseLayout title={title}>
+  <!-- Hero -->
+  <section class="bg-gray-900 text-white py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop');"></div>
+    <div class="container mx-auto px-4 relative z-10 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">{locale === 'zh' ? '关于我们' : 'About Us'}</h1>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+        {locale === 'zh' ? '专注教育，成就未来' : 'Focus on Education, Achieve the Future'}
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto">
+        <div class="prose prose-lg text-gray-600">
+          <h2 class="text-3xl font-bold text-text-main mb-6">
+            {locale === 'zh' ? '我们的使命' : 'Our Mission'}
+          </h2>
+          <p class="mb-8">
+            {locale === 'zh' 
+              ? 'Apex Education 成立于2010年，致力于为中国学生提供最优质的国际教育资源。我们的使命是通过科学的规划和专业的辅导，帮助每一位学生发现自己的潜力，实现进入世界名校的梦想。'
+              : 'Founded in 2010, Apex Education is dedicated to providing the highest quality international education resources for Chinese students. Our mission is to help every student discover their potential and achieve their dream of entering top universities through scientific planning and professional tutoring.'}
+          </p>
+
+          <h2 class="text-3xl font-bold text-text-main mb-6">
+            {locale === 'zh' ? '我们的优势' : 'Our Advantages'}
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            {[
+              { title: locale === 'zh' ? '顶尖师资' : 'Top Faculty', desc: locale === 'zh' ? '来自哈佛、耶鲁、牛津等名校的精英导师团队。' : 'Elite tutor team from Harvard, Yale, Oxford, etc.' },
+              { title: locale === 'zh' ? '个性化定制' : 'Personalized Customization', desc: locale === 'zh' ? '根据学生特点量身定制升学方案。' : 'Tailor-made admission plans based on student characteristics.' },
+              { title: locale === 'zh' ? '全程陪伴' : 'Full Process Companionship', desc: locale === 'zh' ? '从规划到申请，提供全方位的指导与支持。' : 'Comprehensive guidance and support from planning to application.' },
+              { title: locale === 'zh' ? '卓越成果' : 'Excellent Results', desc: locale === 'zh' ? '累计帮助数千名学子进入梦想学府。' : 'Helped thousands of students enter their dream universities.' }
+            ].map(item => (
+              <div class="bg-gray-50 p-6 rounded-lg border border-gray-100">
+                <h3 class="font-bold text-primary-blue text-xl mb-2">{item.title}</h3>
+                <p class="text-sm">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <h2 class="text-3xl font-bold text-text-main mb-6">
+            {locale === 'zh' ? '发展历程' : 'History'}
+          </h2>
+          <div class="border-l-2 border-primary-blue pl-6 space-y-8">
+            {[
+              { year: '2010', title: locale === 'zh' ? '机构成立' : 'Founded', desc: locale === 'zh' ? 'Apex Education 在上海成立。' : 'Apex Education was founded in Shanghai.' },
+              { year: '2015', title: locale === 'zh' ? '拓展业务' : 'Expansion', desc: locale === 'zh' ? '开设优冠学术辅导中心，专注于国际课程辅导。' : 'Opened UCAN Tutoring Center, focusing on international curriculum tutoring.' },
+              { year: '2018', title: locale === 'zh' ? '全面升级' : 'Upgrade', desc: locale === 'zh' ? '成立瑞思升学规划中心，提供一站式留学服务。' : 'Established Rise Academic Planning Center, providing one-stop study abroad services.' },
+              { year: '2023', title: locale === 'zh' ? '新的征程' : 'New Journey', desc: locale === 'zh' ? '累计服务学生超过5000人。' : 'Served over 5000 students cumulatively.' }
+            ].map(item => (
+              <div class="relative">
+                <span class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-primary-blue border-4 border-white shadow-sm"></span>
+                <span class="text-primary-blue font-bold text-lg block mb-1">{item.year}</span>
+                <h3 class="font-bold text-gray-800 mb-1">{item.title}</h3>
+                <p class="text-sm">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Course, Center, Locale } from '../../data/types';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+interface Props {
+  course: Course;
+  center: Center;
+  locale: Locale;
+}
+
+const { course, center, locale } = Astro.props;
+---
+
+<BaseLayout title={`${course.name[locale]} - ${center.name[locale]}`}>
+  <!-- Hero -->
+  <section class="bg-gray-900 text-white py-16">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
+        <div class="flex-grow">
+          <div class="flex gap-2 mb-4">
+            <a href={getRelativeLocaleUrl(locale, center.slug)} class="text-blue-300 hover:text-white transition-colors">
+              {center.name[locale]}
+            </a>
+            <span class="text-gray-500">/</span>
+            <span class="text-gray-400">{course.name[locale]}</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">{course.name[locale]}</h1>
+          <p class="text-xl text-gray-300 mb-6 max-w-3xl">{course.shortDescription[locale]}</p>
+          
+          <div class="flex flex-wrap gap-4">
+            {course.tags?.map(tag => (
+              <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">
+                {tag[locale]}
+              </span>
+            ))}
+          </div>
+        </div>
+        
+        <!-- Quick Action Card (Desktop) -->
+        <div class="hidden md:block w-80 bg-white text-gray-900 rounded-lg p-6 shadow-lg mt-8 md:mt-0">
+          <div class="text-3xl font-bold text-primary-blue mb-2">
+            {locale === 'zh' ? '咨询课程' : 'Inquire'}
+          </div>
+          <p class="text-gray-500 text-sm mb-6">
+            {locale === 'zh' ? '联系我们获取详细课表和报价' : 'Contact us for schedule and pricing'}
+          </p>
+          <button class="w-full bg-primary-blue hover:bg-blue-700 text-white font-bold py-3 rounded transition-colors mb-4">
+            {locale === 'zh' ? '立即咨询' : 'Contact Now'}
+          </button>
+          <div class="text-xs text-gray-500 text-center">
+            {locale === 'zh' ? '30分钟内回复' : 'Response within 30 mins'}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container mx-auto px-4 py-12">
+    <div class="flex flex-col md:flex-row gap-12">
+      <!-- Main Content -->
+      <div class="w-full md:w-2/3">
+        <!-- Overview -->
+        <div class="mb-12">
+          <h2 class="text-2xl font-bold text-text-main mb-6 border-l-4 border-primary-blue pl-4">
+            {locale === 'zh' ? '课程介绍' : 'Course Overview'}
+          </h2>
+          <div class="prose max-w-none text-gray-600">
+            <p>
+              {course.description ? course.description[locale] : course.shortDescription[locale]}
+            </p>
+            <p class="mt-4">
+              {locale === 'zh' 
+                ? '本课程旨在帮助学生掌握核心知识点，通过系统的训练和实战演练，提升学术能力和考试成绩。我们的专业教师团队将根据学生的具体情况，制定个性化的学习计划。'
+                : 'This course aims to help students master core knowledge points. Through systematic training and practical exercises, we improve academic ability and exam scores. Our professional teaching team will formulate personalized study plans based on the specific situation of students.'}
+            </p>
+          </div>
+        </div>
+
+        <!-- Curriculum (Placeholder) -->
+        <div class="mb-12">
+          <h2 class="text-2xl font-bold text-text-main mb-6 border-l-4 border-primary-blue pl-4">
+            {locale === 'zh' ? '课程大纲' : 'Curriculum'}
+          </h2>
+          <div class="bg-gray-50 rounded-lg p-6 border border-gray-100">
+            <ul class="space-y-4">
+              {[1, 2, 3, 4].map(i => (
+                <li class="flex items-start gap-3">
+                  <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-primary-blue rounded-full flex items-center justify-center text-sm font-bold mt-0.5">{i}</span>
+                  <div>
+                    <h4 class="font-bold text-gray-800 mb-1">
+                      {locale === 'zh' ? `第 ${i} 阶段：核心模块` : `Phase ${i}: Core Module`}
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      {locale === 'zh' ? '深入讲解基础理论与解题技巧，配合大量真题练习。' : 'In-depth explanation of basic theories and problem-solving techniques, combined with extensive past paper practice.'}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Target Audience -->
+        <div class="mb-12">
+          <h2 class="text-2xl font-bold text-text-main mb-6 border-l-4 border-primary-blue pl-4">
+            {locale === 'zh' ? '适合人群' : 'Target Audience'}
+          </h2>
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              locale === 'zh' ? '希望提升学术成绩的学生' : 'Students wishing to improve academic grades',
+              locale === 'zh' ? '准备参加标化考试的学生' : 'Students preparing for standardized tests',
+              locale === 'zh' ? '有志于申请名校的学生' : 'Students aiming for top universities',
+              locale === 'zh' ? '需要系统性规划的学生' : 'Students needing systematic planning'
+            ].map(item => (
+              <li class="flex items-center gap-2 text-gray-700 bg-white p-3 rounded shadow-sm border border-gray-100">
+                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="w-full md:w-1/3">
+        <div class="sticky top-24 space-y-8">
+          <!-- Mobile Action Card (Visible only on mobile) -->
+          <div class="md:hidden bg-white text-gray-900 rounded-lg p-6 shadow-lg border border-gray-100">
+            <button class="w-full bg-primary-blue hover:bg-blue-700 text-white font-bold py-3 rounded transition-colors">
+              {locale === 'zh' ? '立即咨询' : 'Contact Now'}
+            </button>
+          </div>
+
+          <!-- Center Info -->
+          <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+            <h3 class="font-bold text-lg mb-4 pb-2 border-b border-gray-100">
+              {locale === 'zh' ? '授课中心' : 'Center'}
+            </h3>
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-primary-blue">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-bold text-gray-800">{center.name[locale]}</div>
+                <div class="text-xs text-gray-500">{center.courses.length} {locale === 'zh' ? '门课程' : 'Courses'}</div>
+              </div>
+            </div>
+            <a 
+              href={getRelativeLocaleUrl(locale, center.slug)} 
+              class="text-primary-blue text-sm hover:underline"
+            >
+              {locale === 'zh' ? '查看中心主页 →' : 'View Center Page →'}
+            </a>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="bg-blue-50 rounded-lg p-6 border border-blue-100">
+            <h3 class="font-bold text-lg text-primary-blue mb-4">
+              {locale === 'zh' ? '联系方式' : 'Contact'}
+            </h3>
+            <ul class="space-y-3 text-sm text-gray-700">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></path></svg>
+                <span>+86 123 4567 8901</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></path></svg>
+                <span>contact@apex-edu.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

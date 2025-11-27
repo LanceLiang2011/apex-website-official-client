@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #151a5f;
+  --color-accent: #c10923;
+  --color-primary-blue: #151a5f;
+  --color-accent-red: #c10923;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+:root {
+  --color-primary-blue: #151a5f;
+  --color-accent-red: #c10923;
+  --color-text-main: #1f2937;
+  --color-text-light: #6b7280;
+  --color-bg-light: #f3f4f6;
+  --color-white: #ffffff;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-main);
+  background-color: var(--color-white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}

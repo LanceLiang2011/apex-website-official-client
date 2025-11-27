@@ -1,0 +1,32 @@
+---
+const locale = Astro.currentLocale || 'zh';
+const text = locale === 'zh' ? '扫码咨询' : 'Scan to Chat';
+const subText = locale === 'zh' ? '添加顾问微信' : 'Add WeChat';
+---
+
+<div class="fixed right-0 bottom-20 z-50 group translate-x-[calc(100%-40px)] hover:translate-x-0 transition-transform duration-300 ease-in-out">
+  <div class="flex items-center shadow-lg rounded-l-lg overflow-hidden">
+    <!-- Tab (Visible part) -->
+    <div class="bg-primary-blue text-white w-10 py-4 flex flex-col items-center justify-center cursor-pointer h-32">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+      <span class="writing-vertical-lr text-sm font-medium tracking-widest">{text}</span>
+    </div>
+
+    <!-- Content (Hidden part) -->
+    <div class="bg-white p-4 w-48 flex flex-col items-center justify-center border-l border-gray-100 h-32">
+      <div class="w-20 h-20 bg-gray-200 mb-2 flex items-center justify-center text-gray-400 text-xs">
+        QR Code
+      </div>
+      <p class="text-xs text-gray-600 font-medium">{subText}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .writing-vertical-lr {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+  }
+</style>

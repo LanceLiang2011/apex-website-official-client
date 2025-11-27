@@ -1,0 +1,15 @@
+---
+import CenterPage from '../components/pages/CenterPage.astro';
+import { centers } from '../data/centers';
+
+export function getStaticPaths() {
+  return centers.map(center => ({
+    params: { center: center.slug },
+    props: { center }
+  }));
+}
+
+const { center } = Astro.props;
+---
+
+<CenterPage center={center} locale="zh" />

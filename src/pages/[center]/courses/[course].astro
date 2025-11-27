@@ -1,0 +1,21 @@
+---
+import CoursePage from '../../../components/pages/CoursePage.astro';
+import { courses } from '../../../data/courses';
+import { centers } from '../../../data/centers';
+
+export function getStaticPaths() {
+  return courses.map(course => {
+    const center = centers.find(c => c.id === course.centerId);
+    if (!center) throw new Error(`Center not found for course ${course.id}`);
+    
+    return {
+      params: { center: center.slug, course: course.slug },
+      props: { course, center }
+    };
+  });
+}
+
+const { course, center } = Astro.props;
+---
+
+<CoursePage course={course} center={center} locale="zh" />

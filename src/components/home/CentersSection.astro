@@ -1,0 +1,88 @@
+---
+import type { Locale } from '../../data/types';
+import { centers } from '../../data/centers';
+import { courses } from '../../data/courses';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+
+// Helper to get tags for a center
+function getCenterTags(centerId: string) {
+  return courses
+    .filter(c => c.centerId === centerId)
+    .flatMap(c => c.tags || [])
+    .slice(0, 4); // Limit to 4 tags
+}
+
+// Deduplicate tags by label
+function uniqueTags(tags: { zh: string; en: string }[]) {
+  const seen = new Set();
+  return tags.filter(tag => {
+    const label = tag[locale];
+    if (seen.has(label)) return false;
+    seen.add(label);
+    return true;
+  });
+}
+---
+
+<section class="py-20 bg-bg-light">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4">
+        {locale === 'zh' ? '我们的中心' : 'Our Centers'}
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        {locale === 'zh' 
+          ? '三大专业中心，为您提供全方位的教育服务' 
+          : 'Three professional centers providing comprehensive education services for you'}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {centers.map(center => {
+        const tags = uniqueTags(getCenterTags(center.id));
+        
+        return (
+          <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col group">
+            <div class="p-8 flex-grow">
+              <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-accent-red transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-blue group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              
+              <h3 class="text-xl font-bold text-text-main mb-3 group-hover:text-primary-blue transition-colors">
+                {center.name[locale]}
+              </h3>
+              
+              <p class="text-gray-600 mb-6 line-clamp-3">
+                {center.description[locale]}
+              </p>
+
+              <div class="flex flex-wrap gap-2 mb-6">
+                {tags.map(tag => (
+                  <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                    {tag[locale]}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div class="p-8 pt-0 mt-auto">
+              <a 
+                href={getRelativeLocaleUrl(locale, center.slug)} 
+                class="block w-full text-center border-2 border-primary-blue text-primary-blue font-semibold py-3 rounded-lg hover:bg-accent-red hover:border-accent-red hover:text-white transition-all duration-300"
+              >
+                {locale === 'zh' ? '进入中心' : 'View Center'}
+              </a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
