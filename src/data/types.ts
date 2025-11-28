@@ -33,3 +33,14 @@ export interface NavItem {
   href: string; // Base href (without locale prefix, handled by component)
   children?: NavItem[];
 }
+
+export interface Post {
+  id: string;
+  slug: string;
+  title: TranslatedText;
+  excerpt: TranslatedText;
+  content: TranslatedText; // Placeholder for full content
+  date: string;
+  category: TranslatedText;
+  image: string;
+}

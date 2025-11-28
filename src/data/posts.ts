@@ -1,15 +1,4 @@
-import type { TranslatedText } from './types';
-
-export interface Post {
-  id: string;
-  slug: string;
-  title: TranslatedText;
-  excerpt: TranslatedText;
-  content: TranslatedText; // Placeholder for full content
-  date: string;
-  category: TranslatedText;
-  image: string;
-}
+import type { TranslatedText, Post } from './types';
 
 export const posts: Post[] = [
   {
