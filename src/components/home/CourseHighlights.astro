@@ -3,6 +3,7 @@ import type { Locale } from '../../data/types';
 import { courses } from '../../data/courses';
 import { centers } from '../../data/centers';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { content as siteContent } from '../../data/content';
 
 interface Props {
   locale: Locale;
@@ -21,16 +22,19 @@ function getCenterSlug(centerId: string) {
   const center = centers.find(c => c.id === centerId);
   return center?.slug || '';
 }
+
+const highlightsContent = siteContent.home.courseHighlights;
+const commonButtons = siteContent.common.buttons;
 ---
 
 <section class="py-20 bg-white">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
       <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4">
-        {locale === 'zh' ? '热门课程' : 'Popular Courses'}
+        {highlightsContent.heading[locale]}
       </h2>
       <p class="text-gray-600">
-        {locale === 'zh' ? '探索我们最受欢迎的课程' : 'Explore our most popular courses'}
+        {highlightsContent.subheading[locale]}
       </p>
     </div>
 
@@ -71,7 +75,7 @@ function getCenterSlug(centerId: string) {
                 href={getRelativeLocaleUrl(locale, `${getCenterSlug(course.centerId)}/courses/${course.slug}`)} 
                 class="text-primary-blue font-semibold text-sm hover:underline"
               >
-                {locale === 'zh' ? '查看详情' : 'View Details'}
+                {commonButtons.viewDetails[locale]}
               </a>
             </div>
           </div>
@@ -84,7 +88,7 @@ function getCenterSlug(centerId: string) {
         href={getRelativeLocaleUrl(locale, '/ucan')} 
         class="inline-block border-2 border-primary-blue text-primary-blue font-semibold px-8 py-3 rounded-lg hover:bg-primary-blue hover:text-white transition-colors"
       >
-        {locale === 'zh' ? '查看所有课程' : 'View All Courses'}
+        {highlightsContent.viewAllText[locale]}
       </a>
     </div>
   </div>

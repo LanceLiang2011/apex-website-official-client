@@ -1,28 +1,20 @@
 ---
 import type { Locale } from '../../data/types';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { content } from '../../data/content';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
 
-const slides = [
-  {
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop',
-    title: locale === 'zh' ? '开启您的名校之旅' : 'Start Your Journey to Top Universities',
-    subtitle: locale === 'zh' ? '专业的学术辅导与升学规划，助力学子圆梦。' : 'Professional academic tutoring & college planning to help students achieve their dreams.',
-    cta: locale === 'zh' ? '了解课程' : 'View Courses',
-    link: '/ucan'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop',
-    title: locale === 'zh' ? '语言连接世界' : 'Language Connects the World',
-    subtitle: locale === 'zh' ? '托福、雅思、多邻国全方位培训，沟通无障碍。' : 'Comprehensive training for TOEFL, IELTS, Duolingo for barrier-free communication.',
-    cta: locale === 'zh' ? '查看详情' : 'Learn More',
-    link: '/simple-language'
-  }
-];
+const slides = content.home.hero.slides.map(slide => ({
+  image: slide.image,
+  title: slide.title[locale],
+  subtitle: slide.subtitle[locale],
+  cta: slide.cta[locale],
+  link: slide.link
+}));
 ---
 
 <section class="relative h-[600px] overflow-hidden group">

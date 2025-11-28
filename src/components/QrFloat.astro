@@ -1,7 +1,9 @@
 ---
-const locale = Astro.currentLocale || 'zh';
-const text = locale === 'zh' ? '扫码咨询' : 'Scan to Chat';
-const subText = locale === 'zh' ? '添加顾问微信' : 'Add WeChat';
+import type { Locale } from '../data/types';
+import { content as siteContent } from '../data/content';
+
+const locale = (Astro.currentLocale || 'zh') as Locale;
+const { scanText, subText } = siteContent.qrFloat;
 ---
 
 <div id="qr-float" class="fixed right-0 bottom-20 z-50 group transition-transform duration-300 ease-in-out translate-x-0">
@@ -18,7 +20,7 @@ const subText = locale === 'zh' ? '添加顾问微信' : 'Add WeChat';
       <div class="w-20 h-20 bg-gray-200 mb-2 flex items-center justify-center text-gray-400 text-xs">
         QR Code
       </div>
-      <p class="text-xs text-gray-600 font-medium text-center">{subText}</p>
+      <p class="text-xs text-gray-600 font-medium text-center">{subText[locale]}</p>
     </div>
   </div>
 </div>

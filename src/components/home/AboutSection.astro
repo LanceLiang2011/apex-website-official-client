@@ -1,21 +1,14 @@
 ---
 import type { Locale } from '../../data/types';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { content as siteContent } from '../../data/content';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
 
-const content = {
-  title: locale === 'zh' ? '关于我们' : 'About Us',
-  subtitle: locale === 'zh' ? '专注教育，成就未来' : 'Focus on Education, Achieve the Future',
-  description: locale === 'zh' 
-    ? 'Apex Education 致力于为学生提供最优质的国际教育资源。我们拥有经验丰富的师资团队，科学的课程体系，以及个性化的升学规划服务。无论是标化考试提分，还是名校申请指导，我们都是您最值得信赖的伙伴。'
-    : 'Apex Education is dedicated to providing the highest quality international education resources for students. We have an experienced team of teachers, a scientific curriculum system, and personalized college planning services. Whether it is standardized test score improvement or top university application guidance, we are your most trustworthy partner.',
-  buttonText: locale === 'zh' ? '了解更多' : 'Read More',
-  image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop'
-};
+const { title, subtitle, description, buttonText, image } = siteContent.home.about;
 ---
 
 <section class="py-20 bg-white">
@@ -24,18 +17,18 @@ const content = {
       <!-- Text Content -->
       <div class="w-full md:w-1/2">
         <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 relative inline-block">
-          {content.title}
+          {title[locale]}
           <span class="absolute bottom-0 left-0 w-1/2 h-1 bg-primary-blue rounded"></span>
         </h2>
-        <h3 class="text-xl text-primary-blue font-medium mb-6">{content.subtitle}</h3>
+        <h3 class="text-xl text-primary-blue font-medium mb-6">{subtitle[locale]}</h3>
         <p class="text-gray-600 leading-relaxed mb-8 text-lg">
-          {content.description}
+          {description[locale]}
         </p>
         <a 
           href={getRelativeLocaleUrl(locale, '/about')} 
           class="inline-flex items-center text-primary-blue font-semibold hover:text-blue-700 transition-colors group"
         >
-          {content.buttonText}
+          {buttonText[locale]}
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
@@ -46,7 +39,7 @@ const content = {
       <div class="w-full md:w-1/2">
         <div class="relative rounded-2xl overflow-hidden shadow-xl group">
           <img 
-            src={content.image} 
+            src={image} 
             alt="About Us" 
             class="w-full h-[400px] object-cover transform group-hover:scale-105 transition-transform duration-500"
           />

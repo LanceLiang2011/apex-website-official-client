@@ -3,6 +3,7 @@ import type { Locale } from '../../data/types';
 import { centers } from '../../data/centers';
 import { courses } from '../../data/courses';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { content as siteContent } from '../../data/content';
 
 interface Props {
   locale: Locale;
@@ -34,18 +35,21 @@ function uniqueTags(tags: { zh: string; en: string }[]) {
     return true;
   });
 }
+
+const centersContent = siteContent.home.centers;
+const commonLabels = siteContent.common.labels;
+const commonButtons = siteContent.common.buttons;
+const centerPlans = siteContent.common.centerPlans;
 ---
 
 <section class="py-20 bg-bg-light" id="centers-section">
   <div class="container mx-auto px-4">
     <div class="text-center mb-10">
       <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4">
-        {locale === 'zh' ? '我们的中心' : 'Our Centers'}
+        {centersContent.heading[locale]}
       </h2>
       <p class="text-gray-600 max-w-2xl mx-auto">
-        {locale === 'zh' 
-          ? '三大专业中心，为您提供全方位的教育服务' 
-          : 'Three professional centers providing comprehensive education services for you'}
+        {centersContent.subheading[locale]}
       </p>
     </div>
 
@@ -53,13 +57,13 @@ function uniqueTags(tags: { zh: string; en: string }[]) {
     <div class="flex justify-center mb-12">
       <div class="bg-white p-1 rounded-lg shadow-sm inline-flex">
         <button class="design-toggle px-6 py-2 rounded-md text-sm font-medium transition-all duration-200 bg-primary-blue text-white shadow-sm" data-design="a">
-          Plan A
+          {centerPlans.planA}
         </button>
         <button class="design-toggle px-6 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-primary-blue transition-all duration-200" data-design="b">
-          Plan B
+          {centerPlans.planB}
         </button>
         <button class="design-toggle px-6 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-primary-blue transition-all duration-200" data-design="c">
-          Plan C
+          {centerPlans.planC}
         </button>
       </div>
     </div>
@@ -90,7 +94,7 @@ function uniqueTags(tags: { zh: string; en: string }[]) {
               <!-- Featured Courses Links -->
               <div class="mb-6 space-y-2">
                 <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                  {locale === 'zh' ? '热门课程' : 'Popular Courses'}
+                  {commonLabels.popularCourses[locale]}
                 </div>
                 {centerCourses.map(course => (
                   <a 
@@ -117,7 +121,7 @@ function uniqueTags(tags: { zh: string; en: string }[]) {
                 href={getRelativeLocaleUrl(locale, center.slug)} 
                 class="block w-full text-center border-2 border-primary-blue text-primary-blue font-semibold py-3 rounded-lg hover:bg-primary-blue hover:text-white transition-all duration-300"
               >
-                {locale === 'zh' ? '进入中心' : 'View Center'}
+                {commonButtons.viewCenter[locale]}
               </a>
             </div>
           </div>
@@ -148,12 +152,12 @@ function uniqueTags(tags: { zh: string; en: string }[]) {
                   {center.description[locale]}
                 </p>
                 <a href={getRelativeLocaleUrl(locale, center.slug)} class="text-primary-blue font-medium text-sm hover:underline">
-                  {locale === 'zh' ? '了解更多 →' : 'Learn More →'}
+                  {commonButtons.learnMore[locale]} →
                 </a>
               </div>
               <div class="md:w-1/3 border-l border-gray-100 pl-0 md:pl-8 pt-4 md:pt-0">
                  <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
-                  {locale === 'zh' ? '课程直达' : 'Quick Access'}
+                   {commonLabels.quickAccess[locale]}
                 </div>
                 <div class="space-y-2">
                   {centerCourses.map(course => (
@@ -216,7 +220,7 @@ function uniqueTags(tags: { zh: string; en: string }[]) {
                   href={getRelativeLocaleUrl(locale, center.slug)} 
                   class="inline-block bg-white/20 hover:bg-white hover:text-primary-blue text-white backdrop-blur-sm border border-white/30 px-6 py-2 rounded-full text-sm font-medium transition-all duration-300"
                 >
-                  {locale === 'zh' ? '进入中心' : 'Enter Center'}
+                   {commonButtons.enterCenter[locale]}
                 </a>
               </div>
             </div>

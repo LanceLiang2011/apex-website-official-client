@@ -1,20 +1,11 @@
 ---
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import type { Locale } from '../data/types';
+import { content as siteContent } from '../data/content';
 
 const currentLocale = (Astro.currentLocale || 'zh') as Locale;
 
-const footerLinks = [
-  { label: { zh: '关于我们', en: 'About Us' }, href: '/about' },
-  { label: { zh: '教育信息', en: 'Education Info' }, href: '/education-info' },
-  { label: { zh: '联系我们', en: 'Contact Us' }, href: '/contact' }, // Placeholder
-];
-
-const centers = [
-  { label: { zh: '优冠学术辅导中心', en: 'UCAN Tutoring Center' }, href: '/ucan' },
-  { label: { zh: '简言语言培训中心', en: 'Simple Language Training Center' }, href: '/simple-language' },
-  { label: { zh: '瑞思升学规划中心', en: 'Rise Academic Planning Center' }, href: '/rise' },
-];
+const footerContent = siteContent.footer;
 ---
 
 <footer class="bg-gray-900 text-white pt-16 pb-8">
@@ -29,9 +20,7 @@ const centers = [
           <span>Apex Education</span>
         </div>
         <p class="text-gray-400 mb-6 leading-relaxed">
-          {currentLocale === 'zh' 
-            ? '致力于为学生提供全方位的国际教育解决方案，从语言培训到学术辅导，再到升学规划，助力每一位学子实现名校梦想。'
-            : 'Dedicated to providing comprehensive international education solutions for students, from language training to academic tutoring and college planning, helping every student achieve their dream school.'}
+          {footerContent.brandDescription[currentLocale]}
         </p>
         <div class="flex gap-4">
           <!-- Social Icons Placeholders -->
@@ -46,10 +35,10 @@ const centers = [
       <div class="grid grid-cols-2 gap-4">
         <div>
           <h3 class="text-lg font-bold mb-6 border-b-2 border-accent-red inline-block pb-1">
-            {currentLocale === 'zh' ? '快速链接' : 'Quick Links'}
+            {footerContent.quickLinks.heading[currentLocale]}
           </h3>
           <ul class="space-y-3">
-            {footerLinks.map(link => (
+            {footerContent.quickLinks.items.map(link => (
               <li>
                 <a href={getRelativeLocaleUrl(currentLocale, link.href)} class="text-gray-400 hover:text-white transition-colors">
                   {link.label[currentLocale]}
@@ -60,10 +49,10 @@ const centers = [
         </div>
         <div>
           <h3 class="text-lg font-bold mb-6 border-b-2 border-accent-red inline-block pb-1">
-            {currentLocale === 'zh' ? '旗下中心' : 'Our Centers'}
+            {footerContent.centersLinks.heading[currentLocale]}
           </h3>
           <ul class="space-y-3">
-            {centers.map(center => (
+            {footerContent.centersLinks.items.map(center => (
               <li>
                 <a href={getRelativeLocaleUrl(currentLocale, center.href)} class="text-gray-400 hover:text-white transition-colors">
                   {center.label[currentLocale]}
@@ -77,19 +66,19 @@ const centers = [
       <!-- Column 3: Newsletter -->
       <div>
         <h3 class="text-lg font-bold mb-6 border-b-2 border-accent-red inline-block pb-1">
-          {currentLocale === 'zh' ? '订阅更新' : 'Newsletter'}
+          {footerContent.newsletter.heading[currentLocale]}
         </h3>
         <p class="text-gray-400 mb-4">
-          {currentLocale === 'zh' ? '订阅我们的最新课程和教育资讯。' : 'Subscribe to our latest courses and education news.'}
+          {footerContent.newsletter.description[currentLocale]}
         </p>
         <form class="flex flex-col gap-3">
           <input 
             type="email" 
-            placeholder={currentLocale === 'zh' ? '您的邮箱地址' : 'Your email address'} 
+            placeholder={footerContent.newsletter.emailPlaceholder[currentLocale]} 
             class="bg-gray-800 border border-gray-700 text-white px-4 py-3 rounded focus:outline-none focus:border-primary-blue transition-colors"
           />
           <button type="submit" class="bg-accent-red hover:bg-red-700 text-white font-medium px-6 py-3 rounded transition-colors">
-            {currentLocale === 'zh' ? '订阅' : 'Subscribe'}
+            {footerContent.newsletter.subscribeButton[currentLocale]}
           </button>
         </form>
       </div>

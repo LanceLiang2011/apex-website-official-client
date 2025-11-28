@@ -2,6 +2,7 @@
 import type { Locale } from '../../data/types';
 import { posts } from '../../data/posts';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { content as siteContent } from '../../data/content';
 
 interface Props {
   locale: Locale;
@@ -9,6 +10,8 @@ interface Props {
 const { locale } = Astro.props;
 
 const latestPosts = posts.slice(0, 3);
+const blogContent = siteContent.home.blog;
+const commonButtons = siteContent.common.buttons;
 ---
 
 <section class="py-20 bg-gray-50">
@@ -16,17 +19,17 @@ const latestPosts = posts.slice(0, 3);
     <div class="flex justify-between items-end mb-12">
       <div>
         <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4">
-          {locale === 'zh' ? '最新资讯' : 'Latest News'}
+          {blogContent.heading[locale]}
         </h2>
         <p class="text-gray-600">
-          {locale === 'zh' ? '关注教育动态，把握升学先机' : 'Stay updated with education news and admission opportunities'}
+          {blogContent.subheading[locale]}
         </p>
       </div>
       <a 
         href={getRelativeLocaleUrl(locale, '/education-info')} 
         class="hidden md:inline-flex items-center text-primary-blue font-semibold hover:underline"
       >
-        {locale === 'zh' ? '查看更多' : 'View More'}
+        {blogContent.viewMoreText[locale]}
         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
       </a>
     </div>
@@ -61,7 +64,7 @@ const latestPosts = posts.slice(0, 3);
               href={getRelativeLocaleUrl(locale, `education-info/${post.slug}`)} 
               class="text-primary-blue font-medium text-sm hover:underline mt-auto inline-block"
             >
-              {locale === 'zh' ? '阅读全文' : 'Read More'}
+              {commonButtons.readMore[locale]}
             </a>
           </div>
         </article>
@@ -73,7 +76,7 @@ const latestPosts = posts.slice(0, 3);
         href={getRelativeLocaleUrl(locale, '/education-info')} 
         class="inline-block border border-gray-300 text-gray-700 font-medium px-6 py-2 rounded-lg hover:bg-gray-50 transition-colors"
       >
-        {locale === 'zh' ? '查看更多' : 'View More'}
+        {blogContent.viewMoreText[locale]}
       </a>
     </div>
   </div>
