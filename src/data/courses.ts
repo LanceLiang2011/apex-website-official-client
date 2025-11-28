@@ -1,7 +1,84 @@
 import type { Course } from './types';
 
 export const courses: Course[] = [
-  // UCAN Courses
+  // UCAN Courses - Categories/Overviews (matching navigation)
+  {
+    id: 'ucan-middle-high',
+    slug: 'middle-high-improvement',
+    centerId: 'ucan',
+    name: {
+      zh: '初高中课程提高',
+      en: 'Middle/High School Improvement'
+    },
+    shortDescription: {
+      zh: '全面覆盖初高中各学科，查漏补缺，巩固基础，提升校内成绩。',
+      en: 'Comprehensive coverage of middle and high school subjects, filling gaps, solidifying foundations, and improving school grades.'
+    },
+    level: { zh: '综合', en: 'Comprehensive' },
+    tags: [{ zh: '校内同步', en: 'School Sync' }]
+  },
+  {
+    id: 'ucan-ap-overview',
+    slug: 'ap-courses',
+    centerId: 'ucan',
+    name: {
+      zh: 'AP 课程系列',
+      en: 'AP Courses Series'
+    },
+    shortDescription: {
+      zh: '提供微积分、物理、化学、经济等热门 AP 科目辅导，冲刺 5 分。',
+      en: 'Tutoring for popular AP subjects like Calculus, Physics, Chemistry, Economics, aiming for a score of 5.'
+    },
+    level: { zh: '进阶', en: 'Advanced' },
+    tags: [{ zh: 'AP', en: 'AP' }]
+  },
+  {
+    id: 'ucan-ssat-sat',
+    slug: 'ssat-sat',
+    centerId: 'ucan',
+    name: {
+      zh: 'SSAT / SAT 标化备考',
+      en: 'SSAT / SAT Preparation'
+    },
+    shortDescription: {
+      zh: '系统性的标化考试培训体系，从词汇积累到真题演练，全方位提分。',
+      en: 'Systematic standardized test training system, from vocabulary accumulation to past paper practice, comprehensively improving scores.'
+    },
+    level: { zh: '标化', en: 'Standardized Test' },
+    tags: [{ zh: 'SAT', en: 'SAT' }, { zh: 'SSAT', en: 'SSAT' }]
+  },
+  {
+    id: 'ucan-competitions',
+    slug: 'competitions',
+    centerId: 'ucan',
+    name: {
+      zh: '国际竞赛辅导',
+      en: 'International Competitions'
+    },
+    shortDescription: {
+      zh: 'AMC、物理碗、USACO 等各类国际竞赛辅导，提升学术背景。',
+      en: 'Tutoring for various international competitions like AMC, Physics Bowl, USACO, enhancing academic background.'
+    },
+    level: { zh: '竞赛', en: 'Competition' },
+    tags: [{ zh: '竞赛', en: 'Competition' }]
+  },
+  {
+    id: 'ucan-critical-thinking',
+    slug: 'critical-thinking',
+    centerId: 'ucan',
+    name: {
+      zh: '思维训练开发',
+      en: 'Critical Thinking Development'
+    },
+    shortDescription: {
+      zh: '培养逻辑思维、批判性思维和创新能力，为未来学术研究打下基础。',
+      en: 'Cultivate logical thinking, critical thinking, and innovation capabilities, laying the foundation for future academic research.'
+    },
+    level: { zh: '素养', en: 'Literacy' },
+    tags: [{ zh: '思维训练', en: 'Critical Thinking' }]
+  },
+
+  // UCAN Specific Courses (kept for detail)
   {
     id: 'ucan-ap-calc',
     slug: 'ap-calculus',
@@ -24,8 +101,8 @@ export const courses: Course[] = [
     ]
   },
   {
-    id: 'ucan-sat',
-    slug: 'sat-prep',
+    id: 'ucan-sat-intensive',
+    slug: 'sat-prep', // Note: Navigation uses 'ssat-sat' for the category, this is a specific course
     centerId: 'ucan',
     name: {
       zh: 'SAT 冲刺班',

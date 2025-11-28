@@ -22,15 +22,15 @@ const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
 
 ---
 
-<header class="bg-white shadow-sm sticky top-0 z-50">
+<header id="main-header" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent text-white">
   <div class="container mx-auto px-4 h-20 flex items-center justify-between">
     <!-- Logo -->
-    <a href={getRelativeLocaleUrl(currentLocale, '/')} class="text-2xl font-bold text-primary-blue flex items-center gap-2">
+    <a href={getRelativeLocaleUrl(currentLocale, '/')} class="text-2xl font-bold flex items-center gap-2 group">
       <!-- Placeholder Logo Icon -->
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white transition-colors duration-300 group-hover:text-blue-200 header-logo-icon" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 2L1 12h3v9h6v-6h4v6h6v-9h3L12 2z"/>
       </svg>
-      <span>Apex Education</span>
+      <span class="header-logo-text">Apex Education</span>
     </a>
 
     <!-- Desktop Nav -->
@@ -39,11 +39,11 @@ const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
         <div class="relative group">
           <a 
             href={getRelativeLocaleUrl(currentLocale, item.href)} 
-            class="text-text-main hover:text-primary-blue font-medium py-2 transition-colors"
+            class="header-nav-link font-medium py-2 transition-colors flex items-center gap-1 hover:text-blue-200"
           >
             {item.label[currentLocale]}
             {item.children && (
-              <span class="ml-1 text-xs">▼</span>
+              <span class="text-xs">▼</span>
             )}
           </a>
           
@@ -68,23 +68,23 @@ const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
 
     <!-- Language Switcher & Mobile Menu Button -->
     <div class="flex items-center gap-4">
-      <div class="flex items-center text-sm font-medium border border-gray-200 rounded-md overflow-hidden">
+      <div class="flex items-center text-sm font-medium border border-white/30 rounded-md overflow-hidden header-lang-switcher">
         <a 
           href={zhUrl} 
-          class={`px-3 py-1 ${currentLocale === 'zh' ? 'bg-primary-blue text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
+          class={`px-3 py-1 transition-colors ${currentLocale === 'zh' ? 'bg-primary-blue text-white' : 'bg-transparent text-white hover:bg-white/10'}`}
         >
           中
         </a>
         <a 
           href={enUrl} 
-          class={`px-3 py-1 ${currentLocale === 'en' ? 'bg-primary-blue text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
+          class={`px-3 py-1 transition-colors ${currentLocale === 'en' ? 'bg-primary-blue text-white' : 'bg-transparent text-white hover:bg-white/10'}`}
         >
           EN
         </a>
       </div>
 
       <!-- Mobile Menu Button (Hamburger) -->
-      <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-primary-blue focus:outline-none">
+      <button id="mobile-menu-btn" class="md:hidden text-white hover:text-blue-200 focus:outline-none header-mobile-btn">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -131,16 +131,84 @@ const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
 </header>
 
 <script>
+  const header = document.getElementById('main-header');
+  const logoIcon = document.querySelector('.header-logo-icon');
+  const navLinks = document.querySelectorAll('.header-nav-link');
+  const langSwitcher = document.querySelector('.header-lang-switcher');
+  const mobileBtn = document.querySelector('.header-mobile-btn');
+  const mobileBtnIcon = mobileBtn?.querySelector('svg'); // Get the SVG inside the button
+
   const menuBtn = document.getElementById('mobile-menu-btn');
   const closeBtn = document.getElementById('close-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobilePanel = document.getElementById('mobile-menu-panel');
 
+  function updateHeaderStyle() {
+    if (window.scrollY > 50) {
+      // Scrolled State (White BG)
+      header?.classList.remove('bg-transparent', 'text-white');
+      header?.classList.add('bg-white', 'text-text-main', 'shadow-sm');
+      
+      logoIcon?.classList.remove('text-white');
+      logoIcon?.classList.add('text-primary-blue');
+
+      navLinks.forEach(link => {
+        link.classList.remove('hover:text-blue-200');
+        link.classList.add('hover:text-primary-blue');
+      });
+
+      langSwitcher?.classList.remove('border-white/30');
+      langSwitcher?.classList.add('border-gray-200');
+      
+      // Update lang switcher links text color for non-active items
+      const langLinks = langSwitcher?.querySelectorAll('a');
+      langLinks?.forEach(link => {
+        if (!link.classList.contains('bg-primary-blue')) {
+           link.classList.remove('text-white', 'hover:bg-white/10');
+           link.classList.add('text-gray-600', 'hover:bg-gray-50');
+        }
+      });
+
+      mobileBtn?.classList.remove('text-white', 'hover:text-blue-200');
+      mobileBtn?.classList.add('text-gray-600', 'hover:text-primary-blue');
+
+    } else {
+      // Top State (Transparent BG)
+      header?.classList.add('bg-transparent', 'text-white');
+      header?.classList.remove('bg-white', 'text-text-main', 'shadow-sm');
+
+      logoIcon?.classList.add('text-white');
+      logoIcon?.classList.remove('text-primary-blue');
+
+      navLinks.forEach(link => {
+        link.classList.add('hover:text-blue-200');
+        link.classList.remove('hover:text-primary-blue');
+      });
+
+      langSwitcher?.classList.add('border-white/30');
+      langSwitcher?.classList.remove('border-gray-200');
+
+      const langLinks = langSwitcher?.querySelectorAll('a');
+      langLinks?.forEach(link => {
+        if (!link.classList.contains('bg-primary-blue')) {
+           link.classList.add('text-white', 'hover:bg-white/10');
+           link.classList.remove('text-gray-600', 'hover:bg-gray-50');
+        }
+      });
+
+      mobileBtn?.classList.add('text-white', 'hover:text-blue-200');
+      mobileBtn?.classList.remove('text-gray-600', 'hover:text-primary-blue');
+    }
+  }
+
+  window.addEventListener('scroll', updateHeaderStyle);
+  // Initial check
+  updateHeaderStyle();
+
   function toggleMenu() {
     const isHidden = mobileMenu?.classList.contains('hidden');
     if (isHidden) {
       mobileMenu?.classList.remove('hidden');
-      // Small delay to allow display:block to apply before transition
       setTimeout(() => {
         mobilePanel?.classList.remove('translate-x-full');
       }, 10);
