@@ -113,6 +113,43 @@ export const content = {
         }
       ]
     },
+    whyChooseUs: {
+      heading: { zh: 'Apex 的优势', en: 'The Apex Difference' },
+      subText: { 
+        zh: '十余年来，我们致力于为学生提供最优质的教育服务，赢得了广泛的信任与好评。',
+        en: "For over a decade, we've been dedicated to providing top-quality education services, earning widespread trust and acclaim."
+      },
+      features: [
+        {
+          title: { zh: '顶尖师资团队', en: 'Top-Tier Faculty' },
+          description: { 
+            zh: '来自世界名校的精英导师，拥有丰富的教学经验和独特的教育理念。',
+            en: 'Elite tutors from world-renowned universities with extensive teaching experience.'
+          }
+        },
+        {
+          title: { zh: '个性化定制方案', en: 'Personalized Plans' },
+          description: { 
+            zh: '拒绝流水线式教学，为每一位学生量身打造专属的升学规划路线。',
+            en: 'Tailor-made admission plans for every student, rejecting assembly-line teaching.'
+          }
+        },
+        {
+          title: { zh: '卓越的升学成果', en: 'Proven Results' },
+          description: { 
+            zh: '累计帮助数千名学子成功录取哈佛、耶鲁、牛津、剑桥等世界顶尖名校。',
+            en: 'Helped thousands of students successfully admit to Ivy League and G5 universities.'
+          }
+        },
+        {
+          title: { zh: '全方位全程陪伴', en: 'Holistic Support' },
+          description: { 
+            zh: '从学术辅导到文书润色，从背景提升到面试指导，我们全程陪伴左右。',
+            en: 'From academic tutoring to essay editing, we are with you every step of the way.'
+          }
+        }
+      ]
+    },
     blog: {
       heading: { zh: '最新资讯', en: 'Latest News' },
       subheading: {
