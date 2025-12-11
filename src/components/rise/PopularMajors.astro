@@ -1,0 +1,242 @@
+---
+import { popularMajorsData } from '../../data/popular-majors';
+import VerticalTabs from '../ui/VerticalTabs.astro';
+import type { Locale } from '../../data/types';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const sectionTitle = locale === 'zh' ? '热门专业推荐' : 'Popular Major Recommendations';
+
+// Helper to get bilingual label
+const t = (obj: any) => obj[locale];
+
+---
+
+<section class="py-16 bg-white" id="popular-majors">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 border-b border-gray-200 pb-4">
+      <h2 class="text-3xl font-bold text-gray-900 border-l-4 border-red-700 pl-4 mb-4 md:mb-0">
+        {sectionTitle}
+      </h2>
+      
+      <!-- Horizontal Tabs: Areas -->
+      <div class="flex overflow-x-auto scrollbar-hide gap-6 md:gap-8">
+        {popularMajorsData.map((area, index) => (
+          <button
+            class={`area-tab text-base md:text-lg font-bold whitespace-nowrap pb-4 border-b-2 transition-colors duration-300 ${
+              index === 0
+                ? 'text-primary-brown border-primary-brown active' 
+                : 'text-gray-500 border-transparent hover:text-gray-700'
+            }`}
+            data-target={area.value}
+          >
+            {t(area.label)}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="flex flex-col md:flex-row gap-8 min-h-[500px]">
+      
+      <!-- Left Column: Vertical Tabs -->
+      <div class="w-full md:w-1/4">
+        {popularMajorsData.map((area, index) => (
+          <div 
+            class={`vertical-tab-group transition-opacity duration-300 ${index === 0 ? 'block' : 'hidden'}`}
+            data-area={area.value}
+          >
+            <VerticalTabs 
+              groupName={area.value}
+              items={area.majors.map(m => ({ label: t(m.label), value: m.value }))}
+            />
+          </div>
+        ))}
+      </div>
+
+      <!-- Right Column: Major Details -->
+      <div class="w-full md:w-3/4">
+        {popularMajorsData.map((area) => (
+           area.majors.map((major) => (
+             <div 
+               class="major-content hidden fade-in bg-white rounded-lg p-1"
+               data-area={area.value}
+               data-major={major.value}
+             >
+               <h3 class="text-xl font-bold text-gray-900 mb-6">
+                 {locale === 'zh' ? '就业形势' : 'Employment Trends'}
+               </h3>
+               
+               <div class="mb-8">
+                 <p class="text-gray-600 leading-relaxed mb-4">
+                   {t(major.description)}
+                 </p>
+                 <p class="text-gray-700 font-medium bg-gray-50 p-4 rounded border-l-4 border-primary-blue">
+                   {t(major.employment)}
+                 </p>
+               </div>
+
+               <h3 class="text-xl font-bold text-gray-900 mb-6">
+                 {locale === 'zh' ? `2024 QS世界大学 ${t(major.label)} 专业排名 (TOP5)` : `2024 QS World University Rankings: ${t(major.label)} (TOP 5)`}
+               </h3>
+
+               <div class="mb-10">
+                 <ul class="flex flex-wrap gap-4">
+                   {major.rankings.map((uni, idx) => (
+                     <li class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium">
+                       <span class="text-primary-blue font-bold mr-2">#{idx + 1}</span>
+                       {t(uni)}
+                     </li>
+                   ))}
+                 </ul>
+               </div>
+
+
+
+             </div>
+           ))
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Custom colors from screenshot context */
+  .text-primary-brown { color: #8B5E3C; } /* Approximate brown from text */
+  .border-primary-brown { border-color: #8B5E3C; }
+  .bg-primary-brown { background-color: #8B5E3C; }
+  .text-primary-yellow { color: #F8CB4F; } /* Tab yellow */
+  .border-primary-yellow { border-color: #F8CB4F; }
+  
+  /* Override Vertical Tab Active State for this section to match screenshot style roughly (Yellow+Black or Blue?)
+     User said "stick to our own style" (Blue/Red).
+     But I reused VerticalTabs which has Primary Blue hardcoded. 
+     I will keep Blue for consistency with the site, ignoring the Yellow in screenshot as per user instruction.
+  */
+</style>
+
+<script>
+  // Scoped Logic
+  const section = document.getElementById('popular-majors');
+  
+  if (section) {
+    const areaTabs = section.querySelectorAll('.area-tab');
+    const verticalGroups = section.querySelectorAll('.vertical-tab-group');
+    const contents = section.querySelectorAll('.major-content');
+
+    let currentArea = 'stem';
+    let currentMajor = 'cs'; // Default first
+
+    // Initial Render
+    showContent(currentArea, currentMajor);
+
+    // 1. Horizontal Tab Click
+    areaTabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        const target = (e.currentTarget as HTMLElement).dataset.target;
+        if (target && target !== currentArea) {
+           // Update Area
+           currentArea = target;
+           
+           // Highlight Tab
+           areaTabs.forEach(t => {
+             t.classList.remove('text-primary-brown', 'border-primary-brown', 'active');
+             t.classList.add('text-gray-500', 'border-transparent');
+           });
+           (e.currentTarget as HTMLElement).classList.add('text-primary-brown', 'border-primary-brown', 'active');
+           (e.currentTarget as HTMLElement).classList.remove('text-gray-500', 'border-transparent');
+
+           // Show correct Vertical Group
+           verticalGroups.forEach(g => {
+             if ((g as HTMLElement).dataset.area === currentArea) {
+               g.classList.remove('hidden');
+               g.classList.add('block');
+             } else {
+               g.classList.add('hidden');
+               g.classList.remove('block');
+             }
+           });
+
+           // Reset Major to first in new group
+           const firstTabInGroup = section.querySelector(`.vertical-tab-group[data-area="${currentArea}"] .vertical-tab`);
+           if (firstTabInGroup) {
+             currentMajor = (firstTabInGroup as HTMLElement).dataset.value || '';
+             // Trigger click simulation or manual update to highlight it
+             updateVerticalTabHighlight(currentMajor);
+             showContent(currentArea, currentMajor);
+           }
+        }
+      });
+    });
+
+    // 2. Vertical Tab Click (Event Delegation)
+    verticalGroups.forEach(group => {
+      group.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('.vertical-tab');
+        if (btn && !btn.classList.contains('text-primary-yellow')) { // Ignore "More" button
+           const major = (btn as HTMLElement).dataset.value;
+           if (major && major !== currentMajor) {
+             currentMajor = major;
+             updateVerticalTabHighlight(currentMajor);
+             showContent(currentArea, currentMajor);
+           }
+        }
+      });
+    });
+
+    function updateVerticalTabHighlight(activeVal: string) {
+       // Only update in the visible group
+       const currentGroup = section!.querySelector(`.vertical-tab-group[data-area="${currentArea}"]`);
+       if (currentGroup) {
+         const tabs = currentGroup.querySelectorAll('.vertical-tab');
+         tabs.forEach(t => {
+           if ((t as HTMLElement).dataset.value === activeVal) {
+             t.classList.add('active');
+           } else {
+             t.classList.remove('active');
+           }
+         });
+       }
+    }
+
+    function showContent(area: string, major: string) {
+      contents.forEach(c => {
+        const cArea = (c as HTMLElement).dataset.area;
+        const cMajor = (c as HTMLElement).dataset.major;
+        
+        if (cArea === area && cMajor === major) {
+          c.classList.remove('hidden');
+          // Trigger reflow
+          void (c as HTMLElement).offsetWidth;
+          c.classList.add('fade-in');
+        } else {
+          c.classList.add('hidden');
+          c.classList.remove('fade-in');
+        }
+      });
+    }
+  }
+</script>

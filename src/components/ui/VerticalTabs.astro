@@ -1,0 +1,44 @@
+---
+interface TabItem {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  items: TabItem[];
+  groupName: string; // To differentiate if multiple vertical tabs exist
+}
+
+const { items, groupName } = Astro.props;
+---
+
+<div class="flex flex-col w-full bg-gray-50 rounded-lg overflow-hidden border border-gray-100">
+  {items.map((item, index) => (
+    <button
+      class={`vertical-tab text-left px-6 py-4 border-b border-gray-200 last:border-0 hover:bg-gray-100 transition-colors duration-200 focus:outline-none flex justify-between items-center group ${
+        index === 0 ? 'active' : ''
+      }`}
+      data-group={groupName}
+      data-value={item.value}
+    >
+      <span class="font-medium text-gray-700 group-[.active]:text-white relative z-10 transition-colors duration-200">
+        {item.label}
+      </span>
+      {/* Active Indicator Background */}
+      <div class="absolute inset-0 bg-primary-blue opacity-0 group-[.active]:opacity-100 transition-opacity duration-300 z-0"></div>
+    </button>
+  ))}
+  
+  <button class="vertical-tab text-left px-6 py-4 hover:bg-gray-100 transition-colors duration-200 text-primary-yellow font-bold flex items-center gap-2 group">
+    <span>{groupName === 'stem' || groupName === 'humanities' || groupName === 'business' || groupName === 'medbio' || groupName === 'arts' ? (Astro.props.items[0].label.match(/[\u4e00-\u9fa5]/) ? '更多专业' : 'More Majors') : 'More'}</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+</div>
+
+<style>
+  .vertical-tab {
+    position: relative;
+  }
+</style>

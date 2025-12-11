@@ -4,6 +4,7 @@ import { centers } from '../data/centers';
 import RisePathways from '../components/rise/RisePathways.astro';
 import ServiceProcess from '../components/rise/ServiceProcess.astro';
 import TopUniversities from '../components/rise/TopUniversities.astro';
+import PopularMajors from '../components/rise/PopularMajors.astro';
 
 // Get Rise Center Data
 const center = centers.find(c => c.id === 'rise');
@@ -47,5 +48,8 @@ const locale = 'zh';
 
   <!-- Top Universities Requirements -->
   <TopUniversities locale={locale} />
+
+  <!-- Popular Major Recommendations -->
+  <PopularMajors locale={locale} />
 
 </BaseLayout>
