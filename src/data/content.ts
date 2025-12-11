@@ -384,7 +384,8 @@ export const content = {
 
   // ==================== CONTACT INFO ====================
   contact: {
-    phone: '+86 123 4567 8901',
+    addressHeading: { zh: '地址与定位', en: 'Location' },
+    hoursHeading: { zh: '营业时间', en: 'Opening Hours' },
     email: 'contact@apex-edu.com',
     wechat: 'apex-education',
     address: {
@@ -393,8 +394,86 @@ export const content = {
     },
     openingHours: {
       days: { zh: '周一至周日', en: 'Monday - Sunday' },
-      time: '9:00 - 21:00'
+      time: { zh: '10:00 - 18:00', en: '10:00 - 18:00' }
     }
+  },
+  // Service Process Steps for Rise Center
+  serviceProcess: {
+    heading: { zh: '一站式服务流程', en: 'One-Stop Service Process' },
+    steps: [
+      {
+         id: 1,
+         title: { zh: '前期咨询', en: 'Initial Consultation' },
+         description: { zh: '掌握学生信息，了解留学意向', en: 'Assess student background & goals' },
+         icon: 'chat'
+      },
+      {
+         id: 2,
+         title: { zh: '留学方案', en: 'Study Plan' },
+         description: { zh: '院校专业分析，确定申请目标', en: 'Analyze options & set targets' },
+         icon: 'document'
+      },
+      {
+         id: 3,
+         title: { zh: '申请材料', en: 'Materials Prep' },
+         description: { zh: '收集、整理、翻译申请材料', en: 'Collect & translate documents' },
+         icon: 'folder'
+      },
+      {
+         id: 4,
+         title: { zh: '提升建议', en: 'Enhancement' },
+         description: { zh: 'GPA、语言能力、背景提升建议', en: 'GPA, Language & Background advice' },
+         icon: 'bulb'
+      },
+      {
+         id: 5,
+         title: { zh: '文书制作', en: 'Essay Writing' },
+         description: { zh: '文书素材头脑风暴及制作', en: 'Brainstorm & craft essays' },
+         icon: 'edit'
+      },
+      {
+         id: 6,
+         title: { zh: '留学申请', en: 'Application' },
+         description: { zh: '递交申请并跟踪申请进度', en: 'Submit & track status' },
+         icon: 'send'
+      },
+      {
+         id: 7,
+         title: { zh: '面试指导', en: 'Interview Prep' },
+         description: { zh: '分享面试经验及面试指导', en: 'Mock interviews & guidance' },
+         icon: 'user'
+      },
+      {
+         id: 8,
+         title: { zh: '确认入读院校', en: 'Accept Offer' },
+         description: { zh: 'offer分析，给出选择建议', en: 'Analyze offers & decide' },
+         icon: 'check'
+      },
+      {
+         id: 9,
+         title: { zh: '签证申请', en: 'Visa Application' },
+         description: { zh: '收集签证材料进行申请并跟踪进度', en: 'Prepare & submit visa app' },
+         icon: 'passport'
+      },
+      {
+         id: 10,
+         title: { zh: '行前准备指导', en: 'Pre-departure' },
+         description: { zh: '协助申请海外住宿及接机服务', en: 'Accommodation & Pickup help' },
+         icon: 'plane'
+      },
+      {
+         id: 11,
+         title: { zh: '入学注册指导', en: 'Registration' },
+         description: { zh: '发送院校资料，协助入学注册', en: 'Enrollment guidance' },
+         icon: 'degree'
+      },
+      {
+         id: 12,
+         title: { zh: '梦想起航', en: 'Dream Start' },
+         description: { zh: '开启留学新篇章', en: 'Start your journey' },
+         icon: 'rocket'
+      }
+    ]
   }
 };
 

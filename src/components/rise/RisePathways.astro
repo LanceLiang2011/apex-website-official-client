@@ -1,0 +1,198 @@
+---
+import { risePathways, countryOptions, degreeOptions } from '../../data/rise-pathways';
+import ContentTable from '../ui/ContentTable.astro';
+import type { Locale } from '../../data/types';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+// Default active states (server-side initial render is not strictly needed for logic if using 'hidden' classes, 
+// but good for having one open by default).
+// We will let JS handle the initial "active" class application or hardcode the first one.
+---
+
+<section class="py-16 bg-white" id="rise-pathways">
+  <div class="container mx-auto px-4">
+    <div class="mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 border-l-4 border-primary-blue pl-4 mb-8">
+        {locale === 'zh' ? '多元化留学途径' : 'Diversified Study Abroad Pathways'}
+      </h2>
+
+      <!-- Level 1 Tabs: Country -->
+      <div class="flex flex-wrap items-center gap-x-8 gap-y-4 border-b border-gray-200 mb-8 overflow-x-auto pb-1 scrollbar-hide">
+        {countryOptions.map((country, index) => (
+          <button
+            class={`country-tab text-lg font-medium whitespace-nowrap pb-4 px-2 border-b-2 transition-colors duration-300 ${
+              index === 0 
+                ? 'text-primary-blue border-primary-blue active' 
+                : 'text-gray-500 border-transparent hover:text-gray-700'
+            }`}
+            data-target={country.value}
+          >
+            {country.label[locale]}
+          </button>
+        ))}
+      </div>
+
+      <!-- Level 2 Tabs: Degree -->
+      <div class="flex items-center gap-4 mb-8">
+        {degreeOptions.map((degree, index) => (
+          <button
+            class={`degree-tab px-8 py-2.5 rounded text-sm font-bold transition-all duration-300 shadow-sm ${
+              index === 0
+                ? 'bg-primary-blue text-white active' // "Our style" blue
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+            data-target={degree.value}
+          >
+            {degree.label[locale]}
+          </button>
+        ))}
+      </div>
+
+      <!-- Content Area -->
+      <div class="min-h-[400px]">
+        {countryOptions.map((country) => (
+          degreeOptions.map((degree) => {
+            const countryData = risePathways[country.value];
+            // @ts-ignore
+            const degreeData = countryData?.[degree.value]?.data;
+            const hasData = degreeData && degreeData.rows.length > 0;
+
+            // Default visibility: Show first country + first degree
+            const isDefault = country.value === countryOptions[0].value && degree.value === degreeOptions[0].value;
+            
+            return (
+              <div 
+                class={`pathway-content transition-opacity duration-300 ${isDefault ? 'block fade-in' : 'hidden'}`}
+                data-country={country.value}
+                data-degree={degree.value}
+              >
+                {hasData ? (
+                  <ContentTable 
+                    headers={degreeData.headers} 
+                    rows={degreeData.rows} 
+                    locale={locale} 
+                  />
+                ) : (
+                  <div class="bg-gray-50 rounded-lg border border-gray-100 p-12 text-center text-gray-500">
+                    <p class="text-lg mb-2">{locale === 'zh' ? '暂无相关数据' : 'No data available'}</p>
+                    <p class="text-sm opacity-75">{locale === 'zh' ? '请联系我们咨询详情' : 'Please contact us for details'}</p>
+                  </div>
+                )}
+                
+                {/* Contact CTA removed as per request */}
+              </div>
+            );
+          })
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Simple fade in animation */
+  .fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Hide scrollbar for tab container but allow scroll */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  // Simple Vanilla JS for Tab Switching
+  // Scoped to this component instance
+  const container = document.getElementById('rise-pathways');
+
+  if (container) {
+    const countryTabs = container.querySelectorAll('.country-tab');
+    const degreeTabs = container.querySelectorAll('.degree-tab');
+    const contents = container.querySelectorAll('.pathway-content');
+
+    let currentCountry = container.querySelector('.country-tab.active')?.getAttribute('data-target') || 'uk';
+    let currentDegree = container.querySelector('.degree-tab.active')?.getAttribute('data-target') || 'undergrad';
+
+    function updateView() {
+      // 1. Hide all content
+      contents.forEach(el => {
+        el.classList.add('hidden');
+        el.classList.remove('fade-in'); // Reset animation
+      });
+
+      // 2. Show matched content
+      const target = container?.querySelector(`.pathway-content[data-country="${currentCountry}"][data-degree="${currentDegree}"]`);
+      if (target) {
+        target.classList.remove('hidden');
+        // Trigger reflow to restart animation
+        void (target as HTMLElement).offsetWidth; 
+        target.classList.add('fade-in');
+      }
+    }
+
+    function setActiveTab(tabs: any, clickedTarget: any) {
+      tabs.forEach((t: any) => {
+        const isCountry = t.classList.contains('country-tab');
+        const isActive = t === clickedTarget;
+        
+        if (isActive) {
+           t.classList.add('active');
+           if (isCountry) {
+             t.classList.add('text-primary-blue', 'border-primary-blue');
+             t.classList.remove('text-gray-500', 'border-transparent');
+           } else {
+             t.classList.add('bg-primary-blue', 'text-white');
+             t.classList.remove('bg-gray-100', 'text-gray-600');
+           }
+        } else {
+           t.classList.remove('active');
+           if (isCountry) {
+             t.classList.remove('text-primary-blue', 'border-primary-blue');
+             t.classList.add('text-gray-500', 'border-transparent');
+           } else {
+             t.classList.remove('bg-primary-blue', 'text-white');
+             t.classList.add('bg-gray-100', 'text-gray-600');
+           }
+        }
+      });
+    }
+
+    // Event Listeners
+    countryTabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        const target = (e.currentTarget as HTMLElement).dataset.target;
+        if (target && target !== currentCountry) {
+          currentCountry = target;
+          setActiveTab(countryTabs, e.currentTarget);
+          updateView();
+        }
+      });
+    });
+
+    degreeTabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        const target = (e.currentTarget as HTMLElement).dataset.target;
+        if (target && target !== currentDegree) {
+          currentDegree = target;
+          setActiveTab(degreeTabs, e.currentTarget);
+          updateView();
+        }
+      });
+    });
+  }
+</script>

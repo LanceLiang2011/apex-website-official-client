@@ -1,0 +1,144 @@
+---
+import { topUniversitiesData, countryTabs } from '../../data/top-universities';
+import type { Locale } from '../../data/types';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<section class="py-20 bg-gray-50 from-gray-50 to-white" id="top-universities">
+  <div class="container mx-auto px-4">
+    <!-- Header with Tabs -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6">
+      <div class="flex items-center">
+         <div class="w-1 h-8 bg-accent-red mr-4"></div>
+         <h2 class="text-3xl font-bold text-gray-900">
+           {locale === 'zh' ? '各国TOP院校申请条件' : 'Top University Requirements'}
+         </h2>
+      </div>
+
+      <!-- Country Tabs -->
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+         {countryTabs.map((tab, index) => (
+            <button 
+              class={`country-filter text-base font-medium transition-colors duration-300 pb-1 border-b-2 ${index === 0 ? 'text-primary-blue border-primary-blue active' : 'text-gray-500 border-transparent hover:text-gray-800'}`}
+              data-target={tab.value}
+            >
+              {tab.label[locale]}
+            </button>
+         ))}
+      </div>
+    </div>
+
+    <!-- Grid/Flex Container -->
+    <div class="uni-grid-container min-h-[400px]">
+       {countryTabs.map((country, idx) => {
+          const unis = topUniversitiesData[country.value] || [];
+          const isHidden = idx !== 0; 
+          
+          // Chunk into rows of 4
+          const rows = [];
+          for (let i = 0; i < unis.length; i += 4) {
+            rows.push(unis.slice(i, i + 4));
+          }
+
+          return (
+            <div 
+               class={`uni-group transition-opacity duration-500 ${isHidden ? 'hidden' : 'block fade-in'}`}
+               data-country={country.value}
+            >
+               {rows.map((row) => (
+                 <div class="flex flex-col lg:flex-row gap-4 mb-4 w-full h-auto lg:h-96">
+                   {row.map((uni) => (
+                      <div class="uni-card relative group flex-1 hover:flex-[2] transition-[flex] duration-500 ease-in-out bg-white rounded-xl shadow-sm hover:shadow-xl overflow-hidden border border-gray-100 p-4 flex flex-col items-center justify-center min-w-0">
+                         
+                         <!-- QS Badge -->
+                         <div class="absolute top-0 left-0 bg-accent-red text-white text-xs font-bold py-1 px-3 rounded-br-lg z-20 shadow-sm whitespace-nowrap">
+                            QS.{uni.rank}
+                         </div>
+
+                         <!-- Content Wrapper -->
+                         <div class="flex flex-col items-center justify-center w-full h-full transition-transform duration-300">
+                            <div class="w-32 h-32 mb-4 flex items-center justify-center relative">
+                               <img src={uni.logo} alt={uni.name[locale]} class="max-w-full max-h-full object-contain" loading="lazy" />
+                            </div>
+                            <h3 class="text-base lg:text-lg font-bold text-gray-800 text-center px-1 truncate w-full group-hover:whitespace-normal group-hover:overflow-visible">{uni.name[locale]}</h3>
+                         </div>
+
+                         <!-- Hover Overlay: Requirements -->
+                         <div class="absolute inset-0 bg-primary-blue/95 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-white text-center z-30 translate-y-4 group-hover:translate-y-0 overflow-hidden">
+                            <h4 class="font-bold text-lg mb-2 border-b border-white/30 pb-2 w-full whitespace-nowrap">{locale === 'zh' ? '申请要求' : 'Requirements'}</h4>
+                            <ul class="space-y-1 text-sm text-blue-50 text-left w-full pl-1 overflow-y-auto max-h-[70%]">
+                               {uni.requirements[locale].map(req => (
+                                  <li class="flex items-start">
+                                     <span class="mr-1 text-accent-red">•</span>
+                                     <span class="leading-tight">{req}</span>
+                                  </li>
+                               ))}
+                            </ul>
+                         </div>
+                      </div>
+                   ))}
+                   <!-- Fill empty space if row has < 4 items? 
+                        Flexbox naturally stretches them. If we want them to stay standard size, we'd need spacers. 
+                        But stretching is usually fine and looks "full". 
+                        If user wants strict sizing, we might need empty placeholders. 
+                        For "Accordion", stretching remaining items is standard behavior.
+                   -->
+                 </div>
+               ))}
+            </div>
+          );
+       })}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+  @keyframes fadeIn {
+     from { opacity: 0; transform: translateY(10px); }
+     to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<script>
+  const section = document.getElementById('top-universities');
+  
+  if (section) {
+     const filters = section.querySelectorAll('.country-filter');
+     const groups = section.querySelectorAll('.uni-group');
+
+     filters.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+           const target = (e.currentTarget as HTMLElement).dataset.target;
+
+           // Update Buttons
+           filters.forEach(b => {
+             b.classList.remove('text-primary-blue', 'border-primary-blue', 'active');
+             b.classList.add('text-gray-500', 'border-transparent');
+           });
+           (e.currentTarget as HTMLElement).classList.add('text-primary-blue', 'border-primary-blue', 'active');
+           (e.currentTarget as HTMLElement).classList.remove('text-gray-500', 'border-transparent');
+
+           // Update Grid
+           groups.forEach((g) => {
+              if ((g as HTMLElement).dataset.country === target) {
+                 g.classList.remove('hidden');
+                 void (g as HTMLElement).offsetWidth; // Trigger reflow
+                 g.classList.add('fade-in');
+              } else {
+                 g.classList.add('hidden');
+                 g.classList.remove('fade-in');
+              }
+           });
+        });
+     });
+  }
+</script>

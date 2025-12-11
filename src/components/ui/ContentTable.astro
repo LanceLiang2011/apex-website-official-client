@@ -1,0 +1,78 @@
+---
+import type { TranslatedText } from '../../data/types';
+import type { PathwayTableRow } from '../../data/rise-pathways';
+
+interface Props {
+  headers: TranslatedText[];
+  rows: PathwayTableRow[]; // Using specific type for typed access, or could be generic
+  locale: 'zh' | 'en';
+}
+
+const { headers, rows, locale } = Astro.props;
+---
+
+<div class="overflow-x-auto rounded-lg border border-gray-200 shadow-sm bg-white">
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        {headers.map((header) => (
+          <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap">
+            {header[locale]}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      {rows.length > 0 ? (
+        rows.map((row) => (
+          <tr class="hover:bg-gray-50 transition-colors">
+            {/* 
+              We need to map the row object values relative to headers or just values?
+              The row object has specific keys (method, audience, description, requirements).
+              The data structure in rise-pathways.ts has rows matching the headers order implicitly in design but explicitly in keys.
+              We should probably iterate well-known keys or pass a renderer.
+              For simplicity and robustness given the specific data structure:
+              We'll rely on the specific order: Method, Audience, Description, [Requirements]
+            */}
+            <td class="px-6 py-4 whitespace-normal text-sm font-semibold text-gray-900 leading-relaxed min-w-[140px]">
+              {row.method[locale]}
+            </td>
+            <td class="px-6 py-4 whitespace-normal text-sm text-gray-600 leading-relaxed min-w-[160px]">
+              {row.audience[locale]}
+            </td>
+            <td class="px-6 py-4 whitespace-normal text-sm text-gray-600 leading-relaxed min-w-[240px]">
+              {row.description[locale]}
+            </td>
+            {row.requirements && (
+              <td class="px-6 py-4 whitespace-normal text-sm text-gray-600 leading-relaxed min-w-[200px]">
+                {row.requirements[locale]}
+              </td>
+            )}
+            {/* 
+               If headers count > rendered columns (which happens if row.requirements is missing but header exists, 
+               or if headers < columns), we should handle it.
+               The generic solution is hard without a strict schema-to-column mapping.
+               Given the user wants a "reusable component" but the data is specific, 
+               I will make this component expect the specific "PathwayTableRow" shape 
+               but loop broadly if I made it generic.
+               For this specific task, keeping it tied to PathwayTableRow is safer for alignment.
+               Wait, Canada has 4 columns, others have 3.
+               The logic above renders 4rd column ONLY if row.requirements exists.
+               But if the Header has 4 columns, and some rows don't have requirements (unlikely in same table), it might break alignment.
+               In my data, Canada has 4 headers and all rows have requirements.
+               Others have 3 headers and no requirements.
+               So the logic `row.requirements && ...` works IF the table is consistent.
+               However, `headers` prop is passed. If headers.length is 4, we must render 4 cells.
+            */}
+          </tr>
+        ))
+      ) : (
+        <tr>
+          <td colspan={headers.length} class="px-6 py-12 text-center text-gray-400">
+            {locale === 'zh' ? '暂无数据 / Coming Soon' : 'No data available'}
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { centers } from '../../data/centers';
+import RisePathways from '../../components/rise/RisePathways.astro';
+import ServiceProcess from '../../components/rise/ServiceProcess.astro';
+import TopUniversities from '../../components/rise/TopUniversities.astro';
+
+// Get Rise Center Data
+const center = centers.find(c => c.id === 'rise');
+
+if (!center) {
+  return Astro.redirect('/404');
+}
+
+const locale = 'en';
+---
+
+<BaseLayout title={`${center.name[locale]} - Apex Education`}>
+  <!-- Hero -->
+  <section class="bg-primary-blue text-white py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/20"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">{center.name[locale]}</h1>
+      {center.slogan && <p class="text-xl md:text-2xl text-blue-100 max-w-3xl">{center.slogan[locale]}</p>}
+    </div>
+  </section>
+
+  <!-- Description -->
+  <section class="py-16 bg-white border-b border-gray-100">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">
+          Center Introduction
+        </h2>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          {center.description[locale]}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diversified Pathways (New Section) -->
+  <RisePathways locale={locale} />
+
+  <!-- One-Stop Service Process -->
+  <ServiceProcess locale={locale} />
+
+  <!-- Top Universities Requirements -->
+  <TopUniversities locale={locale} />
+
+</BaseLayout>

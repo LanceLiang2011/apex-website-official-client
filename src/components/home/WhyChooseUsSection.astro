@@ -2,7 +2,7 @@
 import content from '../../data/content';
 
 const { locale } = Astro.props;
-const data = content.home.whyChooseUs;
+const data = content.home.whyChooseUs as any;
 
 const icons = [
   // Faculty (Cap)
@@ -37,7 +37,7 @@ const icons = [
         </h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
-          {data.features.map((feature, index) => (
+          {data.features.map((feature: any, index: number) => (
             <div class="flex flex-col items-start group">
               <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-primary-blue mb-6 group-hover:bg-accent-red group-hover:text-white group-hover:scale-110 transition-all duration-300 shadow-sm border border-blue-100">
                 <Fragment set:html={icons[index]} />
