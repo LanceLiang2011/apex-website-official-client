@@ -389,8 +389,8 @@ export const content = {
     email: 'contact@apex-edu.com',
     wechat: 'apex-education',
     address: {
-      zh: '7181 Woodbine Ave, Markham, ON L3R 1A3, Canada',
-      en: '7181 Woodbine Ave, Markham, ON L3R 1A3, Canada'
+      zh: '30 Wertheim Ct #1, Richmond Hill, ON L4B 1B9, Canada',
+      en: '30 Wertheim Ct #1, Richmond Hill, ON L4B 1B9, Canada'
     },
     openingHours: {
       days: { zh: '周一至周日', en: 'Monday - Sunday' },
