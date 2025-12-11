@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../home/Hero.astro';
 import AboutSection from '../home/AboutSection.astro';
 import CentersSection from '../home/CentersSection.astro';
-import CourseHighlights from '../home/CourseHighlights.astro';
+import TutorsSection from '../home/TutorsSection.astro';
 import HomeBlogSection from '../home/HomeBlogSection.astro';
 import type { Locale } from '../../data/types';
 
@@ -56,6 +56,6 @@ const title = locale === 'zh' ? 'Apex Education - 首页' : 'Apex Education - Ho
   </section>
 
   <CentersSection locale={locale} />
-  <CourseHighlights locale={locale} />
+  <TutorsSection locale={locale} />
   <HomeBlogSection locale={locale} />
 </BaseLayout>

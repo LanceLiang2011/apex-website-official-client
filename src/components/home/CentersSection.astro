@@ -4,19 +4,12 @@ import { centers } from '../../data/centers';
 import { courses } from '../../data/courses';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { content as siteContent } from '../../data/content';
+import GlassmorphicBox from '../GlassmorphicBox.astro';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-
-// Helper to get tags for a center
-function getCenterTags(centerId: string) {
-  return courses
-    .filter(c => c.centerId === centerId)
-    .flatMap(c => c.tags || [])
-    .slice(0, 4); // Limit to 4 tags
-}
 
 // Helper to get featured courses for a center
 function getCenterCourses(centerId: string) {
@@ -25,21 +18,8 @@ function getCenterCourses(centerId: string) {
     .slice(0, 3);
 }
 
-// Deduplicate tags by label
-function uniqueTags(tags: { zh: string; en: string }[]) {
-  const seen = new Set();
-  return tags.filter(tag => {
-    const label = tag[locale];
-    if (seen.has(label)) return false;
-    seen.add(label);
-    return true;
-  });
-}
-
 const centersContent = siteContent.home.centers;
-const commonLabels = siteContent.common.labels;
 const commonButtons = siteContent.common.buttons;
-const centerPlans = siteContent.common.centerPlans;
 ---
 
 <section class="py-20 bg-bg-light" id="centers-section">
@@ -53,131 +33,8 @@ const centerPlans = siteContent.common.centerPlans;
       </p>
     </div>
 
-    <!-- Design Toggle Tabs -->
-    <div class="flex justify-center mb-12">
-      <div class="bg-white p-1 rounded-lg shadow-sm inline-flex">
-        <button class="design-toggle px-6 py-2 rounded-md text-sm font-medium transition-all duration-200 bg-primary-blue text-white shadow-sm" data-design="a">
-          {centerPlans.planA}
-        </button>
-        <button class="design-toggle px-6 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-primary-blue transition-all duration-200" data-design="b">
-          {centerPlans.planB}
-        </button>
-        <button class="design-toggle px-6 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-primary-blue transition-all duration-200" data-design="c">
-          {centerPlans.planC}
-        </button>
-      </div>
-    </div>
-
-    <!-- Design A: Classic Cards with Course Links -->
-    <div id="design-a" class="design-view grid grid-cols-1 md:grid-cols-3 gap-8">
-      {centers.map(center => {
-        const tags = uniqueTags(getCenterTags(center.id));
-        const centerCourses = getCenterCourses(center.id);
-        
-        return (
-          <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col group">
-            <div class="p-8 flex-grow">
-              <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary-blue transition-colors duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-blue group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-              </div>
-              
-              <h3 class="text-xl font-bold text-text-main mb-3 group-hover:text-primary-blue transition-colors">
-                <a href={getRelativeLocaleUrl(locale, center.slug)}>{center.name[locale]}</a>
-              </h3>
-              
-              <p class="text-gray-600 mb-6 line-clamp-3 text-sm">
-                {center.description[locale]}
-              </p>
-
-              <!-- Featured Courses Links -->
-              <div class="mb-6 space-y-2">
-                <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                  {commonLabels.popularCourses[locale]}
-                </div>
-                {centerCourses.map(course => (
-                  <a 
-                    href={getRelativeLocaleUrl(locale, `${center.slug}/courses/${course.slug}`)}
-                    class="block text-sm text-gray-600 hover:text-primary-blue hover:translate-x-1 transition-all flex items-center"
-                  >
-                    <span class="w-1.5 h-1.5 rounded-full bg-gray-300 mr-2"></span>
-                    {course.name[locale]}
-                  </a>
-                ))}
-              </div>
-
-              <div class="flex flex-wrap gap-2">
-                {tags.map(tag => (
-                  <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
-                    {tag[locale]}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div class="p-8 pt-0 mt-auto">
-              <a 
-                href={getRelativeLocaleUrl(locale, center.slug)} 
-                class="block w-full text-center border-2 border-primary-blue text-primary-blue font-semibold py-3 rounded-lg hover:bg-primary-blue hover:text-white transition-all duration-300"
-              >
-                {commonButtons.viewCenter[locale]}
-              </a>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-
-    <!-- Design B: Horizontal List with Side Image/Icon -->
-    <div id="design-b" class="design-view hidden space-y-6">
-      {centers.map((center, index) => {
-        const centerCourses = getCenterCourses(center.id);
-        return (
-          <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden flex flex-col md:flex-row border border-gray-100">
-            <div class={`md:w-1/4 bg-gradient-to-br ${index === 0 ? 'from-blue-500 to-blue-600' : index === 1 ? 'from-indigo-500 to-indigo-600' : 'from-sky-500 to-sky-600'} p-8 flex items-center justify-center text-white`}>
-              <div class="text-center">
-                <h3 class="text-2xl font-bold mb-2">{center.name[locale].split(' ')[0]}</h3> <!-- Simplified name logic -->
-                <div class="w-12 h-1 bg-white/30 mx-auto rounded"></div>
-              </div>
-            </div>
-            <div class="p-8 md:w-3/4 flex flex-col md:flex-row gap-8">
-              <div class="flex-grow">
-                <h3 class="text-xl font-bold text-text-main mb-2">
-                  <a href={getRelativeLocaleUrl(locale, center.slug)} class="hover:text-primary-blue transition-colors">
-                    {center.name[locale]}
-                  </a>
-                </h3>
-                <p class="text-gray-600 text-sm mb-4">
-                  {center.description[locale]}
-                </p>
-                <a href={getRelativeLocaleUrl(locale, center.slug)} class="text-primary-blue font-medium text-sm hover:underline">
-                  {commonButtons.learnMore[locale]} →
-                </a>
-              </div>
-              <div class="md:w-1/3 border-l border-gray-100 pl-0 md:pl-8 pt-4 md:pt-0">
-                 <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
-                   {commonLabels.quickAccess[locale]}
-                </div>
-                <div class="space-y-2">
-                  {centerCourses.map(course => (
-                    <a 
-                      href={getRelativeLocaleUrl(locale, `${center.slug}/courses/${course.slug}`)}
-                      class="block text-sm text-gray-700 hover:text-primary-blue truncate"
-                    >
-                      {course.name[locale]}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-
-    <!-- Design C: Modern Grid with Hover Overlay -->
-    <div id="design-c" class="design-view hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Modern Grid with Glassmorphic Overlay -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {centers.map((center, index) => {
         const centerCourses = getCenterCourses(center.id);
         // Placeholder images for background
@@ -188,27 +45,28 @@ const centerPlans = siteContent.common.centerPlans;
         ][index];
 
         return (
-          <div class="group relative h-[400px] rounded-2xl overflow-hidden shadow-lg cursor-pointer">
+          <div class="group relative h-[450px] rounded-2xl overflow-hidden shadow-lg border border-gray-100">
             <!-- Background Image -->
             <div class="absolute inset-0">
               <img src={bgImage} alt={center.name[locale]} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
             </div>
             
-            <!-- Content -->
-            <div class="absolute inset-0 p-8 flex flex-col justify-end">
-              <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 class="text-2xl font-bold text-white mb-2">{center.name[locale]}</h3>
-                <p class="text-gray-300 text-sm mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 line-clamp-2">
+            <!-- Glassmorphic overlay covering entire image -->
+            <!-- Using dark glass for better text visibility (bgOpacity=70) -->
+            <GlassmorphicBox class="absolute inset-0 transition-all duration-300" blur="md" bgOpacity={70} borderOpacity={20} mode="dark">
+              <!-- Content centered -->
+              <div class="absolute inset-0 p-8 flex flex-col justify-center items-center text-center">
+                <h3 class="text-2xl font-bold text-white mb-4">{center.name[locale]}</h3>
+                <p class="text-gray-100 text-sm mb-6 max-w-sm mx-auto leading-relaxed">
                   {center.description[locale]}
                 </p>
                 
-                <!-- Course Links appearing on hover -->
-                <div class="space-y-2 mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
-                   {centerCourses.map(course => (
+                <!-- Course Links -->
+                <div class="space-y-2 mb-8 w-full max-w-xs mx-auto">
+                  {centerCourses.map(course => (
                     <a 
                       href={getRelativeLocaleUrl(locale, `${center.slug}/courses/${course.slug}`)}
-                      class="block text-sm text-blue-200 hover:text-white flex items-center"
+                      class="block text-sm text-white/90 hover:text-white hover:bg-white/10 rounded px-2 py-1 transition-colors flex items-center justify-center"
                     >
                       <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                       {course.name[locale]}
@@ -218,12 +76,12 @@ const centerPlans = siteContent.common.centerPlans;
 
                 <a 
                   href={getRelativeLocaleUrl(locale, center.slug)} 
-                  class="inline-block bg-white/20 hover:bg-white hover:text-primary-blue text-white backdrop-blur-sm border border-white/30 px-6 py-2 rounded-full text-sm font-medium transition-all duration-300"
+                  class="inline-flex items-center justify-center bg-accent-red hover:bg-red-700 text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 >
-                   {commonButtons.enterCenter[locale]}
+                  {commonButtons.enterCenter[locale]}
                 </a>
               </div>
-            </div>
+            </GlassmorphicBox>
           </div>
         );
       })}
@@ -231,40 +89,3 @@ const centerPlans = siteContent.common.centerPlans;
 
   </div>
 </section>
-
-<script>
-  const toggles = document.querySelectorAll('.design-toggle');
-  const views = document.querySelectorAll('.design-view');
-
-  toggles.forEach(toggle => {
-    toggle.addEventListener('click', () => {
-      const design = (toggle as HTMLElement).dataset.design;
-      
-      // Update buttons
-      toggles.forEach(t => {
-        t.classList.remove('bg-primary-blue', 'text-white', 'shadow-sm');
-        t.classList.add('text-gray-600', 'hover:text-primary-blue');
-      });
-      toggle.classList.remove('text-gray-600', 'hover:text-primary-blue');
-      toggle.classList.add('bg-primary-blue', 'text-white', 'shadow-sm');
-
-      // Update views
-      views.forEach(view => {
-        if (view.id === `design-${design}`) {
-          view.classList.remove('hidden');
-          // Add a small fade-in animation
-          view.animate([
-            { opacity: 0, transform: 'translateY(10px)' },
-            { opacity: 1, transform: 'translateY(0)' }
-          ], {
-            duration: 300,
-            easing: 'ease-out',
-            fill: 'forwards'
-          });
-        } else {
-          view.classList.add('hidden');
-        }
-      });
-    });
-  });
-</script>

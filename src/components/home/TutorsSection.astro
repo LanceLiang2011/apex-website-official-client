@@ -1,0 +1,58 @@
+---
+import type { Locale } from '../../data/types';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { content as siteContent } from '../../data/content';
+import GlassmorphicBox from '../GlassmorphicBox.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+
+const tutorsContent = siteContent.home.tutors;
+---
+
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4">
+        {tutorsContent.heading[locale]}
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        {tutorsContent.subheading[locale]}
+      </p>
+    </div>
+
+    <!-- Tutors Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {tutorsContent.list.map((tutor) => (
+        <div class="group relative h-[400px] rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow duration-300">
+          <!-- Image (Full height) -->
+          <img 
+            src={tutor.image} 
+            alt={tutor.name[locale]} 
+            class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+
+          <!-- Overlay (Slides in from bottom) -->
+          <div class="absolute inset-x-0 bottom-0 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out h-[60%]">
+             <GlassmorphicBox class="w-full h-full p-6 flex flex-col justify-center text-center" blur="md" bgOpacity={80} borderOpacity={20} mode="dark">
+                <h3 class="text-xl font-bold text-white mb-1">{tutor.name[locale]}</h3>
+                <p class="text-blue-100 font-medium text-sm mb-3">{tutor.role[locale]}</p>
+                <p class="text-white text-sm mb-4 line-clamp-3 opacity-90">
+                  {tutor.description[locale]}
+                </p>
+                <a 
+                  href={getRelativeLocaleUrl(locale, '/about')} 
+                  class="inline-block border border-white/40 hover:bg-white hover:text-primary-blue text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300"
+                >
+                  {tutorsContent.viewDetails[locale]}
+                </a>
+             </GlassmorphicBox>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

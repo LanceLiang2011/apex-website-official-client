@@ -5,7 +5,8 @@
   --color-accent: #c10923;
   --color-primary-blue: #151a5f;
   --color-accent-red: #c10923;
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Apple-like font stack with Chinese support */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 :root {

@@ -70,10 +70,48 @@ export const content = {
         en: 'Three professional centers providing comprehensive education services for you'
       }
     },
-    courseHighlights: {
-      heading: { zh: '热门课程', en: 'Popular Courses' },
-      subheading: { zh: '探索我们最受欢迎的课程', en: 'Explore our most popular courses' },
-      viewAllText: { zh: '查看所有课程', en: 'View All Courses' }
+    tutors: {
+      heading: { zh: '师资队伍', en: 'Our Tutors' },
+      subheading: { zh: '专业的教育团队', en: 'Professional Teaching Team' },
+      viewDetails: { zh: '查看详情', en: 'See Details' },
+      list: [
+        {
+          name: { zh: 'Ms. Sarah Johnson', en: 'Ms. Sarah Johnson' },
+          role: { zh: '高级英语讲师', en: 'Senior English Instructor' },
+          description: { 
+            zh: '拥有剑桥大学英语文学硕士学位，10年国际学校教学经验，擅长雅思、托福备考指导。', 
+            en: 'MA in English Literature from Cambridge University. 10 years of teaching experience in international schools, specializing in IELTS and TOEFL preparation.' 
+          },
+          image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop'
+        },
+        {
+          name: { zh: 'Mr. David Chen', en: 'Mr. David Chen' },
+          role: { zh: '数学/物理竞赛教练', en: 'Math/Physics Contest Coach' },
+          description: { 
+            zh: '北京大学物理系毕业，曾辅导多名学生获得AMC及物理碗金奖，教学风格严谨风趣。', 
+            en: 'Graduated from Physics Department of Peking University. Coached multiple students to win Gold Awards in AMC and Physics Bowl. Rigorous yet humorous teaching style.' 
+          },
+          image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1974&auto=format&fit=crop'
+        },
+        {
+          name: { zh: 'Dr. Emily Wang', en: 'Dr. Emily Wang' },
+          role: { zh: '升学规划总监', en: 'Director of College Counseling' },
+          description: { 
+            zh: '哥伦比亚大学教育学博士，深谙美国名校申请流程，成功帮助数百位学生进入常春藤盟校。', 
+            en: 'Ed.D. from Columbia University. Expert in US top university application process. Successfully helped hundreds of students enter Ivy League schools.' 
+          },
+          image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop'
+        },
+        {
+          name: { zh: 'Mr. Michael Brown', en: 'Mr. Michael Brown' },
+          role: { zh: 'SAT/ACT 标化讲师', en: 'SAT/ACT Instructor' },
+          description: { 
+            zh: '美国本土资深教师，ETS认证培训师，拥有独特的阅读写作教学法，帮助学生快速提分。', 
+            en: 'Native senior teacher from the US, ETS certified trainer. Has unique teaching methods for reading and writing, helping students improve scores quickly.' 
+          },
+          image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop'
+        }
+      ]
     },
     blog: {
       heading: { zh: '最新资讯', en: 'Latest News' },
@@ -296,40 +334,8 @@ export const content = {
       zh: '致力于为学生提供全方位的国际教育解决方案，从语言培训到学术辅导，再到升学规划，助力每一位学子实现名校梦想。',
       en: 'Dedicated to providing comprehensive international education solutions for students, from language training to academic tutoring and college planning, helping every student achieve their dream school.'
     },
-    quickLinks: {
-      heading: { zh: '快速链接', en: 'Quick Links' },
-      items: [
-        { label: { zh: '关于我们', en: 'About Us' }, href: '/about' },
-        { label: { zh: '教育信息', en: 'Education Info' }, href: '/education-info' },
-        { label: { zh: '联系我们', en: 'Contact Us' }, href: '/contact' }
-      ]
-    },
-    centersLinks: {
-      heading: { zh: '旗下中心', en: 'Our Centers' },
-      items: [
-        {
-          label: { zh: '优冠学术辅导中心', en: 'UCAN Tutoring Center' },
-          href: '/ucan'
-        },
-        {
-          label: { zh: '简言语言培训中心', en: 'Simple Language Training Center' },
-          href: '/simple-language'
-        },
-        {
-          label: { zh: '瑞思升学规划中心', en: 'Rise Academic Planning Center' },
-          href: '/rise'
-        }
-      ]
-    },
-    newsletter: {
-      heading: { zh: '订阅更新', en: 'Newsletter' },
-      description: {
-        zh: '订阅我们的最新课程和教育资讯。',
-        en: 'Subscribe to our latest courses and education news.'
-      },
-      emailPlaceholder: { zh: '您的邮箱地址', en: 'Your email address' },
-      subscribeButton: { zh: '订阅', en: 'Subscribe' }
-    },
+    addressHeading: { zh: '联系地址', en: 'Our Location' },
+    hoursHeading: { zh: '营业时间', en: 'Opening Hours' },
     copyright: '© {year} Apex Education. All rights reserved.'
   },
 
@@ -345,8 +351,12 @@ export const content = {
     email: 'contact@apex-edu.com',
     wechat: 'apex-education',
     address: {
-      zh: '上海市浦东新区世纪大道1000号',
-      en: '1000 Century Avenue, Pudong New Area, Shanghai'
+      zh: '7181 Woodbine Ave, Markham, ON L3R 1A3, Canada',
+      en: '7181 Woodbine Ave, Markham, ON L3R 1A3, Canada'
+    },
+    openingHours: {
+      days: { zh: '周一至周日', en: 'Monday - Sunday' },
+      time: '9:00 - 21:00'
     }
   }
 };

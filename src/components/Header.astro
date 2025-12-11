@@ -25,12 +25,12 @@ const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
 <header id="main-header" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent text-white">
   <div class="container mx-auto px-4 h-20 flex items-center justify-between">
     <!-- Logo -->
-    <a href={getRelativeLocaleUrl(currentLocale, '/')} class="text-2xl font-bold flex items-center gap-2 group">
-      <!-- Placeholder Logo Icon -->
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white transition-colors duration-300 group-hover:text-blue-200 header-logo-icon" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2L1 12h3v9h6v-6h4v6h6v-9h3L12 2z"/>
-      </svg>
-      <span class="header-logo-text">Apex Education</span>
+    <a href={getRelativeLocaleUrl(currentLocale, '/')} class="flex items-center group">
+      <img 
+        src="/images/logo_light.png" 
+        alt="Apex Education" 
+        class="h-16 w-auto transition-opacity duration-300 group-hover:opacity-80 header-logo"
+      />
     </a>
 
     <!-- Desktop Nav -->
@@ -107,7 +107,7 @@ const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
           <div>
             <a 
               href={getRelativeLocaleUrl(currentLocale, item.href)} 
-              class="block text-lg font-medium text-text-main hover:text-primary-blue"
+              class="block text-lg font-medium text-primary-blue hover:text-blue-700"
             >
               {item.label[currentLocale]}
             </a>
@@ -132,7 +132,7 @@ const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
 
 <script>
   const header = document.getElementById('main-header');
-  const logoIcon = document.querySelector('.header-logo-icon');
+  const logo = document.querySelector('.header-logo') as HTMLImageElement;
   const navLinks = document.querySelectorAll('.header-nav-link');
   const langSwitcher = document.querySelector('.header-lang-switcher');
   const mobileBtn = document.querySelector('.header-mobile-btn');
@@ -149,8 +149,8 @@ const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
       header?.classList.remove('bg-transparent', 'text-white');
       header?.classList.add('bg-white', 'text-text-main', 'shadow-sm');
       
-      logoIcon?.classList.remove('text-white');
-      logoIcon?.classList.add('text-primary-blue');
+      // Switch to dark logo for white background
+      if (logo) logo.src = '/images/logo_dark.png';
 
       navLinks.forEach(link => {
         link.classList.remove('hover:text-blue-200');
@@ -177,8 +177,8 @@ const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
       header?.classList.add('bg-transparent', 'text-white');
       header?.classList.remove('bg-white', 'text-text-main', 'shadow-sm');
 
-      logoIcon?.classList.add('text-white');
-      logoIcon?.classList.remove('text-primary-blue');
+      // Switch to light logo for transparent background
+      if (logo) logo.src = '/images/logo_light.png';
 
       navLinks.forEach(link => {
         link.classList.add('hover:text-blue-200');

@@ -1,0 +1,46 @@
+---
+interface Props {
+  class?: string;
+  blur?: 'sm' | 'md' | 'lg' | 'xl';
+  bgOpacity?: number; // 0-100, background opacity
+  borderOpacity?: number; // 0-100, border opacity
+  mode?: 'light' | 'dark'; // Add mode support
+}
+
+const { 
+  class: className = '', 
+  blur = 'md',
+  bgOpacity = 10,
+  borderOpacity = 20,
+  mode = 'light'
+} = Astro.props;
+
+const blurClass = {
+  'sm': 'backdrop-blur-sm',
+  'md': 'backdrop-blur-md',
+  'lg': 'backdrop-blur-lg',
+  'xl': 'backdrop-blur-xl'
+}[blur];
+
+const bgOpacityValue = bgOpacity / 100;
+const borderOpacityValue = borderOpacity / 100;
+const rgbBase = mode === 'dark' ? '0, 0, 0' : '255, 255, 255';
+---
+
+<div 
+  class={`glassmorphic ${blurClass} ${className}`}
+  style={`
+    background: rgba(${rgbBase}, ${bgOpacityValue});
+    border-color: rgba(${rgbBase}, ${borderOpacityValue});
+  `}
+>
+  <slot />
+</div>
+
+<style>
+  .glassmorphic {
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  }
+</style>
