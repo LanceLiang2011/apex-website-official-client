@@ -2,6 +2,18 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import type { Course, Center, Locale } from '../../data/types';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { 
+  Calculator, 
+  BookOpen, 
+  Atom, 
+  FlaskConical, 
+  Dna,
+  Users,
+  GraduationCap,
+  ClipboardList,
+  RefreshCw,
+  BrainCircuit
+} from 'lucide-astro';
 
 interface Props {
   course: Course;
@@ -154,6 +166,7 @@ const subjects = [
   {
     id: 'math',
     name: { zh: '数学', en: 'Math' },
+    icon: Calculator,
     levels: [
       { label: { zh: '9年级', en: 'Grade 9' }, key: 'g9' },
       { label: { zh: '10年级', en: 'Grade 10' }, key: 'g10' },
@@ -165,6 +178,7 @@ const subjects = [
   {
     id: 'english',
     name: { zh: '英语', en: 'English' },
+    icon: BookOpen,
     levels: [
       { label: { zh: '6-8年级 阅读与词汇', en: 'Grade 6-8 Reading & Vocabulary' }, key: null },
       { label: { zh: '9-12年级 语法与写作', en: 'Grade 9-12 Grammar & Writing' }, key: null },
@@ -173,6 +187,7 @@ const subjects = [
   {
     id: 'physics',
     name: { zh: '物理', en: 'Physics' },
+    icon: Atom,
     levels: [
       { label: { zh: '11年级', en: 'Grade 11' }, key: 'g11' },
       { label: { zh: '12年级', en: 'Grade 12' }, key: 'g12' },
@@ -181,6 +196,7 @@ const subjects = [
   {
     id: 'chemistry',
     name: { zh: '化学', en: 'Chemistry' },
+    icon: FlaskConical,
     levels: [
       { label: { zh: '11年级', en: 'Grade 11' }, key: 'g11' },
       { label: { zh: '12年级', en: 'Grade 12' }, key: 'g12' },
@@ -189,6 +205,7 @@ const subjects = [
   {
     id: 'biology',
     name: { zh: '生物', en: 'Biology' },
+    icon: Dna,
     levels: [
       { label: { zh: '11年级', en: 'Grade 11' }, key: 'g11' },
       { label: { zh: '12年级', en: 'Grade 12' }, key: 'g12' },
@@ -199,23 +216,23 @@ const subjects = [
 const highlights = [
   {
     title: { zh: '6人小班授课', en: 'Small Class Size (6 Students)' },
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>`
+    icon: Users
   },
   {
     title: { zh: '名师专业辅导', en: 'Expert Tutoring' },
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>`
+    icon: GraduationCap
   },
   {
     title: { zh: '作业全程跟踪', en: 'Homework Tracking' },
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>`
+    icon: ClipboardList
   },
   {
     title: { zh: '校内进度同步', en: 'School Sync' },
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`
+    icon: RefreshCw
   },
   {
     title: { zh: '重难知识巩固', en: 'Knowledge Consolidation' },
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>`
+    icon: BrainCircuit
   }
 ];
 
@@ -256,7 +273,8 @@ const highlights = [
         {subjects.map(subject => (
           <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col md:flex-row items-stretch">
             <!-- Subject Title -->
-            <div class="bg-primary-blue text-white p-6 md:w-48 flex-shrink-0 flex items-center justify-center md:justify-start">
+            <div class="bg-primary-blue text-white p-6 md:w-48 flex-shrink-0 flex flex-col items-center justify-center gap-3">
+              <subject.icon class="w-10 h-10" />
               <h3 class="text-2xl font-bold">{subject.name[locale]}</h3>
             </div>
             
@@ -293,7 +311,7 @@ const highlights = [
         {highlights.map(highlight => (
           <div class="flex flex-col items-center text-center group">
             <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-primary-blue mb-4 group-hover:bg-primary-blue group-hover:text-white transition-all duration-300">
-              <Fragment set:html={highlight.icon} />
+              <highlight.icon class="w-8 h-8" />
             </div>
             <h3 class="font-bold text-gray-900">{highlight.title[locale]}</h3>
           </div>
