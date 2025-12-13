@@ -1,0 +1,213 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Course, Center, Locale } from '../../data/types';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { 
+  BookOpen, 
+  GraduationCap, 
+  Calendar, 
+  BarChart3, 
+  Brain, 
+  Calculator, 
+  Languages,
+  Target,
+  Clock,
+  Award,
+  PenTool
+} from 'lucide-astro';
+
+interface Props {
+  course: Course;
+  center: Center;
+  locale: Locale;
+}
+
+const { course, center, locale } = Astro.props;
+
+const ssatInfo = {
+  intro: {
+    title: { zh: '什么是 SSAT？', en: 'What is SSAT?' },
+    description: {
+      zh: 'SSAT（Secondary School Admission Test）是加拿大和美国私立中学常用的入学考试，主要用于评估学生的英语阅读能力、词汇逻辑水平和数学基础。它是私立学校评估申请者学术潜力的重要标准。',
+      en: 'The SSAT (Secondary School Admission Test) is a standardized entrance exam used by many private middle and high schools in Canada and the United States. It primarily assesses students\' English reading ability, vocabulary logic, and mathematical foundation, serving as a key benchmark for evaluating academic potential.'
+    }
+  },
+  levels: {
+    title: { zh: '考试级别', en: 'Exam Levels' },
+    items: [
+      {
+        level: { zh: 'Elementary Level', en: 'Elementary Level' },
+        grades: { zh: 'G3 – G4', en: 'Grades 3 – 4' },
+        desc: { zh: '针对小学低年级学生，评估基础学术能力。', en: 'For lower elementary students, assessing foundational academic skills.' }
+      },
+      {
+        level: { zh: 'Middle Level', en: 'Middle Level' },
+        grades: { zh: 'G5 – G7', en: 'Grades 5 – 7' },
+        desc: { zh: '针对小学高年级及初中学生，是申请私立中学的关键考试。', en: 'For upper elementary and middle school students, crucial for private middle school applications.' }
+      },
+      {
+        level: { zh: 'Upper Level', en: 'Upper Level' },
+        grades: { zh: 'G8 – G11', en: 'Grades 8 – 11' },
+        desc: { zh: '针对申请私立高中的学生，难度较高，考察综合学术素养。', en: 'For students applying to private high schools, testing comprehensive academic literacy.' }
+      }
+    ]
+  },
+  content: {
+    title: { zh: '考试内容', en: 'Exam Content' },
+    items: [
+      {
+        title: { zh: '阅读理解', en: 'Reading Comprehension' },
+        icon: BookOpen,
+        desc: { zh: '考察学生对不同题材文章的理解、分析和推断能力。', en: 'Tests understanding, analysis, and inference skills across various text genres.' }
+      },
+      {
+        title: { zh: '词汇', en: 'Vocabulary' },
+        icon: Languages,
+        desc: { zh: '包括同义词（Synonyms）和类比（Analogies），考察词汇量及逻辑思维。', en: 'Includes Synonyms and Analogies, testing vocabulary breadth and logical thinking.' }
+      },
+      {
+        title: { zh: '数学', en: 'Mathematics' },
+        icon: Calculator,
+        desc: { zh: '考察基础数学概念、计算能力及数学逻辑应用。', en: 'Tests fundamental math concepts, calculation skills, and logical application.' }
+      },
+      {
+        title: { zh: '写作', en: 'Writing Sample' },
+        icon: PenTool,
+        desc: { zh: '不计入总分，但会寄送给申请学校，作为写作能力的参考。', en: 'Not scored, but sent to schools as a reference for writing ability.' }
+      }
+    ]
+  },
+  details: {
+    schedule: {
+      title: { zh: '考试时间', en: 'Schedule' },
+      content: { zh: '每年 10 月至次年 4–5 月期间提供多次考试机会，学生可根据私校申请时间灵活选择。', en: 'Multiple test opportunities are offered annually from October to April/May. Students can choose dates flexibly based on their application timeline.' },
+      icon: Calendar
+    },
+    scoring: {
+      title: { zh: '评分标准', en: 'Scoring' },
+      content: { zh: 'Middle 和 Upper Level 总分范围为 500–2400 分，并以百分位形式呈现成绩，供私立学校综合评估学生的学术能力与学习潜力。', en: 'For Middle and Upper Levels, scores range from 500–2400. Results are also presented as percentiles to help schools evaluate academic ability and potential.' },
+      icon: BarChart3
+    }
+  }
+};
+
+---
+
+<BaseLayout title={`${course.name[locale]} - ${center.name[locale]}`}>
+  <!-- Hero Section -->
+  <section class="bg-gray-900 text-white pt-32 pb-16">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
+        <div class="grow">
+          <div class="flex gap-2 mb-4">
+            <a href={getRelativeLocaleUrl(locale, center.slug)} class="text-blue-300 hover:text-white transition-colors">
+              {center.name[locale]}
+            </a>
+            <span class="text-gray-500">/</span>
+            <span class="text-gray-400">{course.name[locale]}</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">{course.name[locale]}</h1>
+          <p class="text-xl text-gray-300 mb-6 max-w-3xl">{course.shortDescription[locale]}</p>
+          
+          <div class="flex flex-wrap gap-4">
+            {course.tags?.map(tag => (
+              <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">
+                {tag[locale]}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">{ssatInfo.intro.title[locale]}</h2>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          {ssatInfo.intro.description[locale]}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Levels Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">{ssatInfo.levels.title[locale]}</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        {ssatInfo.levels.items.map((level, index) => (
+          <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow relative overflow-hidden group">
+            <div class="absolute top-0 left-0 w-full h-1 bg-primary-blue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+            <div class="w-12 h-12 bg-blue-50 text-primary-blue rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-blue group-hover:text-white transition-colors">
+              <GraduationCap class="w-6 h-6" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">{level.level[locale]}</h3>
+            <div class="inline-block bg-gray-100 text-gray-600 text-sm font-medium px-3 py-1 rounded-full mb-4">
+              {level.grades[locale]}
+            </div>
+            <p class="text-gray-600">
+              {level.desc[locale]}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">{ssatInfo.content.title[locale]}</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {ssatInfo.content.items.map(item => (
+          <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:border-blue-200 transition-colors">
+            <div class="w-10 h-10 bg-white text-primary-blue rounded-full shadow-sm flex items-center justify-center mb-4">
+              <item.icon class="w-5 h-5" />
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">{item.title[locale]}</h3>
+            <p class="text-sm text-gray-600">
+              {item.desc[locale]}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Details Section (Schedule & Scoring) -->
+  <section class="py-16 bg-gray-900 text-white">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- Schedule -->
+        <div class="flex gap-6">
+          <div class="shrink-0 w-16 h-16 bg-blue-600/20 text-blue-400 rounded-2xl flex items-center justify-center">
+            <ssatInfo.details.schedule.icon class="w-8 h-8" />
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4">{ssatInfo.details.schedule.title[locale]}</h3>
+            <p class="text-gray-300 leading-relaxed">
+              {ssatInfo.details.schedule.content[locale]}
+            </p>
+          </div>
+        </div>
+
+        <!-- Scoring -->
+        <div class="flex gap-6">
+          <div class="shrink-0 w-16 h-16 bg-purple-600/20 text-purple-400 rounded-2xl flex items-center justify-center">
+            <ssatInfo.details.scoring.icon class="w-8 h-8" />
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4">{ssatInfo.details.scoring.title[locale]}</h3>
+            <p class="text-gray-300 leading-relaxed">
+              {ssatInfo.details.scoring.content[locale]}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
