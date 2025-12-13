@@ -1,0 +1,401 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Course, Center, Locale } from '../../data/types';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { 
+  Calculator, 
+  Sigma, 
+  Atom, 
+  Zap, 
+  FlaskConical, 
+  Dna, 
+  BarChart3, 
+  Code2, 
+  Globe2, 
+  Coins, 
+  PenTool, 
+  BookOpen 
+} from 'lucide-astro';
+
+interface Props {
+  course: Course;
+  center: Center;
+  locale: Locale;
+}
+
+const { course, center, locale } = Astro.props;
+
+const apCourses = [
+  {
+    id: 'ap-calc',
+    name: { zh: 'AP预备微积分', en: 'AP Precalculus' },
+    icon: Calculator,
+    syllabus: {
+      title: { zh: 'Pre-AP课纲', en: 'Pre-AP Syllabus' },
+      topics: [
+        { title: { zh: '一次函数', en: 'Linear Function' }, hours: 1 },
+        { title: { zh: '二次函数', en: 'Quadratic Function' }, hours: 2 },
+        { title: { zh: '指数函数', en: 'Exponential Function' }, hours: 3 },
+        { title: { zh: '对数函数', en: 'Logarithmic Function' }, hours: 3 },
+        { title: { zh: '三角函数', en: 'Trigonometric Function' }, hours: 4 },
+      ]
+    }
+  },
+  {
+    id: 'ap-calc-bc',
+    name: { zh: 'AP微积分AB/BC', en: 'AP Calculus AB/BC' },
+    icon: Sigma,
+    syllabus: {
+      title: { zh: 'AP Math课纲', en: 'AP Math Syllabus' },
+      topics: [
+        { title: { zh: '极限与连续性', en: 'Limits and Continuity' }, hours: 4, sub: [{ zh: '函数与特征', en: 'Functions and Their Behaviors' }, { zh: '极限概念', en: 'Limit Definitions' }] },
+        { title: { zh: '导数的定义与计算', en: 'Derivatives' }, hours: 4, sub: [{ zh: '导数定义', en: 'Definition of the Derivative' }, { zh: '基本求导规则', en: 'Basic Rules' }] },
+        { title: { zh: '导数的应用', en: 'Applications of Derivatives' }, hours: 3, sub: [{ zh: '运动问题', en: 'Motion' }, { zh: '切线与线性近似', en: 'Tangent Lines & Linear Approximation' }] },
+        { title: { zh: '积分与反导', en: 'Integrals' }, hours: 4, sub: [{ zh: '不定积分', en: 'Antiderivatives' }, { zh: '定积分', en: 'Definite Integrals' }] },
+        { title: { zh: '积分应用', en: 'Applications of Integration' }, hours: 2, sub: [{ zh: '面积', en: 'Area Between Curves' }, { zh: '旋转体体积', en: 'Volumes' }] },
+        { title: { zh: '微分方程', en: 'Differential Equations' }, hours: 3, sub: [{ zh: '斜率场', en: 'Slope Fields' }, { zh: '分离变量法', en: 'Separation of Variables' }] },
+        { title: { zh: '参数方程 (BC)', en: 'Parametric Equations (BC)' }, hours: 2, sub: [{ zh: '参数曲线的方程', en: 'The derivative of a parametric curve' }, { zh: '速度、加速度向量', en: 'Velocity and acceleration vectors' }] },
+        { title: { zh: '极坐标 (BC)', en: 'Polar Coordinates (BC)' }, hours: 2, sub: [{ zh: '极坐标曲线的导数', en: 'The derivative of polar coordinate curves' }, { zh: '面积公式', en: 'Area formula' }] },
+        { title: { zh: '数列与级数 (BC)', en: 'Sequences & Series (BC)' }, hours: 3, sub: [{ zh: '数列的极限', en: 'Limits of Sequences' }, { zh: '级数与收敛性', en: 'Convergence Tests' }, { zh: '泰勒和麦克劳林级数', en: 'Taylor & Maclaurin Series' }] },
+      ]
+    }
+  },
+  {
+    id: 'ap-phys-1',
+    name: { zh: 'AP物理I', en: 'AP Physics 1' },
+    icon: Atom,
+    syllabus: {
+      title: { zh: 'AP物理1课纲', en: 'AP Physics 1 Syllabus' },
+      hours: 20,
+      topics: [
+        { title: { zh: '运动学', en: 'Kinematics' }, hours: 3, sub: [{ zh: '直线运动', en: '1D Motion' }, { zh: '平面运动', en: '2D Motion' }] },
+        { title: { zh: '动力学', en: 'Dynamics' }, hours: 3, sub: [{ zh: '牛顿三大定律', en: 'Newton’s Laws' }, { zh: '常见受力分析', en: 'Force Analysis' }] },
+        { title: { zh: '能量与功', en: 'Energy and Work' }, hours: 2, sub: [{ zh: '功', en: 'Work' }, { zh: '能量', en: 'Energy' }, { zh: '功率', en: 'Power' }] },
+        { title: { zh: '动量与碰撞', en: 'Momentum & Collisions' }, hours: 2, sub: [{ zh: '动量', en: 'Momentum' }, { zh: '冲量', en: 'Impulse' }, { zh: '二维碰撞', en: '2D Collisions' }] },
+        { title: { zh: '简谐运动', en: 'Simple Harmonic Motion' }, hours: 2, sub: [{ zh: '弹簧简谐运动', en: 'Spring SHM' }, { zh: '单摆', en: 'Simple Pendulum' }] },
+        { title: { zh: '转动动力学', en: 'Rotational Motion' }, hours: 2, sub: [{ zh: '角量', en: 'Angular Quantities' }, { zh: '转动动力学', en: 'Rotational Dynamics' }, { zh: '转动惯量', en: 'Moment of Inertia' }] },
+        { title: { zh: '引力与轨道', en: 'Gravity' }, hours: 2, sub: [{ zh: '万有引力', en: 'Universal Gravitation' }, { zh: '重力场强度', en: 'Gravitational Field Strength' }, { zh: '圆周运动', en: 'Circular Motion' }] },
+        { title: { zh: '波动与声音', en: 'Waves' }, hours: 2, sub: [{ zh: '波的基本量', en: 'Basic Wave Quantities' }, { zh: '波的类型', en: 'Types' }, { zh: '声波', en: 'Sound Waves' }] },
+        { title: { zh: '简单电路', en: 'DC Circuits' }, hours: 2, sub: [{ zh: '电路基本量', en: 'Basic Circuit Quantities' }, { zh: '串联与并联', en: 'Series and Parallel Circuits' }, { zh: '基尔霍夫定律', en: 'Kirchhoff’s Laws' }] },
+      ]
+    }
+  },
+  {
+    id: 'ap-phys-2',
+    name: { zh: 'AP物理II', en: 'AP Physics 2' },
+    icon: Zap,
+    syllabus: {
+      title: { zh: 'AP物理2课纲', en: 'AP Physics 2 Syllabus' },
+      hours: 20,
+      topics: [
+        { title: { zh: '流体力学', en: 'Fluids' }, hours: 4, sub: [{ zh: '密度', en: 'Density' }, { zh: '压强', en: 'Pressure' }, { zh: '浮力', en: 'Buoyancy' }, { zh: '流体动力学', en: 'Fluid Dynamics' }] },
+        { title: { zh: '热力学', en: 'Thermodynamics' }, hours: 4, sub: [{ zh: '温度与热量', en: 'Temperature and Heat' }, { zh: '热力学定律', en: 'Laws of Thermodynamics' }] },
+        { title: { zh: '电学与电路', en: 'Electricity' }, hours: 4, sub: [{ zh: '电荷与库仑定律', en: 'Electric Charge & Coulomb’s Law' }, { zh: '电场', en: 'Electric Field' }, { zh: '电势', en: 'Electric Potential' }, { zh: '电容', en: 'Capacitors' }] },
+        { title: { zh: '磁场与电磁感应', en: 'Magnetism & Induction' }, hours: 4, sub: [{ zh: '磁力', en: 'Magnetic Force' }, { zh: '电流的磁场', en: 'Magnetic Field Produced by Currents' }, { zh: '电磁感应', en: 'Electromagnetic Induction' }, { zh: '法拉第定律', en: 'Faraday’s Law' }] },
+        { title: { zh: '光学', en: 'Optics' }, hours: 2, sub: [{ zh: '几何光学', en: 'Geometrical Optics' }, { zh: '透镜与成像', en: 'Lenses and Imaging' }, { zh: '光的波动性', en: 'Wave Nature of Light' }] },
+        { title: { zh: '现代物理', en: 'Modern Physics' }, hours: 2, sub: [{ zh: '光电效应', en: 'Photoelectric Effect' }, { zh: '原子模型', en: 'Atomic Models' }, { zh: '核物理', en: 'Nuclear Physics' }] },
+      ]
+    }
+  },
+  {
+    id: 'ap-chem',
+    name: { zh: 'AP化学', en: 'AP Chemistry' },
+    icon: FlaskConical,
+    syllabus: {
+      title: { zh: 'AP Chemistry教纲', en: 'AP Chemistry Syllabus' },
+      topics: [
+        { title: { zh: '原子结构与性质', en: 'Atomic Structure and Properties' }, hours: 2 },
+        { title: { zh: '分子与离子化合物的结构与性质', en: 'Molecular and Ionic Compound Structure and Properties' }, hours: 2 },
+        { title: { zh: '分子间作用力与物质的性质', en: 'Intermolecular Forces and Properties' }, hours: 2 },
+        { title: { zh: '化学反应', en: 'Chemical Reactions' }, hours: 2 },
+        { title: { zh: '化学动力学', en: 'Kinetics' }, hours: 3 },
+        { title: { zh: '热力学', en: 'Thermodynamics' }, hours: 2 },
+        { title: { zh: '化学平衡', en: 'Equilibrium' }, hours: 2 },
+        { title: { zh: '酸碱平衡', en: 'Acids and Bases' }, hours: 2 },
+        { title: { zh: '热力学：熵、自由能、电化学', en: 'Thermodynamics: Entropy, Free Energy, Electrochemistry' }, hours: 3 },
+      ]
+    }
+  },
+  {
+    id: 'ap-bio',
+    name: { zh: 'AP生物', en: 'AP Biology' },
+    icon: Dna,
+    syllabus: {
+      title: { zh: 'AP生物课纲', en: 'AP Biology Syllabus' },
+      topics: [
+        { title: { zh: '生命化学', en: 'Chemistry of Life' }, hours: 2 },
+        { title: { zh: '细胞结构与功能', en: 'Cell Structure and Function' }, hours: 2 },
+        { title: { zh: '细胞能量学', en: 'Cellular Energetics' }, hours: 3 },
+        { title: { zh: '细胞通讯与细胞周期', en: 'Cell Communication and Cell Cycle' }, hours: 2 },
+        { title: { zh: '遗传学', en: 'Heredity' }, hours: 3 },
+        { title: { zh: '基因表达与调控', en: 'Gene Expression and Regulation' }, hours: 3 },
+        { title: { zh: '自然选择', en: 'Natural Selection' }, hours: 3 },
+        { title: { zh: '生态学', en: 'Ecology' }, hours: 2 },
+      ]
+    }
+  },
+  {
+    id: 'ap-stat',
+    name: { zh: 'AP统计', en: 'AP Statistics' },
+    icon: BarChart3,
+    syllabus: {
+      title: { zh: 'AP统计课纲', en: 'AP Statistics Syllabus' },
+      hours: 20,
+      topics: [
+        { title: { zh: '数据分析', en: 'Exploring Data' }, hours: 2, sub: [{ zh: '数据类型', en: 'Types' }, { zh: '描述一维数据', en: 'One-variable' }, { zh: '正态分布', en: 'Normal Distribution' }] },
+        { title: { zh: '双变量数据', en: 'Two-variable Data' }, hours: 3, sub: [{ zh: '散点图描述', en: 'Scatterplots' }, { zh: '相关系数', en: 'Correlation Coefficient' }, { zh: '回归模型', en: 'Regression Model' }] },
+        { title: { zh: '抽样与实验', en: 'Sampling & Experimentation' }, hours: 3, sub: [{ zh: '抽样方法', en: 'Sampling methods' }, { zh: '偏差类型', en: 'Types of bias' }] },
+        { title: { zh: '概率与随机变量', en: 'Probability & Random variable' }, hours: 4, sub: [{ zh: '基本概率规则', en: 'Basic rules of probability' }, { zh: '条件概率', en: 'Conditional probability' }, { zh: '随机变量', en: 'Random variable' }] },
+        { title: { zh: '抽样分布', en: 'Sampling Distributions' }, hours: 4, sub: [{ zh: '样本比例', en: 'Sample Proportion' }, { zh: '样本均值', en: 'Sample Mean' }] },
+        { title: { zh: '推断', en: 'Inference' }, hours: 4, sub: [{ zh: '置信区间', en: 'Confidence Interval' }, { zh: '假设检验', en: 'Hypothesis Test' }, { zh: '两样本检验', en: 'Two-sample test' }] },
+      ]
+    }
+  },
+  {
+    id: 'ap-cs',
+    name: { zh: 'AP计算机', en: 'AP Computer Science A' },
+    icon: Code2,
+    syllabus: {
+      title: { zh: 'AP计算机课纲', en: 'AP Computer Science A Syllabus' },
+      topics: [
+        { title: { zh: '基本类型', en: 'Primitive Types' }, hours: 2 },
+        { title: { zh: '对象使用', en: 'Using Objects' }, hours: 2 },
+        { title: { zh: '布尔表达式与if语句', en: 'Boolean Expressions and if Statements' }, hours: 2 },
+        { title: { zh: '迭代', en: 'Iteration' }, hours: 3 },
+        { title: { zh: '类编写', en: 'Writing Classes' }, hours: 3 },
+        { title: { zh: '数组', en: 'Array' }, hours: 2 },
+        { title: { zh: 'ArrayList', en: 'ArrayList' }, hours: 2 },
+        { title: { zh: '二维数组', en: '2D Array' }, hours: 2 },
+        { title: { zh: '继承', en: 'Inheritance' }, hours: 2 },
+        { title: { zh: '递归', en: 'Recursion' }, hours: 1 },
+      ]
+    }
+  },
+  {
+    id: 'ap-macro',
+    name: { zh: 'AP宏观经济', en: 'AP Macroeconomics' },
+    icon: Globe2,
+    syllabus: {
+      title: { zh: 'AP宏观经济课纲', en: 'AP Macroeconomics Syllabus' },
+      topics: [
+        { title: { zh: '基本经济概念', en: 'Basic Economic Concepts' }, hours: 2 },
+        { title: { zh: '经济指标与商业周期', en: 'Economic Indicators and the Business Cycle' }, hours: 2 },
+        { title: { zh: '国民收入与价格决定', en: 'National Income and Price Determination' }, hours: 3 },
+        { title: { zh: '金融部门', en: 'Financial Sector' }, hours: 3 },
+        { title: { zh: '长期稳定政策', en: 'Long-Run Consequences of Stabilization Policies' }, hours: 2 },
+        { title: { zh: '开放经济：国际贸易与金融', en: 'Open Economy: International Trade and Finance' }, hours: 2 },
+      ]
+    }
+  },
+  {
+    id: 'ap-micro',
+    name: { zh: 'AP微观经济', en: 'AP Microeconomics' },
+    icon: Coins,
+    syllabus: {
+      title: { zh: 'AP微观经济课纲', en: 'AP Microeconomics Syllabus' },
+      topics: [
+        { title: { zh: '基本经济概念', en: 'Basic Economic Concepts' }, hours: 2 },
+        { title: { zh: '供需关系', en: 'Supply and Demand' }, hours: 3 },
+        { title: { zh: '生产、成本与完全竞争模型', en: 'Production, Cost, and the Perfect Competition Model' }, hours: 3 },
+        { title: { zh: '不完全竞争', en: 'Imperfect Competition' }, hours: 2 },
+        { title: { zh: '要素市场', en: 'Factor Markets' }, hours: 2 },
+        { title: { zh: '市场失灵与政府角色', en: 'Market Failure and the Role of Government' }, hours: 2 },
+      ]
+    }
+  },
+  {
+    id: 'ap-lang',
+    name: { zh: 'AP英语语言与写作', en: 'AP English Language' },
+    icon: PenTool,
+    syllabus: {
+      title: { zh: 'AP英语语言与写作课纲', en: 'AP English Language Syllabus' },
+      topics: [
+        { title: { zh: '修辞分析', en: 'Rhetorical Analysis' }, hours: 4 },
+        { title: { zh: '论证与说服', en: 'Argument and Persuasion' }, hours: 4 },
+        { title: { zh: '综合写作', en: 'Synthesis Essay' }, hours: 4 },
+        { title: { zh: '风格与语气', en: 'Style and Tone' }, hours: 2 },
+        { title: { zh: '语法与机制', en: 'Grammar and Mechanics' }, hours: 2 },
+      ]
+    }
+  },
+  {
+    id: 'ap-lit',
+    name: { zh: 'AP英语文学与写作', en: 'AP English Literature' },
+    icon: BookOpen,
+    syllabus: {
+      title: { zh: 'AP英语文学与写作课纲', en: 'AP English Literature Syllabus' },
+      topics: [
+        { title: { zh: '短篇小说分析', en: 'Short Fiction Analysis' }, hours: 3 },
+        { title: { zh: '诗歌分析', en: 'Poetry Analysis' }, hours: 3 },
+        { title: { zh: '长篇小说与戏剧', en: 'Long Fiction and Drama' }, hours: 4 },
+        { title: { zh: '文学手法', en: 'Literary Devices' }, hours: 2 },
+        { title: { zh: '写作研讨', en: 'Writing Workshop' }, hours: 4 },
+      ]
+    }
+  }
+];
+
+---
+
+<BaseLayout title={`${course.name[locale]} - ${center.name[locale]}`}>
+  <!-- Hero Section -->
+  <section class="bg-gray-900 text-white pt-32 pb-16">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
+        <div class="flex-grow">
+          <div class="flex gap-2 mb-4">
+            <a href={getRelativeLocaleUrl(locale, center.slug)} class="text-blue-300 hover:text-white transition-colors">
+              {center.name[locale]}
+            </a>
+            <span class="text-gray-500">/</span>
+            <span class="text-gray-400">{course.name[locale]}</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">{course.name[locale]}</h1>
+          <p class="text-xl text-gray-300 mb-6 max-w-3xl">{course.shortDescription[locale]}</p>
+          
+          <div class="flex flex-wrap gap-4">
+            {course.tags?.map(tag => (
+              <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">
+                {tag[locale]}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Section -->
+  <section class="py-16 bg-gray-50 min-h-[600px]">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col lg:flex-row gap-8">
+        
+        <!-- Left Sidebar: Vertical Tabs -->
+        <div class="w-full lg:w-1/4 flex-shrink-0">
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden sticky top-24">
+            <div class="p-4 bg-gray-50 border-b border-gray-100">
+              <h3 class="font-bold text-gray-900">{locale === 'zh' ? '课程列表' : 'Course List'}</h3>
+            </div>
+            <div class="flex flex-col">
+              {apCourses.map((item, index) => (
+                <button
+                  class={`text-left px-6 py-4 border-b border-gray-100 last:border-0 hover:bg-blue-50 transition-colors duration-200 focus:outline-none flex items-center gap-3 group ${
+                    index === 0 ? 'active bg-blue-50' : ''
+                  }`}
+                  data-tab={item.id}
+                  onclick={`
+                    document.querySelectorAll('[data-tab]').forEach(b => {
+                      b.classList.remove('active', 'bg-blue-50');
+                      b.querySelector('.icon-box').classList.remove('bg-primary-blue', 'text-white');
+                      b.querySelector('.icon-box').classList.add('bg-gray-100', 'text-gray-500');
+                    });
+                    this.classList.add('active', 'bg-blue-50');
+                    this.querySelector('.icon-box').classList.remove('bg-gray-100', 'text-gray-500');
+                    this.querySelector('.icon-box').classList.add('bg-primary-blue', 'text-white');
+                    
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+                    document.getElementById('content-' + this.dataset.tab).classList.remove('hidden');
+                  `}
+                >
+                  <div class={`icon-box w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${index === 0 ? 'bg-primary-blue text-white' : 'bg-gray-100 text-gray-500 group-hover:bg-white group-hover:text-primary-blue'}`}>
+                    <item.icon class="w-5 h-5" />
+                  </div>
+                  <span class="font-medium text-gray-700 group-[.active]:text-primary-blue transition-colors">
+                    {item.name[locale]}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Content: Syllabus -->
+        <div class="w-full lg:w-3/4">
+          {apCourses.map((item, index) => (
+            <div id={`content-${item.id}`} class={`tab-content ${index === 0 ? '' : 'hidden'} animate-fadeIn`}>
+              <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="p-8 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
+                  <div class="flex items-center gap-4 mb-2">
+                    <div class="w-12 h-12 bg-primary-blue text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
+                      <item.icon class="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h2 class="text-2xl font-bold text-gray-900">{item.name[locale]}</h2>
+                      <p class="text-gray-500 text-sm">{item.syllabus.title[locale]}</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="p-8">
+                  <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                      <thead>
+                        <tr>
+                          <th class="py-4 px-4 bg-gray-50 font-bold text-gray-900 border-b border-gray-200 w-2/3 rounded-tl-lg">
+                            {locale === 'zh' ? '课题' : 'Topic'}
+                          </th>
+                          <th class="py-4 px-4 bg-gray-50 font-bold text-gray-900 border-b border-gray-200 w-1/3 rounded-tr-lg text-right">
+                            {locale === 'zh' ? '课时' : 'Hours'}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-gray-100">
+                        {item.syllabus.topics.map((topic, i) => (
+                          <tr class="hover:bg-gray-50 transition-colors group">
+                            <td class="py-4 px-4 align-top">
+                              <div class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-6 h-6 bg-blue-50 text-primary-blue rounded-full flex items-center justify-center text-xs font-bold mt-0.5 group-hover:bg-primary-blue group-hover:text-white transition-colors">
+                                  {i + 1}
+                                </span>
+                                <div>
+                                  <div class="font-bold text-gray-800 mb-1">{topic.title[locale]}</div>
+                                  {topic.sub && (
+                                    <ul class="text-sm text-gray-500 space-y-1 mt-2 pl-1 border-l-2 border-gray-100 ml-1">
+                                      {topic.sub.map(sub => (
+                                        <li class="pl-3 relative before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full">
+                                          {sub[locale]}
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  )}
+                                </div>
+                              </div>
+                            </td>
+                            <td class="py-4 px-4 text-right align-top">
+                              <span class="inline-block bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm font-medium group-hover:bg-blue-100 group-hover:text-primary-blue transition-colors">
+                                {topic.hours} {locale === 'zh' ? '课时' : 'Hrs'}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

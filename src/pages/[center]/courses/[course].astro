@@ -1,6 +1,7 @@
 ---
 import CoursePage from '../../../components/pages/CoursePage.astro';
 import MiddleHighImprovement from '../../../components/ucan/MiddleHighImprovement.astro';
+import ApCourses from '../../../components/ucan/ApCourses.astro';
 import { courses } from '../../../data/courses';
 import { centers } from '../../../data/centers';
 
@@ -21,6 +22,8 @@ const { course, center } = Astro.props;
 
 {course.slug === 'middle-high-improvement' ? (
   <MiddleHighImprovement course={course} center={center} locale="zh" />
+) : course.slug === 'ap-courses' ? (
+  <ApCourses course={course} center={center} locale="zh" />
 ) : (
   <CoursePage course={course} center={center} locale="zh" />
 )}
