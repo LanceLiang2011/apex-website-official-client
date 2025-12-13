@@ -14,7 +14,7 @@ const { course, center, locale } = Astro.props;
 
 <BaseLayout title={`${course.name[locale]} - ${center.name[locale]}`}>
   <!-- Hero -->
-  <section class="bg-gray-900 text-white py-16">
+  <section class="bg-gray-900 text-white pt-32 pb-16">
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row gap-8 items-start">
         <div class="flex-grow">
@@ -34,22 +34,6 @@ const { course, center, locale } = Astro.props;
                 {tag[locale]}
               </span>
             ))}
-          </div>
-        </div>
-        
-        <!-- Quick Action Card (Desktop) -->
-        <div class="hidden md:block w-80 bg-white text-gray-900 rounded-lg p-6 shadow-lg mt-8 md:mt-0">
-          <div class="text-3xl font-bold text-primary-blue mb-2">
-            {locale === 'zh' ? '咨询课程' : 'Inquire'}
-          </div>
-          <p class="text-gray-500 text-sm mb-6">
-            {locale === 'zh' ? '联系我们获取详细课表和报价' : 'Contact us for schedule and pricing'}
-          </p>
-          <button class="w-full bg-primary-blue hover:bg-blue-700 text-white font-bold py-3 rounded transition-colors mb-4">
-            {locale === 'zh' ? '立即咨询' : 'Contact Now'}
-          </button>
-          <div class="text-xs text-gray-500 text-center">
-            {locale === 'zh' ? '30分钟内回复' : 'Response within 30 mins'}
           </div>
         </div>
       </div>

@@ -60,7 +60,7 @@ const footerContent = siteContent.footer;
             <div class="bg-gray-800/50 rounded-lg p-5 backdrop-blur-sm border border-gray-700/50">
               <div class="flex items-center justify-between py-2 border-b border-gray-700/50">
                 <span class="text-gray-400 text-sm">{siteContent.contact.openingHours.days[currentLocale]}</span>
-                <span class="text-white font-medium text-sm">{siteContent.contact.openingHours.time}</span>
+                <span class="text-white font-medium text-sm">{siteContent.contact.openingHours.time[currentLocale]}</span>
               </div>
               <div class="mt-3 text-xs text-gray-500">
                 {currentLocale === 'zh' ? '法定节假日可能有所调整，请提前致电咨询。' : 'Hours may vary on holidays. Please call to confirm.'}

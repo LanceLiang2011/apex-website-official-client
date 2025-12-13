@@ -1,5 +1,6 @@
 ---
 import CoursePage from '../../../../components/pages/CoursePage.astro';
+import MiddleHighImprovement from '../../../../components/ucan/MiddleHighImprovement.astro';
 import { courses } from '../../../../data/courses';
 import { centers } from '../../../../data/centers';
 
@@ -18,4 +19,8 @@ export function getStaticPaths() {
 const { course, center } = Astro.props;
 ---
 
-<CoursePage course={course} center={center} locale="en" />
+{course.slug === 'middle-high-improvement' ? (
+  <MiddleHighImprovement course={course} center={center} locale="en" />
+) : (
+  <CoursePage course={course} center={center} locale="en" />
+)}

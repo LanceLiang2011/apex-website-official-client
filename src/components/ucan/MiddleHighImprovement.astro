@@ -1,0 +1,406 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Course, Center, Locale } from '../../data/types';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+interface Props {
+  course: Course;
+  center: Center;
+  locale: Locale;
+}
+
+const { course, center, locale } = Astro.props;
+
+// Syllabus Data
+const syllabusData = {
+  math: {
+    g9: {
+      title: { zh: '9年级数学', en: 'Grade 9 Math' },
+      topics: [
+        { title: { zh: '有理数', en: 'Rational Numbers' }, hours: 2, sub: [{ zh: '分数的四则混合运算', en: 'Mixed operations involving fractions' }, { zh: '有理数的运算', en: 'Rational number operations' }] },
+        { title: { zh: '幂与多项式', en: 'Powers and Polynomials' }, hours: 2, sub: [{ zh: '幂的运算', en: 'Multiplying and dividing powers' }, { zh: '多项式的运算', en: 'Polynomials' }] },
+        { title: { zh: '线性关系', en: 'Linear Relations' }, hours: 2, sub: [{ zh: '线性关系', en: 'Linear relations' }, { zh: '线性与非线性的关系', en: 'Linear and nonlinear relations' }] },
+        { title: { zh: '线性方程', en: 'Linear Equations' }, hours: 3, sub: [{ zh: '对线性方程的求解', en: 'Solving linear equations' }, { zh: '求解线性方程中的变量', en: 'Solving for a variable in a linear relation' }] },
+        { title: { zh: '解析几何', en: 'Analytic Geometry' }, hours: 3, sub: [{ zh: '探究直线方程', en: 'Exploring the equation of a line' }, { zh: '求解直线方程', en: 'Determine the equation of a line' }, { zh: '线与线之间的关系', en: 'Parallel and perpendicular lines' }] },
+        { title: { zh: '关系研究', en: 'Investigating Relationships' }, hours: 2, sub: [{ zh: '数据分析', en: 'Research on data' }, { zh: '数据解析', en: 'Reasoning about data' }] },
+        { title: { zh: '平面几何', en: 'Properties of 2-D Figures' }, hours: 3, sub: [{ zh: '多边形的性质', en: 'Properties of polygons' }, { zh: '探究多边形', en: 'Exploring polygons' }] },
+        { title: { zh: '立体几何', en: 'Measurement' }, hours: 3, sub: [{ zh: '确定表面积', en: 'Determining surface area' }, { zh: '探究表面积和表面积', en: 'Exploring volume and surface area' }] },
+      ]
+    },
+    g10: {
+      title: { zh: '10年级数学', en: 'Grade 10 Math' },
+      topics: [
+        { title: { zh: '线性方程', en: 'Systems of Linear Equations' }, hours: 3, sub: [{ zh: '求解线性方程', en: 'Solving linear equations' }, { zh: '线性方程的两种基础解法', en: 'Solving linear systems: substitution & elimination' }] },
+        { title: { zh: '解析几何：线段与圆', en: 'Analytic Geometry: Line Segments and Circles' }, hours: 2, sub: [{ zh: '线段与圆的探究', en: 'Line segments and circles' }, { zh: '探究几何图形的性质', en: 'Exploring properties of geometric figures' }] },
+        { title: { zh: '二次等式', en: 'Graphs of Quadratic Relations' }, hours: 3, sub: [{ zh: '探究二次等式', en: 'Exploring quadratic relations' }, { zh: '二次等式的扩展', en: 'Expanding quadratic expressions' }] },
+        { title: { zh: '代数式的因式分解', en: 'Factoring Algebraic Expressions' }, hours: 2, sub: [{ zh: '二次等式的因式分解', en: 'Factoring quadratics' }, { zh: '多项式因式分解', en: 'Factoring polynomials' }] },
+        { title: { zh: '二次函数模型的应用', en: 'Applying Quadratic Models' }, hours: 2, sub: [{ zh: '二次函数的变换', en: 'Translations of quadratic relations' }, { zh: '二次函数顶点式', en: 'Quadratic models using vertex form' }] },
+        { title: { zh: '二次等式', en: 'Quadratic Equations' }, hours: 3, sub: [{ zh: '求解二次等式', en: 'Solving quadratic equations' }, { zh: '通过二次函数模型解决问题', en: 'Solving problems using quadratic models' }] },
+        { title: { zh: '相似三角形与三角学', en: 'Similar Triangles and Trigonometry' }, hours: 2, sub: [{ zh: '探究相似三角形', en: 'Solving Similar Triangle Problems' }, { zh: '探究直角三角形', en: 'Solving Right Triangle Problems' }] },
+        { title: { zh: '锐角三角形', en: 'Acute Triangle Trigonometry' }, hours: 3, sub: [{ zh: '正弦定理', en: 'Sine Law' }, { zh: '余弦定理', en: 'Cosine Law' }] },
+      ]
+    },
+    g11: {
+      title: { zh: '11年级数学', en: 'Grade 11 Math' },
+      topics: [
+        { title: { zh: '函数的介绍', en: 'Introduction to Functions' }, hours: 3, sub: [{ zh: '探究函数的性质', en: 'Exploring properties of parent functions' }, { zh: '探究定义域与值域', en: 'Determining the domain and range of a function' }, { zh: '函数的变换', en: 'Exploring transformations of parent functions' }, { zh: '函数图像的绘制', en: 'Using transformations to graph functions' }] },
+        { title: { zh: '等价代数式的表达', en: 'Equivalent Algebraic Expressions' }, hours: 2, sub: [{ zh: '多项式的四则混合运算', en: 'The arithmetic operations involving polynomials' }, { zh: '分式的混合运算', en: 'The arithmetic operations involving rational expressions' }] },
+        { title: { zh: '二次函数', en: 'Quadratic Functions' }, hours: 2, sub: [{ zh: '二次函数的性质', en: 'Properties of quadratic functions' }, { zh: '解二次函数', en: 'Solving quadratic equations' }] },
+        { title: { zh: '幂函数与指数函数', en: 'Power functions and Exponential Functions' }, hours: 3, sub: [{ zh: '幂函数', en: 'Power functions' }, { zh: '指数函数', en: 'Exponential functions' }] },
+        { title: { zh: '三角函数', en: 'Trigonometric Functions' }, hours: 5, sub: [{ zh: '初级三角函数', en: 'Basic trigonometric functions' }, { zh: '高级三角函数', en: 'Advanced trigonometric functions' }] },
+        { title: { zh: '数列', en: 'Discrete Functions: Sequences and Series' }, hours: 3, sub: [{ zh: '等差数列', en: 'Arithmetic series' }, { zh: '等比数列', en: 'Geometric series' }] },
+        { title: { zh: '数列在金融学的应用', en: 'Discrete Functions: Financial Applications' }, hours: 2, sub: [{ zh: '单利问题', en: 'Simple interest problems' }, { zh: '年利问题', en: 'Annuities: Future value & Present value' }] },
+      ]
+    },
+    g12_mcv4u: {
+      title: { zh: '12年级数学 (MCV4U)', en: 'Grade 12 Math (MCV4U)' },
+      topics: [
+        { title: { zh: '微积分导论', en: 'Introduction to Calculus' }, hours: 3, sub: [{ zh: '变换率', en: 'Rates of change' }, { zh: '极限', en: 'Limits' }] },
+        { title: { zh: '导数', en: 'Derivatives' }, hours: 3, sub: [{ zh: '导数函数', en: 'Derivative function' }, { zh: '复合函数求导', en: 'The derivatives of composite functions' }] },
+        { title: { zh: '导数及其应用', en: 'Derivatives and their Applications' }, hours: 2, sub: [{ zh: '高阶导数，速度与加速度', en: 'Higher order derivatives, velocity and acceleration' }, { zh: '最大值最小值问题', en: 'Minimum and maximum' }, { zh: '问题的优化', en: 'Optimization problems' }] },
+        { title: { zh: '图像的绘制', en: 'Curve Sketching' }, hours: 2, sub: [{ zh: '函数的性质', en: 'Properties of functions' }, { zh: '函数的凹凸与拐点', en: 'Concavity and points of inflection' }] },
+        { title: { zh: '指数函数与三角函数的求导', en: 'Derivatives of Exponential and Trigonometric Functions' }, hours: 2, sub: [{ zh: '指数函数的求导', en: 'Derivatives of exponential functions' }, { zh: '三角函数的求导', en: 'Derivatives of trigonometric functions' }] },
+        { title: { zh: '向量导论', en: 'An Introduction to Vectors' }, hours: 2, sub: [{ zh: '研究向量及其计算', en: 'Vectors' }, { zh: '二维和三维向量的运算', en: 'Operations with vectors in R2 and R3' }] },
+        { title: { zh: '向量的应用', en: 'Applications of Vectors' }, hours: 2, sub: [{ zh: '向量的点积', en: 'The dot product of vectors' }, { zh: '向量的叉乘', en: 'The cross product of vectors' }] },
+        { title: { zh: '直线与平面方程', en: 'Equations of Lines and Planes' }, hours: 2, sub: [{ zh: '直线笛卡尔方程', en: 'Cartesian equation of a line' }, { zh: '平面笛卡尔方程', en: 'Cartesian equation of a plane' }] },
+        { title: { zh: '点，线与面之间的关系', en: 'Relationships Between Points, Lines and Planes' }, hours: 2, sub: [{ zh: '等式系统', en: 'Systems of equations' }, { zh: '点到直线/面的距离', en: 'The distance from a point to a line/a plane' }] },
+      ]
+    },
+    g12_mhf4u: {
+      title: { zh: '12年级数学 (MHF4U)', en: 'Grade 12 Math (MHF4U)' },
+      topics: [
+        { title: { zh: '函数的特征与性质', en: 'Functions: Characteristics and Properties' }, hours: 2, sub: [{ zh: '探究绝对值', en: 'Exploring absolute value' }, { zh: '探究函数的运算', en: 'Exploring operations with functions' }] },
+        { title: { zh: '函数的变换率', en: 'Functions: Understanding Rates of Change' }, hours: 2, sub: [{ zh: '平均和瞬时变化率', en: 'Average rate of change & instantaneous rate of change' }, { zh: '利用变化率解决问题', en: 'Problems solving' }] },
+        { title: { zh: '多项式函数', en: 'Polynomial Functions' }, hours: 2, sub: [{ zh: '多项式性质', en: 'Characteristics of polynomial functions' }, { zh: '分解和提取多项式', en: 'Dividing and factoring polynomials' }] },
+        { title: { zh: '多项式等式与不等式', en: 'Polynomial Equations and Inequalities' }, hours: 2, sub: [{ zh: '多项式等式', en: 'Polynomial equations' }, { zh: '多项式不等式', en: 'Polynomial inequations' }] },
+        { title: { zh: '有理函数的等式与不等式', en: 'Rational Functions, Equations, and Inequalities' }, hours: 2, sub: [{ zh: '有理函数的图像', en: 'Graphs of rational functions' }, { zh: '有理不等式的求解', en: 'Solving rational inequalities' }] },
+        { title: { zh: '三角函数', en: 'Trigonometric Functions' }, hours: 2, sub: [{ zh: '探究三角函数图像', en: 'Exploring graphs of trigonometric functions' }, { zh: '利用三号函数建模', en: 'Modelling with trigonometric functions' }] },
+        { title: { zh: '三角函数等式与方程', en: 'Trigonometric Identities and Equations' }, hours: 2, sub: [{ zh: '探索三角函数', en: 'Exploring trigonometric functions' }, { zh: '解三角函数等式', en: 'Solving trigonometric equations' }] },
+        { title: { zh: '指数与对数方程', en: 'Exponential and Logarithmic Functions' }, hours: 3, sub: [{ zh: '探究对数函数', en: 'Exploring the logarithmic function' }, { zh: '解决指数与对数函数问题', en: 'Solving exponential and logarithmic function problems' }] },
+        { title: { zh: '函数的结合', en: 'Combinations of Functions' }, hours: 3, sub: [{ zh: '函数的结合', en: 'Combinations of functions' }, { zh: '函数等式与不等式的解决', en: 'Techniques for solving equations and inequalities' }] },
+      ]
+    }
+  },
+  chemistry: {
+    g11: {
+      title: { zh: '11年级化学 (SCH3U)', en: 'Grade 11 Chemistry (SCH3U)' },
+      topics: [
+        { title: { zh: '科学探究技能', en: 'Scientific Investigation Skills' }, hours: 1 },
+        { title: { zh: '物质、化学趋势与化学键', en: 'Matter, Chemical Trends, and Chemical Bonding' }, hours: 2 },
+        { title: { zh: '化学反应', en: 'Chemical Reactions' }, hours: 2 },
+        { title: { zh: '化学反应中的物质的量（化学计量）', en: 'Quantities in Chemical Reactions (Stoichiometry)' }, hours: 3 },
+        { title: { zh: '溶液与溶解度', en: 'Solutions and Solubility' }, hours: 2 },
+        { title: { zh: '气体与大气化学', en: 'Gases and Atmospheric Chemistry' }, hours: 2 },
+      ]
+    },
+    g12: {
+      title: { zh: '12年级化学 (SCH4U)', en: 'Grade 12 Chemistry (SCH4U)' },
+      topics: [
+        { title: { zh: '有机化学', en: 'Organic Chemistry' }, hours: 2 },
+        { title: { zh: '物质的结构与性质', en: 'Structure and Properties of Matter' }, hours: 2 },
+        { title: { zh: '能量改变及化学反应速率', en: 'Energy Changes and Rates of Reaction' }, hours: 3 },
+        { title: { zh: '化学系统与平衡', en: 'Chemical Systems and Equilibrium' }, hours: 2 },
+        { title: { zh: '电化学', en: 'Electrochemistry' }, hours: 3 },
+      ]
+    }
+  },
+  physics: {
+    g11: {
+      title: { zh: '11年级物理', en: 'Grade 11 Physics' },
+      topics: [
+        { title: { zh: '运动学', en: 'Kinematics' }, hours: 0, sub: [{ zh: '直线运动', en: 'Motion in a Straight Line' }, { zh: '二维运动', en: 'Motion in Two Dimensions' }] },
+        { title: { zh: '力学', en: 'Forces' }, hours: 0, sub: [{ zh: '牛顿运动定律', en: 'Newton’s Laws of Motion' }, { zh: '力的应用', en: 'Applications of Forces' }] },
+        { title: { zh: '能量与社会', en: 'Energy and Society' }, hours: 0, sub: [{ zh: '功，能量，功率与社会', en: 'Work, Energy, Power, and Society' }, { zh: '热能和社会', en: 'Thermal Energy and Society' }, { zh: '核能与社会', en: 'Nuclear Energy and Society' }] },
+        { title: { zh: '波与声', en: 'Waves and Sound' }, hours: 0, sub: [{ zh: '震动与波', en: 'Vibrations and Waves' }, { zh: '波的相互干扰', en: 'Wave Interactions' }, { zh: '波的应用', en: 'Applications of Waves' }] },
+        { title: { zh: '电场与磁场', en: 'Electricity and Magnetism' }, hours: 0, sub: [{ zh: '电场', en: 'Electricity and Its Production' }, { zh: '磁场', en: 'Electromagnetism' }, { zh: '电磁感应', en: 'Electromagnetic Induction' }] },
+      ]
+    },
+    g12: {
+      title: { zh: '12年级物理', en: 'Grade 12 Physics' },
+      topics: [
+        { title: { zh: '动力学', en: 'Dynamics' }, hours: 0, sub: [{ zh: '运动学', en: 'Kinematics' }, { zh: '动力学', en: 'Dynamics' }, { zh: '匀速圆周运动', en: 'Uniform Circular Motion' }] },
+        { title: { zh: '能量与动量', en: 'Energy and Momentum' }, hours: 0, sub: [{ zh: '功和能', en: 'Energy and Momentum' }, { zh: '动量与碰撞', en: 'Momentum and Collisions' }] },
+        { title: { zh: '重力场，电场和磁场', en: 'Gravitational, Electric, and Magnetic Fields' }, hours: 0, sub: [{ zh: '重力场', en: 'Gravitational Fields' }, { zh: '电场', en: 'Electric Fields' }, { zh: '磁场', en: 'Magnetic Fields' }] },
+        { title: { zh: '光的波动性质', en: 'The Wave Nature of Light' }, hours: 0, sub: [{ zh: '波与光', en: 'Waves and Light' }, { zh: '光的波动性质的应用', en: 'Applications of the Wave Nature of Light' }] },
+        { title: { zh: '现代物理学的革新', en: 'Revolutions in Modern Physics' }, hours: 0, sub: [{ zh: '相对论', en: 'Relativity' }, { zh: '量子力学', en: 'Quantum Mechanics' }] },
+      ]
+    }
+  },
+  biology: {
+    g11: {
+      title: { zh: '11年级生物', en: 'Grade 11 Biology' },
+      topics: [
+        { title: { zh: '生物多样性', en: 'Diversity of Living Things' }, hours: 3, sub: [{ zh: '分类学', en: 'Taxonomy' }, { zh: '病毒、细菌与原生生物', en: 'Viruses, Bacteria, and Protists' }] },
+        { title: { zh: '遗传过程', en: 'Genetic Processes' }, hours: 3, sub: [{ zh: '细胞分裂', en: 'Cell Division' }, { zh: '孟德尔遗传学', en: 'Mendelian Genetics' }] },
+        { title: { zh: '进化', en: 'Evolution' }, hours: 3, sub: [{ zh: '进化理论', en: 'Theory of Evolution' }, { zh: '进化的机制', en: 'Mechanisms of Evolution' }] },
+        { title: { zh: '动物结构与功能', en: 'Animals: Structure and Function' }, hours: 4, sub: [{ zh: '消化系统', en: 'Digestive System' }, { zh: '呼吸系统', en: 'Respiratory System' }, { zh: '循环系统', en: 'Circulatory System' }] },
+        { title: { zh: '植物结构与功能', en: 'Plants: Anatomy, Growth, and Function' }, hours: 3, sub: [{ zh: '植物组织', en: 'Plant Tissues' }, { zh: '植物生长与繁殖', en: 'Plant Growth and Reproduction' }] },
+      ]
+    },
+    g12: {
+      title: { zh: '12年级生物', en: 'Grade 12 Biology' },
+      topics: [
+        { title: { zh: '生物化学', en: 'Biochemistry' }, hours: 3, sub: [{ zh: '生物大分子', en: 'Biological Macromolecules' }, { zh: '酶与代谢', en: 'Enzymes and Metabolism' }] },
+        { title: { zh: '代谢过程', en: 'Metabolic Processes' }, hours: 4, sub: [{ zh: '细胞呼吸', en: 'Cellular Respiration' }, { zh: '光合作用', en: 'Photosynthesis' }] },
+        { title: { zh: '分子遗传学', en: 'Molecular Genetics' }, hours: 4, sub: [{ zh: 'DNA 结构与复制', en: 'DNA Structure and Replication' }, { zh: '蛋白质合成', en: 'Protein Synthesis' }] },
+        { title: { zh: '体内平衡', en: 'Homeostasis' }, hours: 3, sub: [{ zh: '神经系统', en: 'Nervous System' }, { zh: '内分泌系统', en: 'Endocrine System' }] },
+        { title: { zh: '种群动态', en: 'Population Dynamics' }, hours: 2, sub: [{ zh: '种群增长模型', en: 'Population Growth Models' }, { zh: '人类人口', en: 'Human Population' }] },
+      ]
+    }
+  }
+};
+
+const subjects = [
+  {
+    id: 'math',
+    name: { zh: '数学', en: 'Math' },
+    levels: [
+      { label: { zh: '9年级', en: 'Grade 9' }, key: 'g9' },
+      { label: { zh: '10年级', en: 'Grade 10' }, key: 'g10' },
+      { label: { zh: '11年级', en: 'Grade 11' }, key: 'g11' },
+      { label: { zh: '12年级 (MCV4U)', en: 'Grade 12 (MCV4U)' }, key: 'g12_mcv4u' },
+      { label: { zh: '12年级 (MHF4U)', en: 'Grade 12 (MHF4U)' }, key: 'g12_mhf4u' },
+    ]
+  },
+  {
+    id: 'english',
+    name: { zh: '英语', en: 'English' },
+    levels: [
+      { label: { zh: '6-8年级 阅读与词汇', en: 'Grade 6-8 Reading & Vocabulary' }, key: null },
+      { label: { zh: '9-12年级 语法与写作', en: 'Grade 9-12 Grammar & Writing' }, key: null },
+    ]
+  },
+  {
+    id: 'physics',
+    name: { zh: '物理', en: 'Physics' },
+    levels: [
+      { label: { zh: '11年级', en: 'Grade 11' }, key: 'g11' },
+      { label: { zh: '12年级', en: 'Grade 12' }, key: 'g12' },
+    ]
+  },
+  {
+    id: 'chemistry',
+    name: { zh: '化学', en: 'Chemistry' },
+    levels: [
+      { label: { zh: '11年级', en: 'Grade 11' }, key: 'g11' },
+      { label: { zh: '12年级', en: 'Grade 12' }, key: 'g12' },
+    ]
+  },
+  {
+    id: 'biology',
+    name: { zh: '生物', en: 'Biology' },
+    levels: [
+      { label: { zh: '11年级', en: 'Grade 11' }, key: 'g11' },
+      { label: { zh: '12年级', en: 'Grade 12' }, key: 'g12' },
+    ]
+  }
+];
+
+const highlights = [
+  {
+    title: { zh: '6人小班授课', en: 'Small Class Size (6 Students)' },
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>`
+  },
+  {
+    title: { zh: '名师专业辅导', en: 'Expert Tutoring' },
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>`
+  },
+  {
+    title: { zh: '作业全程跟踪', en: 'Homework Tracking' },
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>`
+  },
+  {
+    title: { zh: '校内进度同步', en: 'School Sync' },
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`
+  },
+  {
+    title: { zh: '重难知识巩固', en: 'Knowledge Consolidation' },
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>`
+  }
+];
+
+---
+
+<BaseLayout title={`${course.name[locale]} - ${center.name[locale]}`}>
+  <!-- Hero Section -->
+  <section class="bg-gray-900 text-white pt-32 pb-16">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
+        <div class="flex-grow">
+          <div class="flex gap-2 mb-4">
+            <a href={getRelativeLocaleUrl(locale, center.slug)} class="text-blue-300 hover:text-white transition-colors">
+              {center.name[locale]}
+            </a>
+            <span class="text-gray-500">/</span>
+            <span class="text-gray-400">{course.name[locale]}</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">{course.name[locale]}</h1>
+          <p class="text-xl text-gray-300 mb-6 max-w-3xl">{course.shortDescription[locale]}</p>
+          
+          <div class="flex flex-wrap gap-4">
+            {course.tags?.map(tag => (
+              <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">
+                {tag[locale]}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Course Cards Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto space-y-6">
+        {subjects.map(subject => (
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col md:flex-row items-stretch">
+            <!-- Subject Title -->
+            <div class="bg-primary-blue text-white p-6 md:w-48 flex-shrink-0 flex items-center justify-center md:justify-start">
+              <h3 class="text-2xl font-bold">{subject.name[locale]}</h3>
+            </div>
+            
+            <!-- Levels -->
+            <div class="p-6 flex-grow flex flex-wrap items-center gap-4">
+              {subject.levels.map(level => (
+                <button 
+                  class={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    level.key 
+                      ? 'bg-blue-50 text-primary-blue hover:bg-blue-100 cursor-pointer' 
+                      : 'bg-gray-50 text-gray-400 cursor-default'
+                  }`}
+                  data-subject={subject.id}
+                  data-level={level.key}
+                  disabled={!level.key}
+                >
+                  {level.label[locale]}
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12 text-gray-900">
+        {locale === 'zh' ? '课程亮点' : 'Course Highlights'}
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+        {highlights.map(highlight => (
+          <div class="flex flex-col items-center text-center group">
+            <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-primary-blue mb-4 group-hover:bg-primary-blue group-hover:text-white transition-all duration-300">
+              <Fragment set:html={highlight.icon} />
+            </div>
+            <h3 class="font-bold text-gray-900">{highlight.title[locale]}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Syllabus Modal -->
+  <dialog id="syllabus-modal" class="fixed inset-0 m-auto backdrop:bg-gray-900/50 rounded-xl shadow-2xl p-0 w-full max-w-3xl max-h-[90vh] overflow-hidden">
+    <div class="flex flex-col h-full max-h-[90vh]">
+      <!-- Header -->
+      <div class="bg-gray-50 px-6 py-4 border-b border-gray-100 flex justify-between items-center sticky top-0 z-10">
+        <h3 id="modal-title" class="text-xl font-bold text-gray-900"></h3>
+        <button id="close-modal" class="text-gray-400 hover:text-gray-600 p-2 rounded-full hover:bg-gray-200 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Content -->
+      <div id="modal-content" class="p-6 overflow-y-auto">
+        <!-- Dynamic Content -->
+      </div>
+    </div>
+  </dialog>
+
+</BaseLayout>
+
+<script define:vars={{ syllabusData, locale }}>
+  const modal = document.getElementById('syllabus-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalContent = document.getElementById('modal-content');
+  const closeBtn = document.getElementById('close-modal');
+  const buttons = document.querySelectorAll('button[data-level]');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const subject = btn.dataset.subject;
+      const level = btn.dataset.level;
+      
+      if (!subject || !level || !syllabusData[subject] || !syllabusData[subject][level]) return;
+
+      const data = syllabusData[subject][level];
+      
+      // Set Title
+      modalTitle.textContent = data.title[locale];
+      
+      // Build Content
+      let html = '<div class="space-y-6">';
+      
+      if (data.topics) {
+        data.topics.forEach((topic, index) => {
+          html += `
+            <div class="border-b border-gray-100 pb-4 last:border-0">
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="font-bold text-gray-900 text-lg">${index + 1}. ${topic.title[locale]}</h4>
+                ${topic.hours ? `<span class="text-xs font-medium bg-blue-50 text-primary-blue px-2 py-1 rounded">${topic.hours} ${locale === 'zh' ? '课时' : 'Hours'}</span>` : ''}
+              </div>
+              ${topic.sub ? `
+                <ul class="pl-5 space-y-1 list-disc text-gray-600">
+                  ${topic.sub.map(sub => `<li>${sub[locale]}</li>`).join('')}
+                </ul>
+              ` : ''}
+            </div>
+          `;
+        });
+      }
+      
+      html += '</div>';
+      modalContent.innerHTML = html;
+      
+      modal.showModal();
+    });
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.close();
+  });
+
+  modal.addEventListener('click', (e) => {
+    const rect = modal.getBoundingClientRect();
+    const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+      rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+    if (!isInDialog) {
+      modal.close();
+    }
+  });
+</script>
+
+<style>
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+  }
+  dialog[open] {
+    animation: zoomIn 0.2s ease-out;
+  }
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
