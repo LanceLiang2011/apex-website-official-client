@@ -1,0 +1,393 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Course, Center, Locale } from '../../data/types';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { 
+  Calculator, 
+  Trophy, 
+  Cpu, 
+  Atom, 
+  Sigma, 
+  Binary, 
+  Zap, 
+  Target,
+  Brain,
+  Shapes,
+  LineChart,
+  FunctionSquare,
+  Compass,
+  Ruler,
+  Code2,
+  Network
+} from 'lucide-astro';
+
+interface Props {
+  course: Course;
+  center: Center;
+  locale: Locale;
+}
+
+const { course, center, locale } = Astro.props;
+
+// Data Structure
+const categories = [
+  {
+    id: 'waterloo-math',
+    name: { zh: '滑铁卢数学竞赛', en: 'Waterloo Math Contest' },
+    icon: Calculator,
+    courses: [
+      {
+        id: 'gauss',
+        name: { zh: 'Gauss (G7-G8)', en: 'Gauss (G7-G8)' },
+        syllabus: [
+          { title: { zh: '数感与数论', en: 'Number Sense' }, hours: 3 },
+          { title: { zh: '代数', en: 'Algebra' }, hours: 3 },
+          { title: { zh: '几何', en: 'Geometry' }, hours: 3 },
+          { title: { zh: '数据与概率', en: 'Data & Probability' }, hours: 3 },
+          { title: { zh: '逻辑推理与综合问题', en: 'Logic & Problem Solving' }, hours: 2 },
+        ]
+      },
+      {
+        id: 'pascal',
+        name: { zh: 'Pascal (G9)', en: 'Pascal (G9)' },
+        syllabus: [
+          { title: { zh: '数与运算', en: 'Numbers & Operations' }, hours: 2 },
+          { title: { zh: '代数', en: 'Algebra' }, hours: 2 },
+          { title: { zh: '函数与图像', en: 'Functions & Graphs' }, hours: 2 },
+          { title: { zh: '数列与模式', en: 'Sequences & Patterns' }, hours: 2 },
+          { title: { zh: '几何', en: 'Geometry' }, hours: 2 },
+          { title: { zh: '计数与概率', en: 'Counting & Probability' }, hours: 2 },
+          { title: { zh: '逻辑与综合推理', en: 'Logic & Problem Solving' }, hours: 2 },
+        ]
+      },
+      {
+        id: 'cayley',
+        name: { zh: 'Cayley (G10)', en: 'Cayley (G10)' },
+        syllabus: [
+          { title: { zh: '数与运算', en: 'Numbers & Operations' }, hours: 2 },
+          { title: { zh: '方程与不等式', en: 'Equations & Inequalities' }, hours: 2 },
+          { title: { zh: '函数与模式', en: 'Functions & Patterns' }, hours: 2 },
+          { title: { zh: '几何 (初级)', en: 'Geometry (Basic)' }, hours: 2 },
+          { title: { zh: '几何 (高级)', en: 'Geometry (Advanced)' }, hours: 2 },
+          { title: { zh: '计数与概率', en: 'Counting & Probability' }, hours: 2 },
+          { title: { zh: '逻辑与推理', en: 'Logical Reasoning' }, hours: 2 },
+        ]
+      },
+      {
+        id: 'fermat',
+        name: { zh: 'Fermat (G11)', en: 'Fermat (G11)' },
+        syllabus: [
+          { title: { zh: '代数', en: 'Algebra' }, hours: 2 },
+          { title: { zh: '数论', en: 'Number Theory' }, hours: 2 },
+          { title: { zh: '几何', en: 'Geometry' }, hours: 2 },
+          { title: { zh: '三角函数', en: 'Trigonometry' }, hours: 3 },
+          { title: { zh: '组合与概率', en: 'Combinatorics & Probability' }, hours: 3 },
+          { title: { zh: '逻辑与综合解题', en: 'Logic & Problem-solving' }, hours: 2 },
+        ]
+      },
+      {
+        id: 'euclid',
+        name: { zh: 'Euclid (G12)', en: 'Euclid (G12)' },
+        syllabus: [
+          { title: { zh: '代数', en: 'Algebra' }, hours: 2 },
+          { title: { zh: '数论', en: 'Number Theory' }, hours: 2 },
+          { title: { zh: '几何', en: 'Geometry' }, hours: 3 },
+          { title: { zh: '三角学', en: 'Trigonometry' }, hours: 3 },
+          { title: { zh: '组合与概率', en: 'Combinatorics & Probability' }, hours: 2 },
+          { title: { zh: '逻辑与综合解题', en: 'Logic & Problem Solving' }, hours: 2 },
+        ]
+      },
+      {
+        id: 'cimc',
+        name: { zh: 'CIMC (G9-G10)', en: 'CIMC (G9-G10)' },
+        syllabus: [
+          { title: { zh: '代数', en: 'Algebra' }, hours: 3 },
+          { title: { zh: '数论', en: 'Number Theory' }, hours: 3 },
+          { title: { zh: '几何', en: 'Geometry' }, hours: 3 },
+          { title: { zh: '组合与概率', en: 'Combinatorics & Probability' }, hours: 3 },
+          { title: { zh: '逻辑与解题能力', en: 'Problem Solving & Logic' }, hours: 2 },
+        ]
+      },
+      {
+        id: 'csmc',
+        name: { zh: 'CSMC (G11-G12)', en: 'CSMC (G11-G12)' },
+        syllabus: [
+          { title: { zh: '代数', en: 'Algebra' }, hours: 3 },
+          { title: { zh: '数论', en: 'Number Theory' }, hours: 3 },
+          { title: { zh: '几何', en: 'Geometry' }, hours: 3 },
+          { title: { zh: '三角学', en: 'Trigonometry' }, hours: 3 },
+          { title: { zh: '计数与概率', en: 'Counting & Probability' }, hours: 2 },
+        ]
+      }
+    ]
+  },
+  {
+    id: 'amc-math',
+    name: { zh: 'AMC 数学竞赛', en: 'AMC Math Contest' },
+    icon: Trophy,
+    courses: [
+      {
+        id: 'amc-8',
+        name: { zh: 'AMC 8', en: 'AMC 8' },
+        syllabus: [
+          { title: { zh: '数与运算', en: 'Numbers & Operations' }, hours: 3 },
+          { title: { zh: '代数基础', en: 'Pre-Algebra & Algebra' }, hours: 3 },
+          { title: { zh: '几何', en: 'Geometry' }, hours: 3 },
+          { title: { zh: '计数与概率', en: 'Counting & Probability' }, hours: 3 },
+          { title: { zh: '数学推理与竞赛技巧', en: 'Mathematical Reasoning' }, hours: 2 },
+          { title: { zh: '强化刷题', en: 'Intensive Practice' }, hours: 3 },
+        ]
+      },
+      {
+        id: 'amc-10',
+        name: { zh: 'AMC 10', en: 'AMC 10' },
+        syllabus: [
+          { title: { zh: '数论', en: 'Number Theory' }, hours: 3 },
+          { title: { zh: '代数', en: 'Algebra' }, hours: 3 },
+          { title: { zh: '几何', en: 'Geometry' }, hours: 3 },
+          { title: { zh: '组合数学', en: 'Counting & Combinatorics' }, hours: 3 },
+          { title: { zh: '概率', en: 'Probability' }, hours: 3 },
+          { title: { zh: '强化刷题', en: 'Intensive Practice' }, hours: 2 },
+        ]
+      },
+      {
+        id: 'amc-12',
+        name: { zh: 'AMC 12', en: 'AMC 12' },
+        syllabus: [
+          { title: { zh: '代数', en: 'Algebra' }, hours: 3 },
+          { title: { zh: '数论', en: 'Number Theory' }, hours: 3 },
+          { title: { zh: '几何', en: 'Geometry' }, hours: 3 },
+          { title: { zh: '组合数学', en: 'Counting & Combinatorics' }, hours: 3 },
+          { title: { zh: '概率', en: 'Probability' }, hours: 3 },
+          { title: { zh: '强化刷题', en: 'Intensive Practice' }, hours: 2 },
+        ]
+      }
+    ]
+  },
+  {
+    id: 'waterloo-cs',
+    name: { zh: '滑铁卢计算机竞赛', en: 'Waterloo CS Contest' },
+    icon: Cpu,
+    courses: [
+      {
+        id: 'ccc-junior',
+        name: { zh: 'CCC Junior', en: 'CCC Junior' },
+        syllabus: [
+          { title: { zh: '输入输出与变量', en: 'Input/Output & Variables' }, hours: 2 },
+          { title: { zh: '条件判断与循环', en: 'Conditionals & Loops' }, hours: 3 },
+          { title: { zh: '字符串与数组', en: 'Strings & Arrays' }, hours: 3 },
+          { title: { zh: '基础算法', en: 'Basic Algorithms' }, hours: 2 },
+          { title: { zh: '真题演练与调试', en: 'Practice & Debugging' }, hours: 2 },
+        ]
+      },
+      {
+        id: 'ccc-senior',
+        name: { zh: 'CCC Senior', en: 'CCC Senior' },
+        syllabus: [
+          { title: { zh: '高级数据结构', en: 'Advanced Data Structures' }, hours: 2 },
+          { title: { zh: '图论 (BFS/DFS)', en: 'Graph Theory (BFS/DFS)' }, hours: 3 },
+          { title: { zh: '动态规划', en: 'Dynamic Programming' }, hours: 3 },
+          { title: { zh: '贪心算法', en: 'Greedy Algorithms' }, hours: 2 },
+          { title: { zh: '优化与复杂度', en: 'Optimization & Complexity' }, hours: 2 },
+        ]
+      }
+    ]
+  },
+  {
+    id: 'waterloo-phys',
+    name: { zh: '滑铁卢物理竞赛', en: 'Waterloo Physics Contest' },
+    icon: Atom,
+    courses: [
+      {
+        id: 'sin',
+        name: { zh: 'SIN Exam', en: 'SIN Exam' },
+        syllabus: [
+          { title: { zh: '运动学', en: 'Kinematics' }, hours: 1 },
+          { title: { zh: '动力学', en: 'Dynamics' }, hours: 3 },
+          { title: { zh: '功、能量、功率', en: 'Work, Energy, Power' }, hours: 2 },
+          { title: { zh: '动量与碰撞', en: 'Momentum & Collisions' }, hours: 2 },
+          { title: { zh: '转动动力学', en: 'Rotational Dynamics' }, hours: 1 },
+          { title: { zh: '波动', en: 'Waves' }, hours: 0.5 },
+          { title: { zh: '光学', en: 'Optics' }, hours: 0.5 },
+          { title: { zh: '静电学', en: 'Electrostatics' }, hours: 1 },
+          { title: { zh: '电路学', en: 'Circuits' }, hours: 1 },
+          { title: { zh: '磁学', en: 'Magnetism' }, hours: 1 },
+          { title: { zh: '热学', en: 'Thermodynamics' }, hours: 1 },
+          { title: { zh: '现代物理', en: 'Modern Physics' }, hours: 1 },
+        ]
+      }
+    ]
+  }
+];
+---
+
+<BaseLayout title={`${course.name[locale]} - ${center.name[locale]}`}>
+  <!-- Hero Section -->
+  <section class="bg-gray-900 text-white pt-32 pb-16">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
+        <div class="grow">
+          <div class="flex gap-2 mb-4">
+            <a href={getRelativeLocaleUrl(locale, center.slug)} class="text-blue-300 hover:text-white transition-colors">
+              {center.name[locale]}
+            </a>
+            <span class="text-gray-500">/</span>
+            <span class="text-gray-400">{course.name[locale]}</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">{course.name[locale]}</h1>
+          <p class="text-xl text-gray-300 mb-6 max-w-3xl">{course.shortDescription[locale]}</p>
+          
+          <div class="flex flex-wrap gap-4">
+            {course.tags?.map(tag => (
+              <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">
+                {tag[locale]}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Section -->
+  <section class="py-16 bg-gray-50 min-h-[600px]">
+    <div class="container mx-auto px-4">
+      
+      <!-- Top Tabs (Categories) -->
+      <div class="flex flex-wrap gap-2 mb-8 border-b border-gray-200 pb-1">
+        {categories.map((cat, index) => (
+          <button
+            class={`px-6 py-3 rounded-t-lg font-bold text-sm md:text-base transition-all duration-200 flex items-center gap-2 ${
+              index === 0 
+                ? 'bg-white text-primary-blue border-t border-x border-gray-200 shadow-sm -mb-px' 
+                : 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700'
+            }`}
+            data-cat-tab={cat.id}
+            onclick={`
+              // Handle Category Tab Switching
+              document.querySelectorAll('[data-cat-tab]').forEach(b => {
+                b.classList.remove('bg-white', 'text-primary-blue', 'border-t', 'border-x', 'border-gray-200', 'shadow-sm', '-mb-px');
+                b.classList.add('bg-gray-100', 'text-gray-500');
+              });
+              this.classList.remove('bg-gray-100', 'text-gray-500');
+              this.classList.add('bg-white', 'text-primary-blue', 'border-t', 'border-x', 'border-gray-200', 'shadow-sm', '-mb-px');
+              
+              document.querySelectorAll('.category-content').forEach(c => c.classList.add('hidden'));
+              document.getElementById('cat-content-' + this.dataset.catTab).classList.remove('hidden');
+            `}
+          >
+            <cat.icon class="w-4 h-4" />
+            {cat.name[locale]}
+          </button>
+        ))}
+      </div>
+
+      <!-- Category Contents -->
+      {categories.map((cat, catIndex) => (
+        <div id={`cat-content-${cat.id}`} class={`category-content ${catIndex === 0 ? '' : 'hidden'} animate-fadeIn`}>
+          <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- Left Sidebar: Vertical Tabs for Courses -->
+            <div class="w-full lg:w-1/4 shrink-0">
+              <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden sticky top-24">
+                <div class="p-4 bg-gray-50 border-b border-gray-100">
+                  <h3 class="font-bold text-gray-900">{locale === 'zh' ? '竞赛级别' : 'Contest Level'}</h3>
+                </div>
+                <div class="flex flex-col">
+                  {cat.courses.map((item, index) => (
+                    <button
+                      class={`text-left px-6 py-4 border-b border-gray-100 last:border-0 hover:bg-blue-50 transition-colors duration-200 focus:outline-none flex items-center gap-3 group ${
+                        index === 0 ? 'active bg-blue-50' : ''
+                      }`}
+                      data-course-tab={`${cat.id}-${item.id}`}
+                      onclick={`
+                        // Handle Course Tab Switching within this Category
+                        const container = document.getElementById('cat-content-${cat.id}');
+                        container.querySelectorAll('[data-course-tab]').forEach(b => {
+                          b.classList.remove('active', 'bg-blue-50');
+                          b.querySelector('.icon-box').classList.remove('bg-primary-blue', 'text-white');
+                          b.querySelector('.icon-box').classList.add('bg-gray-100', 'text-gray-500');
+                        });
+                        this.classList.add('active', 'bg-blue-50');
+                        this.querySelector('.icon-box').classList.remove('bg-gray-100', 'text-gray-500');
+                        this.querySelector('.icon-box').classList.add('bg-primary-blue', 'text-white');
+                        
+                        container.querySelectorAll('.course-content').forEach(c => c.classList.add('hidden'));
+                        document.getElementById('course-content-${cat.id}-${item.id}').classList.remove('hidden');
+                      `}
+                    >
+                      <div class={`icon-box w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${index === 0 ? 'bg-primary-blue text-white' : 'bg-gray-100 text-gray-500 group-hover:bg-white group-hover:text-primary-blue'}`}>
+                        <Target class="w-4 h-4" />
+                      </div>
+                      <span class="font-medium text-gray-700 group-[.active]:text-primary-blue transition-colors">
+                        {item.name[locale]}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Content: Syllabus -->
+            <div class="w-full lg:w-3/4">
+              {cat.courses.map((item, index) => (
+                <div id={`course-content-${cat.id}-${item.id}`} class={`course-content ${index === 0 ? '' : 'hidden'} animate-fadeIn`}>
+                  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="p-8 border-b border-gray-100 bg-linear-to-r from-gray-50 to-white">
+                      <div class="flex items-center gap-4 mb-2">
+                        <div class="w-12 h-12 bg-primary-blue text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
+                          <cat.icon class="w-6 h-6" />
+                        </div>
+                        <div>
+                          <h2 class="text-2xl font-bold text-gray-900">{item.name[locale]}</h2>
+                          <p class="text-gray-500 text-sm">{cat.name[locale]}</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="p-8">
+                      <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                          <thead>
+                            <tr>
+                              <th class="py-4 px-4 bg-gray-50 font-bold text-gray-900 border-b border-gray-200 w-2/3 rounded-tl-lg">
+                                {locale === 'zh' ? '课题' : 'Topic'}
+                              </th>
+                              <th class="py-4 px-4 bg-gray-50 font-bold text-gray-900 border-b border-gray-200 w-1/3 rounded-tr-lg text-right">
+                                {locale === 'zh' ? '课时' : 'Hours'}
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody class="divide-y divide-gray-100">
+                            {item.syllabus.map((topic, i) => (
+                              <tr class="hover:bg-gray-50 transition-colors group">
+                                <td class="py-4 px-4 align-top">
+                                  <div class="flex items-center gap-3">
+                                    <span class="shrink-0 w-6 h-6 bg-blue-50 text-primary-blue rounded-full flex items-center justify-center text-xs font-bold group-hover:bg-primary-blue group-hover:text-white transition-colors">
+                                      {i + 1}
+                                    </span>
+                                    <span class="font-bold text-gray-800">{topic.title[locale]}</span>
+                                  </div>
+                                </td>
+                                <td class="py-4 px-4 text-right text-gray-600 font-mono">
+                                  {topic.hours}h
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </div>
+      ))}
+
+    </div>
+  </section>
+
+</BaseLayout>
