@@ -4,6 +4,7 @@ import MiddleHighImprovement from '../../../../components/ucan/MiddleHighImprove
 import ApCourses from '../../../../components/ucan/ApCourses.astro';
 import SsatSat from '../../../../components/ucan/SsatSat.astro';
 import Competitions from '../../../../components/ucan/Competitions.astro';
+import CriticalThinking from '../../../../components/ucan/CriticalThinking.astro';
 import { courses } from '../../../../data/courses';
 import { centers } from '../../../../data/centers';
 
@@ -30,6 +31,8 @@ const { course, center } = Astro.props;
   <SsatSat course={course} center={center} locale="en" />
 ) : course.slug === 'competitions' ? (
   <Competitions course={course} center={center} locale="en" />
+) : course.slug === 'critical-thinking' ? (
+  <CriticalThinking course={course} center={center} locale="en" />
 ) : (
   <CoursePage course={course} center={center} locale="en" />
 )}

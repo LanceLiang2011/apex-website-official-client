@@ -1,0 +1,281 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Course, Center, Locale } from '../../data/types';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { 
+  Brain, 
+  Box, 
+  Zap, 
+  Puzzle, 
+  Layers, 
+  Image, 
+  Link, 
+  Users,
+  Sparkles
+} from 'lucide-astro';
+
+interface ClassItem {
+  name: { zh: string; en: string; };
+  icon: any;
+  items?: { zh: string; en: string; }[];
+  description?: { zh: string; en: string; };
+}
+
+interface Module {
+  id: string;
+  title: { zh: string; en: string; };
+  subtitle: { zh: string; en: string; };
+  icon: any;
+  color: string;
+  classes: ClassItem[];
+}
+
+interface Props {
+  course: Course;
+  center: Center;
+  locale: Locale;
+}
+
+const { course, center, locale } = Astro.props;
+
+const content: {
+  targetAudience: {
+    title: { zh: string; en: string; };
+    age: { zh: string; en: string; };
+    desc: { zh: string; en: string; };
+  };
+  modules: Module[];
+} = {
+  targetAudience: {
+    title: { zh: '课程对象', en: 'Target Audience' },
+    age: { zh: '7周岁 - 16周岁', en: 'Ages 7 - 16' },
+    desc: { zh: '适合希望提升专注力、记忆力和逻辑思维的学生', en: 'Suitable for students wishing to improve focus, memory, and logical thinking.' }
+  },
+  modules: [
+    {
+      id: 'cube',
+      title: { zh: '脑力魔方', en: 'Brain Cube' },
+      subtitle: { zh: '手脑并用，开发智力', en: 'Hand-Brain Coordination & Intelligence Development' },
+      icon: Box,
+      color: 'blue',
+      classes: [
+        {
+          name: { zh: '魔方基础班', en: 'Cube Fundamentals' },
+          icon: Puzzle,
+          items: [
+            { zh: '三阶魔方', en: '3x3 Cube' },
+            { zh: '二阶魔方', en: '2x2 Cube' },
+            { zh: '金字塔魔方', en: 'Pyraminx' }
+          ]
+        },
+        {
+          name: { zh: '魔方高级班', en: 'Advanced Cube Solving' },
+          icon: Layers,
+          items: [
+            { zh: '高级魔方', en: 'Advanced Cubes' },
+            { zh: '异形魔方', en: 'Shape Mods / Irregular Cubes' }
+          ]
+        },
+        {
+          name: { zh: '魔方进阶班', en: 'Speedcubing Masterclass' },
+          icon: Zap,
+          items: [
+            { zh: '魔方速拧 CFOP 全套学习', en: 'Full CFOP Speedcubing Method' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'memory',
+      title: { zh: '最强大脑', en: 'Super Brain' },
+      subtitle: { zh: '高效记忆，终身受益', en: 'Efficient Memory, Lifelong Benefits' },
+      icon: Brain,
+      color: 'purple',
+      classes: [
+        {
+          name: { zh: '记忆力基础班', en: 'Memory Fundamentals' },
+          icon: Link,
+          description: { 
+            zh: '连接记忆法，掌握高效学习方法，全面提升学习力与专注力。', 
+            en: 'Master the Link Method and efficient learning strategies to comprehensively improve learning ability and focus.' 
+          }
+        },
+        {
+          name: { zh: '照相机记忆班', en: 'Photographic Memory' },
+          icon: Image,
+          description: { 
+            zh: '把文字变成画面，把知识变成图像。有助于学生在单词背诵、知识记忆、考试复习和演讲表达的巩固与提高。', 
+            en: 'Transform text into scenes and knowledge into images. Enhances vocabulary retention, knowledge recall, exam review, and public speaking skills.' 
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={`${course.name[locale]} - ${center.name[locale]}`}>
+  <!-- Hero Section -->
+  <section class="bg-gray-900 text-white pt-32 pb-16">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
+        <div class="grow">
+          <div class="flex gap-2 mb-4">
+            <a href={getRelativeLocaleUrl(locale, center.slug)} class="text-blue-300 hover:text-white transition-colors">
+              {center.name[locale]}
+            </a>
+            <span class="text-gray-500">/</span>
+            <span class="text-gray-400">{course.name[locale]}</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">{course.name[locale]}</h1>
+          <p class="text-xl text-gray-300 mb-6 max-w-3xl">{course.shortDescription[locale]}</p>
+          
+          <div class="flex flex-wrap gap-4">
+            {course.tags?.map(tag => (
+              <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">
+                {tag[locale]}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Target Audience Banner -->
+  <section class="bg-blue-50 border-b border-blue-100">
+    <div class="container mx-auto px-4 py-8">
+      <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-center md:text-left">
+        <div class="w-12 h-12 bg-primary-blue text-white rounded-full flex items-center justify-center shrink-0">
+          <Users class="w-6 h-6" />
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-gray-900">{content.targetAudience.title[locale]}: <span class="text-primary-blue">{content.targetAudience.age[locale]}</span></h3>
+          <p class="text-gray-600">{content.targetAudience.desc[locale]}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-12">
+        
+        <!-- Module 1: Brain Cube -->
+        <div class="space-y-8">
+          <div class="flex items-center gap-4 mb-8">
+            <div class="w-16 h-16 bg-blue-100 text-primary-blue rounded-2xl flex items-center justify-center">
+              <Box class="w-8 h-8" />
+            </div>
+            <div>
+              <h2 class="text-3xl font-bold text-gray-900">{content.modules[0].title[locale]}</h2>
+              <p class="text-gray-500 text-lg">{content.modules[0].subtitle[locale]}</p>
+            </div>
+          </div>
+
+          <div class="grid gap-6">
+            {content.modules[0].classes.map((cls) => (
+              <div class="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow group relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                <div class="flex items-start gap-4">
+                  <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <cls.icon class="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">{cls.name[locale]}</h3>
+                    <div class="flex flex-wrap gap-2">
+                      {cls.items?.map(item => (
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700">
+                          {item[locale]}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Module 2: Super Brain -->
+        <div class="space-y-8">
+          <div class="flex items-center gap-4 mb-8">
+            <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center">
+              <Brain class="w-8 h-8" />
+            </div>
+            <div>
+              <h2 class="text-3xl font-bold text-gray-900">{content.modules[1].title[locale]}</h2>
+              <p class="text-gray-500 text-lg">{content.modules[1].subtitle[locale]}</p>
+            </div>
+          </div>
+
+          <div class="grid gap-6">
+            {content.modules[1].classes.map((cls) => (
+              <div class="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow group relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
+                <div class="flex items-start gap-4">
+                  <div class="w-10 h-10 bg-purple-50 text-purple-600 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                    <cls.icon class="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">{cls.name[locale]}</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                      {cls.description?.[locale]}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits/Why Choose Us Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">
+        {locale === 'zh' ? '为什么选择思维训练？' : 'Why Choose Critical Thinking Training?'}
+      </h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-xl shadow-sm text-center">
+          <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Sparkles class="w-6 h-6" />
+          </div>
+          <h3 class="text-lg font-bold mb-2">{locale === 'zh' ? '提升专注力' : 'Improve Focus'}</h3>
+          <p class="text-gray-600 text-sm">
+            {locale === 'zh' 
+              ? '通过魔方和记忆训练，显著提高学生在学习中的专注时长和深度。' 
+              : 'Significantly increase students\' attention span and depth through cube and memory training.'}
+          </p>
+        </div>
+        <div class="bg-white p-8 rounded-xl shadow-sm text-center">
+          <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Brain class="w-6 h-6" />
+          </div>
+          <h3 class="text-lg font-bold mb-2">{locale === 'zh' ? '开发大脑潜能' : 'Unlock Brain Potential'}</h3>
+          <p class="text-gray-600 text-sm">
+            {locale === 'zh' 
+              ? '左右脑协同开发，提升逻辑思维、空间想象力和瞬间记忆能力。' 
+              : 'Coordinated development of left and right brain, enhancing logic, spatial imagination, and instant memory.'}
+          </p>
+        </div>
+        <div class="bg-white p-8 rounded-xl shadow-sm text-center">
+          <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Zap class="w-6 h-6" />
+          </div>
+          <h3 class="text-lg font-bold mb-2">{locale === 'zh' ? '高效学习' : 'Efficient Learning'}</h3>
+          <p class="text-gray-600 text-sm">
+            {locale === 'zh' 
+              ? '掌握科学的记忆方法，让背诵变得轻松，提高学习效率。' 
+              : 'Master scientific memory methods to make memorization easier and improve learning efficiency.'}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
