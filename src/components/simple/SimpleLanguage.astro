@@ -28,7 +28,41 @@ if (!center) {
   throw new Error('Simple Language Center not found');
 }
 
-const categories = [
+interface Course {
+  id: string;
+  name: { zh: string; en: string };
+  icon: any;
+  description?: { zh: string; en: string };
+  features?: {
+    title: { zh: string; en: string };
+    desc: { zh: string; en: string };
+    icon: any;
+  }[];
+  subTabs?: {
+    id: string;
+    label: { zh: string; en: string };
+    content?: {
+      title: { zh: string; en: string };
+      target: { zh: string; en: string };
+      goal: { zh: string; en: string };
+      features: { zh: string; en: string }[];
+    }[];
+    schedule?: {
+      lecture: string;
+      topic: { zh: string; en: string };
+    }[];
+  }[];
+  placeholder?: boolean;
+}
+
+interface Category {
+  id: string;
+  name: { zh: string; en: string };
+  icon: any;
+  courses: Course[];
+}
+
+const categories: Category[] = [
   {
     id: 'academic',
     name: { zh: '雅思学术类课程(A)', en: 'IELTS Academic (A)' },
@@ -182,15 +216,72 @@ const categories = [
       },
       {
         id: 'small-class',
-        name: { zh: '精品8人小班课程(线下)', en: 'Premium 8-Person Small Class' },
+        name: { zh: '精品8人小班课程(线下)', en: 'Premium 8-Person Small Class (Offline)' },
         icon: Users,
-        placeholder: true
+        features: [
+          {
+            title: { zh: '5-8人小班授课', en: '5-8 Person Small Class' },
+            desc: { zh: '严格控制班级人数，保证每一位学生的教学效果与课堂参与度。', en: 'Strictly controlled class size to ensure teaching effectiveness and participation for every student.' },
+            icon: Users
+          },
+          {
+            title: { zh: '顶尖师资团队', en: 'Top-tier Faculty' },
+            desc: { zh: '教师均为硕士及以上学历，均有海外留学经历，执教不少于5年。', en: 'All teachers hold Master\'s degrees or higher, have overseas study experience, and 5+ years of teaching experience.' },
+            icon: GraduationCap
+          },
+          {
+            title: { zh: '一科一教师', en: 'Subject-Specific Teachers' },
+            desc: { zh: '术业有专攻，经验丰富，对考题预测精准。', en: 'Specialized teachers for each subject, experienced with accurate exam predictions.' },
+            icon: BookOpen
+          },
+          {
+            title: { zh: '全程助教督学', en: 'Full TA Supervision' },
+            desc: { zh: '配备教学助理，负责追讨作业、默写抽测及报名考试。', en: 'Teaching assistants responsible for homework tracking, dictation checks, and exam registration.' },
+            icon: ClipboardList
+          },
+          {
+            title: { zh: '前考官模考', en: 'Ex-Examiner Mock Exams' },
+            desc: { zh: '独家前雅思考官1对1在线模考，还原真实考场体验。', en: 'Exclusive 1-on-1 online mock exams with former IELTS examiners to simulate real test experience.' },
+            icon: MonitorPlay
+          }
+        ]
       },
       {
         id: 'bootcamp',
         name: { zh: '封闭营+加拿大送考服务', en: 'Bootcamp + Canada Exam Service' },
         icon: Plane,
-        placeholder: true
+        features: [
+          {
+            title: { zh: '14天全封闭集训', en: '14-Day Intensive Bootcamp' },
+            desc: { zh: '14天全方位封闭，享受沉浸式学习，极速出分，奇迹上岸。', en: '14-day comprehensive closed training, immersive learning for rapid score improvement.' },
+            icon: Calendar
+          },
+          {
+            title: { zh: '全明星服务团队', en: 'All-Star Service Team' },
+            desc: { zh: '配备一科一教师、教学助理、生活助理，全方位保障。', en: 'Equipped with subject teachers, teaching assistants, and life assistants for comprehensive support.' },
+            icon: Users
+          },
+          {
+            title: { zh: '顶尖师资配置', en: 'Top Faculty Configuration' },
+            desc: { zh: '教师均为硕士及以上学历，均有海外留学经历，执教不少于5年。', en: 'All teachers hold Master\'s degrees or higher, have overseas study experience, and 5+ years of teaching experience.' },
+            icon: GraduationCap
+          },
+          {
+            title: { zh: '分秒必争的规划', en: 'Precise Schedule Planning' },
+            desc: { zh: '全程规划预习、上课、复习，高效利用每一分钟。', en: 'Full planning for preview, class, and review, making every minute count.' },
+            icon: Target
+          },
+          {
+            title: { zh: '送考一条龙服务', en: 'One-Stop Exam Service' },
+            desc: { zh: '代办签证，安排食宿，无忧赴考。', en: 'Visa handling, accommodation and meals arranged for a worry-free exam trip.' },
+            icon: Plane
+          },
+          {
+            title: { zh: '得天独厚的考场', en: 'Advantageous Test Centers' },
+            desc: { zh: '加拿大总部与雅思官方合作考场，拥有得天独厚的出分条件。', en: 'Canada HQ and official IELTS partner test centers offer unique advantages for scoring.' },
+            icon: MapPin
+          }
+        ]
       }
     ]
   },
