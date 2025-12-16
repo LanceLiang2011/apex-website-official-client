@@ -4,7 +4,7 @@ import { centers } from '../../data/centers';
 
 export function getStaticPaths() {
   return centers
-    .filter(center => center.slug !== 'rise')
+    .filter(center => center.slug !== 'rise' && center.slug !== 'simple-language')
     .map(center => ({
       params: { center: center.slug },
       props: { center }

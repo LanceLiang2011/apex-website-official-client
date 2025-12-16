@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { centers } from '../../data/centers';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { 
+  GraduationCap, 
+  Users, 
+  BookOpen, 
+  Target, 
+  Calendar, 
+  CheckCircle2, 
+  MessageCircle, 
+  ClipboardList,
+  Globe2,
+  MonitorPlay,
+  MapPin,
+  Plane
+} from 'lucide-astro';
+
+interface Props {
+  locale: 'zh' | 'en';
+}
+
+const { locale } = Astro.props;
+const center = centers.find(c => c.id === 'simple');
+
+if (!center) {
+  throw new Error('Simple Language Center not found');
+}
+
+const categories = [
+  {
+    id: 'academic',
+    name: { zh: '雅思学术类课程(A)', en: 'IELTS Academic (A)' },
+    icon: GraduationCap,
+    courses: [
+      {
+        id: 'vip-4-1',
+        name: { zh: '4对1 VIP全程规划课程(线上线下)', en: '4-on-1 VIP Full Planning Course' },
+        icon: Users,
+        features: [
+          {
+            title: { zh: '全程规划，直至出分', en: 'Full Process Planning' },
+            desc: { zh: '从入学到考试，全程跟踪指导，确保达成目标分数。', en: 'Tracking and guidance from enrollment to exam, ensuring target score achievement.' },
+            icon: Target
+          },
+          {
+            title: { zh: '顶尖师资团队', en: 'Top-tier Faculty' },
+            desc: { zh: '教师均为硕士及以上学历，均有海外留学经历，执教不少于5年。', en: 'All teachers hold Master\'s degrees or higher, have overseas study experience, and 5+ years of teaching experience.' },
+            icon: GraduationCap
+          },
+          {
+            title: { zh: '4对1 专属教学', en: '4-on-1 Exclusive Teaching' },
+            desc: { zh: '一科一老师（听、说、读、写），全程4对1教学授课，精准提升。', en: 'One teacher per subject (Listening, Speaking, Reading, Writing), 4-on-1 instruction for precise improvement.' },
+            icon: Users
+          },
+          {
+            title: { zh: '科学测评与分析', en: 'Scientific Assessment' },
+            desc: { zh: '4对1进行课前测评及学情分析，精准定位薄弱环节。', en: '4-on-1 pre-class assessment and learning analysis to pinpoint weaknesses.' },
+            icon: ClipboardList
+          },
+          {
+            title: { zh: '定制化教学方案', en: 'Customized Teaching Plan' },
+            desc: { zh: '4对1制定教学计划及授课大纲，量身打造学习路径。', en: '4-on-1 creation of teaching plans and syllabi, tailored learning paths.' },
+            icon: BookOpen
+          },
+          {
+            title: { zh: '全方位学习管理', en: 'Comprehensive Management' },
+            desc: { zh: '4对1规划预习、上课、复习及报考细节，无忧备考。', en: '4-on-1 planning for preview, class, review, and exam registration details.' },
+            icon: Calendar
+          },
+          {
+            title: { zh: '深度答疑与复盘', en: 'In-depth Q&A & Review' },
+            desc: { zh: '4对1答疑解惑、复盘作业，确保知识点完全吸收。', en: '4-on-1 Q&A and homework review to ensure full absorption of knowledge.' },
+            icon: MessageCircle
+          },
+          {
+            title: { zh: '贴心助教服务', en: 'Dedicated TA Service' },
+            desc: { zh: '1对1教学助理负责追讨作业、默写抽测及报名考试，全程督学。', en: '1-on-1 teaching assistant for homework tracking, dictation checks, and exam registration.' },
+            icon: CheckCircle2
+          }
+        ]
+      },
+      {
+        id: 'score-improvement',
+        name: { zh: '提分全项课程(线上)', en: 'Score Improvement Course (Online)' },
+        icon: MonitorPlay,
+        placeholder: true
+      },
+      {
+        id: 'small-class',
+        name: { zh: '精品8人小班课程(线下)', en: 'Premium 8-Person Small Class' },
+        icon: Users,
+        placeholder: true
+      },
+      {
+        id: 'bootcamp',
+        name: { zh: '封闭营+加拿大送考服务', en: 'Bootcamp + Canada Exam Service' },
+        icon: Plane,
+        placeholder: true
+      }
+    ]
+  },
+  {
+    id: 'general',
+    name: { zh: '雅思移民类课程(G)', en: 'IELTS General (G)' },
+    icon: Globe2,
+    courses: [
+      {
+        id: 'g-placeholder',
+        name: { zh: '课程筹备中', en: 'Coming Soon' },
+        icon: Calendar,
+        placeholder: true
+      }
+    ]
+  }
+];
+---
+
+<BaseLayout title={`${center.name[locale]} - Apex Education`}>
+  <!-- Hero Section -->
+  <section class="bg-gray-900 text-white pt-32 pb-16">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
+        <div class="grow">
+          <div class="flex gap-2 mb-4">
+            <a href={getRelativeLocaleUrl(locale, '/')} class="text-blue-300 hover:text-white transition-colors">
+              {locale === 'zh' ? '首页' : 'Home'}
+            </a>
+            <span class="text-gray-500">/</span>
+            <span class="text-gray-400">{center.name[locale]}</span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">{center.name[locale]}</h1>
+          <p class="text-xl text-gray-300 mb-6 max-w-3xl">{center.description[locale]}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Section -->
+  <section class="py-16 bg-gray-50 min-h-[600px]">
+    <div class="container mx-auto px-4">
+      
+      <!-- Top Tabs (Categories) -->
+      <div class="flex flex-wrap gap-2 mb-8 border-b border-gray-200 pb-1">
+        {categories.map((cat, index) => (
+          <button
+            class={`px-6 py-3 rounded-t-lg font-bold text-sm md:text-base transition-all duration-200 flex items-center gap-2 ${
+              index === 0 
+                ? 'bg-white text-primary-blue border-t border-x border-gray-200 shadow-sm -mb-px' 
+                : 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700'
+            }`}
+            data-cat-tab={cat.id}
+            onclick={`
+              document.querySelectorAll('[data-cat-tab]').forEach(b => {
+                b.classList.remove('bg-white', 'text-primary-blue', 'border-t', 'border-x', 'border-gray-200', 'shadow-sm', '-mb-px');
+                b.classList.add('bg-gray-100', 'text-gray-500');
+              });
+              this.classList.remove('bg-gray-100', 'text-gray-500');
+              this.classList.add('bg-white', 'text-primary-blue', 'border-t', 'border-x', 'border-gray-200', 'shadow-sm', '-mb-px');
+              
+              document.querySelectorAll('.category-content').forEach(c => c.classList.add('hidden'));
+              document.getElementById('cat-content-' + this.dataset.catTab).classList.remove('hidden');
+            `}
+          >
+            <cat.icon class="w-4 h-4" />
+            {cat.name[locale]}
+          </button>
+        ))}
+      </div>
+
+      <!-- Category Contents -->
+      {categories.map((cat, catIndex) => (
+        <div id={`cat-content-${cat.id}`} class={`category-content ${catIndex === 0 ? '' : 'hidden'} animate-fadeIn`}>
+          <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- Left Sidebar: Vertical Tabs for Courses -->
+            <div class="w-full lg:w-1/4 shrink-0">
+              <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden sticky top-24">
+                <div class="p-4 bg-gray-50 border-b border-gray-100">
+                  <h3 class="font-bold text-gray-900">{locale === 'zh' ? '课程列表' : 'Course List'}</h3>
+                </div>
+                <div class="flex flex-col">
+                  {cat.courses.map((item, index) => (
+                    <button
+                      class={`text-left px-6 py-4 border-b border-gray-100 last:border-0 hover:bg-blue-50 transition-colors duration-200 focus:outline-none flex items-center gap-3 group ${
+                        index === 0 ? 'active bg-blue-50' : ''
+                      }`}
+                      data-course-tab={`${cat.id}-${item.id}`}
+                      onclick={`
+                        const container = document.getElementById('cat-content-${cat.id}');
+                        container.querySelectorAll('[data-course-tab]').forEach(b => {
+                          b.classList.remove('active', 'bg-blue-50');
+                          b.querySelector('.icon-box').classList.remove('bg-primary-blue', 'text-white');
+                          b.querySelector('.icon-box').classList.add('bg-gray-100', 'text-gray-500');
+                        });
+                        this.classList.add('active', 'bg-blue-50');
+                        this.querySelector('.icon-box').classList.remove('bg-gray-100', 'text-gray-500');
+                        this.querySelector('.icon-box').classList.add('bg-primary-blue', 'text-white');
+                        
+                        container.querySelectorAll('.course-content').forEach(c => c.classList.add('hidden'));
+                        document.getElementById('course-content-${cat.id}-${item.id}').classList.remove('hidden');
+                      `}
+                    >
+                      <div class={`icon-box w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${index === 0 ? 'bg-primary-blue text-white' : 'bg-gray-100 text-gray-500 group-hover:bg-white group-hover:text-primary-blue'}`}>
+                        <item.icon class="w-4 h-4" />
+                      </div>
+                      <span class="font-medium text-gray-700 group-[.active]:text-primary-blue transition-colors">
+                        {item.name[locale]}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Content: Course Details -->
+            <div class="w-full lg:w-3/4">
+              {cat.courses.map((item, index) => (
+                <div id={`course-content-${cat.id}-${item.id}`} class={`course-content ${index === 0 ? '' : 'hidden'} animate-fadeIn`}>
+                  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="p-8 border-b border-gray-100 bg-linear-to-r from-gray-50 to-white">
+                      <div class="flex items-center gap-4 mb-2">
+                        <div class="w-12 h-12 bg-primary-blue text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
+                          <item.icon class="w-6 h-6" />
+                        </div>
+                        <div>
+                          <h2 class="text-2xl font-bold text-gray-900">{item.name[locale]}</h2>
+                          <p class="text-gray-500 text-sm">{cat.name[locale]}</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="p-8">
+                      {item.placeholder ? (
+                        <div class="text-center py-12">
+                          <div class="w-16 h-16 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Calendar class="w-8 h-8" />
+                          </div>
+                          <h3 class="text-xl font-bold text-gray-900 mb-2">
+                            {locale === 'zh' ? '内容更新中' : 'Content Coming Soon'}
+                          </h3>
+                          <p class="text-gray-500">
+                            {locale === 'zh' ? '该课程的详细介绍即将上线，敬请期待。' : 'Detailed introduction for this course will be available soon.'}
+                          </p>
+                        </div>
+                      ) : (
+                        <div class="grid md:grid-cols-2 gap-6">
+                          {item.features?.map((feature) => (
+                            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:shadow-md transition-shadow">
+                              <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-white text-primary-blue rounded-lg shadow-sm flex items-center justify-center shrink-0">
+                                  <feature.icon class="w-5 h-5" />
+                                </div>
+                                <div>
+                                  <h3 class="font-bold text-gray-900 mb-2">{feature.title[locale]}</h3>
+                                  <p class="text-sm text-gray-600 leading-relaxed">
+                                    {feature.desc[locale]}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </div>
+      ))}
+
+    </div>
+  </section>
+
+</BaseLayout>
