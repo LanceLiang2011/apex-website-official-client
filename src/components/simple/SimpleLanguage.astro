@@ -85,7 +85,100 @@ const categories = [
         id: 'score-improvement',
         name: { zh: '提分全项课程(线上)', en: 'Score Improvement Course (Online)' },
         icon: MonitorPlay,
-        placeholder: true
+        description: {
+          zh: '包含直播课、录播课及全套电子教材，全方位助力雅思提分。',
+          en: 'Includes live classes, recorded sessions, and full digital materials for comprehensive score improvement.'
+        },
+        subTabs: [
+          {
+            id: 'class-types',
+            label: { zh: '班型介绍', en: 'Class Types' },
+            content: [
+              {
+                title: { zh: '6.5分冲刺班', en: '6.5 Sprint Class' },
+                target: { zh: '适合目前雅思5.5-6.0分左右的学生', en: 'Suitable for students currently at IELTS 5.5-6.0' },
+                goal: { zh: '目标分数：6.5分', en: 'Target Score: 6.5' },
+                features: [
+                  { zh: '针对性强化训练', en: 'Targeted intensive training' },
+                  { zh: '突破分数瓶颈', en: 'Break through score plateaus' }
+                ]
+              },
+              {
+                title: { zh: '7.5分高分班', en: '7.5 Advanced Class' },
+                target: { zh: '适合目前雅思6.5-7.0分左右的学生', en: 'Suitable for students currently at IELTS 6.5-7.0' },
+                goal: { zh: '目标分数：7.5分', en: 'Target Score: 7.5' },
+                features: [
+                  { zh: '高难度技巧讲解', en: 'Advanced technique explanation' },
+                  { zh: '冲击名校高分要求', en: 'Aiming for top university requirements' }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'reading',
+            label: { zh: '阅读课表', en: 'Reading Schedule' },
+            schedule: [
+              { lecture: 'Lecture 1', topic: { zh: '雅思阅读总论', en: 'IELTS Reading Overview' } },
+              { lecture: 'Lecture 2', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
+              { lecture: 'Lecture 3', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
+              { lecture: 'Lecture 4', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
+              { lecture: 'Lecture 5', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
+              { lecture: 'Lecture 6', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
+              { lecture: 'Lecture 7', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
+              { lecture: 'Lecture 8', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
+              { lecture: 'Lecture 9', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
+              { lecture: 'Lecture 10', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
+            ]
+          },
+          {
+            id: 'listening',
+            label: { zh: '听力课表', en: 'Listening Schedule' },
+            schedule: [
+              { lecture: 'Lecture 1', topic: { zh: '雅思听力总论', en: 'IELTS Listening Overview' } },
+              { lecture: 'Lecture 2', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
+              { lecture: 'Lecture 3', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
+              { lecture: 'Lecture 4', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
+              { lecture: 'Lecture 5', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
+              { lecture: 'Lecture 6', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
+              { lecture: 'Lecture 7', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
+              { lecture: 'Lecture 8', topic: { zh: 'P4 题型技巧讲解', en: 'P4 Question Type Techniques' } },
+              { lecture: 'Lecture 9', topic: { zh: 'P4 题型技巧讲解', en: 'P4 Question Type Techniques' } },
+              { lecture: 'Lecture 10', topic: { zh: 'P4 题型技巧讲解', en: 'P4 Question Type Techniques' } },
+            ]
+          },
+          {
+            id: 'writing',
+            label: { zh: '写作课表', en: 'Writing Schedule' },
+            schedule: [
+              { lecture: 'Lecture 1', topic: { zh: '雅思写作总论', en: 'IELTS Writing Overview' } },
+              { lecture: 'Lecture 2', topic: { zh: '小作文题型技巧讲解', en: 'Task 1 Techniques' } },
+              { lecture: 'Lecture 3', topic: { zh: '小作文题型技巧讲解', en: 'Task 1 Techniques' } },
+              { lecture: 'Lecture 4', topic: { zh: '小作文题型技巧讲解', en: 'Task 1 Techniques' } },
+              { lecture: 'Lecture 5', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
+              { lecture: 'Lecture 6', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
+              { lecture: 'Lecture 7', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
+              { lecture: 'Lecture 8', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
+              { lecture: 'Lecture 9', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
+              { lecture: 'Lecture 10', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
+            ]
+          },
+          {
+            id: 'speaking',
+            label: { zh: '口语课表', en: 'Speaking Schedule' },
+            schedule: [
+              { lecture: 'Lecture 1', topic: { zh: '雅思口语总论', en: 'IELTS Speaking Overview' } },
+              { lecture: 'Lecture 2', topic: { zh: 'P1 题型技巧讲解', en: 'Part 1 Techniques' } },
+              { lecture: 'Lecture 3', topic: { zh: 'P1 题型技巧讲解', en: 'Part 1 Techniques' } },
+              { lecture: 'Lecture 4', topic: { zh: 'P2 题型技巧讲解', en: 'Part 2 Techniques' } },
+              { lecture: 'Lecture 5', topic: { zh: 'P2 题型技巧讲解', en: 'Part 2 Techniques' } },
+              { lecture: 'Lecture 6', topic: { zh: 'P2 题型技巧讲解', en: 'Part 2 Techniques' } },
+              { lecture: 'Lecture 7', topic: { zh: 'P2 题型技巧讲解', en: 'Part 2 Techniques' } },
+              { lecture: 'Lecture 8', topic: { zh: 'P3 题型技巧讲解', en: 'Part 3 Techniques' } },
+              { lecture: 'Lecture 9', topic: { zh: 'P3 题型技巧讲解', en: 'Part 3 Techniques' } },
+              { lecture: 'Lecture 10', topic: { zh: 'P3 题型技巧讲解', en: 'Part 3 Techniques' } },
+            ]
+          }
+        ]
       },
       {
         id: 'small-class',
@@ -243,6 +336,94 @@ const categories = [
                           <p class="text-gray-500">
                             {locale === 'zh' ? '该课程的详细介绍即将上线，敬请期待。' : 'Detailed introduction for this course will be available soon.'}
                           </p>
+                        </div>
+                      ) : item.subTabs ? (
+                        <div>
+                          {/* Sub Tab Navigation */}
+                          <div class="flex flex-wrap gap-2 mb-6 border-b border-gray-200">
+                            {item.subTabs.map((tab, tabIndex) => (
+                              <button
+                                class={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${
+                                  tabIndex === 0 
+                                    ? 'bg-blue-50 text-primary-blue border-b-2 border-primary-blue' 
+                                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                                }`}
+                                data-sub-tab={`${item.id}-${tab.id}`}
+                                onclick={`
+                                  const container = document.getElementById('course-content-${cat.id}-${item.id}');
+                                  container.querySelectorAll('[data-sub-tab]').forEach(b => {
+                                    b.classList.remove('bg-blue-50', 'text-primary-blue', 'border-b-2', 'border-primary-blue');
+                                    b.classList.add('text-gray-500');
+                                  });
+                                  this.classList.remove('text-gray-500');
+                                  this.classList.add('bg-blue-50', 'text-primary-blue', 'border-b-2', 'border-primary-blue');
+                                  
+                                  container.querySelectorAll('.sub-tab-content').forEach(c => c.classList.add('hidden'));
+                                  document.getElementById('sub-content-' + this.dataset.subTab).classList.remove('hidden');
+                                `}
+                              >
+                                {tab.label[locale]}
+                              </button>
+                            ))}
+                          </div>
+
+                          {/* Sub Tab Content */}
+                          {item.subTabs.map((tab, tabIndex) => (
+                            <div id={`sub-content-${item.id}-${tab.id}`} class={`sub-tab-content ${tabIndex === 0 ? '' : 'hidden'} animate-fadeIn`}>
+                              {tab.content ? (
+                                /* Class Types Content */
+                                <div class="grid md:grid-cols-2 gap-6">
+                                  {tab.content.map((cls) => (
+                                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+                                      <h4 class="text-lg font-bold text-gray-900 mb-3">{cls.title[locale]}</h4>
+                                      <div class="space-y-3">
+                                        <div class="flex items-start gap-2 text-sm text-gray-600">
+                                          <Users class="w-4 h-4 mt-0.5 text-primary-blue" />
+                                          <span>{cls.target[locale]}</span>
+                                        </div>
+                                        <div class="flex items-start gap-2 text-sm text-gray-600">
+                                          <Target class="w-4 h-4 mt-0.5 text-primary-blue" />
+                                          <span>{cls.goal[locale]}</span>
+                                        </div>
+                                        <div class="pt-3 border-t border-gray-200 mt-3">
+                                          <ul class="space-y-2">
+                                            {cls.features.map(f => (
+                                              <li class="flex items-center gap-2 text-sm text-gray-600">
+                                                <CheckCircle2 class="w-3 h-3 text-green-500" />
+                                                <span>{f[locale]}</span>
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              ) : tab.schedule ? (
+                                /* Schedule Content */
+                                <div class="bg-white rounded-xl border border-gray-100 overflow-hidden">
+                                  <div class="overflow-x-auto">
+                                    <table class="w-full text-sm text-left">
+                                      <thead class="bg-gray-50 text-gray-700 font-medium">
+                                        <tr>
+                                          <th class="px-6 py-3 w-1/3">{locale === 'zh' ? '课次' : 'Lecture'}</th>
+                                          <th class="px-6 py-3">{locale === 'zh' ? '主题' : 'Topic'}</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody class="divide-y divide-gray-100">
+                                        {tab.schedule.map((row) => (
+                                          <tr class="hover:bg-gray-50 transition-colors">
+                                            <td class="px-6 py-3 font-medium text-primary-blue">{row.lecture}</td>
+                                            <td class="px-6 py-3 text-gray-600">{row.topic[locale]}</td>
+                                          </tr>
+                                        ))}
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              ) : null}
+                            </div>
+                          ))}
                         </div>
                       ) : (
                         <div class="grid md:grid-cols-2 gap-6">
