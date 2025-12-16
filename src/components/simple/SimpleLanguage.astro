@@ -291,10 +291,396 @@ const categories: Category[] = [
     icon: Globe2,
     courses: [
       {
-        id: 'g-placeholder',
-        name: { zh: '课程筹备中', en: 'Coming Soon' },
-        icon: Calendar,
-        placeholder: true
+        id: 'g-4-5',
+        name: { zh: 'G类雅思4-5分基础班', en: 'G-Type 4-5 Band Foundation' },
+        icon: BookOpen,
+        description: {
+          zh: '适合初中英语水平学员，浅显易懂，轻松入门。',
+          en: 'Suitable for junior high English level students, easy to understand, easy entry.'
+        },
+        features: [
+          {
+            title: { zh: '适合学员', en: 'Target Audience' },
+            desc: { zh: '掌握初中英语词汇的学员。', en: 'Students who have mastered junior high school English vocabulary.' },
+            icon: Users
+          },
+          {
+            title: { zh: '出班预期', en: 'Expected Outcome' },
+            desc: { zh: '达到 CLB 5 水平。', en: 'Reach CLB 5 level.' },
+            icon: Target
+          },
+          {
+            title: { zh: '课程特色', en: 'Course Features' },
+            desc: { zh: '零基础雅思，浅显易懂，轻松屠鸭。', en: 'Zero foundation IELTS, easy to understand, easy to pass.' },
+            icon: CheckCircle2
+          }
+        ],
+        subTabs: [
+          {
+            id: 'reading',
+            label: { zh: '阅读课表', en: 'Reading Schedule' },
+            schedule: [
+              { lecture: '01', topic: { zh: '录播：课程信息+雅思阅读概述+单词讲解1&2', en: 'Rec: Info + Overview + Vocab 1&2' } },
+              { lecture: '02', topic: { zh: '录播：单词讲解3&4 + 直播：判断题技巧讲解及例题练习1', en: 'Rec: Vocab 3&4 + Live: T/F Techniques 1' } },
+              { lecture: '03', topic: { zh: '录播：单词讲解5&6 + 直播：判断题技巧巩固及例题练习2', en: 'Rec: Vocab 5&6 + Live: T/F Techniques 2' } },
+              { lecture: '04', topic: { zh: '录播：单词讲解7&8 + 直播：填词题技巧讲解及例题练习1', en: 'Rec: Vocab 7&8 + Live: Fill-in Techniques 1' } },
+              { lecture: '05', topic: { zh: '录播：单词讲解9&10 + 直播：填词题技巧巩固及例题练习2', en: 'Rec: Vocab 9&10 + Live: Fill-in Techniques 2' } },
+              { lecture: '06', topic: { zh: '录播：单词讲解11&12 + 直播：配对题技巧讲解及例题练习', en: 'Rec: Vocab 11&12 + Live: Matching Techniques' } },
+              { lecture: '07', topic: { zh: '录播：单词讲解13 + 直播：组合解题技巧', en: 'Rec: Vocab 13 + Live: Combined Techniques' } },
+              { lecture: '08', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
+            ]
+          },
+          {
+            id: 'listening',
+            label: { zh: '听力课表', en: 'Listening Schedule' },
+            schedule: [
+              { lecture: '1', topic: { zh: '录播：课程信息+雅思听力概述+听力练习心法+核心技巧', en: 'Rec: Info + Overview + Mindset + Core Techniques' } },
+              { lecture: '2', topic: { zh: '直播：P1填词题技巧 + 录播：作业评讲1', en: 'Live: P1 Fill-in + Rec: HW Review 1' } },
+              { lecture: '3', topic: { zh: '直播：P2+P3填词题技巧 + 录播：作业评讲2', en: 'Live: P2+P3 Fill-in + Rec: HW Review 2' } },
+              { lecture: '4', topic: { zh: '直播：P4填词题技巧 + 录播：作业评讲3', en: 'Live: P4 Fill-in + Rec: HW Review 3' } },
+              { lecture: '5', topic: { zh: '直播：地图题技巧 + 录播：作业评讲4', en: 'Live: Map Techniques + Rec: HW Review 4' } },
+              { lecture: '6', topic: { zh: '直播：配对题技巧 + 录播：作业评讲5', en: 'Live: Matching Techniques + Rec: HW Review 5' } },
+              { lecture: '7', topic: { zh: '直播：单选题+多选题技巧 + 录播：作业评讲6', en: 'Live: Choice Techniques + Rec: HW Review 6' } },
+              { lecture: '8', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
+            ]
+          },
+          {
+            id: 'writing',
+            label: { zh: '写作课表', en: 'Writing Schedule' },
+            schedule: [
+              { lecture: '1', topic: { zh: '录播：写作评分标准精讲', en: 'Rec: Writing Grading Criteria' } },
+              { lecture: '2', topic: { zh: '直播：小作文书信如何写1', en: 'Live: Task 1 Letters 1' } },
+              { lecture: '3', topic: { zh: '直播：小作文书信如何写2', en: 'Live: Task 1 Letters 2' } },
+              { lecture: '4', topic: { zh: '直播：大作文辩论类题型讲解(健康)', en: 'Live: Task 2 Argument (Health)' } },
+              { lecture: '5', topic: { zh: '直播：大作文辩论类题型讲解(媒体广告)', en: 'Live: Task 2 Argument (Media/Ads)' } },
+              { lecture: '6', topic: { zh: '直播：大作文讨论类题型讲解(科技全球化)', en: 'Live: Task 2 Discussion (Tech/Global)' } },
+              { lecture: '7', topic: { zh: '直播：大作文辩论类题型讲解(政府教育)', en: 'Live: Task 2 Argument (Gov/Edu)' } },
+              { lecture: '8', topic: { zh: '直播：模考', en: 'Live: Mock Exam' } },
+            ]
+          },
+          {
+            id: 'speaking',
+            label: { zh: '口语课表', en: 'Speaking Schedule' },
+            schedule: [
+              { lecture: '1', topic: { zh: '录播：考试流程+评分标准+P1突破法+P1必考题', en: 'Rec: Process + Criteria + P1 Breakthrough' } },
+              { lecture: '2', topic: { zh: '直播：P1话题策略分类讲解(1)', en: 'Live: P1 Strategy 1' } },
+              { lecture: '3', topic: { zh: '直播：P1话题策略分类讲解(2)', en: 'Live: P1 Strategy 2' } },
+              { lecture: '4', topic: { zh: '直播：攻克P2物品类话题', en: 'Live: P2 Objects' } },
+              { lecture: '5', topic: { zh: '直播：攻克P2事件类话题', en: 'Live: P2 Events' } },
+              { lecture: '6', topic: { zh: '直播：攻克P2人物及地点类话题', en: 'Live: P2 People/Places' } },
+              { lecture: '7', topic: { zh: '录播：总结P3思维展开技巧 + 直播：P3分类例题精讲', en: 'Rec: P3 Thinking + Live: P3 Examples' } },
+              { lecture: '8', topic: { zh: '直播：模考+点评', en: 'Live: Mock Exam + Review' } },
+            ]
+          },
+          {
+            id: 'flow',
+            label: { zh: '课程流程', en: 'Course Flow' },
+            content: [
+              {
+                title: { zh: '1. 开课前', en: '1. Pre-Class' },
+                target: { zh: '准备阶段', en: 'Preparation' },
+                goal: { zh: 'Ready', en: 'Ready' },
+                features: [
+                  { zh: '进课堂专属群', en: 'Join exclusive class group' },
+                  { zh: '熟悉直播课规则', en: 'Familiarize with live rules' },
+                  { zh: '获取课程学习资料', en: 'Get course materials' }
+                ]
+              },
+              {
+                title: { zh: '2. 授课中', en: '2. In-Class' },
+                target: { zh: '学习阶段', en: 'Learning' },
+                goal: { zh: 'Study', en: 'Study' },
+                features: [
+                  { zh: '提前10分钟开通课堂入口', en: 'Class opens 10 mins early' },
+                  { zh: '互动直播授课', en: 'Interactive live teaching' },
+                  { zh: '当堂答疑', en: 'Live Q&A' }
+                ]
+              },
+              {
+                title: { zh: '3. 结课后', en: '3. Post-Class' },
+                target: { zh: '复习阶段', en: 'Review' },
+                goal: { zh: 'Review', en: 'Review' },
+                features: [
+                  { zh: '无限次录播回放', en: 'Unlimited playback' },
+                  { zh: '学习任务打卡', en: 'Study task check-ins' },
+                  { zh: '课后作业批改反馈', en: 'Homework correction & feedback' },
+                  { zh: '群内随时提问答疑', en: 'Anytime Q&A in group' },
+                  { zh: '免费在线口语模考', en: 'Free online speaking mock' }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'g-6',
+        name: { zh: 'G类雅思6分突击班', en: 'G-Type 6 Band Sprint' },
+        icon: Target,
+        description: {
+          zh: '针对移民类雅思考点，下手狠，出分快。',
+          en: 'Focus on immigration IELTS test points, ruthless tactics, fast scoring.'
+        },
+        features: [
+          {
+            title: { zh: '适合学员', en: 'Target Audience' },
+            desc: { zh: '已达到CLB 6或平行水平的学员。', en: 'Students who have reached CLB 6 or equivalent.' },
+            icon: Users
+          },
+          {
+            title: { zh: '出班预期', en: 'Expected Outcome' },
+            desc: { zh: '达到 CLB 7 水平。', en: 'Reach CLB 7 level.' },
+            icon: Target
+          },
+          {
+            title: { zh: '课程特色', en: 'Course Features' },
+            desc: { zh: '着眼移民类雅思考点，下手狠，出分快。', en: 'Focus on immigration test points, fast scoring.' },
+            icon: CheckCircle2
+          }
+        ],
+        subTabs: [
+          {
+            id: 'reading',
+            label: { zh: '阅读课表', en: 'Reading Schedule' },
+            schedule: [
+              { lecture: '01', topic: { zh: '录播：课程信息+长难句解析+概述+核心技巧+作业评讲1', en: 'Rec: Info + Long Sentences + Overview + Techniques + HW1' } },
+              { lecture: '02', topic: { zh: '直播：填词题技巧+判断题技巧 + 录播：作业评讲2&3', en: 'Live: Fill-in + T/F + Rec: HW2&3' } },
+              { lecture: '03', topic: { zh: '直播：信息配对技巧+人物观点(行为)配对技巧 + 录播：作业评讲4', en: 'Live: Info Matching + Person/Viewpoint Matching + Rec: HW4' } },
+              { lecture: '04', topic: { zh: '直播：句子匹配技巧+有选项summary技巧 + 录播：作业评讲5', en: 'Live: Sentence Matching + Summary + Rec: HW5' } },
+              { lecture: '05', topic: { zh: '直播：单选题技巧 + 录播：作业评讲6', en: 'Live: Multiple Choice + Rec: HW6' } },
+              { lecture: '06', topic: { zh: '直播：段落细节配对技巧+LOH技巧 + 录播：作业评讲7', en: 'Live: Paragraph Matching + LOH + Rec: HW7' } },
+              { lecture: '07', topic: { zh: '直播：组合解题技巧 + 录播：作业评讲8', en: 'Live: Combined Techniques + Rec: HW8' } },
+              { lecture: '08', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
+            ]
+          },
+          {
+            id: 'listening',
+            label: { zh: '听力课表', en: 'Listening Schedule' },
+            schedule: [
+              { lecture: '1', topic: { zh: '录播：课程信息+雅思听力概述+听力练习心法+核心技巧', en: 'Rec: Info + Overview + Mindset + Core Techniques' } },
+              { lecture: '2', topic: { zh: '直播：P1填词题技巧 + 录播：作业评讲1', en: 'Live: P1 Fill-in + Rec: HW Review 1' } },
+              { lecture: '3', topic: { zh: '直播：P2+P3+P4填词题技巧 + 录播：作业评讲2', en: 'Live: P2-P4 Fill-in + Rec: HW Review 2' } },
+              { lecture: '4', topic: { zh: '直播：地图题技巧 + 录播：作业评讲3', en: 'Live: Map Techniques + Rec: HW Review 3' } },
+              { lecture: '5', topic: { zh: '直播：配对题技巧 + 录播：作业评讲4', en: 'Live: Matching Techniques + Rec: HW Review 4' } },
+              { lecture: '6', topic: { zh: '直播：单选题(短)技巧 + 录播：作业评讲5', en: 'Live: Short Choice + Rec: HW Review 5' } },
+              { lecture: '7', topic: { zh: '直播：单选题(长)技巧+多选题技巧 + 录播：作业评讲6', en: 'Live: Long/Multi Choice + Rec: HW Review 6' } },
+              { lecture: '8', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
+            ]
+          },
+          {
+            id: 'writing',
+            label: { zh: '写作课表', en: 'Writing Schedule' },
+            schedule: [
+              { lecture: '1', topic: { zh: '录播：写作评分标准精讲', en: 'Rec: Writing Grading Criteria' } },
+              { lecture: '2', topic: { zh: '直播：小作文书信如何写1', en: 'Live: Task 1 Letters 1' } },
+              { lecture: '3', topic: { zh: '直播：小作文书信如何写2', en: 'Live: Task 1 Letters 2' } },
+              { lecture: '4', topic: { zh: '直播：大作文辩论类题型讲解(健康)', en: 'Live: Task 2 Argument (Health)' } },
+              { lecture: '5', topic: { zh: '直播：大作文辩论类题型讲解(媒体广告)', en: 'Live: Task 2 Argument (Media/Ads)' } },
+              { lecture: '6', topic: { zh: '直播：大作文讨论类题型讲解(科技全球化)', en: 'Live: Task 2 Discussion (Tech/Global)' } },
+              { lecture: '7', topic: { zh: '直播：大作文辩论类题型讲解(政府教育)', en: 'Live: Task 2 Argument (Gov/Edu)' } },
+              { lecture: '8', topic: { zh: '直播：模考', en: 'Live: Mock Exam' } },
+            ]
+          },
+          {
+            id: 'speaking',
+            label: { zh: '口语课表', en: 'Speaking Schedule' },
+            schedule: [
+              { lecture: '1', topic: { zh: '录播：考试流程+评分标准+P1突破法+P1必考题', en: 'Rec: Process + Criteria + P1 Breakthrough' } },
+              { lecture: '2', topic: { zh: '直播：P1话题策略分类讲解(1)', en: 'Live: P1 Strategy 1' } },
+              { lecture: '3', topic: { zh: '直播：P1话题策略分类讲解(2)', en: 'Live: P1 Strategy 2' } },
+              { lecture: '4', topic: { zh: '直播：攻克P2物品类话题', en: 'Live: P2 Objects' } },
+              { lecture: '5', topic: { zh: '直播：攻克P2事件类话题', en: 'Live: P2 Events' } },
+              { lecture: '6', topic: { zh: '直播：攻克P2人物及地点类话题', en: 'Live: P2 People/Places' } },
+              { lecture: '7', topic: { zh: '录播：总结P3思维展开技巧 + 直播：P3分类例题精讲', en: 'Rec: P3 Thinking + Live: P3 Examples' } },
+              { lecture: '8', topic: { zh: '直播：模考+点评', en: 'Live: Mock Exam + Review' } },
+            ]
+          },
+          {
+            id: 'flow',
+            label: { zh: '课程流程', en: 'Course Flow' },
+            content: [
+              {
+                title: { zh: '1. 开课前', en: '1. Pre-Class' },
+                target: { zh: '准备阶段', en: 'Preparation' },
+                goal: { zh: 'Ready', en: 'Ready' },
+                features: [
+                  { zh: '进课堂专属群', en: 'Join exclusive class group' },
+                  { zh: '熟悉直播课规则', en: 'Familiarize with live rules' },
+                  { zh: '获取课程学习资料', en: 'Get course materials' }
+                ]
+              },
+              {
+                title: { zh: '2. 授课中', en: '2. In-Class' },
+                target: { zh: '学习阶段', en: 'Learning' },
+                goal: { zh: 'Study', en: 'Study' },
+                features: [
+                  { zh: '提前10分钟开通课堂入口', en: 'Class opens 10 mins early' },
+                  { zh: '互动直播授课', en: 'Interactive live teaching' },
+                  { zh: '当堂答疑', en: 'Live Q&A' }
+                ]
+              },
+              {
+                title: { zh: '3. 结课后', en: '3. Post-Class' },
+                target: { zh: '复习阶段', en: 'Review' },
+                goal: { zh: 'Review', en: 'Review' },
+                features: [
+                  { zh: '无限次录播回放', en: 'Unlimited playback' },
+                  { zh: '学习任务打卡', en: 'Study task check-ins' },
+                  { zh: '课后作业批改反馈', en: 'Homework correction & feedback' },
+                  { zh: '群内随时提问答疑', en: 'Anytime Q&A in group' },
+                  { zh: '免费在线口语模考', en: 'Free online speaking mock' }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'g-7',
+        name: { zh: 'G类雅思7分无忧班', en: 'G-Type 7 Band Worry-Free' },
+        icon: GraduationCap,
+        description: {
+          zh: '高阶英语实力训练，考试技巧重点攻克，考题预测点睛。',
+          en: 'Advanced strength training, focus on techniques, accurate predictions.'
+        },
+        features: [
+          {
+            title: { zh: '适合学员', en: 'Target Audience' },
+            desc: { zh: '已达到CLB 7或平行水平的学员。', en: 'Students who have reached CLB 7 or equivalent.' },
+            icon: Users
+          },
+          {
+            title: { zh: '出班预期', en: 'Expected Outcome' },
+            desc: { zh: '达到 CLB 9 水平。', en: 'Reach CLB 9 level.' },
+            icon: Target
+          },
+          {
+            title: { zh: '课程特色', en: 'Course Features' },
+            desc: { zh: '高阶英语实力训练，考试技巧重点攻克。', en: 'Advanced strength training, focus on techniques.' },
+            icon: CheckCircle2
+          }
+        ],
+        subTabs: [
+          {
+            id: 'reading',
+            label: { zh: '阅读课表', en: 'Reading Schedule' },
+            schedule: [
+              { lecture: '01', topic: { zh: '录播：课程信息+长难句解析+概述+核心技巧+作业评讲1', en: 'Rec: Info + Long Sentences + Overview + Techniques + HW1' } },
+              { lecture: '02', topic: { zh: '直播：填词题技巧+判断题技巧 + 录播：作业评讲2&3', en: 'Live: Fill-in + T/F + Rec: HW2&3' } },
+              { lecture: '03', topic: { zh: '直播：信息配对技巧+人物观点(行为)配对技巧 + 录播：作业评讲4', en: 'Live: Info Matching + Person/Viewpoint Matching + Rec: HW4' } },
+              { lecture: '04', topic: { zh: '直播：句子匹配技巧+有选项summary技巧 + 录播：作业评讲5', en: 'Live: Sentence Matching + Summary + Rec: HW5' } },
+              { lecture: '05', topic: { zh: '直播：单选题技巧 + 录播：作业评讲6', en: 'Live: Multiple Choice + Rec: HW6' } },
+              { lecture: '06', topic: { zh: '直播：段落细节配对技巧+LOH技巧 + 录播：作业评讲7', en: 'Live: Paragraph Matching + LOH + Rec: HW7' } },
+              { lecture: '07', topic: { zh: '直播：组合解题技巧 + 录播：作业评讲8', en: 'Live: Combined Techniques + Rec: HW8' } },
+              { lecture: '08', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
+            ]
+          },
+          {
+            id: 'listening',
+            label: { zh: '听力课表', en: 'Listening Schedule' },
+            schedule: [
+              { lecture: '1', topic: { zh: '录播：课程信息+雅思听力概述+听力练习心法+核心技巧', en: 'Rec: Info + Overview + Mindset + Core Techniques' } },
+              { lecture: '2', topic: { zh: '直播：P1填词题技巧 + 录播：作业评讲1', en: 'Live: P1 Fill-in + Rec: HW Review 1' } },
+              { lecture: '3', topic: { zh: '直播：P2+P3+P4填词题技巧 + 录播：作业评讲2', en: 'Live: P2-P4 Fill-in + Rec: HW Review 2' } },
+              { lecture: '4', topic: { zh: '直播：地图题技巧 + 录播：作业评讲3', en: 'Live: Map Techniques + Rec: HW Review 3' } },
+              { lecture: '5', topic: { zh: '直播：配对题技巧 + 录播：作业评讲4', en: 'Live: Matching Techniques + Rec: HW Review 4' } },
+              { lecture: '6', topic: { zh: '直播：单选题(短)技巧 + 录播：作业评讲5', en: 'Live: Short Choice + Rec: HW Review 5' } },
+              { lecture: '7', topic: { zh: '直播：单选题(长)技巧+多选题技巧 + 录播：作业评讲6', en: 'Live: Long/Multi Choice + Rec: HW Review 6' } },
+              { lecture: '8', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
+            ]
+          },
+          {
+            id: 'writing',
+            label: { zh: '写作课表', en: 'Writing Schedule' },
+            schedule: [
+              { lecture: '1', topic: { zh: '录播：写作评分标准精讲', en: 'Rec: Writing Grading Criteria' } },
+              { lecture: '2', topic: { zh: '直播：小作文书信如何写1', en: 'Live: Task 1 Letters 1' } },
+              { lecture: '3', topic: { zh: '直播：小作文书信如何写2', en: 'Live: Task 1 Letters 2' } },
+              { lecture: '4', topic: { zh: '直播：大作文辩论类题型讲解(健康)', en: 'Live: Task 2 Argument (Health)' } },
+              { lecture: '5', topic: { zh: '直播：大作文辩论类题型讲解(媒体广告)', en: 'Live: Task 2 Argument (Media/Ads)' } },
+              { lecture: '6', topic: { zh: '直播：大作文讨论类题型讲解(科技全球化)', en: 'Live: Task 2 Discussion (Tech/Global)' } },
+              { lecture: '7', topic: { zh: '直播：大作文辩论类题型讲解(政府教育)', en: 'Live: Task 2 Argument (Gov/Edu)' } },
+              { lecture: '8', topic: { zh: '直播：模考', en: 'Live: Mock Exam' } },
+            ]
+          },
+          {
+            id: 'speaking',
+            label: { zh: '口语课表', en: 'Speaking Schedule' },
+            schedule: [
+              { lecture: '1', topic: { zh: '录播：考试流程+评分标准+P1突破法+P1必考题', en: 'Rec: Process + Criteria + P1 Breakthrough' } },
+              { lecture: '2', topic: { zh: '直播：P1话题策略分类讲解(1)', en: 'Live: P1 Strategy 1' } },
+              { lecture: '3', topic: { zh: '直播：P1话题策略分类讲解(2)', en: 'Live: P1 Strategy 2' } },
+              { lecture: '4', topic: { zh: '直播：攻克P2物品类话题', en: 'Live: P2 Objects' } },
+              { lecture: '5', topic: { zh: '直播：攻克P2事件类话题', en: 'Live: P2 Events' } },
+              { lecture: '6', topic: { zh: '直播：攻克P2人物及地点类话题', en: 'Live: P2 People/Places' } },
+              { lecture: '7', topic: { zh: '录播：总结P3思维展开技巧 + 直播：P3分类例题精讲', en: 'Rec: P3 Thinking + Live: P3 Examples' } },
+              { lecture: '8', topic: { zh: '直播：模考+点评', en: 'Live: Mock Exam + Review' } },
+            ]
+          },
+          {
+            id: 'flow',
+            label: { zh: '课程流程', en: 'Course Flow' },
+            content: [
+              {
+                title: { zh: '1. 开课前', en: '1. Pre-Class' },
+                target: { zh: '准备阶段', en: 'Preparation' },
+                goal: { zh: 'Ready', en: 'Ready' },
+                features: [
+                  { zh: '进课堂专属群', en: 'Join exclusive class group' },
+                  { zh: '熟悉直播课规则', en: 'Familiarize with live rules' },
+                  { zh: '获取课程学习资料', en: 'Get course materials' }
+                ]
+              },
+              {
+                title: { zh: '2. 授课中', en: '2. In-Class' },
+                target: { zh: '学习阶段', en: 'Learning' },
+                goal: { zh: 'Study', en: 'Study' },
+                features: [
+                  { zh: '提前10分钟开通课堂入口', en: 'Class opens 10 mins early' },
+                  { zh: '互动直播授课', en: 'Interactive live teaching' },
+                  { zh: '当堂答疑', en: 'Live Q&A' }
+                ]
+              },
+              {
+                title: { zh: '3. 结课后', en: '3. Post-Class' },
+                target: { zh: '复习阶段', en: 'Review' },
+                goal: { zh: 'Review', en: 'Review' },
+                features: [
+                  { zh: '无限次录播回放', en: 'Unlimited playback' },
+                  { zh: '学习任务打卡', en: 'Study task check-ins' },
+                  { zh: '课后作业批改反馈', en: 'Homework correction & feedback' },
+                  { zh: '群内随时提问答疑', en: 'Anytime Q&A in group' },
+                  { zh: '免费在线口语模考', en: 'Free online speaking mock' }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'g-zero',
+        name: { zh: 'G类雅思零基础班(录播)', en: 'G-Type Zero Foundation (Recorded)' },
+        icon: MonitorPlay,
+        description: {
+          zh: '专为英语基础薄弱学员设计，从零开始，夯实基础。不单独售卖，仅作为5分基础班的补充课程。',
+          en: 'Designed for students with weak English foundation. Not sold separately, only as a supplementary course for the 5-band foundation class.'
+        },
+        features: [
+          {
+            title: { zh: '适合学员', en: 'Target Audience' },
+            desc: { zh: '只认识26个英文字母，英语基础接近零的学员。', en: 'Students who only know the 26 English letters, with near-zero foundation.' },
+            icon: Users
+          },
+          {
+            title: { zh: '出班预期', en: 'Expected Outcome' },
+            desc: { zh: '衔接CLB 5课程，具备基本的英语认知能力。', en: 'Connect to CLB 5 courses, possessing basic English cognitive abilities.' },
+            icon: Target
+          },
+          {
+            title: { zh: '课程特色', en: 'Course Features' },
+            desc: { zh: '从零开始，夯实基础，循序渐进。', en: 'Start from scratch, solidify foundation, step-by-step progress.' },
+            icon: CheckCircle2
+          }
+        ]
       }
     ]
   }
