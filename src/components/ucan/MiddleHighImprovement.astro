@@ -93,6 +93,28 @@ const syllabusData = {
       ]
     }
   },
+  english: {
+    g6_8: {
+      title: { zh: '6-8年级 阅读与词汇', en: 'Grade 6-8 Reading & Vocabulary' },
+      topics: [
+        { title: { zh: '词汇积累与运用', en: 'Vocabulary Building & Usage' }, hours: 3, sub: [{ zh: '词根词缀记忆法', en: 'Root words, prefixes, and suffixes' }, { zh: '语境中的词义推测', en: 'Context clues for vocabulary' }] },
+        { title: { zh: '阅读理解策略', en: 'Reading Comprehension Strategies' }, hours: 3, sub: [{ zh: '主旨大意与细节捕捉', en: 'Main ideas and supporting details' }, { zh: '推断与结论', en: 'Making inferences and drawing conclusions' }] },
+        { title: { zh: '文学作品赏析', en: 'Literary Analysis' }, hours: 3, sub: [{ zh: '小说要素分析（人物、情节、环境）', en: 'Elements of fiction (character, plot, setting)' }, { zh: '修辞手法识别', en: 'Identifying figurative language' }] },
+        { title: { zh: '非虚构类文本阅读', en: 'Non-Fiction Reading' }, hours: 3, sub: [{ zh: '新闻与社论分析', en: 'Analyzing news and editorials' }, { zh: '观点与论据识别', en: 'Identifying arguments and evidence' }] },
+        { title: { zh: '基础写作技巧', en: 'Basic Writing Skills' }, hours: 3, sub: [{ zh: '句子结构多样化', en: 'Sentence variety and structure' }, { zh: '段落构建与过渡', en: 'Paragraph development and transitions' }] },
+      ]
+    },
+    g9_12: {
+      title: { zh: '9-12年级 语法与写作', en: 'Grade 9-12 Grammar & Writing' },
+      topics: [
+        { title: { zh: '高级语法精讲', en: 'Advanced Grammar' }, hours: 3, sub: [{ zh: '复杂句式分析', en: 'Complex sentence structures' }, { zh: '常见语法错误纠正', en: 'Common grammatical errors' }] },
+        { title: { zh: '学术写作基础', en: 'Academic Writing Fundamentals' }, hours: 3, sub: [{ zh: '论文陈述与大纲构建', en: 'Thesis statements and outlining' }, { zh: '引用与参考文献格式 (MLA/APA)', en: 'Citations and formatting (MLA/APA)' }] },
+        { title: { zh: '文学评论写作', en: 'Literary Essay Writing' }, hours: 4, sub: [{ zh: '文本细读与证据提取', en: 'Close reading and evidence selection' }, { zh: '分析性段落写作', en: 'Writing analytical paragraphs' }] },
+        { title: { zh: '说服性写作', en: 'Persuasive Writing' }, hours: 3, sub: [{ zh: '修辞策略运用 (Logos, Ethos, Pathos)', en: 'Rhetorical strategies (Logos, Ethos, Pathos)' }, { zh: '反驳与论证加强', en: 'Counter-arguments and strengthening claims' }] },
+        { title: { zh: '创意写作', en: 'Creative Writing' }, hours: 2, sub: [{ zh: '叙事技巧与描写', en: 'Narrative techniques and description' }, { zh: '个人陈述写作指导', en: 'Personal statement guidance' }] },
+      ]
+    }
+  },
   chemistry: {
     g11: {
       title: { zh: '11年级化学 (SCH3U)', en: 'Grade 11 Chemistry (SCH3U)' },
@@ -180,8 +202,8 @@ const subjects = [
     name: { zh: '英语', en: 'English' },
     icon: BookOpen,
     levels: [
-      { label: { zh: '6-8年级 阅读与词汇', en: 'Grade 6-8 Reading & Vocabulary' }, key: null },
-      { label: { zh: '9-12年级 语法与写作', en: 'Grade 9-12 Grammar & Writing' }, key: null },
+      { label: { zh: '6-8年级 阅读与词汇', en: 'Grade 6-8 Reading & Vocabulary' }, key: 'g6_8' },
+      { label: { zh: '9-12年级 语法与写作', en: 'Grade 9-12 Grammar & Writing' }, key: 'g9_12' },
     ]
   },
   {
@@ -243,7 +265,7 @@ const highlights = [
   <section class="bg-gray-900 text-white pt-32 pb-16">
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row gap-8 items-start">
-        <div class="flex-grow">
+        <div class="grow">
           <div class="flex gap-2 mb-4">
             <a href={getRelativeLocaleUrl(locale, center.slug)} class="text-blue-300 hover:text-white transition-colors">
               {center.name[locale]}
@@ -262,41 +284,6 @@ const highlights = [
             ))}
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Course Cards Section -->
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto space-y-6">
-        {subjects.map(subject => (
-          <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col md:flex-row items-stretch">
-            <!-- Subject Title -->
-            <div class="bg-primary-blue text-white p-6 md:w-48 flex-shrink-0 flex flex-col items-center justify-center gap-3">
-              <subject.icon class="w-10 h-10" />
-              <h3 class="text-2xl font-bold">{subject.name[locale]}</h3>
-            </div>
-            
-            <!-- Levels -->
-            <div class="p-6 flex-grow flex flex-wrap items-center gap-4">
-              {subject.levels.map(level => (
-                <button 
-                  class={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    level.key 
-                      ? 'bg-blue-50 text-primary-blue hover:bg-blue-100 cursor-pointer' 
-                      : 'bg-gray-50 text-gray-400 cursor-default'
-                  }`}
-                  data-subject={subject.id}
-                  data-level={level.key}
-                  disabled={!level.key}
-                >
-                  {level.label[locale]}
-                </button>
-              ))}
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   </section>
@@ -320,105 +307,190 @@ const highlights = [
     </div>
   </section>
 
-  <!-- Syllabus Modal -->
-  <dialog id="syllabus-modal" class="fixed inset-0 m-auto backdrop:bg-gray-900/50 rounded-xl shadow-2xl p-0 w-full max-w-3xl max-h-[90vh] overflow-hidden">
-    <div class="flex flex-col h-full max-h-[90vh]">
-      <!-- Header -->
-      <div class="bg-gray-50 px-6 py-4 border-b border-gray-100 flex justify-between items-center sticky top-0 z-10">
-        <h3 id="modal-title" class="text-xl font-bold text-gray-900"></h3>
-        <button id="close-modal" class="text-gray-400 hover:text-gray-600 p-2 rounded-full hover:bg-gray-200 transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
+  <!-- Syllabus Section -->
+  <section class="py-16 bg-gray-50 min-h-[600px]">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12 text-gray-900">
+        {locale === 'zh' ? '课程大纲' : 'Course Syllabus'}
+      </h2>
       
-      <!-- Content -->
-      <div id="modal-content" class="p-6 overflow-y-auto">
-        <!-- Dynamic Content -->
+      <!-- Top Tabs (Subjects) -->
+      <div class="flex flex-wrap gap-2 mb-8 border-b border-gray-200 pb-1 justify-start">
+        {subjects.map((subject, index) => (
+          <button
+            class={`subject-tab-btn px-6 py-3 rounded-t-lg font-bold text-sm md:text-base transition-all duration-200 flex items-center gap-2 ${
+              index === 0 
+                ? 'bg-white text-primary-blue border-t border-x border-gray-200 shadow-sm -mb-px active' 
+                : 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700'
+            }`}
+            data-subject={subject.id}
+          >
+            <subject.icon class="w-4 h-4" />
+            {subject.name[locale]}
+          </button>
+        ))}
       </div>
+
+      <!-- Subject Content Panels -->
+      {subjects.map((subject, index) => (
+        <div id={`subject-content-${subject.id}`} class={`subject-content ${index === 0 ? '' : 'hidden'}`}>
+          <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- Left Sidebar: Vertical Tabs -->
+            <div class="w-full lg:w-1/4 shrink-0">
+              <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden sticky top-24">
+                <div class="p-4 bg-gray-50 border-b border-gray-100">
+                  <h3 class="font-bold text-gray-900">{locale === 'zh' ? '年级/课程' : 'Grade/Course'}</h3>
+                </div>
+                <div class="flex flex-col">
+                  {subject.levels.map((level, lvlIndex) => (
+                    <button
+                      class={`level-tab-btn text-left px-6 py-4 border-b border-gray-100 last:border-0 hover:bg-blue-50 transition-colors duration-200 focus:outline-none flex items-center gap-3 group ${
+                        lvlIndex === 0 ? 'active bg-blue-50' : ''
+                      }`}
+                      data-target={`${subject.id}-${level.key}`}
+                    >
+                      <div class={`icon-box w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${lvlIndex === 0 ? 'bg-primary-blue text-white' : 'bg-gray-100 text-gray-500 group-hover:bg-white group-hover:text-primary-blue'}`}>
+                        <subject.icon class="w-4 h-4" />
+                      </div>
+                      <span class="font-medium text-gray-700 group-[.active]:text-primary-blue transition-colors">
+                        {level.label[locale]}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Content: Syllabus -->
+            <div class="w-full lg:w-3/4">
+              {subject.levels.map((level, lvlIndex) => {
+                const data = (syllabusData as any)[subject.id]?.[level.key];
+                if (!data) return null;
+
+                return (
+                <div id={`level-content-${subject.id}-${level.key}`} class={`level-content ${lvlIndex === 0 ? '' : 'hidden'} animate-fadeIn`}>
+                  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="p-8 border-b border-gray-100 bg-linear-to-r from-gray-50 to-white">
+                      <div class="flex items-center gap-4 mb-2">
+                        <div class="w-12 h-12 bg-primary-blue text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
+                          <subject.icon class="w-6 h-6" />
+                        </div>
+                        <div>
+                          <h2 class="text-2xl font-bold text-gray-900">{data.title[locale]}</h2>
+                          <p class="text-gray-500 text-sm">{subject.name[locale]}</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="p-8">
+                      <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                          <thead>
+                            <tr>
+                              <th class="py-4 px-4 bg-gray-50 font-bold text-gray-900 border-b border-gray-200 w-2/3 rounded-tl-lg">
+                                {locale === 'zh' ? '课题' : 'Topic'}
+                              </th>
+                              <th class="py-4 px-4 bg-gray-50 font-bold text-gray-900 border-b border-gray-200 w-1/3 rounded-tr-lg text-right">
+                                {locale === 'zh' ? '课时' : 'Hours'}
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody class="divide-y divide-gray-100">
+                            {data.topics.map((topic: any, i: number) => (
+                              <tr class="hover:bg-gray-50 transition-colors group">
+                                <td class="py-4 px-4 align-top">
+                                  <div class="flex items-start gap-3">
+                                    <span class="shrink-0 w-6 h-6 bg-blue-50 text-primary-blue rounded-full flex items-center justify-center text-xs font-bold group-hover:bg-primary-blue group-hover:text-white transition-colors mt-0.5">
+                                      {i + 1}
+                                    </span>
+                                    <div>
+                                        <span class="font-bold text-gray-800 block">{topic.title[locale]}</span>
+                                        {topic.sub && (
+                                            <ul class="mt-2 list-disc pl-4 text-sm text-gray-600 space-y-1">
+                                                {topic.sub.map((s: any) => <li>{s[locale]}</li>)}
+                                            </ul>
+                                        )}
+                                    </div>
+                                  </div>
+                                </td>
+                                <td class="py-4 px-4 text-right text-gray-600 font-mono align-top">
+                                  {topic.hours > 0 ? `${topic.hours}h` : '-'}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )})}
+            </div>
+
+          </div>
+        </div>
+      ))}
+
     </div>
-  </dialog>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Subject Tabs Logic
+      const subjectTabs = document.querySelectorAll('.subject-tab-btn');
+      const subjectContents = document.querySelectorAll('.subject-content');
+
+      subjectTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetId = tab.getAttribute('data-subject');
+          if (!targetId) return;
+          
+          // Update Tabs
+          subjectTabs.forEach(t => {
+            t.classList.remove('bg-white', 'text-primary-blue', 'border-t', 'border-x', 'shadow-sm', '-mb-px', 'active');
+            t.classList.add('bg-gray-100', 'text-gray-500');
+          });
+          tab.classList.remove('bg-gray-100', 'text-gray-500');
+          tab.classList.add('bg-white', 'text-primary-blue', 'border-t', 'border-x', 'shadow-sm', '-mb-px', 'active');
+
+          // Update Content
+          subjectContents.forEach(c => c.classList.add('hidden'));
+          document.getElementById(`subject-content-${targetId}`)?.classList.remove('hidden');
+        });
+      });
+
+      // Level Tabs Logic
+      const levelTabs = document.querySelectorAll('.level-tab-btn');
+      
+      levelTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetId = tab.getAttribute('data-target'); // e.g. math-g9
+          if (!targetId) return;
+
+          const subjectId = targetId.split('-')[0]; // e.g. math
+          const container = document.getElementById(`subject-content-${subjectId}`);
+          if (!container) return;
+          
+          // Update Level Tabs in this container
+          container.querySelectorAll('.level-tab-btn').forEach(t => {
+            t.classList.remove('active', 'bg-blue-50');
+            const iconBox = t.querySelector('.icon-box');
+            iconBox?.classList.remove('bg-primary-blue', 'text-white');
+            iconBox?.classList.add('bg-gray-100', 'text-gray-500');
+          });
+          
+          tab.classList.add('active', 'bg-blue-50');
+          const iconBox = tab.querySelector('.icon-box');
+          iconBox?.classList.remove('bg-gray-100', 'text-gray-500');
+          iconBox?.classList.add('bg-primary-blue', 'text-white');
+
+          // Update Level Content
+          container.querySelectorAll('.level-content').forEach(c => c.classList.add('hidden'));
+          document.getElementById(`level-content-${targetId}`)?.classList.remove('hidden');
+        });
+      });
+    });
+  </script>
 
 </BaseLayout>
-
-<script define:vars={{ syllabusData, locale }}>
-  const modal = document.getElementById('syllabus-modal');
-  const modalTitle = document.getElementById('modal-title');
-  const modalContent = document.getElementById('modal-content');
-  const closeBtn = document.getElementById('close-modal');
-  const buttons = document.querySelectorAll('button[data-level]');
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const subject = btn.dataset.subject;
-      const level = btn.dataset.level;
-      
-      if (!subject || !level || !syllabusData[subject] || !syllabusData[subject][level]) return;
-
-      const data = syllabusData[subject][level];
-      
-      // Set Title
-      modalTitle.textContent = data.title[locale];
-      
-      // Build Content
-      let html = '<div class="space-y-6">';
-      
-      if (data.topics) {
-        data.topics.forEach((topic, index) => {
-          html += `
-            <div class="border-b border-gray-100 pb-4 last:border-0">
-              <div class="flex justify-between items-start mb-2">
-                <h4 class="font-bold text-gray-900 text-lg">${index + 1}. ${topic.title[locale]}</h4>
-                ${topic.hours ? `<span class="text-xs font-medium bg-blue-50 text-primary-blue px-2 py-1 rounded">${topic.hours} ${locale === 'zh' ? '课时' : 'Hours'}</span>` : ''}
-              </div>
-              ${topic.sub ? `
-                <ul class="pl-5 space-y-1 list-disc text-gray-600">
-                  ${topic.sub.map(sub => `<li>${sub[locale]}</li>`).join('')}
-                </ul>
-              ` : ''}
-            </div>
-          `;
-        });
-      }
-      
-      html += '</div>';
-      modalContent.innerHTML = html;
-      
-      modal.showModal();
-    });
-  });
-
-  closeBtn.addEventListener('click', () => {
-    modal.close();
-  });
-
-  modal.addEventListener('click', (e) => {
-    const rect = modal.getBoundingClientRect();
-    const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
-      rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
-    if (!isInDialog) {
-      modal.close();
-    }
-  });
-</script>
-
-<style>
-  dialog::backdrop {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);
-  }
-  dialog[open] {
-    animation: zoomIn 0.2s ease-out;
-  }
-  @keyframes zoomIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-</style>
