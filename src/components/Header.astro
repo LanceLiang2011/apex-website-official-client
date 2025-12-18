@@ -35,11 +35,16 @@ const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
 
     <!-- Desktop Nav -->
     <nav class="hidden md:flex items-center gap-6">
-      {navItems.map(item => (
+      {navItems.map(item => {
+        const isStatic = item.href === '#';
+        const linkHref = isStatic ? '#' : getRelativeLocaleUrl(currentLocale, item.href);
+        
+        return (
         <div class="relative group">
           <a 
-            href={getRelativeLocaleUrl(currentLocale, item.href)} 
-            class="header-nav-link font-medium py-2 transition-colors flex items-center gap-1 hover:text-blue-200"
+            href={linkHref} 
+            class={`header-nav-link font-medium py-2 transition-colors flex items-center gap-1 ${isStatic ? 'cursor-default' : 'hover:text-blue-200'}`}
+            onclick={isStatic ? "return false;" : ""}
           >
             {item.label[currentLocale]}
             {item.children && (
@@ -63,7 +68,7 @@ const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
             </div>
           )}
         </div>
-      ))}
+      )})}
     </nav>
 
     <!-- Language Switcher & Mobile Menu Button -->
@@ -103,11 +108,15 @@ const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
         </button>
       </div>
       <nav class="flex flex-col gap-4">
-        {navItems.map(item => (
+        {navItems.map(item => {
+          const isStatic = item.href === '#';
+          const linkHref = isStatic ? '#' : getRelativeLocaleUrl(currentLocale, item.href);
+          return (
           <div>
             <a 
-              href={getRelativeLocaleUrl(currentLocale, item.href)} 
-              class="block text-lg font-medium text-primary-blue hover:text-blue-700"
+              href={linkHref} 
+              class={`block text-lg font-medium text-primary-blue hover:text-blue-700 ${isStatic ? 'cursor-default' : ''}`}
+              onclick={isStatic ? "return false;" : ""}
             >
               {item.label[currentLocale]}
             </a>
@@ -124,7 +133,7 @@ const enUrl = getRelativeLocaleUrl('en', pathWithoutLocale);
               </div>
             )}
           </div>
-        ))}
+        )})}
       </nav>
     </div>
   </div>
