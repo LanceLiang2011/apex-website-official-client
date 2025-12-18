@@ -32,6 +32,7 @@ interface Course {
   id: string;
   name: { zh: string; en: string };
   icon: any;
+  badge?: { zh: string; en: string };
   description?: { zh: string; en: string };
   features?: {
     title: { zh: string; en: string };
@@ -62,6 +63,184 @@ interface Category {
   courses: Course[];
 }
 
+const ieltsASchedule = [
+  {
+    id: 'reading',
+    label: { zh: '阅读课表', en: 'Reading Schedule' },
+    schedule: [
+      { lecture: 'Lecture 1', topic: { zh: '雅思阅读总论', en: 'IELTS Reading Overview' } },
+      { lecture: 'Lecture 2', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
+      { lecture: 'Lecture 3', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
+      { lecture: 'Lecture 4', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
+      { lecture: 'Lecture 5', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
+      { lecture: 'Lecture 6', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
+      { lecture: 'Lecture 7', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
+      { lecture: 'Lecture 8', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
+      { lecture: 'Lecture 9', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
+      { lecture: 'Lecture 10', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
+    ]
+  },
+  {
+    id: 'listening',
+    label: { zh: '听力课表', en: 'Listening Schedule' },
+    schedule: [
+      { lecture: 'Lecture 1', topic: { zh: '雅思听力总论', en: 'IELTS Listening Overview' } },
+      { lecture: 'Lecture 2', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
+      { lecture: 'Lecture 3', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
+      { lecture: 'Lecture 4', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
+      { lecture: 'Lecture 5', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
+      { lecture: 'Lecture 6', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
+      { lecture: 'Lecture 7', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
+      { lecture: 'Lecture 8', topic: { zh: 'P4 题型技巧讲解', en: 'P4 Question Type Techniques' } },
+      { lecture: 'Lecture 9', topic: { zh: 'P4 题型技巧讲解', en: 'P4 Question Type Techniques' } },
+      { lecture: 'Lecture 10', topic: { zh: 'P4 题型技巧讲解', en: 'P4 Question Type Techniques' } },
+    ]
+  },
+  {
+    id: 'writing',
+    label: { zh: '写作课表', en: 'Writing Schedule' },
+    schedule: [
+      { lecture: 'Lecture 1', topic: { zh: '雅思写作总论', en: 'IELTS Writing Overview' } },
+      { lecture: 'Lecture 2', topic: { zh: '小作文题型技巧讲解', en: 'Task 1 Techniques' } },
+      { lecture: 'Lecture 3', topic: { zh: '小作文题型技巧讲解', en: 'Task 1 Techniques' } },
+      { lecture: 'Lecture 4', topic: { zh: '小作文题型技巧讲解', en: 'Task 1 Techniques' } },
+      { lecture: 'Lecture 5', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
+      { lecture: 'Lecture 6', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
+      { lecture: 'Lecture 7', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
+      { lecture: 'Lecture 8', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
+      { lecture: 'Lecture 9', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
+      { lecture: 'Lecture 10', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
+    ]
+  },
+  {
+    id: 'speaking',
+    label: { zh: '口语课表', en: 'Speaking Schedule' },
+    schedule: [
+      { lecture: 'Lecture 1', topic: { zh: '雅思口语总论', en: 'IELTS Speaking Overview' } },
+      { lecture: 'Lecture 2', topic: { zh: 'P1 题型技巧讲解', en: 'Part 1 Techniques' } },
+      { lecture: 'Lecture 3', topic: { zh: 'P1 题型技巧讲解', en: 'Part 1 Techniques' } },
+      { lecture: 'Lecture 4', topic: { zh: 'P2 题型技巧讲解', en: 'Part 2 Techniques' } },
+      { lecture: 'Lecture 5', topic: { zh: 'P2 题型技巧讲解', en: 'Part 2 Techniques' } },
+      { lecture: 'Lecture 6', topic: { zh: 'P2 题型技巧讲解', en: 'Part 2 Techniques' } },
+      { lecture: 'Lecture 7', topic: { zh: 'P2 题型技巧讲解', en: 'Part 2 Techniques' } },
+      { lecture: 'Lecture 8', topic: { zh: 'P3 题型技巧讲解', en: 'Part 3 Techniques' } },
+      { lecture: 'Lecture 9', topic: { zh: 'P3 题型技巧讲解', en: 'Part 3 Techniques' } },
+      { lecture: 'Lecture 10', topic: { zh: 'P3 题型技巧讲解', en: 'Part 3 Techniques' } },
+    ]
+  }
+];
+
+const ieltsGSchedule = [
+  {
+    id: 'reading',
+    label: { zh: '阅读课表', en: 'Reading Schedule' },
+    schedule: [
+      { lecture: '01', topic: { zh: '录播：课程信息+长难句解析+概述+核心技巧+作业评讲1', en: 'Rec: Info + Long Sentences + Overview + Techniques + HW1' } },
+      { lecture: '02', topic: { zh: '直播：填词题技巧+判断题技巧 + 录播：作业评讲2&3', en: 'Live: Fill-in + T/F + Rec: HW2&3' } },
+      { lecture: '03', topic: { zh: '直播：信息配对技巧+人物观点(行为)配对技巧 + 录播：作业评讲4', en: 'Live: Info Matching + Person/Viewpoint Matching + Rec: HW4' } },
+      { lecture: '04', topic: { zh: '直播：句子匹配技巧+有选项summary技巧 + 录播：作业评讲5', en: 'Live: Sentence Matching + Summary + Rec: HW5' } },
+      { lecture: '05', topic: { zh: '直播：单选题技巧 + 录播：作业评讲6', en: 'Live: Multiple Choice + Rec: HW6' } },
+      { lecture: '06', topic: { zh: '直播：段落细节配对技巧+LOH技巧 + 录播：作业评讲7', en: 'Live: Paragraph Matching + LOH + Rec: HW7' } },
+      { lecture: '07', topic: { zh: '直播：组合解题技巧 + 录播：作业评讲8', en: 'Live: Combined Techniques + Rec: HW8' } },
+      { lecture: '08', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
+    ]
+  },
+  {
+    id: 'listening',
+    label: { zh: '听力课表', en: 'Listening Schedule' },
+    schedule: [
+      { lecture: '1', topic: { zh: '录播：课程信息+雅思听力概述+听力练习心法+核心技巧', en: 'Rec: Info + Overview + Mindset + Core Techniques' } },
+      { lecture: '2', topic: { zh: '直播：P1填词题技巧 + 录播：作业评讲1', en: 'Live: P1 Fill-in + Rec: HW Review 1' } },
+      { lecture: '3', topic: { zh: '直播：P2+P3+P4填词题技巧 + 录播：作业评讲2', en: 'Live: P2-P4 Fill-in + Rec: HW Review 2' } },
+      { lecture: '4', topic: { zh: '直播：地图题技巧 + 录播：作业评讲3', en: 'Live: Map Techniques + Rec: HW Review 3' } },
+      { lecture: '5', topic: { zh: '直播：配对题技巧 + 录播：作业评讲4', en: 'Live: Matching Techniques + Rec: HW Review 4' } },
+      { lecture: '6', topic: { zh: '直播：单选题(短)技巧 + 录播：作业评讲5', en: 'Live: Short Choice + Rec: HW Review 5' } },
+      { lecture: '7', topic: { zh: '直播：单选题(长)技巧+多选题技巧 + 录播：作业评讲6', en: 'Live: Long/Multi Choice + Rec: HW Review 6' } },
+      { lecture: '8', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
+    ]
+  },
+  {
+    id: 'writing',
+    label: { zh: '写作课表', en: 'Writing Schedule' },
+    schedule: [
+      { lecture: '1', topic: { zh: '录播：写作评分标准精讲', en: 'Rec: Writing Grading Criteria' } },
+      { lecture: '2', topic: { zh: '直播：小作文书信如何写1', en: 'Live: Task 1 Letters 1' } },
+      { lecture: '3', topic: { zh: '直播：小作文书信如何写2', en: 'Live: Task 1 Letters 2' } },
+      { lecture: '4', topic: { zh: '直播：大作文辩论类题型讲解(健康)', en: 'Live: Task 2 Argument (Health)' } },
+      { lecture: '5', topic: { zh: '直播：大作文辩论类题型讲解(媒体广告)', en: 'Live: Task 2 Argument (Media/Ads)' } },
+      { lecture: '6', topic: { zh: '直播：大作文讨论类题型讲解(科技全球化)', en: 'Live: Task 2 Discussion (Tech/Global)' } },
+      { lecture: '7', topic: { zh: '直播：大作文辩论类题型讲解(政府教育)', en: 'Live: Task 2 Argument (Gov/Edu)' } },
+      { lecture: '8', topic: { zh: '直播：模考', en: 'Live: Mock Exam' } },
+    ]
+  },
+  {
+    id: 'speaking',
+    label: { zh: '口语课表', en: 'Speaking Schedule' },
+    schedule: [
+      { lecture: '1', topic: { zh: '录播：考试流程+评分标准+P1突破法+P1必考题', en: 'Rec: Process + Criteria + P1 Breakthrough' } },
+      { lecture: '2', topic: { zh: '直播：P1话题策略分类讲解(1)', en: 'Live: P1 Strategy 1' } },
+      { lecture: '3', topic: { zh: '直播：P1话题策略分类讲解(2)', en: 'Live: P1 Strategy 2' } },
+      { lecture: '4', topic: { zh: '直播：攻克P2物品类话题', en: 'Live: P2 Objects' } },
+      { lecture: '5', topic: { zh: '直播：攻克P2事件类话题', en: 'Live: P2 Events' } },
+      { lecture: '6', topic: { zh: '直播：攻克P2人物及地点类话题', en: 'Live: P2 People/Places' } },
+      { lecture: '7', topic: { zh: '录播：总结P3思维展开技巧 + 直播：P3分类例题精讲', en: 'Rec: P3 Thinking + Live: P3 Examples' } },
+      { lecture: '8', topic: { zh: '直播：模考+点评', en: 'Live: Mock Exam + Review' } },
+    ]
+  }
+];
+
+const pteSchedule = [
+  {
+    id: 'listening',
+    label: { zh: '听力课表', en: 'Listening Schedule' },
+    schedule: [
+      { lecture: '1', topic: { zh: '录播：思培听力概述+听力笔记法', en: 'Rec: CELPIP Listening Overview + Note-taking' } },
+      { lecture: '2', topic: { zh: '直播/线下：攻克对话题1 x 什么是听重点？ / 录播：作业评讲1', en: 'Live: Dialogue 1 (Key Points) / Rec: HW Review 1' } },
+      { lecture: '3', topic: { zh: '直播/线下：攻克对话题2 x 什么是听细节？ / 录播：作业评讲2', en: 'Live: Dialogue 2 (Details) / Rec: HW Review 2' } },
+      { lecture: '4', topic: { zh: '直播/线下：攻克独白题：新闻 / 录播：作业评讲3', en: 'Live: Monologue (News) / Rec: HW Review 3' } },
+      { lecture: '5', topic: { zh: '直播/线下：攻克独白题：社会类话题 / 录播：作业评讲4', en: 'Live: Monologue (Social) / Rec: HW Review 4' } },
+      { lecture: '6', topic: { zh: '直播/线下：攻克视频题 / 录播：作业评讲5', en: 'Live: Video Questions / Rec: HW Review 5' } },
+    ]
+  },
+  {
+    id: 'reading',
+    label: { zh: '阅读课表', en: 'Reading Schedule' },
+    schedule: [
+      { lecture: '1', topic: { zh: '录播：思培阅读概述', en: 'Rec: CELPIP Reading Overview' } },
+      { lecture: '2', topic: { zh: '直播/线下：细节理解题精讲 / 录播：作业评讲1', en: 'Live: Detail Comprehension / Rec: HW Review 1' } },
+      { lecture: '3', topic: { zh: '直播/线下：细节填空题精讲 / 录播：作业评讲2', en: 'Live: Detail Fill-in / Rec: HW Review 2' } },
+      { lecture: '4', topic: { zh: '直播/线下：细节回应题精讲 / 录播：作业评讲3', en: 'Live: Detail Response / Rec: HW Review 3' } },
+      { lecture: '5', topic: { zh: '直播/线下：段落细节配对题精讲 / 录播：作业评讲4', en: 'Live: Paragraph Matching / Rec: HW Review 4' } },
+      { lecture: '6', topic: { zh: '直播/线下：串题合练+难题坑题提点 / 录播：作业评讲5', en: 'Live: Combined Practice + Tricky Questions / Rec: HW Review 5' } },
+    ]
+  },
+  {
+    id: 'writing',
+    label: { zh: '写作课表', en: 'Writing Schedule' },
+    schedule: [
+      { lecture: '1', topic: { zh: '录播：写作评分标准精讲', en: 'Rec: Writing Grading Criteria' } },
+      { lecture: '2', topic: { zh: '直播/线下：小作文书信如何写？ / 录播：小作文常见错误汇总', en: 'Live: Task 1 Email Writing / Rec: Common Errors' } },
+      { lecture: '3', topic: { zh: '直播/线下：大作文辩论类题型讲解（健康）', en: 'Live: Task 2 Argument (Health)' } },
+      { lecture: '4', topic: { zh: '直播/线下：大作文辩论类题型讲解（媒体广告）', en: 'Live: Task 2 Argument (Media/Ads)' } },
+      { lecture: '5', topic: { zh: '直播/线下：大作文讨论类题型讲解（科技全球化）', en: 'Live: Task 2 Discussion (Tech/Global)' } },
+      { lecture: '6', topic: { zh: '直播/线下：大作文讨论类题型讲解（政府教育）', en: 'Live: Task 2 Discussion (Gov/Edu)' } },
+    ]
+  },
+  {
+    id: 'speaking',
+    label: { zh: '口语课表', en: 'Speaking Schedule' },
+    schedule: [
+      { lecture: '1', topic: { zh: '录播：思培口语破冰+思培口语与雅思口语的异同点', en: 'Rec: Ice-breaking + CELPIP vs IELTS' } },
+      { lecture: '2', topic: { zh: '直播/线下：个人信息爱好类话题精讲', en: 'Live: Personal Info/Hobbies' } },
+      { lecture: '3', topic: { zh: '直播/线下：劝说建议类话题精讲', en: 'Live: Persuasion/Advice' } },
+      { lecture: '4', topic: { zh: '直播/线下：解释道歉类话题精讲', en: 'Live: Explanation/Apology' } },
+      { lecture: '5', topic: { zh: '直播/线下：个人观点类话题精讲', en: 'Live: Personal Opinion' } },
+      { lecture: '6', topic: { zh: '直播/线下：看图说话类话题精讲', en: 'Live: Picture Description' } },
+      { lecture: '7', topic: { zh: '直播/线下：考场意外应对之策', en: 'Live: Emergency Strategies' } },
+    ]
+  }
+];
+
 const categories: Category[] = [
   {
     id: 'academic',
@@ -69,218 +248,38 @@ const categories: Category[] = [
     icon: GraduationCap,
     courses: [
       {
-        id: 'vip-4-1',
-        name: { zh: '4对1 VIP全程规划课程(线上线下)', en: '4-on-1 VIP Full Planning Course' },
-        icon: Users,
-        features: [
-          {
-            title: { zh: '全程规划，直至出分', en: 'Full Process Planning' },
-            desc: { zh: '从入学到考试，全程跟踪指导，确保达成目标分数。', en: 'Tracking and guidance from enrollment to exam, ensuring target score achievement.' },
-            icon: Target
-          },
-          {
-            title: { zh: '顶尖师资团队', en: 'Top-tier Faculty' },
-            desc: { zh: '教师均为硕士及以上学历，均有海外留学经历，执教不少于5年。', en: 'All teachers hold Master\'s degrees or higher, have overseas study experience, and 5+ years of teaching experience.' },
-            icon: GraduationCap
-          },
-          {
-            title: { zh: '4对1 专属教学', en: '4-on-1 Exclusive Teaching' },
-            desc: { zh: '一科一老师（听、说、读、写），全程4对1教学授课，精准提升。', en: 'One teacher per subject (Listening, Speaking, Reading, Writing), 4-on-1 instruction for precise improvement.' },
-            icon: Users
-          },
-          {
-            title: { zh: '科学测评与分析', en: 'Scientific Assessment' },
-            desc: { zh: '4对1进行课前测评及学情分析，精准定位薄弱环节。', en: '4-on-1 pre-class assessment and learning analysis to pinpoint weaknesses.' },
-            icon: ClipboardList
-          },
-          {
-            title: { zh: '定制化教学方案', en: 'Customized Teaching Plan' },
-            desc: { zh: '4对1制定教学计划及授课大纲，量身打造学习路径。', en: '4-on-1 creation of teaching plans and syllabi, tailored learning paths.' },
-            icon: BookOpen
-          },
-          {
-            title: { zh: '全方位学习管理', en: 'Comprehensive Management' },
-            desc: { zh: '4对1规划预习、上课、复习及报考细节，无忧备考。', en: '4-on-1 planning for preview, class, review, and exam registration details.' },
-            icon: Calendar
-          },
-          {
-            title: { zh: '深度答疑与复盘', en: 'In-depth Q&A & Review' },
-            desc: { zh: '4对1答疑解惑、复盘作业，确保知识点完全吸收。', en: '4-on-1 Q&A and homework review to ensure full absorption of knowledge.' },
-            icon: MessageCircle
-          },
-          {
-            title: { zh: '贴心助教服务', en: 'Dedicated TA Service' },
-            desc: { zh: '1对1教学助理负责追讨作业、默写抽测及报名考试，全程督学。', en: '1-on-1 teaching assistant for homework tracking, dictation checks, and exam registration.' },
-            icon: CheckCircle2
-          }
-        ]
-      },
-      {
-        id: 'score-improvement',
-        name: { zh: '提分全项课程(线上)', en: 'Score Improvement Course (Online)' },
+        id: 'ielts-a-65',
+        name: { zh: '雅思A类 6.5分直通班', en: 'IELTS A 6.5 Direct Class' },
         icon: MonitorPlay,
+        badge: { zh: '保分班', en: 'Score Guaranteed' },
         description: {
-          zh: '包含直播课、录播课及全套电子教材，全方位助力雅思提分。',
-          en: 'Includes live classes, recorded sessions, and full digital materials for comprehensive score improvement.'
+          zh: '64课时，全方位助力雅思提分，直通6.5分。',
+          en: '64 hours, comprehensive score improvement to 6.5.'
         },
-        subTabs: [
-          {
-            id: 'class-types',
-            label: { zh: '班型介绍', en: 'Class Types' },
-            content: [
-              {
-                title: { zh: '6.5分冲刺班', en: '6.5 Sprint Class' },
-                target: { zh: '适合目前雅思5.5-6.0分左右的学生', en: 'Suitable for students currently at IELTS 5.5-6.0' },
-                goal: { zh: '目标分数：6.5分', en: 'Target Score: 6.5' },
-                features: [
-                  { zh: '针对性强化训练', en: 'Targeted intensive training' },
-                  { zh: '突破分数瓶颈', en: 'Break through score plateaus' }
-                ]
-              },
-              {
-                title: { zh: '7.5分高分班', en: '7.5 Advanced Class' },
-                target: { zh: '适合目前雅思6.5-7.0分左右的学生', en: 'Suitable for students currently at IELTS 6.5-7.0' },
-                goal: { zh: '目标分数：7.5分', en: 'Target Score: 7.5' },
-                features: [
-                  { zh: '高难度技巧讲解', en: 'Advanced technique explanation' },
-                  { zh: '冲击名校高分要求', en: 'Aiming for top university requirements' }
-                ]
-              }
-            ]
-          },
-          {
-            id: 'reading',
-            label: { zh: '阅读课表', en: 'Reading Schedule' },
-            schedule: [
-              { lecture: 'Lecture 1', topic: { zh: '雅思阅读总论', en: 'IELTS Reading Overview' } },
-              { lecture: 'Lecture 2', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
-              { lecture: 'Lecture 3', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
-              { lecture: 'Lecture 4', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
-              { lecture: 'Lecture 5', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
-              { lecture: 'Lecture 6', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
-              { lecture: 'Lecture 7', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
-              { lecture: 'Lecture 8', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
-              { lecture: 'Lecture 9', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
-              { lecture: 'Lecture 10', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
-            ]
-          },
-          {
-            id: 'listening',
-            label: { zh: '听力课表', en: 'Listening Schedule' },
-            schedule: [
-              { lecture: 'Lecture 1', topic: { zh: '雅思听力总论', en: 'IELTS Listening Overview' } },
-              { lecture: 'Lecture 2', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
-              { lecture: 'Lecture 3', topic: { zh: 'P1 题型技巧讲解', en: 'P1 Question Type Techniques' } },
-              { lecture: 'Lecture 4', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
-              { lecture: 'Lecture 5', topic: { zh: 'P2 题型技巧讲解', en: 'P2 Question Type Techniques' } },
-              { lecture: 'Lecture 6', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
-              { lecture: 'Lecture 7', topic: { zh: 'P3 题型技巧讲解', en: 'P3 Question Type Techniques' } },
-              { lecture: 'Lecture 8', topic: { zh: 'P4 题型技巧讲解', en: 'P4 Question Type Techniques' } },
-              { lecture: 'Lecture 9', topic: { zh: 'P4 题型技巧讲解', en: 'P4 Question Type Techniques' } },
-              { lecture: 'Lecture 10', topic: { zh: 'P4 题型技巧讲解', en: 'P4 Question Type Techniques' } },
-            ]
-          },
-          {
-            id: 'writing',
-            label: { zh: '写作课表', en: 'Writing Schedule' },
-            schedule: [
-              { lecture: 'Lecture 1', topic: { zh: '雅思写作总论', en: 'IELTS Writing Overview' } },
-              { lecture: 'Lecture 2', topic: { zh: '小作文题型技巧讲解', en: 'Task 1 Techniques' } },
-              { lecture: 'Lecture 3', topic: { zh: '小作文题型技巧讲解', en: 'Task 1 Techniques' } },
-              { lecture: 'Lecture 4', topic: { zh: '小作文题型技巧讲解', en: 'Task 1 Techniques' } },
-              { lecture: 'Lecture 5', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
-              { lecture: 'Lecture 6', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
-              { lecture: 'Lecture 7', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
-              { lecture: 'Lecture 8', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
-              { lecture: 'Lecture 9', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
-              { lecture: 'Lecture 10', topic: { zh: '大作文题型技巧讲解', en: 'Task 2 Techniques' } },
-            ]
-          },
-          {
-            id: 'speaking',
-            label: { zh: '口语课表', en: 'Speaking Schedule' },
-            schedule: [
-              { lecture: 'Lecture 1', topic: { zh: '雅思口语总论', en: 'IELTS Speaking Overview' } },
-              { lecture: 'Lecture 2', topic: { zh: 'P1 题型技巧讲解', en: 'Part 1 Techniques' } },
-              { lecture: 'Lecture 3', topic: { zh: 'P1 题型技巧讲解', en: 'Part 1 Techniques' } },
-              { lecture: 'Lecture 4', topic: { zh: 'P2 题型技巧讲解', en: 'Part 2 Techniques' } },
-              { lecture: 'Lecture 5', topic: { zh: 'P2 题型技巧讲解', en: 'Part 2 Techniques' } },
-              { lecture: 'Lecture 6', topic: { zh: 'P2 题型技巧讲解', en: 'Part 2 Techniques' } },
-              { lecture: 'Lecture 7', topic: { zh: 'P2 题型技巧讲解', en: 'Part 2 Techniques' } },
-              { lecture: 'Lecture 8', topic: { zh: 'P3 题型技巧讲解', en: 'Part 3 Techniques' } },
-              { lecture: 'Lecture 9', topic: { zh: 'P3 题型技巧讲解', en: 'Part 3 Techniques' } },
-              { lecture: 'Lecture 10', topic: { zh: 'P3 题型技巧讲解', en: 'Part 3 Techniques' } },
-            ]
-          }
-        ]
+        subTabs: ieltsASchedule
       },
       {
-        id: 'small-class',
-        name: { zh: '精品8人小班课程(线下)', en: 'Premium 8-Person Small Class (Offline)' },
-        icon: Users,
-        features: [
-          {
-            title: { zh: '5-8人小班授课', en: '5-8 Person Small Class' },
-            desc: { zh: '严格控制班级人数，保证每一位学生的教学效果与课堂参与度。', en: 'Strictly controlled class size to ensure teaching effectiveness and participation for every student.' },
-            icon: Users
-          },
-          {
-            title: { zh: '顶尖师资团队', en: 'Top-tier Faculty' },
-            desc: { zh: '教师均为硕士及以上学历，均有海外留学经历，执教不少于5年。', en: 'All teachers hold Master\'s degrees or higher, have overseas study experience, and 5+ years of teaching experience.' },
-            icon: GraduationCap
-          },
-          {
-            title: { zh: '一科一教师', en: 'Subject-Specific Teachers' },
-            desc: { zh: '术业有专攻，经验丰富，对考题预测精准。', en: 'Specialized teachers for each subject, experienced with accurate exam predictions.' },
-            icon: BookOpen
-          },
-          {
-            title: { zh: '全程助教督学', en: 'Full TA Supervision' },
-            desc: { zh: '配备教学助理，负责追讨作业、默写抽测及报名考试。', en: 'Teaching assistants responsible for homework tracking, dictation checks, and exam registration.' },
-            icon: ClipboardList
-          },
-          {
-            title: { zh: '前考官模考', en: 'Ex-Examiner Mock Exams' },
-            desc: { zh: '独家前雅思考官1对1在线模考，还原真实考场体验。', en: 'Exclusive 1-on-1 online mock exams with former IELTS examiners to simulate real test experience.' },
-            icon: MonitorPlay
-          }
-        ]
+        id: 'ielts-a-7',
+        name: { zh: '雅思A类 7+分突破班', en: 'IELTS A 7+ Breakthrough Class' },
+        icon: Target,
+        badge: { zh: '保分班', en: 'Score Guaranteed' },
+        description: {
+          zh: '64课时，突破分数瓶颈，冲击7分及以上高分。',
+          en: '64 hours, breaking through plateaus, aiming for 7+.'
+        },
+        subTabs: ieltsASchedule
       },
       {
-        id: 'bootcamp',
-        name: { zh: '封闭营+加拿大送考服务', en: 'Bootcamp + Canada Exam Service' },
-        icon: Plane,
+        id: 'ielts-a-sim',
+        name: { zh: '雅思纸笔&机考全真模拟', en: 'IELTS Real Simulation (Test)' },
+        icon: ClipboardList,
         features: [
-          {
-            title: { zh: '14天全封闭集训', en: '14-Day Intensive Bootcamp' },
-            desc: { zh: '14天全方位封闭，享受沉浸式学习，极速出分，奇迹上岸。', en: '14-day comprehensive closed training, immersive learning for rapid score improvement.' },
-            icon: Calendar
-          },
-          {
-            title: { zh: '全明星服务团队', en: 'All-Star Service Team' },
-            desc: { zh: '配备一科一教师、教学助理、生活助理，全方位保障。', en: 'Equipped with subject teachers, teaching assistants, and life assistants for comprehensive support.' },
-            icon: Users
-          },
-          {
-            title: { zh: '顶尖师资配置', en: 'Top Faculty Configuration' },
-            desc: { zh: '教师均为硕士及以上学历，均有海外留学经历，执教不少于5年。', en: 'All teachers hold Master\'s degrees or higher, have overseas study experience, and 5+ years of teaching experience.' },
-            icon: GraduationCap
-          },
-          {
-            title: { zh: '分秒必争的规划', en: 'Precise Schedule Planning' },
-            desc: { zh: '全程规划预习、上课、复习，高效利用每一分钟。', en: 'Full planning for preview, class, and review, making every minute count.' },
-            icon: Target
-          },
-          {
-            title: { zh: '送考一条龙服务', en: 'One-Stop Exam Service' },
-            desc: { zh: '代办签证，安排食宿，无忧赴考。', en: 'Visa handling, accommodation and meals arranged for a worry-free exam trip.' },
-            icon: Plane
-          },
-          {
-            title: { zh: '得天独厚的考场', en: 'Advantageous Test Centers' },
-            desc: { zh: '加拿大总部与雅思官方合作考场，拥有得天独厚的出分条件。', en: 'Canada HQ and official IELTS partner test centers offer unique advantages for scoring.' },
-            icon: MapPin
-          }
+          { title: { zh: '全真考题', en: 'Real Exam Questions' }, desc: { zh: '还原真实考试难度', en: 'Authentic Difficulty' }, icon: BookOpen },
+          { title: { zh: '独家题库', en: 'Exclusive Question Bank' }, desc: { zh: '海量真题储备', en: 'Massive Test Bank' }, icon: BookOpen },
+          { title: { zh: '双模式模拟', en: 'Dual Mode Simulation' }, desc: { zh: '支持纸笔与机考', en: 'Paper & Computer Based' }, icon: MonitorPlay },
+          { title: { zh: '严格计时', en: 'Strict Timing' }, desc: { zh: '完全按照考试时间', en: 'Exam Timing' }, icon: Calendar },
+          { title: { zh: '真实流程', en: 'Real Process' }, desc: { zh: '全流程演练', en: 'Full Process Drill' }, icon: CheckCircle2 },
+          { title: { zh: '考后评奖', en: 'Post-Exam Award' }, desc: { zh: '专业评分与奖励', en: 'Professional Grading' }, icon: Target }
         ]
       }
     ]
@@ -291,396 +290,68 @@ const categories: Category[] = [
     icon: Globe2,
     courses: [
       {
-        id: 'g-4-5',
-        name: { zh: 'G类雅思4-5分基础班', en: 'G-Type 4-5 Band Foundation' },
-        icon: BookOpen,
+        id: 'ielts-g-7',
+        name: { zh: '雅思G类CLB 7分无忧班', en: 'IELTS G CLB 7 Worry-Free' },
+        icon: CheckCircle2,
+        badge: { zh: '保分班', en: 'Score Guaranteed' },
         description: {
-          zh: '适合初中英语水平学员，浅显易懂，轻松入门。',
-          en: 'Suitable for junior high English level students, easy to understand, easy entry.'
+          zh: '64课时，针对移民类雅思，稳扎稳打达到CLB 7。',
+          en: '64 hours, clear path to CLB 7 for immigration.'
         },
-        features: [
-          {
-            title: { zh: '适合学员', en: 'Target Audience' },
-            desc: { zh: '掌握初中英语词汇的学员。', en: 'Students who have mastered junior high school English vocabulary.' },
-            icon: Users
-          },
-          {
-            title: { zh: '出班预期', en: 'Expected Outcome' },
-            desc: { zh: '达到 CLB 5 水平。', en: 'Reach CLB 5 level.' },
-            icon: Target
-          },
-          {
-            title: { zh: '课程特色', en: 'Course Features' },
-            desc: { zh: '零基础雅思，浅显易懂，轻松屠鸭。', en: 'Zero foundation IELTS, easy to understand, easy to pass.' },
-            icon: CheckCircle2
-          }
-        ],
-        subTabs: [
-          {
-            id: 'reading',
-            label: { zh: '阅读课表', en: 'Reading Schedule' },
-            schedule: [
-              { lecture: '01', topic: { zh: '录播：课程信息+雅思阅读概述+单词讲解1&2', en: 'Rec: Info + Overview + Vocab 1&2' } },
-              { lecture: '02', topic: { zh: '录播：单词讲解3&4 + 直播：判断题技巧讲解及例题练习1', en: 'Rec: Vocab 3&4 + Live: T/F Techniques 1' } },
-              { lecture: '03', topic: { zh: '录播：单词讲解5&6 + 直播：判断题技巧巩固及例题练习2', en: 'Rec: Vocab 5&6 + Live: T/F Techniques 2' } },
-              { lecture: '04', topic: { zh: '录播：单词讲解7&8 + 直播：填词题技巧讲解及例题练习1', en: 'Rec: Vocab 7&8 + Live: Fill-in Techniques 1' } },
-              { lecture: '05', topic: { zh: '录播：单词讲解9&10 + 直播：填词题技巧巩固及例题练习2', en: 'Rec: Vocab 9&10 + Live: Fill-in Techniques 2' } },
-              { lecture: '06', topic: { zh: '录播：单词讲解11&12 + 直播：配对题技巧讲解及例题练习', en: 'Rec: Vocab 11&12 + Live: Matching Techniques' } },
-              { lecture: '07', topic: { zh: '录播：单词讲解13 + 直播：组合解题技巧', en: 'Rec: Vocab 13 + Live: Combined Techniques' } },
-              { lecture: '08', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
-            ]
-          },
-          {
-            id: 'listening',
-            label: { zh: '听力课表', en: 'Listening Schedule' },
-            schedule: [
-              { lecture: '1', topic: { zh: '录播：课程信息+雅思听力概述+听力练习心法+核心技巧', en: 'Rec: Info + Overview + Mindset + Core Techniques' } },
-              { lecture: '2', topic: { zh: '直播：P1填词题技巧 + 录播：作业评讲1', en: 'Live: P1 Fill-in + Rec: HW Review 1' } },
-              { lecture: '3', topic: { zh: '直播：P2+P3填词题技巧 + 录播：作业评讲2', en: 'Live: P2+P3 Fill-in + Rec: HW Review 2' } },
-              { lecture: '4', topic: { zh: '直播：P4填词题技巧 + 录播：作业评讲3', en: 'Live: P4 Fill-in + Rec: HW Review 3' } },
-              { lecture: '5', topic: { zh: '直播：地图题技巧 + 录播：作业评讲4', en: 'Live: Map Techniques + Rec: HW Review 4' } },
-              { lecture: '6', topic: { zh: '直播：配对题技巧 + 录播：作业评讲5', en: 'Live: Matching Techniques + Rec: HW Review 5' } },
-              { lecture: '7', topic: { zh: '直播：单选题+多选题技巧 + 录播：作业评讲6', en: 'Live: Choice Techniques + Rec: HW Review 6' } },
-              { lecture: '8', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
-            ]
-          },
-          {
-            id: 'writing',
-            label: { zh: '写作课表', en: 'Writing Schedule' },
-            schedule: [
-              { lecture: '1', topic: { zh: '录播：写作评分标准精讲', en: 'Rec: Writing Grading Criteria' } },
-              { lecture: '2', topic: { zh: '直播：小作文书信如何写1', en: 'Live: Task 1 Letters 1' } },
-              { lecture: '3', topic: { zh: '直播：小作文书信如何写2', en: 'Live: Task 1 Letters 2' } },
-              { lecture: '4', topic: { zh: '直播：大作文辩论类题型讲解(健康)', en: 'Live: Task 2 Argument (Health)' } },
-              { lecture: '5', topic: { zh: '直播：大作文辩论类题型讲解(媒体广告)', en: 'Live: Task 2 Argument (Media/Ads)' } },
-              { lecture: '6', topic: { zh: '直播：大作文讨论类题型讲解(科技全球化)', en: 'Live: Task 2 Discussion (Tech/Global)' } },
-              { lecture: '7', topic: { zh: '直播：大作文辩论类题型讲解(政府教育)', en: 'Live: Task 2 Argument (Gov/Edu)' } },
-              { lecture: '8', topic: { zh: '直播：模考', en: 'Live: Mock Exam' } },
-            ]
-          },
-          {
-            id: 'speaking',
-            label: { zh: '口语课表', en: 'Speaking Schedule' },
-            schedule: [
-              { lecture: '1', topic: { zh: '录播：考试流程+评分标准+P1突破法+P1必考题', en: 'Rec: Process + Criteria + P1 Breakthrough' } },
-              { lecture: '2', topic: { zh: '直播：P1话题策略分类讲解(1)', en: 'Live: P1 Strategy 1' } },
-              { lecture: '3', topic: { zh: '直播：P1话题策略分类讲解(2)', en: 'Live: P1 Strategy 2' } },
-              { lecture: '4', topic: { zh: '直播：攻克P2物品类话题', en: 'Live: P2 Objects' } },
-              { lecture: '5', topic: { zh: '直播：攻克P2事件类话题', en: 'Live: P2 Events' } },
-              { lecture: '6', topic: { zh: '直播：攻克P2人物及地点类话题', en: 'Live: P2 People/Places' } },
-              { lecture: '7', topic: { zh: '录播：总结P3思维展开技巧 + 直播：P3分类例题精讲', en: 'Rec: P3 Thinking + Live: P3 Examples' } },
-              { lecture: '8', topic: { zh: '直播：模考+点评', en: 'Live: Mock Exam + Review' } },
-            ]
-          },
-          {
-            id: 'flow',
-            label: { zh: '课程流程', en: 'Course Flow' },
-            content: [
-              {
-                title: { zh: '1. 开课前', en: '1. Pre-Class' },
-                target: { zh: '准备阶段', en: 'Preparation' },
-                goal: { zh: 'Ready', en: 'Ready' },
-                features: [
-                  { zh: '进课堂专属群', en: 'Join exclusive class group' },
-                  { zh: '熟悉直播课规则', en: 'Familiarize with live rules' },
-                  { zh: '获取课程学习资料', en: 'Get course materials' }
-                ]
-              },
-              {
-                title: { zh: '2. 授课中', en: '2. In-Class' },
-                target: { zh: '学习阶段', en: 'Learning' },
-                goal: { zh: 'Study', en: 'Study' },
-                features: [
-                  { zh: '提前10分钟开通课堂入口', en: 'Class opens 10 mins early' },
-                  { zh: '互动直播授课', en: 'Interactive live teaching' },
-                  { zh: '当堂答疑', en: 'Live Q&A' }
-                ]
-              },
-              {
-                title: { zh: '3. 结课后', en: '3. Post-Class' },
-                target: { zh: '复习阶段', en: 'Review' },
-                goal: { zh: 'Review', en: 'Review' },
-                features: [
-                  { zh: '无限次录播回放', en: 'Unlimited playback' },
-                  { zh: '学习任务打卡', en: 'Study task check-ins' },
-                  { zh: '课后作业批改反馈', en: 'Homework correction & feedback' },
-                  { zh: '群内随时提问答疑', en: 'Anytime Q&A in group' },
-                  { zh: '免费在线口语模考', en: 'Free online speaking mock' }
-                ]
-              }
-            ]
-          }
-        ]
+        subTabs: ieltsGSchedule
       },
       {
-        id: 'g-6',
-        name: { zh: 'G类雅思6分突击班', en: 'G-Type 6 Band Sprint' },
+        id: 'ielts-g-9',
+        name: { zh: '雅思G类CLB 9分冲刺班', en: 'IELTS G CLB 9 Sprint' },
         icon: Target,
+        badge: { zh: '保分班', en: 'Score Guaranteed' },
         description: {
-          zh: '针对移民类雅思考点，下手狠，出分快。',
-          en: 'Focus on immigration IELTS test points, ruthless tactics, fast scoring.'
+          zh: '64课时，冲击CLB 9高分，移民加分必备。',
+          en: '64 hours, aiming for CLB 9, essential for immigration points.'
         },
-        features: [
-          {
-            title: { zh: '适合学员', en: 'Target Audience' },
-            desc: { zh: '已达到CLB 6或平行水平的学员。', en: 'Students who have reached CLB 6 or equivalent.' },
-            icon: Users
-          },
-          {
-            title: { zh: '出班预期', en: 'Expected Outcome' },
-            desc: { zh: '达到 CLB 7 水平。', en: 'Reach CLB 7 level.' },
-            icon: Target
-          },
-          {
-            title: { zh: '课程特色', en: 'Course Features' },
-            desc: { zh: '着眼移民类雅思考点，下手狠，出分快。', en: 'Focus on immigration test points, fast scoring.' },
-            icon: CheckCircle2
-          }
-        ],
-        subTabs: [
-          {
-            id: 'reading',
-            label: { zh: '阅读课表', en: 'Reading Schedule' },
-            schedule: [
-              { lecture: '01', topic: { zh: '录播：课程信息+长难句解析+概述+核心技巧+作业评讲1', en: 'Rec: Info + Long Sentences + Overview + Techniques + HW1' } },
-              { lecture: '02', topic: { zh: '直播：填词题技巧+判断题技巧 + 录播：作业评讲2&3', en: 'Live: Fill-in + T/F + Rec: HW2&3' } },
-              { lecture: '03', topic: { zh: '直播：信息配对技巧+人物观点(行为)配对技巧 + 录播：作业评讲4', en: 'Live: Info Matching + Person/Viewpoint Matching + Rec: HW4' } },
-              { lecture: '04', topic: { zh: '直播：句子匹配技巧+有选项summary技巧 + 录播：作业评讲5', en: 'Live: Sentence Matching + Summary + Rec: HW5' } },
-              { lecture: '05', topic: { zh: '直播：单选题技巧 + 录播：作业评讲6', en: 'Live: Multiple Choice + Rec: HW6' } },
-              { lecture: '06', topic: { zh: '直播：段落细节配对技巧+LOH技巧 + 录播：作业评讲7', en: 'Live: Paragraph Matching + LOH + Rec: HW7' } },
-              { lecture: '07', topic: { zh: '直播：组合解题技巧 + 录播：作业评讲8', en: 'Live: Combined Techniques + Rec: HW8' } },
-              { lecture: '08', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
-            ]
-          },
-          {
-            id: 'listening',
-            label: { zh: '听力课表', en: 'Listening Schedule' },
-            schedule: [
-              { lecture: '1', topic: { zh: '录播：课程信息+雅思听力概述+听力练习心法+核心技巧', en: 'Rec: Info + Overview + Mindset + Core Techniques' } },
-              { lecture: '2', topic: { zh: '直播：P1填词题技巧 + 录播：作业评讲1', en: 'Live: P1 Fill-in + Rec: HW Review 1' } },
-              { lecture: '3', topic: { zh: '直播：P2+P3+P4填词题技巧 + 录播：作业评讲2', en: 'Live: P2-P4 Fill-in + Rec: HW Review 2' } },
-              { lecture: '4', topic: { zh: '直播：地图题技巧 + 录播：作业评讲3', en: 'Live: Map Techniques + Rec: HW Review 3' } },
-              { lecture: '5', topic: { zh: '直播：配对题技巧 + 录播：作业评讲4', en: 'Live: Matching Techniques + Rec: HW Review 4' } },
-              { lecture: '6', topic: { zh: '直播：单选题(短)技巧 + 录播：作业评讲5', en: 'Live: Short Choice + Rec: HW Review 5' } },
-              { lecture: '7', topic: { zh: '直播：单选题(长)技巧+多选题技巧 + 录播：作业评讲6', en: 'Live: Long/Multi Choice + Rec: HW Review 6' } },
-              { lecture: '8', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
-            ]
-          },
-          {
-            id: 'writing',
-            label: { zh: '写作课表', en: 'Writing Schedule' },
-            schedule: [
-              { lecture: '1', topic: { zh: '录播：写作评分标准精讲', en: 'Rec: Writing Grading Criteria' } },
-              { lecture: '2', topic: { zh: '直播：小作文书信如何写1', en: 'Live: Task 1 Letters 1' } },
-              { lecture: '3', topic: { zh: '直播：小作文书信如何写2', en: 'Live: Task 1 Letters 2' } },
-              { lecture: '4', topic: { zh: '直播：大作文辩论类题型讲解(健康)', en: 'Live: Task 2 Argument (Health)' } },
-              { lecture: '5', topic: { zh: '直播：大作文辩论类题型讲解(媒体广告)', en: 'Live: Task 2 Argument (Media/Ads)' } },
-              { lecture: '6', topic: { zh: '直播：大作文讨论类题型讲解(科技全球化)', en: 'Live: Task 2 Discussion (Tech/Global)' } },
-              { lecture: '7', topic: { zh: '直播：大作文辩论类题型讲解(政府教育)', en: 'Live: Task 2 Argument (Gov/Edu)' } },
-              { lecture: '8', topic: { zh: '直播：模考', en: 'Live: Mock Exam' } },
-            ]
-          },
-          {
-            id: 'speaking',
-            label: { zh: '口语课表', en: 'Speaking Schedule' },
-            schedule: [
-              { lecture: '1', topic: { zh: '录播：考试流程+评分标准+P1突破法+P1必考题', en: 'Rec: Process + Criteria + P1 Breakthrough' } },
-              { lecture: '2', topic: { zh: '直播：P1话题策略分类讲解(1)', en: 'Live: P1 Strategy 1' } },
-              { lecture: '3', topic: { zh: '直播：P1话题策略分类讲解(2)', en: 'Live: P1 Strategy 2' } },
-              { lecture: '4', topic: { zh: '直播：攻克P2物品类话题', en: 'Live: P2 Objects' } },
-              { lecture: '5', topic: { zh: '直播：攻克P2事件类话题', en: 'Live: P2 Events' } },
-              { lecture: '6', topic: { zh: '直播：攻克P2人物及地点类话题', en: 'Live: P2 People/Places' } },
-              { lecture: '7', topic: { zh: '录播：总结P3思维展开技巧 + 直播：P3分类例题精讲', en: 'Rec: P3 Thinking + Live: P3 Examples' } },
-              { lecture: '8', topic: { zh: '直播：模考+点评', en: 'Live: Mock Exam + Review' } },
-            ]
-          },
-          {
-            id: 'flow',
-            label: { zh: '课程流程', en: 'Course Flow' },
-            content: [
-              {
-                title: { zh: '1. 开课前', en: '1. Pre-Class' },
-                target: { zh: '准备阶段', en: 'Preparation' },
-                goal: { zh: 'Ready', en: 'Ready' },
-                features: [
-                  { zh: '进课堂专属群', en: 'Join exclusive class group' },
-                  { zh: '熟悉直播课规则', en: 'Familiarize with live rules' },
-                  { zh: '获取课程学习资料', en: 'Get course materials' }
-                ]
-              },
-              {
-                title: { zh: '2. 授课中', en: '2. In-Class' },
-                target: { zh: '学习阶段', en: 'Learning' },
-                goal: { zh: 'Study', en: 'Study' },
-                features: [
-                  { zh: '提前10分钟开通课堂入口', en: 'Class opens 10 mins early' },
-                  { zh: '互动直播授课', en: 'Interactive live teaching' },
-                  { zh: '当堂答疑', en: 'Live Q&A' }
-                ]
-              },
-              {
-                title: { zh: '3. 结课后', en: '3. Post-Class' },
-                target: { zh: '复习阶段', en: 'Review' },
-                goal: { zh: 'Review', en: 'Review' },
-                features: [
-                  { zh: '无限次录播回放', en: 'Unlimited playback' },
-                  { zh: '学习任务打卡', en: 'Study task check-ins' },
-                  { zh: '课后作业批改反馈', en: 'Homework correction & feedback' },
-                  { zh: '群内随时提问答疑', en: 'Anytime Q&A in group' },
-                  { zh: '免费在线口语模考', en: 'Free online speaking mock' }
-                ]
-              }
-            ]
-          }
-        ]
+        subTabs: ieltsGSchedule
       },
       {
-        id: 'g-7',
-        name: { zh: 'G类雅思7分无忧班', en: 'G-Type 7 Band Worry-Free' },
-        icon: GraduationCap,
-        description: {
-          zh: '高阶英语实力训练，考试技巧重点攻克，考题预测点睛。',
-          en: 'Advanced strength training, focus on techniques, accurate predictions.'
-        },
+        id: 'ielts-g-sim',
+        name: { zh: '雅思纸笔&机考全真模拟', en: 'IELTS Real Simulation (Test)' },
+        icon: ClipboardList,
         features: [
-          {
-            title: { zh: '适合学员', en: 'Target Audience' },
-            desc: { zh: '已达到CLB 7或平行水平的学员。', en: 'Students who have reached CLB 7 or equivalent.' },
-            icon: Users
-          },
-          {
-            title: { zh: '出班预期', en: 'Expected Outcome' },
-            desc: { zh: '达到 CLB 9 水平。', en: 'Reach CLB 9 level.' },
-            icon: Target
-          },
-          {
-            title: { zh: '课程特色', en: 'Course Features' },
-            desc: { zh: '高阶英语实力训练，考试技巧重点攻克。', en: 'Advanced strength training, focus on techniques.' },
-            icon: CheckCircle2
-          }
-        ],
-        subTabs: [
-          {
-            id: 'reading',
-            label: { zh: '阅读课表', en: 'Reading Schedule' },
-            schedule: [
-              { lecture: '01', topic: { zh: '录播：课程信息+长难句解析+概述+核心技巧+作业评讲1', en: 'Rec: Info + Long Sentences + Overview + Techniques + HW1' } },
-              { lecture: '02', topic: { zh: '直播：填词题技巧+判断题技巧 + 录播：作业评讲2&3', en: 'Live: Fill-in + T/F + Rec: HW2&3' } },
-              { lecture: '03', topic: { zh: '直播：信息配对技巧+人物观点(行为)配对技巧 + 录播：作业评讲4', en: 'Live: Info Matching + Person/Viewpoint Matching + Rec: HW4' } },
-              { lecture: '04', topic: { zh: '直播：句子匹配技巧+有选项summary技巧 + 录播：作业评讲5', en: 'Live: Sentence Matching + Summary + Rec: HW5' } },
-              { lecture: '05', topic: { zh: '直播：单选题技巧 + 录播：作业评讲6', en: 'Live: Multiple Choice + Rec: HW6' } },
-              { lecture: '06', topic: { zh: '直播：段落细节配对技巧+LOH技巧 + 录播：作业评讲7', en: 'Live: Paragraph Matching + LOH + Rec: HW7' } },
-              { lecture: '07', topic: { zh: '直播：组合解题技巧 + 录播：作业评讲8', en: 'Live: Combined Techniques + Rec: HW8' } },
-              { lecture: '08', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
-            ]
-          },
-          {
-            id: 'listening',
-            label: { zh: '听力课表', en: 'Listening Schedule' },
-            schedule: [
-              { lecture: '1', topic: { zh: '录播：课程信息+雅思听力概述+听力练习心法+核心技巧', en: 'Rec: Info + Overview + Mindset + Core Techniques' } },
-              { lecture: '2', topic: { zh: '直播：P1填词题技巧 + 录播：作业评讲1', en: 'Live: P1 Fill-in + Rec: HW Review 1' } },
-              { lecture: '3', topic: { zh: '直播：P2+P3+P4填词题技巧 + 录播：作业评讲2', en: 'Live: P2-P4 Fill-in + Rec: HW Review 2' } },
-              { lecture: '4', topic: { zh: '直播：地图题技巧 + 录播：作业评讲3', en: 'Live: Map Techniques + Rec: HW Review 3' } },
-              { lecture: '5', topic: { zh: '直播：配对题技巧 + 录播：作业评讲4', en: 'Live: Matching Techniques + Rec: HW Review 4' } },
-              { lecture: '6', topic: { zh: '直播：单选题(短)技巧 + 录播：作业评讲5', en: 'Live: Short Choice + Rec: HW Review 5' } },
-              { lecture: '7', topic: { zh: '直播：单选题(长)技巧+多选题技巧 + 录播：作业评讲6', en: 'Live: Long/Multi Choice + Rec: HW Review 6' } },
-              { lecture: '8', topic: { zh: '直播：模考+评讲', en: 'Live: Mock Exam + Review' } },
-            ]
-          },
-          {
-            id: 'writing',
-            label: { zh: '写作课表', en: 'Writing Schedule' },
-            schedule: [
-              { lecture: '1', topic: { zh: '录播：写作评分标准精讲', en: 'Rec: Writing Grading Criteria' } },
-              { lecture: '2', topic: { zh: '直播：小作文书信如何写1', en: 'Live: Task 1 Letters 1' } },
-              { lecture: '3', topic: { zh: '直播：小作文书信如何写2', en: 'Live: Task 1 Letters 2' } },
-              { lecture: '4', topic: { zh: '直播：大作文辩论类题型讲解(健康)', en: 'Live: Task 2 Argument (Health)' } },
-              { lecture: '5', topic: { zh: '直播：大作文辩论类题型讲解(媒体广告)', en: 'Live: Task 2 Argument (Media/Ads)' } },
-              { lecture: '6', topic: { zh: '直播：大作文讨论类题型讲解(科技全球化)', en: 'Live: Task 2 Discussion (Tech/Global)' } },
-              { lecture: '7', topic: { zh: '直播：大作文辩论类题型讲解(政府教育)', en: 'Live: Task 2 Argument (Gov/Edu)' } },
-              { lecture: '8', topic: { zh: '直播：模考', en: 'Live: Mock Exam' } },
-            ]
-          },
-          {
-            id: 'speaking',
-            label: { zh: '口语课表', en: 'Speaking Schedule' },
-            schedule: [
-              { lecture: '1', topic: { zh: '录播：考试流程+评分标准+P1突破法+P1必考题', en: 'Rec: Process + Criteria + P1 Breakthrough' } },
-              { lecture: '2', topic: { zh: '直播：P1话题策略分类讲解(1)', en: 'Live: P1 Strategy 1' } },
-              { lecture: '3', topic: { zh: '直播：P1话题策略分类讲解(2)', en: 'Live: P1 Strategy 2' } },
-              { lecture: '4', topic: { zh: '直播：攻克P2物品类话题', en: 'Live: P2 Objects' } },
-              { lecture: '5', topic: { zh: '直播：攻克P2事件类话题', en: 'Live: P2 Events' } },
-              { lecture: '6', topic: { zh: '直播：攻克P2人物及地点类话题', en: 'Live: P2 People/Places' } },
-              { lecture: '7', topic: { zh: '录播：总结P3思维展开技巧 + 直播：P3分类例题精讲', en: 'Rec: P3 Thinking + Live: P3 Examples' } },
-              { lecture: '8', topic: { zh: '直播：模考+点评', en: 'Live: Mock Exam + Review' } },
-            ]
-          },
-          {
-            id: 'flow',
-            label: { zh: '课程流程', en: 'Course Flow' },
-            content: [
-              {
-                title: { zh: '1. 开课前', en: '1. Pre-Class' },
-                target: { zh: '准备阶段', en: 'Preparation' },
-                goal: { zh: 'Ready', en: 'Ready' },
-                features: [
-                  { zh: '进课堂专属群', en: 'Join exclusive class group' },
-                  { zh: '熟悉直播课规则', en: 'Familiarize with live rules' },
-                  { zh: '获取课程学习资料', en: 'Get course materials' }
-                ]
-              },
-              {
-                title: { zh: '2. 授课中', en: '2. In-Class' },
-                target: { zh: '学习阶段', en: 'Learning' },
-                goal: { zh: 'Study', en: 'Study' },
-                features: [
-                  { zh: '提前10分钟开通课堂入口', en: 'Class opens 10 mins early' },
-                  { zh: '互动直播授课', en: 'Interactive live teaching' },
-                  { zh: '当堂答疑', en: 'Live Q&A' }
-                ]
-              },
-              {
-                title: { zh: '3. 结课后', en: '3. Post-Class' },
-                target: { zh: '复习阶段', en: 'Review' },
-                goal: { zh: 'Review', en: 'Review' },
-                features: [
-                  { zh: '无限次录播回放', en: 'Unlimited playback' },
-                  { zh: '学习任务打卡', en: 'Study task check-ins' },
-                  { zh: '课后作业批改反馈', en: 'Homework correction & feedback' },
-                  { zh: '群内随时提问答疑', en: 'Anytime Q&A in group' },
-                  { zh: '免费在线口语模考', en: 'Free online speaking mock' }
-                ]
-              }
-            ]
-          }
+          { title: { zh: '全真考题', en: 'Real Exam Questions' }, desc: { zh: '还原真实考试难度', en: 'Authentic Difficulty' }, icon: BookOpen },
+          { title: { zh: '独家题库', en: 'Exclusive Question Bank' }, desc: { zh: '海量真题储备', en: 'Massive Test Bank' }, icon: BookOpen },
+          { title: { zh: '双模式模拟', en: 'Dual Mode Simulation' }, desc: { zh: '支持纸笔与机考', en: 'Paper & Computer Based' }, icon: MonitorPlay },
+          { title: { zh: '严格计时', en: 'Strict Timing' }, desc: { zh: '完全按照考试时间', en: 'Exam Timing' }, icon: Calendar },
+          { title: { zh: '真实流程', en: 'Real Process' }, desc: { zh: '全流程演练', en: 'Full Process Drill' }, icon: CheckCircle2 },
+          { title: { zh: '考后评奖', en: 'Post-Exam Award' }, desc: { zh: '专业评分与奖励', en: 'Professional Grading' }, icon: Target }
         ]
+      }
+    ]
+  },
+  {
+    id: 'pte',
+    name: { zh: 'PTE (Pearson/思培)', en: 'PTE (Pearson/CELPIP)' },
+    icon: MonitorPlay,
+    courses: [
+      {
+        id: 'pte-clb-7',
+        name: { zh: '思培CLB 7分无忧班', en: 'CELPIP CLB 7 Worry-Free' },
+        icon: CheckCircle2,
+        badge: { zh: '保分班', en: 'Score Guaranteed' },
+        description: {
+          zh: '48课时，系统掌握思培考试技巧，无忧达标CLB 7。',
+          en: '48 hours, master CELPIP techniques, reach CLB 7.'
+        },
+        subTabs: pteSchedule
       },
       {
-        id: 'g-zero',
-        name: { zh: 'G类雅思零基础班(录播)', en: 'G-Type Zero Foundation (Recorded)' },
-        icon: MonitorPlay,
+        id: 'pte-clb-9',
+        name: { zh: '思培CLB 9分冲刺班', en: 'CELPIP CLB 9 Sprint' },
+        icon: Target,
+        badge: { zh: '保分班', en: 'Score Guaranteed' },
         description: {
-          zh: '专为英语基础薄弱学员设计，从零开始，夯实基础。不单独售卖，仅作为5分基础班的补充课程。',
-          en: 'Designed for students with weak English foundation. Not sold separately, only as a supplementary course for the 5-band foundation class.'
+          zh: '48课时，强化训练，冲击思培高分CLB 9。',
+          en: '48 hours, intensive training for CELPIP CLB 9.'
         },
-        features: [
-          {
-            title: { zh: '适合学员', en: 'Target Audience' },
-            desc: { zh: '只认识26个英文字母，英语基础接近零的学员。', en: 'Students who only know the 26 English letters, with near-zero foundation.' },
-            icon: Users
-          },
-          {
-            title: { zh: '出班预期', en: 'Expected Outcome' },
-            desc: { zh: '衔接CLB 5课程，具备基本的英语认知能力。', en: 'Connect to CLB 5 courses, possessing basic English cognitive abilities.' },
-            icon: Target
-          },
-          {
-            title: { zh: '课程特色', en: 'Course Features' },
-            desc: { zh: '从零开始，夯实基础，循序渐进。', en: 'Start from scratch, solidify foundation, step-by-step progress.' },
-            icon: CheckCircle2
-          }
-        ]
+        subTabs: pteSchedule
       }
     ]
   }
@@ -795,7 +466,14 @@ const categories: Category[] = [
                           <item.icon class="w-6 h-6" />
                         </div>
                         <div>
-                          <h2 class="text-2xl font-bold text-gray-900">{item.name[locale]}</h2>
+                          <div class="flex items-center gap-2">
+                             <h2 class="text-2xl font-bold text-gray-900">{item.name[locale]}</h2>
+                             {item.badge && (
+                               <span class="px-2 py-0.5 rounded-full bg-red-100 text-red-600 text-xs font-bold border border-red-200">
+                                 {item.badge[locale]}
+                               </span>
+                             )}
+                          </div>
                           <p class="text-gray-500 text-sm">{cat.name[locale]}</p>
                         </div>
                       </div>
