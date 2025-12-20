@@ -2,6 +2,7 @@
 import type { Locale } from '../../data/types';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { content as siteContent } from '../../data/content';
+import { tutors } from '../../data/tutors';
 import GlassmorphicBox from '../GlassmorphicBox.astro';
 
 interface Props {
@@ -24,35 +25,216 @@ const tutorsContent = siteContent.home.tutors;
       </p>
     </div>
 
-    <!-- Tutors Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {tutorsContent.list.map((tutor) => (
-        <div class="group relative h-[400px] rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow duration-300">
-          <!-- Image (Full height) -->
-          <img 
-            src={tutor.image} 
-            alt={tutor.name[locale]} 
-            class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-          />
+    <!-- Tutors Swiper -->
+    <div class="tutors-swiper-container relative">
+      <!-- Navigation buttons outside -->
+      <button class="swiper-button-prev-custom nav-button" aria-label="Previous">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      
+      <button class="swiper-button-next-custom nav-button" aria-label="Next">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
 
-          <!-- Overlay (Slides in from bottom) -->
-          <div class="absolute inset-x-0 bottom-0 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out h-[60%]">
-             <GlassmorphicBox class="w-full h-full p-6 flex flex-col justify-center text-center" blur="md" bgOpacity={80} borderOpacity={20} mode="dark">
-                <h3 class="text-xl font-bold text-white mb-1">{tutor.name[locale]}</h3>
-                <p class="text-blue-100 font-medium text-sm mb-3">{tutor.role[locale]}</p>
-                <p class="text-white text-sm mb-4 line-clamp-3 opacity-90">
-                  {tutor.description[locale]}
-                </p>
-                <a 
-                  href={getRelativeLocaleUrl(locale, '/about')} 
-                  class="inline-block border border-white/40 hover:bg-white hover:text-primary-blue text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300"
-                >
-                  {tutorsContent.viewDetails[locale]}
-                </a>
-             </GlassmorphicBox>
-          </div>
+      <div class="swiper tutorsSwiper">
+        <div class="swiper-wrapper">
+          {tutors.map((tutor) => (
+            <div class="swiper-slide">
+              <div class="group relative h-[500px] rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow duration-300">
+                <!-- Image (Full height) -->
+                <img 
+                  src={tutor.image} 
+                  alt={tutor.name} 
+                  class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
+
+                <!-- Overlay (Slides in from bottom) -->
+                <div class="absolute inset-x-0 bottom-0 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out h-[70%]">
+                   <GlassmorphicBox class="w-full h-full p-6 flex flex-col justify-start text-center overflow-y-auto" blur="md" bgOpacity={80} borderOpacity={20} mode="dark">
+                      <h3 class="text-xl font-bold text-white mb-1">{tutor.name}</h3>
+                      <p class="text-blue-100 font-medium text-xs mb-2">{tutor.center[locale]}</p>
+                      <p class="text-blue-200 font-medium text-sm mb-3">{tutor.role[locale]}</p>
+                      <div class="text-white text-xs space-y-1 opacity-90 text-left">
+                        {tutor.credentials[locale].map((credential) => (
+                          <p class="leading-relaxed">• {credential}</p>
+                        ))}
+                      </div>
+                   </GlassmorphicBox>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+        
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .tutors-swiper-container {
+    padding: 0 0 50px;
+    position: relative;
+  }
+
+  .tutorsSwiper {
+    width: 100%;
+    height: 100%;
+    padding: 0 70px 50px;
+  }
+
+  .swiper-slide {
+    width: auto;
+  }
+
+  /* Custom Navigation Buttons - Glassmorphic Style */
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #4b5563;
+  }
+
+  .nav-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-50%) scale(1.05);
+    color: #1f2937;
+  }
+
+  .nav-button:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  .nav-button.swiper-button-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .nav-button.swiper-button-disabled:hover {
+    transform: translateY(-50%) scale(1);
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .swiper-button-prev-custom {
+    left: 0;
+  }
+
+  .swiper-button-next-custom {
+    right: 0;
+  }
+
+  :global(.swiper-pagination-bullet) {
+    background: #cbd5e1;
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+    transition: all 0.3s ease;
+  }
+
+  :global(.swiper-pagination-bullet-active) {
+    background: #2563eb;
+    width: 28px;
+    border-radius: 5px;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .tutorsSwiper {
+      padding: 0 60px 50px;
+    }
+
+    .nav-button {
+      width: 48px;
+      height: 48px;
+    }
+
+    .nav-button svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .tutorsSwiper {
+      padding: 0 55px 50px;
+    }
+
+    .nav-button {
+      width: 44px;
+      height: 44px;
+    }
+
+    .swiper-button-prev-custom {
+      left: -2px;
+    }
+
+    .swiper-button-next-custom {
+      right: -2px;
+    }
+  }
+</style>
+
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/pagination';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new Swiper('.tutorsSwiper', {
+      modules: [Navigation, Pagination, Autoplay],
+      slidesPerView: 1,
+      spaceBetween: 20,
+      navigation: {
+        nextEl: '.swiper-button-next-custom',
+        prevEl: '.swiper-button-prev-custom',
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      loop: true,
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 24,
+        },
+        1280: {
+          slidesPerView: 4,
+          spaceBetween: 24,
+        },
+      },
+    });
+  });
+</script>
