@@ -1,0 +1,393 @@
+---
+import type { Locale } from '../../data/types';
+import { offers } from '../../data/offers';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const sectionTitle = locale === 'zh' ? '成功案例' : 'Success Stories';
+const sectionSubtitle = locale === 'zh' 
+  ? '见证学子们的梦想实现之旅' 
+  : 'Witness the journey of students achieving their dreams';
+---
+
+<section class="py-16 bg-linear-to-br from-blue-50 to-purple-50">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+        {sectionTitle}
+      </h2>
+      <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+        {sectionSubtitle}
+      </p>
+    </div>
+
+    <!-- Offers Swiper -->
+    <div class="offers-swiper-container relative max-w-7xl mx-auto">
+      <!-- Navigation buttons -->
+      <button class="offers-swiper-button-prev nav-button-offers" aria-label="Previous">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      
+      <button class="offers-swiper-button-next nav-button-offers" aria-label="Next">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="swiper offersSwiper">
+        <div class="swiper-wrapper">
+          {offers.map((offer) => (
+            <div class="swiper-slide">
+              <button 
+                class="offer-card-btn group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 bg-white w-full cursor-pointer"
+                data-image={offer.image}
+                data-alt={offer.alt}
+              >
+                <!-- Image Container -->
+                <div class="relative w-full aspect-3/4 overflow-hidden">
+                  <img 
+                    src={offer.image} 
+                    alt={offer.alt} 
+                    class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                  />
+                  
+                  <!-- Gradient Overlay on hover -->
+                  <div class="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  <!-- Click hint -->
+                  <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Award Badge -->
+                <div class="absolute top-4 right-4 bg-linear-to-br from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          ))}
+        </div>
+        
+        <!-- Pagination -->
+        <div class="swiper-pagination offers-pagination"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Dialog -->
+  <div id="offerModal" class="offer-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="offer-modal-overlay"></div>
+    <div class="offer-modal-content">
+      <button class="offer-modal-close" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="offer-modal-image-wrapper">
+        <img id="offerModalImage" src="" alt="" class="offer-modal-image" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .offers-swiper-container {
+    position: relative;
+    padding: 0 60px;
+  }
+
+  @media (max-width: 768px) {
+    .offers-swiper-container {
+      padding: 0 50px;
+    }
+  }
+
+  .nav-button-offers {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-button-offers:hover {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border-color: transparent;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-button-offers:hover svg {
+    stroke: white;
+  }
+
+  .nav-button-offers svg {
+    stroke: #1e40af;
+    transition: stroke 0.3s ease;
+  }
+
+  .offers-swiper-button-prev {
+    left: 0;
+  }
+
+  .offers-swiper-button-next {
+    right: 0;
+  }
+
+  .offersSwiper {
+    padding-bottom: 50px;
+    overflow: visible;
+  }
+
+  .offersSwiper .swiper-slide {
+    height: auto;
+  }
+
+  .offers-pagination :global(.swiper-pagination-bullet) {
+    background: #9ca3af;
+    opacity: 0.5;
+    width: 10px;
+    height: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .offers-pagination :global(.swiper-pagination-bullet-active) {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    opacity: 1;
+    width: 30px;
+    border-radius: 5px;
+  }
+
+  .offer-card-btn {
+    border: none;
+    padding: 0;
+    background: white;
+  }
+
+  /* Modal Styles */
+  .offer-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .offer-modal.active {
+    display: flex;
+  }
+
+  .offer-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .offer-modal-content {
+    position: relative;
+    z-index: 1;
+    max-width: 90vw;
+    max-height: 90vh;
+    animation: zoomIn 0.3s ease-out;
+  }
+
+  .offer-modal-image-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+
+  .offer-modal-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  .offer-modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+
+  .offer-modal-close:hover {
+    background: #ef4444;
+    transform: rotate(90deg);
+  }
+
+  .offer-modal-close:hover svg {
+    stroke: white;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .offer-modal-close {
+      top: 10px;
+      right: 10px;
+    }
+  }
+</style>
+
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/pagination';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const offersSwiper = new Swiper('.offersSwiper', {
+      modules: [Navigation, Pagination, Autoplay],
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      speed: 600,
+      navigation: {
+        nextEl: '.offers-swiper-button-next',
+        prevEl: '.offers-swiper-button-prev',
+      },
+      pagination: {
+        el: '.offers-pagination',
+        clickable: true,
+        dynamicBullets: true,
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 24,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 28,
+        },
+        1280: {
+          slidesPerView: 5,
+          spaceBetween: 30,
+        }
+      }
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('offerModal');
+    const modalImage = document.getElementById('offerModalImage') as HTMLImageElement;
+    const modalOverlay = modal?.querySelector('.offer-modal-overlay');
+    const closeBtn = modal?.querySelector('.offer-modal-close');
+    const offerCards = document.querySelectorAll('.offer-card-btn');
+
+    // Open modal when clicking offer card
+    offerCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        const imageSrc = card.getAttribute('data-image');
+        const imageAlt = card.getAttribute('data-alt');
+        
+        if (modal && modalImage && imageSrc) {
+          modalImage.src = imageSrc;
+          modalImage.alt = imageAlt || '';
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    // Close modal when clicking close button
+    closeBtn?.addEventListener('click', () => {
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Close modal when clicking overlay
+    modalOverlay?.addEventListener('click', () => {
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+</script>

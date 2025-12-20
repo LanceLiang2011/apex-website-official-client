@@ -5,6 +5,7 @@ import RisePathways from '../components/rise/RisePathways.astro';
 import ServiceProcess from '../components/rise/ServiceProcess.astro';
 import TopUniversities from '../components/rise/TopUniversities.astro';
 import PopularMajors from '../components/rise/PopularMajors.astro';
+import SuccessStories from '../components/rise/SuccessStories.astro';
 
 // Get Rise Center Data
 const center = centers.find(c => c.id === 'rise');
@@ -51,5 +52,8 @@ const locale = 'zh';
 
   <!-- Popular Major Recommendations -->
   <PopularMajors locale={locale} />
+
+  <!-- Success Stories -->
+  <SuccessStories locale={locale} />
 
 </BaseLayout>
