@@ -298,7 +298,7 @@ export const ieltsTestCentreData = {
           zh: "扫描二维码添加客服微信，免费获取官方备考资料",
           en: "Scan QR code to add customer service on WeChat and obtain official preparation materials",
         },
-        qrImage: "/images/pr.jpeg",
+        qrImage: "/images/qr.jpeg",
       },
       {
         icon: "instructions",
