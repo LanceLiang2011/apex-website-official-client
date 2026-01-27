@@ -49,7 +49,7 @@ const registerLink = ieltsTestCentreData.hero.registerLink;
           <!-- Background Image -->
           <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${slide.image}')`}></div>
           <!-- Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
+          <div class="absolute inset-0 bg-linear-to-r from-black/70 to-transparent"></div>
           
           <!-- Content -->
           <div class="container mx-auto px-4 h-full flex items-center relative z-20">
@@ -64,7 +64,7 @@ const registerLink = ieltsTestCentreData.hero.registerLink;
                 href={registerLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-4 rounded-lg transition-all transform hover:translate-y-[-2px] hover:shadow-lg animate-fade-in-up delay-200"
+                class="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-4 rounded-lg transition-all transform hover:-translate-y-0.5 hover:shadow-lg animate-fade-in-up delay-200"
               >
                 {slide.cta}
               </a>
@@ -106,32 +106,84 @@ const registerLink = ieltsTestCentreData.hero.registerLink;
   <!-- Test Types Overview -->
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
-      <div class="flex items-center justify-center mb-12">
-        <div class="w-1 h-10 bg-red-600 mr-4"></div>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-          {ieltsTestCentreData.testTypes.title[locale]}
-        </h2>
+      <div class="flex flex-col items-center justify-center mb-8">
+        <div class="flex items-center mb-4">
+          <div class="w-1 h-10 bg-red-600 mr-4"></div>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+            {ieltsTestCentreData.testTypes.title[locale]}
+          </h2>
+        </div>
+        <p class="text-gray-600 text-center max-w-2xl">
+          {ieltsTestCentreData.testTypes.description[locale]}
+        </p>
       </div>
       
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         {ieltsTestCentreData.testTypes.types.map((type) => (
-          <div class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow">
-            <div class="flex justify-center mb-4">
-              {type.icon === 'academic' && <GraduationCap size={48} class="text-red-600" />}
-              {type.icon === 'general' && <Globe2 size={48} class="text-red-600" />}
-              {type.icon === 'computer' && <MonitorPlay size={48} class="text-red-600" />}
-              {type.icon === 'paper' && <FileText size={48} class="text-red-600" />}
+          <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all border-2 border-transparent hover:border-red-600">
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex items-center">
+                {type.icon === 'academic' && <GraduationCap size={56} class="text-red-600 mr-4" />}
+                {type.icon === 'general' && <Globe2 size={56} class="text-red-600 mr-4" />}
+                <div>
+                  <h3 class="text-2xl font-bold text-gray-900">
+                    {type.title[locale]}
+                  </h3>
+                  <span class="inline-block mt-1 px-3 py-1 bg-red-100 text-red-600 text-sm font-semibold rounded-full">
+                    {type.badge[locale]}
+                  </span>
+                </div>
+              </div>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">
-              {type.title[locale]}
-            </h3>
-            <p class="text-gray-600 mb-4 text-center text-sm">
+            <p class="text-gray-600 mb-6 text-base">
               {type.description[locale]}
             </p>
-            <ul class="space-y-2">
+            <ul class="space-y-3">
               {type.features[locale].map((feature) => (
-                <li class="flex items-start text-sm text-gray-700">
-                  <CheckCircle2 size={16} class="text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                <li class="flex items-start text-gray-700">
+                  <CheckCircle2 size={20} class="text-green-500 mr-3 mt-0.5 shrink-0" />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Test Formats -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col items-center justify-center mb-8">
+        <div class="flex items-center mb-4">
+          <div class="w-1 h-10 bg-red-600 mr-4"></div>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+            {ieltsTestCentreData.testFormats.title[locale]}
+          </h2>
+        </div>
+        <p class="text-gray-600 text-center max-w-2xl">
+          {ieltsTestCentreData.testFormats.description[locale]}
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {ieltsTestCentreData.testFormats.formats.map((format) => (
+          <div class="bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition-all">
+            <div class="flex justify-center mb-6">
+              {format.icon === 'computer' && <MonitorPlay size={64} class="text-red-600" />}
+              {format.icon === 'paper' && <FileText size={64} class="text-red-600" />}
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-3 text-center">
+              {format.title[locale]}
+            </h3>
+            <p class="text-gray-600 mb-6 text-center">
+              {format.description[locale]}
+            </p>
+            <ul class="space-y-3">
+              {format.features[locale].map((feature) => (
+                <li class="flex items-start text-gray-700">
+                  <CheckCircle2 size={20} class="text-green-500 mr-3 mt-0.5 shrink-0" />
                   <span>{feature}</span>
                 </li>
               ))}
@@ -183,7 +235,7 @@ const registerLink = ieltsTestCentreData.hero.registerLink;
         <!-- Address -->
         <div class="bg-white rounded-lg p-8 mb-8 shadow-md">
           <div class="flex items-start">
-            <MapPin size={32} class="text-red-600 mr-4 flex-shrink-0" />
+            <MapPin size={32} class="text-red-600 mr-4 shrink-0" />
             <div>
               <h3 class="text-2xl font-bold text-gray-900 mb-3">
                 {ieltsTestCentreData.centreInfo.address.label[locale]}
@@ -198,7 +250,7 @@ const registerLink = ieltsTestCentreData.hero.registerLink;
         <!-- Transportation -->
         <div class="bg-white rounded-lg p-8 mb-8 shadow-md">
           <div class="flex items-start">
-            <Navigation size={32} class="text-red-600 mr-4 flex-shrink-0" />
+            <Navigation size={32} class="text-red-600 mr-4 shrink-0" />
             <div class="flex-1">
               <h3 class="text-2xl font-bold text-gray-900 mb-4">
                 {ieltsTestCentreData.centreInfo.transportation.title[locale]}
@@ -206,7 +258,7 @@ const registerLink = ieltsTestCentreData.hero.registerLink;
               <ul class="space-y-3">
                 {ieltsTestCentreData.centreInfo.transportation.directions.map((direction) => (
                   <li class="flex items-start text-gray-700">
-                    <CheckCircle2 size={20} class="text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 size={20} class="text-green-500 mr-3 mt-0.5 shrink-0" />
                     <span>{direction[locale]}</span>
                   </li>
                 ))}
@@ -300,7 +352,7 @@ const registerLink = ieltsTestCentreData.hero.registerLink;
               <ul class="space-y-3">
                 {section.items.map((item) => (
                   <li class="flex items-start text-sm text-gray-700">
-                    <CheckCircle2 size={16} class="text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 size={16} class="text-green-500 mr-2 mt-0.5 shrink-0" />
                     <span>{item[locale]}</span>
                   </li>
                 ))}
@@ -344,7 +396,7 @@ const registerLink = ieltsTestCentreData.hero.registerLink;
               <span class="font-semibold text-gray-900 pr-4">
                 {item.question[locale]}
               </span>
-              <ChevronDown size={20} class="text-gray-600 flex-shrink-0 faq-icon transition-transform" />
+              <ChevronDown size={20} class="text-gray-600 shrink-0 faq-icon transition-transform" />
             </button>
             <div class="faq-answer px-6 pb-4 text-gray-700 hidden">
               <p>{item.answer[locale]}</p>

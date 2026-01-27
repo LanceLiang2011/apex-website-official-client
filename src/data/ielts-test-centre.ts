@@ -4,7 +4,7 @@ export const ieltsTestCentreData = {
   hero: {
     slides: [
       {
-        image: "/images/ielts/center.jpg",
+        image: "/images/ielts/008.jpg",
         title: {
           zh: "官方授权 IELTS 考试中心",
           en: "Officially Authorized IELTS Test Centre",
@@ -84,49 +84,81 @@ export const ieltsTestCentreData = {
       zh: "考试类型",
       en: "Test Types",
     },
+    description: {
+      zh: "选择适合您需求的考试类型",
+      en: "Choose the test type that suits your needs",
+    },
     types: [
       {
         icon: "academic",
         title: {
-          zh: "学术类 (Academic)",
-          en: "Academic (A)",
+          zh: "学术类",
+          en: "Academic",
+        },
+        badge: {
+          zh: "A类",
+          en: "Type A",
         },
         description: {
           zh: "适用于申请高等教育及专业注册",
           en: "For higher education and professional registration",
         },
         features: {
-          zh: ["本科/研究生申请", "学术环境评估", "国际认可"],
+          zh: [
+            "本科/研究生申请",
+            "学术环境评估",
+            "国际认可",
+            "学术类阅读与写作",
+          ],
           en: [
             "Undergraduate/Graduate applications",
             "Academic environment assessment",
             "International recognition",
+            "Academic reading and writing",
           ],
         },
       },
       {
         icon: "general",
         title: {
-          zh: "培训类 (General Training)",
-          en: "General Training (G)",
+          zh: "培训类",
+          en: "General Training",
+        },
+        badge: {
+          zh: "G类",
+          en: "Type G",
         },
         description: {
           zh: "适用于移民、工作经验及培训项目",
           en: "For immigration, work experience, and training programs",
         },
         features: {
-          zh: ["移民申请", "工作签证", "职业培训"],
+          zh: ["移民申请", "工作签证", "职业培训", "日常生活场景"],
           en: [
             "Immigration applications",
             "Work visas",
             "Professional training",
+            "Everyday life scenarios",
           ],
         },
       },
+    ],
+  },
+
+  testFormats: {
+    title: {
+      zh: "考试形式",
+      en: "Test Formats",
+    },
+    description: {
+      zh: "根据您的偏好选择考试形式",
+      en: "Choose your preferred test format",
+    },
+    formats: [
       {
         icon: "computer",
         title: {
-          zh: "机考 (Computer-based)",
+          zh: "机考",
           en: "Computer-based",
         },
         description: {
@@ -134,18 +166,19 @@ export const ieltsTestCentreData = {
           en: "Complete test on computer with faster results",
         },
         features: {
-          zh: ["3-5天出成绩", "考试时间灵活", "打字更便捷"],
+          zh: ["3-5天出成绩", "考试时间灵活", "打字更便捷", "即时字数统计"],
           en: [
             "Results in 3-5 days",
             "Flexible test times",
             "Convenient typing",
+            "Instant word count",
           ],
         },
       },
       {
         icon: "paper",
         title: {
-          zh: "纸笔考试 (Paper-based)",
+          zh: "纸笔考试",
           en: "Paper-based",
         },
         description: {
@@ -153,11 +186,12 @@ export const ieltsTestCentreData = {
           en: "Traditional paper-based test format",
         },
         features: {
-          zh: ["传统考试形式", "手写作答", "每月多场考试"],
+          zh: ["传统考试形式", "手写作答", "每月多场考试", "13天出成绩"],
           en: [
             "Traditional format",
             "Handwritten answers",
             "Multiple tests monthly",
+            "Results in 13 days",
           ],
         },
       },
@@ -173,7 +207,7 @@ export const ieltsTestCentreData = {
       zh: "观看官方视频，了解详细的考试报名步骤",
       en: "Watch the official video to learn the detailed registration steps",
     },
-    videoUrl: "https://www.youtube.com/embed/oQQTj6DNCNg",
+    videoUrl: "https://www.youtube.com/embed/nacxvsD6kUs",
   },
 
   centreInfo: {
@@ -199,8 +233,8 @@ export const ieltsTestCentreData = {
           en: "Subway: Take Viva Blue from Finch Station directly to Wertheim Ct",
         },
         {
-          zh: "驾车：Highway 7 与 Weston Rd 交界处，提供免费停车位",
-          en: "Driving: At Highway 7 and Weston Rd intersection, free parking available",
+          zh: "驾车：Highway 7 与 Leslie Street 交接处，提供免费停车位",
+          en: "Driving: At Highway 7 and Leslie Street intersection, free parking available",
         },
         {
           zh: "公交：多条 YRT 公交线路可达，详见 YRT 官网",
@@ -209,7 +243,7 @@ export const ieltsTestCentreData = {
       ],
     },
     photos: [
-      "/images/ielts/center.jpg",
+      "/images/ielts/008.jpg",
       "/images/ielts/002.jpg",
       "/images/ielts/003.jpg",
       "/images/ielts/004.jpg",
@@ -308,12 +342,12 @@ export const ieltsTestCentreData = {
         },
         items: [
           {
-            zh: "考试当天需携带有效身份证件（护照或身份证）",
-            en: "Bring valid ID (passport or ID card) on test day",
+            zh: "考试当天需携带有效身份证件（护照或PR卡）",
+            en: "Bring valid ID (passport or PR card) on test day",
           },
           {
-            zh: "提前30分钟到达考场进行签到",
-            en: "Arrive 30 minutes early for check-in",
+            zh: "提前1小时到达考场进行签到",
+            en: "Arrive 1 hour early for check-in",
           },
           {
             zh: "禁止携带电子设备、书籍等物品进入考场",
