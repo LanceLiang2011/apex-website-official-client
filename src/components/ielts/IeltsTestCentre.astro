@@ -1,0 +1,472 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ieltsTestCentreData } from '../../data/ielts-test-centre';
+import { 
+  GraduationCap, 
+  Globe2, 
+  MonitorPlay, 
+  FileText, 
+  CheckCircle2,
+  MapPin,
+  Navigation,
+  Award,
+  Armchair,
+  Users,
+  BookOpen,
+  MessageCircle,
+  ClipboardList,
+  HelpCircle,
+  ChevronDown
+} from 'lucide-astro';
+
+interface Props {
+  locale: 'zh' | 'en';
+}
+
+const { locale } = Astro.props;
+
+const title = locale === 'zh' 
+  ? 'IELTS 考试中心 - Apex Education' 
+  : 'IELTS Test Centre - Apex Education';
+
+const slides = ieltsTestCentreData.hero.slides.map(slide => ({
+  image: slide.image,
+  title: slide.title[locale],
+  subtitle: slide.subtitle[locale],
+  cta: slide.cta[locale]
+}));
+
+const registerLink = ieltsTestCentreData.hero.registerLink;
+---
+
+<BaseLayout title={title}>
+  <!-- Hero Banner with Slider -->
+  <section class="relative h-[600px] overflow-hidden group">
+    <!-- Slides -->
+    <div id="ielts-hero-slider" class="h-full w-full relative">
+      {slides.map((slide, index) => (
+        <div class={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'} slide-item`} data-index={index}>
+          <!-- Background Image -->
+          <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${slide.image}')`}></div>
+          <!-- Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
+          
+          <!-- Content -->
+          <div class="container mx-auto px-4 h-full flex items-center relative z-20">
+            <div class="max-w-2xl text-white">
+              <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight animate-fade-in-up">
+                {slide.title}
+              </h1>
+              <p class="text-lg md:text-xl mb-8 text-gray-200 animate-fade-in-up delay-100">
+                {slide.subtitle}
+              </p>
+              <a 
+                href={registerLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-4 rounded-lg transition-all transform hover:translate-y-[-2px] hover:shadow-lg animate-fade-in-up delay-200"
+              >
+                {slide.cta}
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Indicators -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex gap-3">
+      {slides.map((_, index) => (
+        <button 
+          class={`w-3 h-3 rounded-full transition-colors ${index === 0 ? 'bg-red-600' : 'bg-white/50 hover:bg-white'}`}
+          data-slide-to={index}
+          aria-label={`Go to slide ${index + 1}`}
+        ></button>
+      ))}
+    </div>
+  </section>
+
+  <!-- IELTS Introduction -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex items-center justify-center mb-6">
+          <div class="w-1 h-10 bg-red-600 mr-4"></div>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+            {ieltsTestCentreData.introduction.title[locale]}
+          </h2>
+        </div>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          {ieltsTestCentreData.introduction.description[locale]}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Test Types Overview -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-center mb-12">
+        <div class="w-1 h-10 bg-red-600 mr-4"></div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+          {ieltsTestCentreData.testTypes.title[locale]}
+        </h2>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        {ieltsTestCentreData.testTypes.types.map((type) => (
+          <div class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow">
+            <div class="flex justify-center mb-4">
+              {type.icon === 'academic' && <GraduationCap size={48} class="text-red-600" />}
+              {type.icon === 'general' && <Globe2 size={48} class="text-red-600" />}
+              {type.icon === 'computer' && <MonitorPlay size={48} class="text-red-600" />}
+              {type.icon === 'paper' && <FileText size={48} class="text-red-600" />}
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">
+              {type.title[locale]}
+            </h3>
+            <p class="text-gray-600 mb-4 text-center text-sm">
+              {type.description[locale]}
+            </p>
+            <ul class="space-y-2">
+              {type.features[locale].map((feature) => (
+                <li class="flex items-start text-sm text-gray-700">
+                  <CheckCircle2 size={16} class="text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Video -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex items-center justify-center mb-8">
+          <div class="w-1 h-10 bg-red-600 mr-4"></div>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+            {ieltsTestCentreData.registrationVideo.title[locale]}
+          </h2>
+        </div>
+        <p class="text-center text-gray-600 mb-8">
+          {ieltsTestCentreData.registrationVideo.description[locale]}
+        </p>
+        <div class="relative w-full" style="padding-bottom: 56.25%;">
+          <iframe 
+            class="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+            src={ieltsTestCentreData.registrationVideo.videoUrl}
+            title="IELTS Registration Process"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Test Centre Information -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-center mb-12">
+        <div class="w-1 h-10 bg-red-600 mr-4"></div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+          {ieltsTestCentreData.centreInfo.title[locale]}
+        </h2>
+      </div>
+
+      <div class="max-w-6xl mx-auto">
+        <!-- Address -->
+        <div class="bg-white rounded-lg p-8 mb-8 shadow-md">
+          <div class="flex items-start">
+            <MapPin size={32} class="text-red-600 mr-4 flex-shrink-0" />
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-3">
+                {ieltsTestCentreData.centreInfo.address.label[locale]}
+              </h3>
+              <p class="text-lg text-gray-700">
+                {ieltsTestCentreData.centreInfo.address.value}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transportation -->
+        <div class="bg-white rounded-lg p-8 mb-8 shadow-md">
+          <div class="flex items-start">
+            <Navigation size={32} class="text-red-600 mr-4 flex-shrink-0" />
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                {ieltsTestCentreData.centreInfo.transportation.title[locale]}
+              </h3>
+              <ul class="space-y-3">
+                {ieltsTestCentreData.centreInfo.transportation.directions.map((direction) => (
+                  <li class="flex items-start text-gray-700">
+                    <CheckCircle2 size={20} class="text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                    <span>{direction[locale]}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photos -->
+        <div class="grid md:grid-cols-3 gap-4">
+          {ieltsTestCentreData.centreInfo.photos.map((photo) => (
+            <div class="relative overflow-hidden rounded-lg shadow-md group">
+              <img 
+                src={photo} 
+                alt="Test Centre"
+                class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Centre Advantages -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-center mb-12">
+        <div class="w-1 h-10 bg-red-600 mr-4"></div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+          {ieltsTestCentreData.advantages.title[locale]}
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+        {ieltsTestCentreData.advantages.items.map((item) => (
+          <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+            <div class="flex justify-center mb-4">
+              {item.icon === 'certificate' && <Award size={48} class="text-red-600" />}
+              {item.icon === 'comfort' && <Armchair size={48} class="text-red-600" />}
+              {item.icon === 'location' && <MapPin size={48} class="text-red-600" />}
+              {item.icon === 'availability' && <CheckCircle2 size={48} class="text-red-600" />}
+              {item.icon === 'support' && <MessageCircle size={48} class="text-red-600" />}
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">
+              {item.title[locale]}
+            </h3>
+            <p class="text-sm text-gray-600">
+              {item.description[locale]}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Preparation Resources -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-center mb-12">
+        <div class="w-1 h-10 bg-red-600 mr-4"></div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+          {ieltsTestCentreData.preparationResources.title[locale]}
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {ieltsTestCentreData.preparationResources.sections.map((section) => (
+          <div class="bg-white rounded-lg p-8 shadow-md">
+            <div class="flex justify-center mb-4">
+              {section.icon === 'materials' && <BookOpen size={48} class="text-red-600" />}
+              {section.icon === 'instructions' && <ClipboardList size={48} class="text-red-600" />}
+              {section.icon === 'mock' && <Users size={48} class="text-red-600" />}
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">
+              {section.title[locale]}
+            </h3>
+            
+            {section.qrImage && (
+              <div class="text-center">
+                <p class="text-gray-600 mb-4 text-sm">{section.description[locale]}</p>
+                <img 
+                  src={section.qrImage} 
+                  alt="QR Code"
+                  class="w-48 h-48 mx-auto rounded-lg shadow-md"
+                />
+              </div>
+            )}
+
+            {section.items && (
+              <ul class="space-y-3">
+                {section.items.map((item) => (
+                  <li class="flex items-start text-sm text-gray-700">
+                    <CheckCircle2 size={16} class="text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>{item[locale]}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {section.link && !section.qrImage && (
+              <div class="text-center">
+                <p class="text-gray-600 mb-4 text-sm">{section.description[locale]}</p>
+                <a 
+                  href={section.link}
+                  class="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+                >
+                  {locale === 'zh' ? '了解更多' : 'Learn More'}
+                </a>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-center mb-12">
+        <div class="w-1 h-10 bg-red-600 mr-4"></div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+          {ieltsTestCentreData.faq.title[locale]}
+        </h2>
+      </div>
+
+      <div class="max-w-4xl mx-auto space-y-4">
+        {ieltsTestCentreData.faq.items.map((item, index) => (
+          <div class="bg-gray-50 rounded-lg overflow-hidden">
+            <button 
+              class="faq-question w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-100 transition-colors"
+              data-faq-index={index}
+            >
+              <span class="font-semibold text-gray-900 pr-4">
+                {item.question[locale]}
+              </span>
+              <ChevronDown size={20} class="text-gray-600 flex-shrink-0 faq-icon transition-transform" />
+            </button>
+            <div class="faq-answer px-6 pb-4 text-gray-700 hidden">
+              <p>{item.answer[locale]}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .faq-icon.rotate {
+    transform: rotate(180deg);
+  }
+</style>
+
+<script>
+  // Hero Slider
+  const slides = document.querySelectorAll('.slide-item');
+  const indicators = document.querySelectorAll('[data-slide-to]');
+  let currentIndex = 0;
+  const intervalTime = 5000;
+  let slideInterval: number;
+
+  function showSlide(index: number) {
+    slides.forEach((slide, i) => {
+      if (i === index) {
+        slide.classList.remove('opacity-0', 'z-0');
+        slide.classList.add('opacity-100', 'z-10');
+      } else {
+        slide.classList.remove('opacity-100', 'z-10');
+        slide.classList.add('opacity-0', 'z-0');
+      }
+    });
+
+    indicators.forEach((ind, i) => {
+      if (i === index) {
+        ind.classList.remove('bg-white/50');
+        ind.classList.add('bg-red-600');
+      } else {
+        ind.classList.add('bg-white/50');
+        ind.classList.remove('bg-red-600');
+      }
+    });
+
+    currentIndex = index;
+  }
+
+  function nextSlide() {
+    const nextIndex = (currentIndex + 1) % slides.length;
+    showSlide(nextIndex);
+  }
+
+  function startSlider() {
+    slideInterval = window.setInterval(nextSlide, intervalTime);
+  }
+
+  function stopSlider() {
+    window.clearInterval(slideInterval);
+  }
+
+  // Event Listeners for indicators
+  indicators.forEach(ind => {
+    ind.addEventListener('click', (e) => {
+      stopSlider();
+      const index = parseInt((e.target as HTMLElement).dataset.slideTo || '0');
+      showSlide(index);
+      startSlider();
+    });
+  });
+
+  // Start slider
+  startSlider();
+
+  // FAQ Accordion
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+      const answer = question.nextElementSibling as HTMLElement;
+      const icon = question.querySelector('.faq-icon');
+      
+      // Toggle current FAQ
+      const isOpen = !answer.classList.contains('hidden');
+      
+      if (isOpen) {
+        answer.classList.add('hidden');
+        icon?.classList.remove('rotate');
+      } else {
+        answer.classList.remove('hidden');
+        icon?.classList.add('rotate');
+      }
+    });
+  });
+</script>
