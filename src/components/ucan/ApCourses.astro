@@ -50,11 +50,11 @@ const apCourses: CourseData[] = [
     syllabus: {
       title: { zh: 'Pre-AP课纲', en: 'Pre-AP Syllabus' },
       topics: [
-        { title: { zh: '一次函数', en: 'Linear Function' }, hours: 1 },
-        { title: { zh: '二次函数', en: 'Quadratic Function' }, hours: 2 },
-        { title: { zh: '指数函数', en: 'Exponential Function' }, hours: 3 },
-        { title: { zh: '对数函数', en: 'Logarithmic Function' }, hours: 3 },
-        { title: { zh: '三角函数', en: 'Trigonometric Function' }, hours: 4 },
+        { title: { zh: '一次函数', en: 'Linear Function' }, hours: 2 },
+        { title: { zh: '二次函数', en: 'Quadratic Function' }, hours: 4 },
+        { title: { zh: '指数函数', en: 'Exponential Function' }, hours: 6 },
+        { title: { zh: '对数函数', en: 'Logarithmic Function' }, hours: 6 },
+        { title: { zh: '三角函数', en: 'Trigonometric Function' }, hours: 8 },
       ]
     }
   },
@@ -65,15 +65,15 @@ const apCourses: CourseData[] = [
     syllabus: {
       title: { zh: 'AP Math课纲', en: 'AP Math Syllabus' },
       topics: [
-        { title: { zh: '极限与连续性', en: 'Limits and Continuity' }, hours: 4, sub: [{ zh: '函数与特征', en: 'Functions and Their Behaviors' }, { zh: '极限概念', en: 'Limit Definitions' }] },
-        { title: { zh: '导数的定义与计算', en: 'Derivatives' }, hours: 4, sub: [{ zh: '导数定义', en: 'Definition of the Derivative' }, { zh: '基本求导规则', en: 'Basic Rules' }] },
-        { title: { zh: '导数的应用', en: 'Applications of Derivatives' }, hours: 3, sub: [{ zh: '运动问题', en: 'Motion' }, { zh: '切线与线性近似', en: 'Tangent Lines & Linear Approximation' }] },
-        { title: { zh: '积分与反导', en: 'Integrals' }, hours: 4, sub: [{ zh: '不定积分', en: 'Antiderivatives' }, { zh: '定积分', en: 'Definite Integrals' }] },
-        { title: { zh: '积分应用', en: 'Applications of Integration' }, hours: 2, sub: [{ zh: '面积', en: 'Area Between Curves' }, { zh: '旋转体体积', en: 'Volumes' }] },
-        { title: { zh: '微分方程', en: 'Differential Equations' }, hours: 3, sub: [{ zh: '斜率场', en: 'Slope Fields' }, { zh: '分离变量法', en: 'Separation of Variables' }] },
-        { title: { zh: '参数方程 (BC)', en: 'Parametric Equations (BC)' }, hours: 2, sub: [{ zh: '参数曲线的方程', en: 'The derivative of a parametric curve' }, { zh: '速度、加速度向量', en: 'Velocity and acceleration vectors' }] },
-        { title: { zh: '极坐标 (BC)', en: 'Polar Coordinates (BC)' }, hours: 2, sub: [{ zh: '极坐标曲线的导数', en: 'The derivative of polar coordinate curves' }, { zh: '面积公式', en: 'Area formula' }] },
-        { title: { zh: '数列与级数 (BC)', en: 'Sequences & Series (BC)' }, hours: 3, sub: [{ zh: '数列的极限', en: 'Limits of Sequences' }, { zh: '级数与收敛性', en: 'Convergence Tests' }, { zh: '泰勒和麦克劳林级数', en: 'Taylor & Maclaurin Series' }] },
+        { title: { zh: '极限与连续性', en: 'Limits and Continuity' }, hours: 8, sub: [{ zh: '函数与特征', en: 'Functions and Their Behaviors' }, { zh: '极限概念', en: 'Limit Definitions' }] },
+        { title: { zh: '导数的定义与计算', en: 'Derivatives' }, hours: 8, sub: [{ zh: '导数定义', en: 'Definition of the Derivative' }, { zh: '基本求导规则', en: 'Basic Rules' }] },
+        { title: { zh: '导数的应用', en: 'Applications of Derivatives' }, hours: 6, sub: [{ zh: '运动问题', en: 'Motion' }, { zh: '切线与线性近似', en: 'Tangent Lines & Linear Approximation' }] },
+        { title: { zh: '积分与反导', en: 'Integrals' }, hours: 8, sub: [{ zh: '不定积分', en: 'Antiderivatives' }, { zh: '定积分', en: 'Definite Integrals' }] },
+        { title: { zh: '积分应用', en: 'Applications of Integration' }, hours: 4, sub: [{ zh: '面积', en: 'Area Between Curves' }, { zh: '旋转体体积', en: 'Volumes' }] },
+        { title: { zh: '微分方程', en: 'Differential Equations' }, hours: 6, sub: [{ zh: '斜率场', en: 'Slope Fields' }, { zh: '分离变量法', en: 'Separation of Variables' }] },
+        { title: { zh: '参数方程 (BC)', en: 'Parametric Equations (BC)' }, hours: 4, sub: [{ zh: '参数曲线的方程', en: 'The derivative of a parametric curve' }, { zh: '速度、加速度向量', en: 'Velocity and acceleration vectors' }] },
+        { title: { zh: '极坐标 (BC)', en: 'Polar Coordinates (BC)' }, hours: 4, sub: [{ zh: '极坐标曲线的导数', en: 'The derivative of polar coordinate curves' }, { zh: '面积公式', en: 'Area formula' }] },
+        { title: { zh: '数列与级数 (BC)', en: 'Sequences & Series (BC)' }, hours: 6, sub: [{ zh: '数列的极限', en: 'Limits of Sequences' }, { zh: '级数与收敛性', en: 'Convergence Tests' }, { zh: '泰勒和麦克劳林级数', en: 'Taylor & Maclaurin Series' }] },
       ]
     }
   },
@@ -85,15 +85,15 @@ const apCourses: CourseData[] = [
       title: { zh: 'AP物理1课纲', en: 'AP Physics 1 Syllabus' },
       hours: 20,
       topics: [
-        { title: { zh: '运动学', en: 'Kinematics' }, hours: 3, sub: [{ zh: '直线运动', en: '1D Motion' }, { zh: '平面运动', en: '2D Motion' }] },
-        { title: { zh: '动力学', en: 'Dynamics' }, hours: 3, sub: [{ zh: '牛顿三大定律', en: 'Newton’s Laws' }, { zh: '常见受力分析', en: 'Force Analysis' }] },
-        { title: { zh: '能量与功', en: 'Energy and Work' }, hours: 2, sub: [{ zh: '功', en: 'Work' }, { zh: '能量', en: 'Energy' }, { zh: '功率', en: 'Power' }] },
-        { title: { zh: '动量与碰撞', en: 'Momentum & Collisions' }, hours: 2, sub: [{ zh: '动量', en: 'Momentum' }, { zh: '冲量', en: 'Impulse' }, { zh: '二维碰撞', en: '2D Collisions' }] },
-        { title: { zh: '简谐运动', en: 'Simple Harmonic Motion' }, hours: 2, sub: [{ zh: '弹簧简谐运动', en: 'Spring SHM' }, { zh: '单摆', en: 'Simple Pendulum' }] },
-        { title: { zh: '转动动力学', en: 'Rotational Motion' }, hours: 2, sub: [{ zh: '角量', en: 'Angular Quantities' }, { zh: '转动动力学', en: 'Rotational Dynamics' }, { zh: '转动惯量', en: 'Moment of Inertia' }] },
-        { title: { zh: '引力与轨道', en: 'Gravity' }, hours: 2, sub: [{ zh: '万有引力', en: 'Universal Gravitation' }, { zh: '重力场强度', en: 'Gravitational Field Strength' }, { zh: '圆周运动', en: 'Circular Motion' }] },
-        { title: { zh: '波动与声音', en: 'Waves' }, hours: 2, sub: [{ zh: '波的基本量', en: 'Basic Wave Quantities' }, { zh: '波的类型', en: 'Types' }, { zh: '声波', en: 'Sound Waves' }] },
-        { title: { zh: '简单电路', en: 'DC Circuits' }, hours: 2, sub: [{ zh: '电路基本量', en: 'Basic Circuit Quantities' }, { zh: '串联与并联', en: 'Series and Parallel Circuits' }, { zh: '基尔霍夫定律', en: 'Kirchhoff’s Laws' }] },
+        { title: { zh: '运动学', en: 'Kinematics' }, hours: 6, sub: [{ zh: '直线运动', en: '1D Motion' }, { zh: '平面运动', en: '2D Motion' }] },
+        { title: { zh: '动力学', en: 'Dynamics' }, hours: 6, sub: [{ zh: '牛顿三大定律', en: 'Newton’s Laws' }, { zh: '常见受力分析', en: 'Force Analysis' }] },
+        { title: { zh: '能量与功', en: 'Energy and Work' }, hours: 4, sub: [{ zh: '功', en: 'Work' }, { zh: '能量', en: 'Energy' }, { zh: '功率', en: 'Power' }] },
+        { title: { zh: '动量与碰撞', en: 'Momentum & Collisions' }, hours: 4, sub: [{ zh: '动量', en: 'Momentum' }, { zh: '冲量', en: 'Impulse' }, { zh: '二维碰撞', en: '2D Collisions' }] },
+        { title: { zh: '简谐运动', en: 'Simple Harmonic Motion' }, hours: 4, sub: [{ zh: '弹簧简谐运动', en: 'Spring SHM' }, { zh: '单摆', en: 'Simple Pendulum' }] },
+        { title: { zh: '转动动力学', en: 'Rotational Motion' }, hours: 4, sub: [{ zh: '角量', en: 'Angular Quantities' }, { zh: '转动动力学', en: 'Rotational Dynamics' }, { zh: '转动惯量', en: 'Moment of Inertia' }] },
+        { title: { zh: '引力与轨道', en: 'Gravity' }, hours: 4, sub: [{ zh: '万有引力', en: 'Universal Gravitation' }, { zh: '重力场强度', en: 'Gravitational Field Strength' }, { zh: '圆周运动', en: 'Circular Motion' }] },
+        { title: { zh: '波动与声音', en: 'Waves' }, hours: 4, sub: [{ zh: '波的基本量', en: 'Basic Wave Quantities' }, { zh: '波的类型', en: 'Types' }, { zh: '声波', en: 'Sound Waves' }] },
+        { title: { zh: '简单电路', en: 'DC Circuits' }, hours: 4, sub: [{ zh: '电路基本量', en: 'Basic Circuit Quantities' }, { zh: '串联与并联', en: 'Series and Parallel Circuits' }, { zh: '基尔霍夫定律', en: 'Kirchhoff’s Laws' }] },
       ]
     }
   },
@@ -105,12 +105,12 @@ const apCourses: CourseData[] = [
       title: { zh: 'AP物理2课纲', en: 'AP Physics 2 Syllabus' },
       hours: 20,
       topics: [
-        { title: { zh: '流体力学', en: 'Fluids' }, hours: 4, sub: [{ zh: '密度', en: 'Density' }, { zh: '压强', en: 'Pressure' }, { zh: '浮力', en: 'Buoyancy' }, { zh: '流体动力学', en: 'Fluid Dynamics' }] },
-        { title: { zh: '热力学', en: 'Thermodynamics' }, hours: 4, sub: [{ zh: '温度与热量', en: 'Temperature and Heat' }, { zh: '热力学定律', en: 'Laws of Thermodynamics' }] },
-        { title: { zh: '电学与电路', en: 'Electricity' }, hours: 4, sub: [{ zh: '电荷与库仑定律', en: 'Electric Charge & Coulomb’s Law' }, { zh: '电场', en: 'Electric Field' }, { zh: '电势', en: 'Electric Potential' }, { zh: '电容', en: 'Capacitors' }] },
-        { title: { zh: '磁场与电磁感应', en: 'Magnetism & Induction' }, hours: 4, sub: [{ zh: '磁力', en: 'Magnetic Force' }, { zh: '电流的磁场', en: 'Magnetic Field Produced by Currents' }, { zh: '电磁感应', en: 'Electromagnetic Induction' }, { zh: '法拉第定律', en: 'Faraday’s Law' }] },
-        { title: { zh: '光学', en: 'Optics' }, hours: 2, sub: [{ zh: '几何光学', en: 'Geometrical Optics' }, { zh: '透镜与成像', en: 'Lenses and Imaging' }, { zh: '光的波动性', en: 'Wave Nature of Light' }] },
-        { title: { zh: '现代物理', en: 'Modern Physics' }, hours: 2, sub: [{ zh: '光电效应', en: 'Photoelectric Effect' }, { zh: '原子模型', en: 'Atomic Models' }, { zh: '核物理', en: 'Nuclear Physics' }] },
+        { title: { zh: '流体力学', en: 'Fluids' }, hours: 8, sub: [{ zh: '密度', en: 'Density' }, { zh: '压强', en: 'Pressure' }, { zh: '浮力', en: 'Buoyancy' }, { zh: '流体动力学', en: 'Fluid Dynamics' }] },
+        { title: { zh: '热力学', en: 'Thermodynamics' }, hours: 8, sub: [{ zh: '温度与热量', en: 'Temperature and Heat' }, { zh: '热力学定律', en: 'Laws of Thermodynamics' }] },
+        { title: { zh: '电学与电路', en: 'Electricity' }, hours: 8, sub: [{ zh: '电荷与库仑定律', en: 'Electric Charge & Coulomb’s Law' }, { zh: '电场', en: 'Electric Field' }, { zh: '电势', en: 'Electric Potential' }, { zh: '电容', en: 'Capacitors' }] },
+        { title: { zh: '磁场与电磁感应', en: 'Magnetism & Induction' }, hours: 8, sub: [{ zh: '磁力', en: 'Magnetic Force' }, { zh: '电流的磁场', en: 'Magnetic Field Produced by Currents' }, { zh: '电磁感应', en: 'Electromagnetic Induction' }, { zh: '法拉第定律', en: 'Faraday’s Law' }] },
+        { title: { zh: '光学', en: 'Optics' }, hours: 4, sub: [{ zh: '几何光学', en: 'Geometrical Optics' }, { zh: '透镜与成像', en: 'Lenses and Imaging' }, { zh: '光的波动性', en: 'Wave Nature of Light' }] },
+        { title: { zh: '现代物理', en: 'Modern Physics' }, hours: 4, sub: [{ zh: '光电效应', en: 'Photoelectric Effect' }, { zh: '原子模型', en: 'Atomic Models' }, { zh: '核物理', en: 'Nuclear Physics' }] },
       ]
     }
   },
@@ -121,15 +121,15 @@ const apCourses: CourseData[] = [
     syllabus: {
       title: { zh: 'AP Chemistry教纲', en: 'AP Chemistry Syllabus' },
       topics: [
-        { title: { zh: '原子结构与性质', en: 'Atomic Structure and Properties' }, hours: 2 },
-        { title: { zh: '分子与离子化合物的结构与性质', en: 'Molecular and Ionic Compound Structure and Properties' }, hours: 2 },
-        { title: { zh: '分子间作用力与物质的性质', en: 'Intermolecular Forces and Properties' }, hours: 2 },
-        { title: { zh: '化学反应', en: 'Chemical Reactions' }, hours: 2 },
-        { title: { zh: '化学动力学', en: 'Kinetics' }, hours: 3 },
-        { title: { zh: '热力学', en: 'Thermodynamics' }, hours: 2 },
-        { title: { zh: '化学平衡', en: 'Equilibrium' }, hours: 2 },
-        { title: { zh: '酸碱平衡', en: 'Acids and Bases' }, hours: 2 },
-        { title: { zh: '热力学：熵、自由能、电化学', en: 'Thermodynamics: Entropy, Free Energy, Electrochemistry' }, hours: 3 },
+        { title: { zh: '原子结构与性质', en: 'Atomic Structure and Properties' }, hours: 4 },
+        { title: { zh: '分子与离子化合物的结构与性质', en: 'Molecular and Ionic Compound Structure and Properties' }, hours: 4 },
+        { title: { zh: '分子间作用力与物质的性质', en: 'Intermolecular Forces and Properties' }, hours: 4 },
+        { title: { zh: '化学反应', en: 'Chemical Reactions' }, hours: 4 },
+        { title: { zh: '化学动力学', en: 'Kinetics' }, hours: 6 },
+        { title: { zh: '热力学', en: 'Thermodynamics' }, hours: 4 },
+        { title: { zh: '化学平衡', en: 'Equilibrium' }, hours: 4 },
+        { title: { zh: '酸碱平衡', en: 'Acids and Bases' }, hours: 4 },
+        { title: { zh: '热力学：熵、自由能、电化学', en: 'Thermodynamics: Entropy, Free Energy, Electrochemistry' }, hours: 6 },
       ]
     }
   },
@@ -140,14 +140,14 @@ const apCourses: CourseData[] = [
     syllabus: {
       title: { zh: 'AP生物课纲', en: 'AP Biology Syllabus' },
       topics: [
-        { title: { zh: '生命化学', en: 'Chemistry of Life' }, hours: 2 },
-        { title: { zh: '细胞结构与功能', en: 'Cell Structure and Function' }, hours: 2 },
-        { title: { zh: '细胞能量学', en: 'Cellular Energetics' }, hours: 3 },
-        { title: { zh: '细胞通讯与细胞周期', en: 'Cell Communication and Cell Cycle' }, hours: 2 },
-        { title: { zh: '遗传学', en: 'Heredity' }, hours: 3 },
-        { title: { zh: '基因表达与调控', en: 'Gene Expression and Regulation' }, hours: 3 },
-        { title: { zh: '自然选择', en: 'Natural Selection' }, hours: 3 },
-        { title: { zh: '生态学', en: 'Ecology' }, hours: 2 },
+        { title: { zh: '生命化学', en: 'Chemistry of Life' }, hours: 4 },
+        { title: { zh: '细胞结构与功能', en: 'Cell Structure and Function' }, hours: 4 },
+        { title: { zh: '细胞能量学', en: 'Cellular Energetics' }, hours: 6 },
+        { title: { zh: '细胞通讯与细胞周期', en: 'Cell Communication and Cell Cycle' }, hours: 4 },
+        { title: { zh: '遗传学', en: 'Heredity' }, hours: 6 },
+        { title: { zh: '基因表达与调控', en: 'Gene Expression and Regulation' }, hours: 6 },
+        { title: { zh: '自然选择', en: 'Natural Selection' }, hours: 6 },
+        { title: { zh: '生态学', en: 'Ecology' }, hours: 4 },
       ]
     }
   },
@@ -159,12 +159,12 @@ const apCourses: CourseData[] = [
       title: { zh: 'AP统计课纲', en: 'AP Statistics Syllabus' },
       hours: 20,
       topics: [
-        { title: { zh: '数据分析', en: 'Exploring Data' }, hours: 2, sub: [{ zh: '数据类型', en: 'Types' }, { zh: '描述一维数据', en: 'One-variable' }, { zh: '正态分布', en: 'Normal Distribution' }] },
-        { title: { zh: '双变量数据', en: 'Two-variable Data' }, hours: 3, sub: [{ zh: '散点图描述', en: 'Scatterplots' }, { zh: '相关系数', en: 'Correlation Coefficient' }, { zh: '回归模型', en: 'Regression Model' }] },
-        { title: { zh: '抽样与实验', en: 'Sampling & Experimentation' }, hours: 3, sub: [{ zh: '抽样方法', en: 'Sampling methods' }, { zh: '偏差类型', en: 'Types of bias' }] },
-        { title: { zh: '概率与随机变量', en: 'Probability & Random variable' }, hours: 4, sub: [{ zh: '基本概率规则', en: 'Basic rules of probability' }, { zh: '条件概率', en: 'Conditional probability' }, { zh: '随机变量', en: 'Random variable' }] },
-        { title: { zh: '抽样分布', en: 'Sampling Distributions' }, hours: 4, sub: [{ zh: '样本比例', en: 'Sample Proportion' }, { zh: '样本均值', en: 'Sample Mean' }] },
-        { title: { zh: '推断', en: 'Inference' }, hours: 4, sub: [{ zh: '置信区间', en: 'Confidence Interval' }, { zh: '假设检验', en: 'Hypothesis Test' }, { zh: '两样本检验', en: 'Two-sample test' }] },
+        { title: { zh: '数据分析', en: 'Exploring Data' }, hours: 4, sub: [{ zh: '数据类型', en: 'Types' }, { zh: '描述一维数据', en: 'One-variable' }, { zh: '正态分布', en: 'Normal Distribution' }] },
+        { title: { zh: '双变量数据', en: 'Two-variable Data' }, hours: 6, sub: [{ zh: '散点图描述', en: 'Scatterplots' }, { zh: '相关系数', en: 'Correlation Coefficient' }, { zh: '回归模型', en: 'Regression Model' }] },
+        { title: { zh: '抽样与实验', en: 'Sampling & Experimentation' }, hours: 6, sub: [{ zh: '抽样方法', en: 'Sampling methods' }, { zh: '偏差类型', en: 'Types of bias' }] },
+        { title: { zh: '概率与随机变量', en: 'Probability & Random variable' }, hours: 8, sub: [{ zh: '基本概率规则', en: 'Basic rules of probability' }, { zh: '条件概率', en: 'Conditional probability' }, { zh: '随机变量', en: 'Random variable' }] },
+        { title: { zh: '抽样分布', en: 'Sampling Distributions' }, hours: 8, sub: [{ zh: '样本比例', en: 'Sample Proportion' }, { zh: '样本均值', en: 'Sample Mean' }] },
+        { title: { zh: '推断', en: 'Inference' }, hours: 8, sub: [{ zh: '置信区间', en: 'Confidence Interval' }, { zh: '假设检验', en: 'Hypothesis Test' }, { zh: '两样本检验', en: 'Two-sample test' }] },
       ]
     }
   },
@@ -175,16 +175,16 @@ const apCourses: CourseData[] = [
     syllabus: {
       title: { zh: 'AP计算机课纲', en: 'AP Computer Science A Syllabus' },
       topics: [
-        { title: { zh: '基本类型', en: 'Primitive Types' }, hours: 2 },
-        { title: { zh: '对象使用', en: 'Using Objects' }, hours: 2 },
-        { title: { zh: '布尔表达式与if语句', en: 'Boolean Expressions and if Statements' }, hours: 2 },
-        { title: { zh: '迭代', en: 'Iteration' }, hours: 3 },
-        { title: { zh: '类编写', en: 'Writing Classes' }, hours: 3 },
-        { title: { zh: '数组', en: 'Array' }, hours: 2 },
-        { title: { zh: 'ArrayList', en: 'ArrayList' }, hours: 2 },
-        { title: { zh: '二维数组', en: '2D Array' }, hours: 2 },
-        { title: { zh: '继承', en: 'Inheritance' }, hours: 2 },
-        { title: { zh: '递归', en: 'Recursion' }, hours: 1 },
+        { title: { zh: '基本类型', en: 'Primitive Types' }, hours: 4 },
+        { title: { zh: '对象使用', en: 'Using Objects' }, hours: 4 },
+        { title: { zh: '布尔表达式与if语句', en: 'Boolean Expressions and if Statements' }, hours: 4 },
+        { title: { zh: '迭代', en: 'Iteration' }, hours: 6 },
+        { title: { zh: '类编写', en: 'Writing Classes' }, hours: 6 },
+        { title: { zh: '数组', en: 'Array' }, hours: 4 },
+        { title: { zh: 'ArrayList', en: 'ArrayList' }, hours: 4 },
+        { title: { zh: '二维数组', en: '2D Array' }, hours: 4 },
+        { title: { zh: '继承', en: 'Inheritance' }, hours: 4 },
+        { title: { zh: '递归', en: 'Recursion' }, hours: 2 },
       ]
     }
   },
