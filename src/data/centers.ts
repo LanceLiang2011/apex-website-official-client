@@ -31,8 +31,8 @@ export const centers: Center[] = [
       en: 'Language Connects the World, Communication Creates the Future'
     },
     description: {
-      zh: '简言语言培训中心提供专业的语言培训服务，包括托福、雅思、多邻国等标化考试培训，以及英语口语、写作等实用技能提升课程。',
-      en: 'Simple Language Training Center offers professional language training services, including standardized test prep for TOEFL, IELTS, Duolingo, as well as practical skills improvement in English speaking and writing.'
+      zh: '简言语言培训中心提供专业的语言培训服务，包括托福、雅思、思培等标化考试培训，以及英语口语、写作等实用技能提升课程。',
+      en: 'Simple Language Training Center offers professional language training services, including standardized test prep for TOEFL, IELTS, CELPIP, as well as practical skills improvement in English speaking and writing.'
     },
     courses: ['simple-toefl', 'simple-ielts'],
     heroImage: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop'
