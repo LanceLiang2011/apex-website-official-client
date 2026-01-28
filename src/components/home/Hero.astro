@@ -23,7 +23,7 @@ const slides = content.home.hero.slides.map(slide => ({
     {slides.map((slide, index) => (
       <div class={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'} slide-item`} data-index={index}>
         <!-- Background Image -->
-        <div class="absolute inset-0 bg-center hero-bg-image" style={`background-image: url('${slide.image}')`}></div>
+        <div class={`absolute inset-0 bg-cover ${index < 2 ? 'bg-center' : 'bg-top'}`} style={`background-image: url('${slide.image}')`}></div>
         <!-- Overlay -->
         <div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
         
@@ -61,11 +61,6 @@ const slides = content.home.hero.slides.map(slide => ({
 </section>
 
 <style>
-  .hero-bg-image {
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-
   .animate-fade-in-up {
     animation: fadeInUp 0.8s ease-out forwards;
     opacity: 0;
