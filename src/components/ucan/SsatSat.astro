@@ -91,6 +91,96 @@ const ssatInfo = {
   }
 };
 
+const satInfo = {
+  intro: {
+    title: { zh: '什么是 SAT？', en: 'What is SAT?' },
+    description: {
+      zh: 'SAT（Scholastic Assessment Test）是由美国大学理事会（College Board）主办的标准化考试，是美国大学申请过程中最重要的标准化考试之一。SAT成绩是世界各国高中生申请美国、加拿大及其他国家大学入学资格及奖学金的重要参考。',
+      en: 'The SAT (Scholastic Assessment Test) is a standardized test administered by the College Board and is one of the most important standardized tests in the U.S. college admission process. SAT scores are a critical reference for high school students worldwide applying to universities in the United States, Canada, and other countries for admission and scholarships.'
+    }
+  },
+  structure: {
+    title: { zh: '考试结构', en: 'Test Structure' },
+    items: [
+      {
+        title: { zh: '阅读与写作', en: 'Reading and Writing' },
+        icon: BookOpen,
+        time: { zh: '64 分钟', en: '64 minutes' },
+        score: { zh: '200-800 分', en: '200-800' },
+        desc: { zh: '包含阅读理解和语法题，考察文学、历史、社会科学和自然科学等领域的文章理解能力。', en: 'Includes reading comprehension and grammar questions, testing understanding of passages from literature, history, social sciences, and natural sciences.' }
+      },
+      {
+        title: { zh: '数学', en: 'Math' },
+        icon: Calculator,
+        time: { zh: '70 分钟', en: '70 minutes' },
+        score: { zh: '200-800 分', en: '200-800' },
+        desc: { zh: '涵盖代数、问题解决与数据分析、高等数学入门和几何与三角学等内容。', en: 'Covers algebra, problem-solving and data analysis, advanced math fundamentals, and geometry & trigonometry.' }
+      }
+    ]
+  },
+  sections: {
+    title: { zh: 'SAT 详细内容', en: 'SAT Content Breakdown' },
+    reading: {
+      title: { zh: '阅读与写作 (Reading and Writing)', en: 'Reading and Writing' },
+      subtitle: { zh: '64分钟 | 54题 | 200-800分', en: '64 minutes | 54 questions | 200-800 points' },
+      parts: [
+        {
+          name: { zh: '阅读理解', en: 'Reading' },
+          desc: { zh: '文学作品、历史/社会科学、自然科学文章理解与分析', en: 'Literary passages, history/social studies, and science passage analysis' }
+        },
+        {
+          name: { zh: '语法与写作', en: 'Writing and Language' },
+          desc: { zh: '标准英语规范、句子结构、标点符号、修辞技巧', en: 'Standard English conventions, sentence structure, punctuation, and rhetorical skills' }
+        }
+      ]
+    },
+    math: {
+      title: { zh: '数学 (Math)', en: 'Math' },
+      subtitle: { zh: '70分钟 | 44题 | 200-800分', en: '70 minutes | 44 questions | 200-800 points' },
+      parts: [
+        {
+          name: { zh: '代数', en: 'Algebra' },
+          desc: { zh: '线性方程与不等式、线性函数及其图像', en: 'Linear equations and inequalities, linear functions and graphs' }
+        },
+        {
+          name: { zh: '问题解决与数据分析', en: 'Problem Solving and Data Analysis' },
+          desc: { zh: '比率、百分比、单位换算、统计图表分析', en: 'Ratios, percentages, unit conversion, statistical chart analysis' }
+        },
+        {
+          name: { zh: '高等数学入门', en: 'Advanced Math' },
+          desc: { zh: '二次函数、指数函数、多项式运算、复数', en: 'Quadratic functions, exponential functions, polynomial operations, complex numbers' }
+        },
+        {
+          name: { zh: '几何与三角学', en: 'Geometry and Trigonometry' },
+          desc: { zh: '平面几何、立体几何、三角函数基础', en: 'Plane geometry, solid geometry, basic trigonometric functions' }
+        }
+      ]
+    }
+  },
+  details: {
+    format: {
+      title: { zh: '考试形式', en: 'Test Format' },
+      content: { zh: '2024年起，SAT已全面转为机考（Digital SAT）。考试时长约2小时14分钟，采用自适应考试系统，根据考生第一模块的表现调整第二模块的难度。机考可使用College Board提供的在线计算器。', en: 'Starting in 2024, the SAT has fully transitioned to a digital format (Digital SAT). The test duration is approximately 2 hours and 14 minutes. It uses an adaptive testing system that adjusts the difficulty of the second module based on performance in the first module. An online calculator provided by College Board is available during the test.' },
+      icon: Clock
+    },
+    scoring: {
+      title: { zh: '评分标准', en: 'Scoring' },
+      content: { zh: 'SAT总分为400-1600分，由阅读与写作（200-800分）和数学（200-800分）两部分组成。大多数美国Top 50大学的SAT平均分在1400-1550分之间。', en: 'The SAT total score ranges from 400 to 1600, comprised of Reading and Writing (200-800) and Math (200-800). Most U.S. Top 50 universities have average SAT scores between 1400-1550.' },
+      icon: BarChart3
+    },
+    schedule: {
+      title: { zh: '考试时间', en: 'Test Dates' },
+      content: { zh: '每年提供多次国际考试机会（通常在3月、5月、6月、8月、10月、11月、12月）。建议学生在11年级（高二）开始参加考试，并根据申请时间表合理安排2-3次考试。', en: 'International tests are offered multiple times per year (typically in March, May, June, August, October, November, and December). Students are advised to begin taking the test in 11th grade and plan for 2-3 test attempts based on their application timeline.' },
+      icon: Calendar
+    },
+    importance: {
+      title: { zh: '重要性', en: 'Importance' },
+      content: { zh: 'SAT成绩是申请美国和加拿大大多数大学的重要标准之一。优秀的SAT成绩不仅能提高录取机会，还是获得奖学金的关键因素。许多学校采用"Test-Optional"政策，但提交优秀的SAT成绩仍能显著增强申请竞争力。', en: 'SAT scores are a crucial criterion for applying to most universities in the United States and Canada. Excellent SAT scores not only enhance admission chances but are also key to earning scholarships. While many schools have adopted "Test-Optional" policies, submitting strong SAT scores can still significantly strengthen application competitiveness.' },
+      icon: Award
+    }
+  }
+};
+
 ---
 
 <BaseLayout title={`${course.name[locale]} - ${center.name[locale]}`}>
@@ -203,6 +293,165 @@ const ssatInfo = {
             <h3 class="text-2xl font-bold mb-4">{ssatInfo.details.scoring.title[locale]}</h3>
             <p class="text-gray-600 leading-relaxed">
               {ssatInfo.details.scoring.content[locale]}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAT Section Divider -->
+  <section class="py-8 bg-gradient-to-r from-blue-600 to-purple-600">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold text-white">SAT</h2>
+    </div>
+  </section>
+
+  <!-- SAT Intro Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">{satInfo.intro.title[locale]}</h2>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          {satInfo.intro.description[locale]}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAT Structure Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">{satInfo.structure.title[locale]}</h2>
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {satInfo.structure.items.map((item, index) => (
+          <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow relative overflow-hidden group">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+            <div class="w-12 h-12 bg-gradient-to-br from-blue-50 to-purple-50 text-blue-600 rounded-lg flex items-center justify-center mb-6 group-hover:from-blue-600 group-hover:to-purple-600 group-hover:text-white transition-all">
+              <item.icon class="w-6 h-6" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">{item.title[locale]}</h3>
+            <div class="flex gap-4 mb-4">
+              <span class="inline-flex items-center gap-1 bg-blue-50 text-blue-700 text-sm font-medium px-3 py-1 rounded-full">
+                <Clock class="w-3 h-3" />
+                {item.time[locale]}
+              </span>
+              <span class="inline-flex items-center gap-1 bg-purple-50 text-purple-700 text-sm font-medium px-3 py-1 rounded-full">
+                <Target class="w-3 h-3" />
+                {item.score[locale]}
+              </span>
+            </div>
+            <p class="text-gray-600">
+              {item.desc[locale]}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SAT Detailed Content Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">{satInfo.sections.title[locale]}</h2>
+      <div class="max-w-5xl mx-auto space-y-8">
+        <!-- Reading and Writing -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl border border-blue-100">
+          <div class="flex items-start gap-4 mb-6">
+            <div class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shrink-0">
+              <BookOpen class="w-6 h-6" />
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-2">{satInfo.sections.reading.title[locale]}</h3>
+              <p class="text-blue-700 font-medium">{satInfo.sections.reading.subtitle[locale]}</p>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            {satInfo.sections.reading.parts.map(part => (
+              <div class="bg-white p-5 rounded-xl border border-blue-100">
+                <h4 class="font-bold text-gray-900 mb-2">{part.name[locale]}</h4>
+                <p class="text-sm text-gray-600">{part.desc[locale]}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Math -->
+        <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-2xl border border-purple-100">
+          <div class="flex items-start gap-4 mb-6">
+            <div class="w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center shrink-0">
+              <Calculator class="w-6 h-6" />
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-2">{satInfo.sections.math.title[locale]}</h3>
+              <p class="text-purple-700 font-medium">{satInfo.sections.math.subtitle[locale]}</p>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            {satInfo.sections.math.parts.map(part => (
+              <div class="bg-white p-5 rounded-xl border border-purple-100">
+                <h4 class="font-bold text-gray-900 mb-2">{part.name[locale]}</h4>
+                <p class="text-sm text-gray-600">{part.desc[locale]}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAT Details Section -->
+  <section class="py-16 bg-gray-50 text-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <!-- Format -->
+        <div class="flex gap-6">
+          <div class="shrink-0 w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center">
+            <satInfo.details.format.icon class="w-8 h-8" />
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4">{satInfo.details.format.title[locale]}</h3>
+            <p class="text-gray-600 leading-relaxed">
+              {satInfo.details.format.content[locale]}
+            </p>
+          </div>
+        </div>
+
+        <!-- Scoring -->
+        <div class="flex gap-6">
+          <div class="shrink-0 w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center">
+            <satInfo.details.scoring.icon class="w-8 h-8" />
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4">{satInfo.details.scoring.title[locale]}</h3>
+            <p class="text-gray-600 leading-relaxed">
+              {satInfo.details.scoring.content[locale]}
+            </p>
+          </div>
+        </div>
+
+        <!-- Schedule -->
+        <div class="flex gap-6">
+          <div class="shrink-0 w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center">
+            <satInfo.details.schedule.icon class="w-8 h-8" />
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4">{satInfo.details.schedule.title[locale]}</h3>
+            <p class="text-gray-600 leading-relaxed">
+              {satInfo.details.schedule.content[locale]}
+            </p>
+          </div>
+        </div>
+
+        <!-- Importance -->
+        <div class="flex gap-6">
+          <div class="shrink-0 w-16 h-16 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center">
+            <satInfo.details.importance.icon class="w-8 h-8" />
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-4">{satInfo.details.importance.title[locale]}</h3>
+            <p class="text-gray-600 leading-relaxed">
+              {satInfo.details.importance.content[locale]}
             </p>
           </div>
         </div>
