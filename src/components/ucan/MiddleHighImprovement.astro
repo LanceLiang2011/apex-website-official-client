@@ -26,6 +26,16 @@ const { course, center, locale } = Astro.props;
 // Syllabus Data
 const syllabusData = {
   math: {
+    g7_8: {
+      title: { zh: '7-8年级数学', en: 'Grade 7-8 Math' },
+      topics: [
+        { title: { zh: '数与计数', en: 'Number / Numeracy' }, hours: 8, sub: [{ zh: '表达', en: 'Represent' }, { zh: '比较', en: 'Compare' }, { zh: '排序', en: 'Order numbers' }, { zh: '转换', en: 'Convert' }, { zh: '运算', en: 'Operation' }] },
+        { title: { zh: '代数', en: 'Algebra' }, hours: 12, sub: [{ zh: '变量表达式', en: 'Expressions with variables' }, { zh: '合并同类项', en: 'Combine expressions' }, { zh: '方程', en: 'Equations' }, { zh: '不等式', en: 'Inequalities' }] },
+        { title: { zh: '数据', en: 'Data' }, hours: 8, sub: [{ zh: '数据图表', en: 'Data representation' }, { zh: '平均数/中位数/众数', en: 'Mean/Median/Mode' }, { zh: '概率', en: 'Probability' }, { zh: '解读数据关系并得出结论', en: 'Interpret relationships & Draw conclusions' }] },
+        { title: { zh: '测量与几何', en: 'Measurement and Geometry' }, hours: 8, sub: [{ zh: '属性', en: 'Properties' }, { zh: '变换', en: 'Transformation' }, { zh: '运动', en: 'Movement' }, { zh: '二维及三维测量', en: 'Measurement in 2D & 3D' }] },
+        { title: { zh: '金融素养', en: 'Financial Literacy' }, hours: 4, sub: [] },
+      ]
+    },
     g9: {
       title: { zh: '9年级数学', en: 'Grade 9 Math' },
       topics: [
