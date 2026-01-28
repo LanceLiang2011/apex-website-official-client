@@ -1,6 +1,6 @@
 ---
 import type { Locale } from '../../data/types';
-import { posts } from '../../data/posts';
+import { getCollection } from 'astro:content';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { content as siteContent } from '../../data/content';
 
@@ -9,7 +9,12 @@ interface Props {
 }
 const { locale } = Astro.props;
 
+const allPosts = await getCollection('posts');
+const posts = allPosts.sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
 const latestPosts = posts.slice(0, 3);
+
 const blogContent = siteContent.home.blog;
 const commonButtons = siteContent.common.buttons;
 ---
@@ -35,40 +40,44 @@ const commonButtons = siteContent.common.buttons;
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {latestPosts.map(post => (
-        <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden flex flex-col group">
-          <div class="h-48 overflow-hidden relative">
-            <img 
-              src={post.image} 
-              alt={post.title[locale]} 
-              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-            />
-            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-bold text-text-main shadow-sm">
-              {post.date}
+      {latestPosts.map(entry => {
+        const post = entry.data;
+        const slug = entry.id.replace('.md', '');
+        return (
+          <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden flex flex-col group">
+            <div class="h-48 overflow-hidden relative">
+              <img 
+                src={post.image} 
+                alt={post.title[locale]} 
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-bold text-text-main shadow-sm">
+                {post.date}
+              </div>
             </div>
-          </div>
-          
-          <div class="p-6 flex-grow flex flex-col">
-            <div class="text-xs font-medium text-primary-blue mb-2 uppercase tracking-wider">
-              {post.category[locale]}
-            </div>
-            <h3 class="text-xl font-bold text-text-main mb-3 line-clamp-2 group-hover:text-primary-blue transition-colors">
-              <a href={getRelativeLocaleUrl(locale, `education-info/${post.slug}`)}>
-                {post.title[locale]}
+            
+            <div class="p-6 flex-grow flex flex-col">
+              <div class="text-xs font-medium text-primary-blue mb-2 uppercase tracking-wider">
+                {post.category[locale]}
+              </div>
+              <h3 class="text-xl font-bold text-text-main mb-3 line-clamp-2 group-hover:text-primary-blue transition-colors">
+                <a href={getRelativeLocaleUrl(locale, `education-info/${slug}`)}>
+                  {post.title[locale]}
+                </a>
+              </h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">
+                {post.excerpt[locale]}
+              </p>
+              <a 
+                href={getRelativeLocaleUrl(locale, `education-info/${slug}`)} 
+                class="text-primary-blue font-medium text-sm hover:underline mt-auto inline-block"
+              >
+                {commonButtons.readMore[locale]}
               </a>
-            </h3>
-            <p class="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">
-              {post.excerpt[locale]}
-            </p>
-            <a 
-              href={getRelativeLocaleUrl(locale, `education-info/${post.slug}`)} 
-              class="text-primary-blue font-medium text-sm hover:underline mt-auto inline-block"
-            >
-              {commonButtons.readMore[locale]}
-            </a>
-          </div>
-        </article>
-      ))}
+            </div>
+          </article>
+        );
+      })}
     </div>
 
     <div class="mt-8 text-center md:hidden">

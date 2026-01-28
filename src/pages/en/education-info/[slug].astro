@@ -1,15 +1,17 @@
 ---
 import PostPage from '../../../components/pages/PostPage.astro';
-import { posts } from '../../../data/posts';
+import { getCollection } from 'astro:content';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
   return posts.map(post => ({
-    params: { slug: post.slug },
+    params: { slug: post.id.replace('.md', '') },
     props: { post }
   }));
 }
 
 const { post } = Astro.props;
+const { Content } = await post.render();
 ---
 
-<PostPage post={post} locale="en" />
+<PostPage entry={post} Content={Content} locale="en" />
