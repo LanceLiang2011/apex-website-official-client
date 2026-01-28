@@ -390,8 +390,8 @@ export const ieltsTestCentreData = {
           en: "How long does it take to receive results?",
         },
         answer: {
-          zh: "纸笔考试通常13天后公布成绩，机考则在3-5个工作日内出成绩。成绩公布后，您将收到电子邮件通知。",
-          en: "Paper-based test results are typically available 13 days after the test, while computer-based results are available within 3-5 business days. You will receive an email notification when results are published.",
+          zh: "纸笔考试通常13天后公布成绩，机考则在3-5个工作日内出成绩。成绩公布后，您将收到电子邮件或者短信通知。",
+          en: "Paper-based test results are typically available 13 days after the test, while computer-based results are available within 3-5 business days. You will receive an email or SMS notification when results are published.",
         },
       },
       {
@@ -400,18 +400,18 @@ export const ieltsTestCentreData = {
           en: "What format is the Speaking test?",
         },
         answer: {
-          zh: "口语考试采用一对一面试形式，由认证考官进行评估。考试分为三个部分：自我介绍、话题陈述和双向讨论，全程约11-14分钟。",
-          en: "The Speaking test is a one-on-one interview with a certified examiner. It consists of three parts: introduction, topic talk, and two-way discussion, lasting approximately 11-14 minutes in total.",
+          zh: "口语考试采用一对一面试形式，由认证考官进行评估。考试形式包括面对面或通过线上视频系统进行，但无论采用哪种形式，考生均需到达考试现场。考试共分为三个部分，全程约 11–14 分钟。",
+          en: "The Speaking test is a one-on-one interview with a certified examiner. The test format can be conducted face-to-face or through an online video system, but candidates must arrive at the test center regardless of the format. The test consists of three parts and lasts approximately 11-14 minutes in total.",
         },
       },
       {
         question: {
-          zh: "口语考试是否与笔试同一天？",
-          en: "Is the Speaking test on the same day as the written test?",
+          zh: "口语考试是否与笔试或机考同一天？",
+          en: "Is the Speaking test on the same day as the written or computer-based test?",
         },
         answer: {
-          zh: "口语考试通常安排在笔试前后一周内，具体时间以准考证为准。您将在笔试日前两天收到口语考试的具体安排通知。",
-          en: "The Speaking test is usually scheduled within a week before or after the written test. The specific time will be indicated on your admission ticket. You will receive notification of your Speaking test arrangement two days before the written test.",
+          zh: "口语考试可能安排在考试当日，也可能安排在考试前一周或考试后一周的任意一天，具体时间以考试中心最终邮件通知为准。",
+          en: "The Speaking test may be scheduled on the same day as your test, or on any day within one week before or after your test date. The specific schedule will be confirmed by the test centre via email notification.",
         },
       },
       {
@@ -420,8 +420,8 @@ export const ieltsTestCentreData = {
           en: "Can I retake individual test sections?",
         },
         answer: {
-          zh: "IELTS 考试不支持单项重考。如果您对某一科目的成绩不满意，需要重新报名完整的考试，包括听说读写四个部分。",
-          en: "IELTS does not allow retaking individual sections. If you are unsatisfied with a particular section's score, you must register for the complete test again, including all four sections: Listening, Reading, Writing, and Speaking.",
+          zh: "可以。雅思在部分考点支持单项重考（One Skill Retake），考生可在规定时间内仅重考听、说、读、写中的其中一项，是否开放及具体安排以考试中心通知为准。目前只支持机考单项重考，所以参加纸笔考试的同学是没有办法参加单项重考的。",
+          en: "Yes. IELTS offers One Skill Retake at selected test centres, allowing candidates to retake only one section (Listening, Speaking, Reading, or Writing) within a specified timeframe. Availability and specific arrangements are subject to test centre notification. Currently, One Skill Retake is only available for computer-based tests, so candidates who take the paper-based test cannot use this option.",
         },
       },
       {
@@ -430,8 +430,8 @@ export const ieltsTestCentreData = {
           en: "What should I bring on test day?",
         },
         answer: {
-          zh: "必须携带有效身份证件（与报名时使用的证件一致）。考场会提供铅笔、橡皮等文具。严禁携带手机、手表、电子设备、书籍、笔记等物品进入考场。",
-          en: "You must bring valid identification (matching the document used during registration). Pencils, erasers, and other stationery will be provided at the test centre. Mobile phones, watches, electronic devices, books, notes, and other items are strictly prohibited in the test room.",
+          zh: "必须携带有效身份证件，如护照、PR卡（与报名时使用的证件一致）。考场会提供黑笔、铅笔、橡皮等文具。严禁携带手机、手表、电子设备、书籍、笔记等物品进入考场。",
+          en: "You must bring valid identification such as passport or PR card (matching the document used during registration). Black pens, pencils, erasers, and other stationery will be provided at the test centre. Mobile phones, watches, electronic devices, books, notes, and other items are strictly prohibited in the test room.",
         },
       },
       {
@@ -440,8 +440,8 @@ export const ieltsTestCentreData = {
           en: "Cancellation and rescheduling policy",
         },
         answer: {
-          zh: "如需取消或改期，必须在考试日期前至少5周提出申请。在此期限内取消可获得部分退费；改期需支付额外费用。逾期将无法退费或改期。",
-          en: "To cancel or reschedule, you must submit your request at least 5 weeks before the test date. Cancellations within this timeframe are eligible for partial refunds; rescheduling requires an additional fee. Late requests will not be eligible for refunds or rescheduling.",
+          zh: "如果您在考试日期前5周以上取消考试，可以获得全额报名费退款，但需扣除75加币的管理费。但是，如果您在考试日期前不足5周取消考试 ，则无法获得退款。除非您能提供充分的理由证明，否则您仍需支付全部考试费用。如果您希望在预定考试日期前 5 周以上更改考试日期，您将被收取 75 加币的管理费，并且只能改期到未来 3 个月内有空位的日期。",
+          en: "If you cancel more than 5 weeks before the test date, you can receive a full refund of the registration fee minus a $75 CAD administrative fee. However, if you cancel less than 5 weeks before the test date, no refund will be provided unless you can provide sufficient justification. If you wish to reschedule more than 5 weeks before your scheduled test date, you will be charged a $75 CAD administrative fee and can only reschedule to an available date within the next 3 months.",
         },
       },
       {
@@ -450,8 +450,8 @@ export const ieltsTestCentreData = {
           en: "How to collect the Test Report Form (TRF)?",
         },
         answer: {
-          zh: "成绩公布后，您可以选择到考点现场领取纸质成绩单，或申请邮寄服务（可能需要额外费用）。同时，您也可以通过官方网站下载电子成绩单。",
-          en: "After results are published, you can collect your paper TRF at the test centre in person, or request mail delivery (additional fees may apply). You can also download an electronic copy from the official website.",
+          zh: "考试成绩公布后，成绩单将统一通过邮寄方式寄送至考生报名时填写的地址。",
+          en: "After test results are published, the Test Report Form will be uniformly mailed to the address provided during registration.",
         },
       },
       {
@@ -460,8 +460,8 @@ export const ieltsTestCentreData = {
           en: "What should I do if I don't receive my TRF?",
         },
         answer: {
-          zh: "如果在成绩公布后15个工作日内未收到成绩单，请及时联系考试中心。您可以拨打客服电话或发送邮件查询，考试中心将协助您重新寄送或提供其他解决方案。",
-          en: "If you do not receive your TRF within 15 business days after results publication, please contact the test centre promptly. You can call customer service or send an email for inquiries, and the test centre will assist in resending or providing alternative solutions.",
+          zh: "联系考试中心并提供考生的考试信息。",
+          en: "Contact the test centre and provide the candidate's test information.",
         },
       },
     ],
