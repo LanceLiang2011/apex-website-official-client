@@ -445,16 +445,22 @@ export const content = {
   contact: {
     addressHeading: { zh: "地址与定位", en: "Location" },
     hoursHeading: { zh: "营业时间", en: "Opening Hours" },
-    phone: "647-333-8811",
-    email: "contact@apex-edu.com",
+    phone: "365-550-8468",
+    email: "info@apexedus.com",
     wechat: "apex-education",
     address: {
-      zh: "30 Wertheim Ct #1, Richmond Hill, ON L4B 1B9, Canada",
-      en: "30 Wertheim Ct #1, Richmond Hill, ON L4B 1B9, Canada",
+      zh: "#1-30 Wertheim Ct, Richmond Hill, ON, L4B 1B9",
+      en: "#1-30 Wertheim Ct, Richmond Hill, ON, L4B 1B9",
     },
     openingHours: {
-      days: { zh: "周一至周日", en: "Monday - Sunday" },
-      time: { zh: "10:00 - 18:00", en: "10:00 - 18:00" },
+      weekday: {
+        days: { zh: "周一至周五", en: "Monday - Friday" },
+        time: { zh: "11:00 - 17:00", en: "11AM - 5PM" },
+      },
+      weekend: {
+        days: { zh: "周六至周日", en: "Saturday - Sunday" },
+        time: { zh: "10:00 - 18:00", en: "10AM - 6PM" },
+      },
     },
   },
   // Service Process Steps for Rise Center
