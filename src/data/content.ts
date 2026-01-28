@@ -20,38 +20,68 @@ export const content = {
     hero: {
       slides: [
         {
-          image:
-            "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop",
+          image: "/images/center/center.jpg",
           title: {
             zh: "开启您的名校之旅",
             en: "Start Your Journey to Top Universities",
           },
           subtitle: {
-            zh: "专业的学术辅导与升学规划，助力学子圆梦。",
-            en: "Professional academic tutoring & college planning to help students achieve their dreams.",
+            zh: "专业的学术辅导与升学规划，助力学子圆梦",
+            en: "Professional academic tutoring & college planning to help students achieve their dreams",
           },
           cta: {
-            zh: "了解课程",
-            en: "View Courses",
+            zh: "了解更多",
+            en: "Learn More",
           },
-          link: "/ucan",
+          link: "/about",
         },
         {
-          image:
-            "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop",
+          image: "/images/center/02.jpg",
           title: {
             zh: "语言连接世界",
             en: "Language Connects the World",
           },
           subtitle: {
-            zh: "托福、雅思、多邻国全方位培训，沟通无障碍。",
-            en: "Comprehensive training for TOEFL, IELTS, Duolingo for barrier-free communication.",
+            zh: "托福、雅思、多邻国全方位培训，沟通无障碍",
+            en: "Comprehensive TOEFL, IELTS, and Duolingo training for barrier-free communication",
           },
           cta: {
-            zh: "查看详情",
-            en: "Learn More",
+            zh: "查看课程",
+            en: "View Courses",
           },
           link: "/simple-language",
+        },
+        {
+          image: "/images/center/05.jpg",
+          title: {
+            zh: "卓越成就从这里开始",
+            en: "Excellence Begins Here",
+          },
+          subtitle: {
+            zh: "三大专业中心，为您提供全方位的教育服务",
+            en: "Three professional centers providing comprehensive education services for you",
+          },
+          cta: {
+            zh: "探索服务",
+            en: "Explore Services",
+          },
+          link: "/about",
+        },
+        {
+          image: "/images/center/10.jpg",
+          title: {
+            zh: "专业团队 用心服务",
+            en: "Professional Team, Dedicated Service",
+          },
+          subtitle: {
+            zh: "经验丰富的导师团队，个性化的教学方案",
+            en: "Experienced teaching team with personalized learning plans",
+          },
+          cta: {
+            zh: "认识我们",
+            en: "Meet Our Team",
+          },
+          link: "/about",
         },
       ],
     },
