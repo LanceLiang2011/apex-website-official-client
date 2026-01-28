@@ -195,12 +195,11 @@ const apCourses: CourseData[] = [
     syllabus: {
       title: { zh: 'AP宏观经济课纲', en: 'AP Macroeconomics Syllabus' },
       topics: [
-        { title: { zh: '基本经济概念', en: 'Basic Economic Concepts' }, hours: 2 },
-        { title: { zh: '经济指标与商业周期', en: 'Economic Indicators and the Business Cycle' }, hours: 2 },
-        { title: { zh: '国民收入与价格决定', en: 'National Income and Price Determination' }, hours: 3 },
-        { title: { zh: '金融部门', en: 'Financial Sector' }, hours: 3 },
-        { title: { zh: '长期稳定政策', en: 'Long-Run Consequences of Stabilization Policies' }, hours: 2 },
-        { title: { zh: '开放经济：国际贸易与金融', en: 'Open Economy: International Trade and Finance' }, hours: 2 },
+        { title: { zh: '单元 1 和 2：经济学基本概念、经济指标和商业周期', en: 'Unit 1 and 2: Basic Economics Concepts, Economic Indicators, and the Business Cycle' }, hours: 6, sub: [{ zh: '经济循环与国内生产总值', en: 'The Circular Flow and GDP' }, { zh: '失业率', en: 'Unemployment' }, { zh: '物价指数与通货膨胀', en: 'Price Indices and Inflation' }, { zh: '实质GDP与名目GDP', en: 'Real VS Nominal GDP' }, { zh: '商业周期', en: 'Business Cycles' }] },
+        { title: { zh: '第三单元：国民所得与价格决定', en: 'Unit 3: National Income and Price Determination' }, hours: 6, sub: [{ zh: '总合需求', en: 'Aggregate Demand' }, { zh: '短期与长期总供给', en: 'Short-run and Long-run Aggregate Supply' }, { zh: '总需求-总供给模型的均衡与变化', en: 'Equilibrium and Changes in the Aggregate Demand-Aggregate Supply Model' }, { zh: '财政政策', en: 'Fiscal Policy' }] },
+        { title: { zh: '第四单元：金融部门', en: 'Unit 4: Financial Sector' }, hours: 6, sub: [{ zh: '金融资产', en: 'Financial Assets' }, { zh: '货币的定义、计量和功能', en: 'Definition, Measurement, and Function of Money' }, { zh: '银行与货币供给', en: 'Banking and the Expansion of the Money supply' }, { zh: '货币政策', en: 'Monetary policy' }] },
+        { title: { zh: '第五单元：稳定政策的长期后果', en: 'Unit 5: Long-run Consequences of Stabilization Policies' }, hours: 6, sub: [{ zh: '菲利普曲线', en: 'The Philips Curve' }, { zh: '货币成长与通货膨胀', en: 'Money Growth and Inflation' }, { zh: '政府赤字与国债', en: 'Government Deficits and National Debt' }, { zh: '挤出效应', en: 'Crowding out' }, { zh: '经济成长', en: 'Economic Growth' }] },
+        { title: { zh: '单元6：开放经济、国际贸易与金融', en: 'Unit 6: Open Economy, International Trade and Finance' }, hours: 6, sub: [{ zh: '国际收支帐户', en: 'Balance of Payments Accounts' }, { zh: '汇率与外汇市场', en: 'Exchange Rates and the Foreign Exchange Market' }, { zh: '外汇市场政策与经济状况变动的影响', en: 'Effects of Change in Policies and Economic Conditions of the Foreign Exchange Market' }, { zh: '外汇市场变动与净出口', en: 'Changes in the Foreign Exchange Market and Net Exports' }, { zh: '实质利率与国际资本流动', en: 'Real interest Rates and International Capital Flows' }] },
       ]
     }
   },
@@ -211,42 +210,11 @@ const apCourses: CourseData[] = [
     syllabus: {
       title: { zh: 'AP微观经济课纲', en: 'AP Microeconomics Syllabus' },
       topics: [
-        { title: { zh: '基本经济概念', en: 'Basic Economic Concepts' }, hours: 2 },
-        { title: { zh: '供需关系', en: 'Supply and Demand' }, hours: 3 },
-        { title: { zh: '生产、成本与完全竞争模型', en: 'Production, Cost, and the Perfect Competition Model' }, hours: 3 },
-        { title: { zh: '不完全竞争', en: 'Imperfect Competition' }, hours: 2 },
-        { title: { zh: '要素市场', en: 'Factor Markets' }, hours: 2 },
-        { title: { zh: '市场失灵与政府角色', en: 'Market Failure and the Role of Government' }, hours: 2 },
-      ]
-    }
-  },
-  {
-    id: 'ap-lang',
-    name: { zh: 'AP英语语言与写作', en: 'AP English Language' },
-    icon: PenTool,
-    syllabus: {
-      title: { zh: 'AP英语语言与写作课纲', en: 'AP English Language Syllabus' },
-      topics: [
-        { title: { zh: '修辞分析', en: 'Rhetorical Analysis' }, hours: 4 },
-        { title: { zh: '论证与说服', en: 'Argument and Persuasion' }, hours: 4 },
-        { title: { zh: '综合写作', en: 'Synthesis Essay' }, hours: 4 },
-        { title: { zh: '风格与语气', en: 'Style and Tone' }, hours: 2 },
-        { title: { zh: '语法与机制', en: 'Grammar and Mechanics' }, hours: 2 },
-      ]
-    }
-  },
-  {
-    id: 'ap-lit',
-    name: { zh: 'AP英语文学与写作', en: 'AP English Literature' },
-    icon: BookOpen,
-    syllabus: {
-      title: { zh: 'AP英语文学与写作课纲', en: 'AP English Literature Syllabus' },
-      topics: [
-        { title: { zh: '短篇小说分析', en: 'Short Fiction Analysis' }, hours: 3 },
-        { title: { zh: '诗歌分析', en: 'Poetry Analysis' }, hours: 3 },
-        { title: { zh: '长篇小说与戏剧', en: 'Long Fiction and Drama' }, hours: 4 },
-        { title: { zh: '文学手法', en: 'Literary Devices' }, hours: 2 },
-        { title: { zh: '写作研讨', en: 'Writing Workshop' }, hours: 4 },
+        { title: { zh: '单元1：经济学基本概念', en: 'Unit 1: Basic Economics Concepts' }, hours: 6, sub: [{ zh: '稀缺性', en: 'Scarcity' }, { zh: '资源配置与经济体系', en: 'Resource Allocation and Economic Systems' }, { zh: '生产可能曲线', en: 'The production Possibilities Curve' }, { zh: '比较优势与贸易利益', en: 'Comparative Advantage and Gains from Trade' }, { zh: '成本效益分析', en: 'Cost-Benefit Analysis' }, { zh: '边际分析与消费者选择', en: 'Marginal Analysis and Consumer Choice' }] },
+        { title: { zh: '单元2：供给与需求', en: 'Unit 2: Supply and Demand' }, hours: 6, sub: [{ zh: '需求', en: 'Demand' }, { zh: '供给', en: 'Supply' }, { zh: '弹性', en: 'Elasticity' }, { zh: '市场均衡、非均衡与均衡变化', en: 'Market Equilibrium, Disequilibrium, and Changes in Equilibrium' }, { zh: '政府干预市场的影响', en: 'The Effects of Government Intervention in Markets' }, { zh: '国际贸易与公共政策', en: 'International Trade and Public Policy' }] },
+        { title: { zh: '单元3：生产、成本与完全竞争模型', en: 'Unit 3: Production, Cost, and the Perfect Competition Model' }, hours: 8, sub: [{ zh: '生产函数', en: 'The production Function' }, { zh: '短期和长期生产成本', en: 'Short and Long Turn Production Costs' }, { zh: '生产成本的类型利润', en: 'Types of Profit' }, { zh: '利润最大化', en: 'Profit Maximization' }, { zh: '完全竞争', en: 'Perfect Competition' }] },
+        { title: { zh: '第四单元：不完全竞争', en: 'Unit 4: Imperfect Competition' }, hours: 6, sub: [{ zh: '垄断', en: 'Monopoly' }, { zh: '价格歧视', en: 'Price Discrimination' }, { zh: '独占竞争', en: 'Monopolistic Competition' }, { zh: '寡占与博弈论', en: 'Oligopoly and Game Theory' }] },
+        { title: { zh: '第五单元与第六单元：要素市场、市场失灵与政府的角色', en: 'Units 5 and 6: Factor Markets, Market Failure, and the Role of Government' }, hours: 6, sub: [{ zh: '要素市场', en: 'Factor Markets' }, { zh: '要素需求与要素供给的变化', en: 'Changes in Factor Demand and Factor Supply' }, { zh: '完全竞争要素市场中的获利最大化行为', en: 'Profit-Maximizing Behavior in Perfectly Competitive Factor markets' }, { zh: '垄断性市场', en: 'Monopolistic Markets' }, { zh: '效率与不效率市场的产出', en: 'Socially Efficient and inefficient Market Outcomes' }, { zh: '外部性', en: 'Externalities' }, { zh: '公共财与私有财', en: 'Public and Private Goods' }, { zh: '收入与财富不平等', en: 'Income and Wealth Inequality' }] },
       ]
     }
   }
