@@ -415,7 +415,7 @@ const highlights = [
                                   </div>
                                 </td>
                                 <td class="py-4 px-4 text-right text-gray-600 font-mono align-top">
-                                  {topic.hours > 0 ? `${topic.hours}h` : '-'}
+                                  {topic.hours > 0 ? `${topic.hours}${locale === 'zh' ? '课时' : ' Hrs'}` : '-'}
                                 </td>
                               </tr>
                             ))}
