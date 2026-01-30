@@ -69,13 +69,13 @@ const { locale } = Astro.props;
                          </div>
 
                          <!-- Hover Overlay: Requirements -->
-                         <div class="absolute inset-0 bg-primary-blue/95 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-white text-center z-30 translate-y-4 group-hover:translate-y-0 overflow-hidden">
-                            <h4 class="font-bold text-lg mb-2 border-b border-white/30 pb-2 w-full whitespace-nowrap">{locale === 'zh' ? '申请要求' : 'Requirements'}</h4>
-                            <ul class="space-y-1 text-sm text-blue-50 text-left w-full pl-1 overflow-y-auto max-h-[70%]">
+                         <div class="absolute inset-0 bg-primary-blue/95 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6 text-white text-center z-30 translate-y-4 group-hover:translate-y-0 overflow-hidden">
+                            <h4 class="font-bold text-xl mb-3 border-b border-white/30 pb-2 w-full whitespace-nowrap">{locale === 'zh' ? '申请要求' : 'Requirements'}</h4>
+                            <ul class="space-y-2 text-lg text-blue-50 text-left w-full pl-1 overflow-y-auto max-h-[70%]">
                                {uni.requirements[locale].map(req => (
                                   <li class="flex items-start">
-                                     <span class="mr-1 text-accent-red">•</span>
-                                     <span class="leading-tight">{req}</span>
+                                     <span class="mr-2 text-accent-red text-xl">•</span>
+                                     <span class="leading-relaxed">{req}</span>
                                   </li>
                                ))}
                             </ul>
