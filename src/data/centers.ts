@@ -14,7 +14,7 @@ export const centers: Center[] = [
     },
     description: {
       zh: "优冠学术辅导中心致力于为学生提供高质量的学术辅导课程，涵盖初高中全科辅导、AP/IB/A-Level国际课程辅导以及各类国际竞赛培训。",
-      en: "UCAN Tutoring Center is dedicated to providing high-quality academic tutoring, covering middle and high school subjects, AP/IB/A-Level international curricula, and various international competition training.",
+      en: "UCAN Tutoring Center provides high-quality academic tutoring, covering middle and high school subjects, AP/IB/A-Level curricula, and international competition training.",
     },
     courses: ["ucan-ap-calc", "ucan-sat", "ucan-competition-math"],
     heroImage:
@@ -33,7 +33,7 @@ export const centers: Center[] = [
     },
     description: {
       zh: "简言语言培训中心提供专业的语言培训服务，包括托福、雅思、思培等标化考试培训，以及英语口语、写作等实用技能提升课程。",
-      en: "Simple Language Training Center offers professional language training services, including standardized test prep for TOEFL, IELTS, CELPIP, as well as practical skills improvement in English speaking and writing.",
+      en: "Simple Language Training Center offers professional language training, including TOEFL, IELTS, CELPIP test prep, and English speaking/writing skills improvement.",
     },
     courses: ["simple-toefl", "simple-ielts"],
     heroImage:
@@ -52,7 +52,7 @@ export const centers: Center[] = [
     },
     description: {
       zh: "瑞思升学规划中心为学生提供全方位的升学规划服务，包括选课指导、背景提升、文书润色及大学申请全程跟踪。",
-      en: "Rise Academic Planning Center provides comprehensive college planning services, including course selection guidance, background enhancement, essay polishing, and full-process university application tracking.",
+      en: "Rise Academic Planning Center provides comprehensive college planning services, including course selection, background enhancement, essay polishing, and application tracking.",
     },
     courses: ["rise-planning-us", "rise-planning-uk"],
     heroImage:
