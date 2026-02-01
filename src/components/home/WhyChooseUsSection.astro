@@ -102,13 +102,29 @@ const icons = [
     if (!video || !placeholder) return;
     
     let hasPlayed = false;
+    let placeholderHidden = false;
     
-    // Hide placeholder when video is ready
-    video.addEventListener('loadeddata', () => {
+    // Function to hide placeholder
+    const hidePlaceholder = () => {
+      if (placeholderHidden) return;
+      placeholderHidden = true;
       placeholder.style.opacity = '0';
       video.style.opacity = '0.7';
       setTimeout(() => placeholder.style.display = 'none', 500);
-    });
+    };
+    
+    // Hide placeholder when video is ready - try multiple events
+    video.addEventListener('loadeddata', hidePlaceholder);
+    video.addEventListener('canplay', hidePlaceholder);
+    video.addEventListener('canplaythrough', hidePlaceholder);
+    
+    // Fallback: hide placeholder after 3 seconds regardless
+    setTimeout(() => {
+      if (!placeholderHidden) {
+        console.warn('Video loading timeout, hiding placeholder anyway');
+        hidePlaceholder();
+      }
+    }, 3000);
     
     // Hide overlay when video plays
     video.addEventListener('play', () => {
