@@ -1,5 +1,6 @@
 ---
 import content from '../../data/content';
+import mainVideo from '../../assets/videos/main.mp4';
 
 const { locale } = Astro.props;
 const data = content.home.whyChooseUs as any;
@@ -77,7 +78,7 @@ const icons = [
             playsinline
             preload="auto"
           >
-            <source src="/videos/main.mp4" type="video/mp4" />
+            <source src={mainVideo} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           
