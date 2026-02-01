@@ -327,7 +327,7 @@ export const tutors: Tutor[] = [
         "5 years of teaching experience in North American high school academic curriculum",
       ],
     },
-    image: "/images/tutors/10.Nick.JPG",
+    image: "/images/tutors/10.Nick.jpg",
   },
   {
     id: 11,
