@@ -51,9 +51,9 @@ const { locale } = Astro.props;
                data-country={country.value}
             >
                {rows.map((row) => (
-                 <div class="flex flex-col lg:flex-row gap-4 mb-4 w-full h-auto lg:h-96">
+                 <div class="flex flex-col lg:flex-row gap-4 mb-4 w-full">
                    {row.map((uni) => (
-                      <div class="uni-card relative group flex-1 hover:flex-[2] transition-[flex] duration-500 ease-in-out bg-white rounded-xl shadow-sm hover:shadow-xl overflow-hidden border border-gray-100 p-4 flex flex-col items-center justify-center min-w-0">
+                      <div class="uni-card relative group flex-1 lg:hover:flex-[2] transition-[flex] duration-500 ease-in-out bg-white rounded-xl shadow-sm hover:shadow-xl overflow-hidden border border-gray-100 p-4 flex flex-col items-center justify-center min-w-0 min-h-[280px] lg:h-96">
                          
                          <!-- QS Badge -->
                          <div class="absolute top-0 left-0 bg-accent-red text-white text-xs font-bold py-1 px-3 rounded-br-lg z-20 shadow-sm whitespace-nowrap">
@@ -70,11 +70,11 @@ const { locale } = Astro.props;
 
                          <!-- Hover Overlay: Requirements -->
                          <div class="absolute inset-0 bg-primary-blue/95 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6 text-white text-center z-30 translate-y-4 group-hover:translate-y-0 overflow-hidden">
-                            <h4 class="font-bold text-xl mb-3 border-b border-white/30 pb-2 w-full whitespace-nowrap">{locale === 'zh' ? '申请要求' : 'Requirements'}</h4>
-                            <ul class="space-y-2 text-lg text-blue-50 text-left w-full pl-1 overflow-y-auto max-h-[70%]">
+                            <h4 class="font-bold text-lg lg:text-xl mb-3 border-b border-white/30 pb-2 w-full whitespace-nowrap">{locale === 'zh' ? '申请要求' : 'Requirements'}</h4>
+                            <ul class="space-y-1 lg:space-y-2 text-sm lg:text-lg text-blue-50 text-left w-full pl-1 overflow-y-auto max-h-[70%]">
                                {uni.requirements[locale].map(req => (
                                   <li class="flex items-start">
-                                     <span class="mr-2 text-accent-red text-xl">•</span>
+                                     <span class="mr-2 text-accent-red text-xl flex-shrink-0">•</span>
                                      <span class="leading-relaxed">{req}</span>
                                   </li>
                                ))}

@@ -18,7 +18,7 @@ const locale = Astro.currentLocale || 'zh';
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -26,7 +26,7 @@ const locale = Astro.currentLocale || 'zh';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-bg-light text-text-main flex flex-col min-h-screen">
+  <body class="bg-bg-light text-text-main flex flex-col min-h-screen overflow-x-hidden">
     <Header />
     <main class="flex-grow">
       <slot />

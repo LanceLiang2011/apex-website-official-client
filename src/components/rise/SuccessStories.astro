@@ -14,7 +14,7 @@ const sectionSubtitle = locale === 'zh'
   : 'Witness the journey of students achieving their dreams';
 ---
 
-<section class="py-16 bg-linear-to-br from-blue-50 to-purple-50">
+<section class="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
   <div class="container mx-auto px-4">
     <!-- Section Header -->
     <div class="text-center mb-12">
@@ -51,7 +51,7 @@ const sectionSubtitle = locale === 'zh'
                 data-alt={offer.alt}
               >
                 <!-- Image Container -->
-                <div class="relative w-full aspect-3/4 overflow-hidden">
+                <div class="relative w-full aspect-[3/4] overflow-hidden">
                   <img 
                     src={offer.image} 
                     alt={offer.alt} 
@@ -59,7 +59,7 @@ const sectionSubtitle = locale === 'zh'
                   />
                   
                   <!-- Gradient Overlay on hover -->
-                  <div class="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   <!-- Click hint -->
                   <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -72,7 +72,7 @@ const sectionSubtitle = locale === 'zh'
                 </div>
 
                 <!-- Award Badge -->
-                <div class="absolute top-4 right-4 bg-linear-to-br from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform duration-300">
+                <div class="absolute top-4 right-4 bg-gradient-to-br from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform duration-300">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                   </svg>

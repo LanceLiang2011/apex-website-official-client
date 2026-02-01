@@ -38,10 +38,10 @@ const { locale } = Astro.props;
       </div>
 
       <!-- Level 2 Tabs: Degree -->
-      <div class="flex items-center gap-4 mb-8">
+      <div class="flex flex-wrap items-center gap-4 mb-8">
         {degreeOptions.map((degree, index) => (
           <button
-            class={`degree-tab px-8 py-2.5 rounded text-sm font-bold transition-all duration-300 shadow-sm ${
+            class={`degree-tab px-6 lg:px-8 py-2.5 rounded text-sm font-bold transition-all duration-300 shadow-sm ${
               index === 0
                 ? 'bg-primary-blue text-white active' // "Our style" blue
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
