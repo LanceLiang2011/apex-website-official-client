@@ -53,26 +53,35 @@ const icons = [
         </div>
       </div>
 
-      <!-- Right Column: Video Placeholder -->
+      <!-- Right Column: Video -->
       <div class="relative">
         <!-- Decorative background element -->
         <div class="absolute -right-20 -top-20 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-50 z-0"></div>
         <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-red-50 rounded-full blur-3xl opacity-50 z-0"></div>
         
-        <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-900 group cursor-pointer border-4 border-white">
-          <img 
-            src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" 
-            alt="About Us Video" 
-            class="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500"
-          />
-          <div class="absolute inset-0 flex items-center justify-center">
-             <div class="w-20 h-20 bg-accent-red rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                   <path d="M8 5v14l11-7z"/>
-                </svg>
-             </div>
+        <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl aspect-video bg-gray-900 border-4 border-white" id="video-container">
+          <!-- Loading placeholder -->
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-900 to-purple-900 flex items-center justify-center" id="video-placeholder">
+            <div class="text-center">
+              <div class="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <p class="text-white text-sm font-medium">Loading video...</p>
+            </div>
           </div>
-          <div class="absolute bottom-6 left-6 right-6">
+          
+          <!-- Video element -->
+          <video 
+            id="about-video"
+            class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
+            muted
+            loop
+            playsinline
+            preload="auto"
+          >
+            <source src="/videos/main.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          
+          <div class="absolute bottom-6 left-6 right-6 z-20 transition-opacity duration-500" id="video-overlay">
              <p class="text-white text-sm font-medium uppercase tracking-wider mb-1 text-shadow">Watch Our Story</p>
              <h3 class="text-white text-2xl font-bold text-shadow-lg">Empowering Future Leaders</h3>
           </div>
@@ -82,3 +91,50 @@ const icons = [
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('about-video') as HTMLVideoElement;
+    const placeholder = document.getElementById('video-placeholder') as HTMLElement;
+    const overlay = document.getElementById('video-overlay') as HTMLElement;
+    
+    if (!video || !placeholder) return;
+    
+    let hasPlayed = false;
+    
+    // Hide placeholder once video is loaded and ready
+    video.addEventListener('loadeddata', () => {
+      placeholder.style.opacity = '0';
+      video.style.opacity = '0.7';
+      setTimeout(() => {
+        placeholder.style.display = 'none';
+      }, 500);
+    });
+    
+    // Hide overlay when video starts playing
+    video.addEventListener('play', () => {
+      if (overlay) {
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+          overlay.style.display = 'none';
+        }, 500);
+      }
+    });
+    
+    // Intersection Observer to auto-play when in view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasPlayed) {
+          video.play().catch(err => {
+            console.log('Video autoplay failed:', err);
+          });
+          hasPlayed = true;
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+    
+    observer.observe(video);
+  });
+</script>
