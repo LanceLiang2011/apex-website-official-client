@@ -213,7 +213,7 @@ const categories: Category[] = [
           { title: { zh: '全真模拟', en: 'Computer-Based Simulation' }, desc: { zh: '完全模拟机考环境', en: 'Full CBT Environment' }, icon: MonitorPlay },
           { title: { zh: '严格计时', en: 'Strict Timing' }, desc: { zh: '完全按照考试时间', en: 'Exam Timing' }, icon: Calendar },
           { title: { zh: '真实流程', en: 'Real Process' }, desc: { zh: '全流程演练', en: 'Full Process Drill' }, icon: CheckCircle2 },
-          { title: { zh: '考后评奖', en: 'Post-Exam Award' }, desc: { zh: '专业评分与奖励', en: 'Professional Grading' }, icon: Target }
+          { title: { zh: '考后评讲', en: 'Post-Exam Review' }, desc: { zh: '专业评分与奖励', en: 'Professional Grading' }, icon: Target }
         ]
       }
     ]
@@ -255,7 +255,7 @@ const categories: Category[] = [
           { title: { zh: '全真模拟', en: 'Computer-Based Simulation' }, desc: { zh: '完全模拟机考环境', en: 'Full CBT Environment' }, icon: MonitorPlay },
           { title: { zh: '严格计时', en: 'Strict Timing' }, desc: { zh: '完全按照考试时间', en: 'Exam Timing' }, icon: Calendar },
           { title: { zh: '真实流程', en: 'Real Process' }, desc: { zh: '全流程演练', en: 'Full Process Drill' }, icon: CheckCircle2 },
-          { title: { zh: '考后评奖', en: 'Post-Exam Award' }, desc: { zh: '专业评分与奖励', en: 'Professional Grading' }, icon: Target }
+          { title: { zh: '考后评讲', en: 'Post-Exam Review' }, desc: { zh: '专业评分与奖励', en: 'Professional Grading' }, icon: Target }
         ]
       }
     ]
@@ -546,4 +546,26 @@ const categories: Category[] = [
     </div>
   </section>
 
+  <script>
+    function initTabs() {
+      const params = new URLSearchParams(window.location.search);
+      const tab = params.get('tab');
+      if (tab) {
+        const tabButton = document.querySelector(`button[data-cat-tab="${tab}"]`);
+        if (tabButton) {
+          (tabButton as HTMLButtonElement).click();
+          // Scroll slightly past header
+          setTimeout(() => {
+            const container = document.querySelector('.category-content');
+            if (container) {
+              container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 100);
+        }
+      }
+    }
+
+    initTabs();
+    document.addEventListener('astro:page-load', initTabs);
+  </script>
 </BaseLayout>

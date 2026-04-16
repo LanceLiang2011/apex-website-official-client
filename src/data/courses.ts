@@ -83,44 +83,44 @@ export const courses: Course[] = [
 
   // Simple Courses
   {
-    id: "simple-toefl",
-    slug: "toefl-basic",
+    id: "simple-ielts-ag",
+    slug: "ielts-ag",
     centerId: "simple",
     name: {
-      zh: "托福基础班",
-      en: "TOEFL Foundation",
+      zh: "雅思A/G班",
+      en: "IELTS A/G Class",
     },
     shortDescription: {
-      zh: "夯实英语基础，全面提升听说读写能力，为托福考试做好准备。",
-      en: "Solidify English foundation, comprehensively improve listening, speaking, reading, and writing skills, preparing for the TOEFL exam.",
+      zh: "夯实英语基础，针对雅思考试技巧进行深度解析，为A类及G类雅思考试做好准备。",
+      en: "Solidify English foundation, in-depth analysis of IELTS exam techniques, preparing for Academic and General IELTS exams.",
     },
     level: {
-      zh: "入门",
-      en: "Beginner",
+      zh: "全阶段",
+      en: "All Stages",
     },
     tags: [
-      { zh: "托福", en: "TOEFL" },
+      { zh: "雅思", en: "IELTS" },
       { zh: "语言培训", en: "Language Training" },
     ],
   },
   {
-    id: "simple-ielts",
-    slug: "ielts-advanced",
+    id: "simple-celpip",
+    slug: "celpip",
     centerId: "simple",
     name: {
-      zh: "雅思高分班",
-      en: "IELTS Advanced",
+      zh: "思培直通班",
+      en: "CELPIP Bootcamp",
     },
     shortDescription: {
-      zh: "针对雅思考试技巧进行深度解析，模拟实战，冲刺高分。",
-      en: "In-depth analysis of IELTS exam techniques, mock exams, aiming for high scores.",
+      zh: "针对思培考试技巧进行深度解析，模拟实战，冲刺高分。",
+      en: "In-depth analysis of CELPIP exam techniques, mock exams, aiming for high scores.",
     },
     level: {
       zh: "进阶",
       en: "Advanced",
     },
     tags: [
-      { zh: "雅思", en: "IELTS" },
+      { zh: "思培", en: "CELPIP" },
       { zh: "语言培训", en: "Language Training" },
     ],
   },

@@ -60,15 +60,27 @@ const commonButtons = siteContent.common.buttons;
                 
                 <!-- Course Links -->
                 <div class="space-y-2 mb-8 w-full max-w-xs mx-auto">
-                  {centerCourses.map(course => (
-                    <a 
-                      href={getRelativeLocaleUrl(locale, `${center.slug}/courses/${course.slug}`)}
-                      class="block text-base text-white hover:text-white hover:bg-white/20 rounded px-2 py-1 transition-colors flex items-center justify-center font-medium drop-shadow-sm"
-                    >
-                      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                      {course.name[locale]}
-                    </a>
-                  ))}
+                  {centerCourses.map(course => {
+                    let href = getRelativeLocaleUrl(locale, `${center.slug}/courses/${course.slug}`);
+                    if (center.id === 'simple') {
+                      href = getRelativeLocaleUrl(locale, center.slug);
+                      if (course.slug === 'celpip') {
+                        href += '?tab=pte';
+                      } else if (course.slug === 'ielts-ag') {
+                        // Link IELTS A/G to appropriate tab. Using first tab (IELTS Academic) as default
+                        href += '?tab=academic'; 
+                      }
+                    }
+                    return (
+                      <a 
+                        href={href}
+                        class="block text-base text-white hover:text-white hover:bg-white/20 rounded px-2 py-1 transition-colors flex items-center justify-center font-medium drop-shadow-sm"
+                      >
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        {course.name[locale]}
+                      </a>
+                    );
+                  })}
                 </div>
 
                 <a 
