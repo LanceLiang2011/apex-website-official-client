@@ -51,7 +51,7 @@ export const centers: Center[] = [
       en: "Scientific Planning, Win at the Starting Line",
     },
     description: {
-      zh: "瑞思升学规划中心为学生提供全方位的升学规划服务，包括选课指导、背景提升、文书润色及大学申请全程跟踪。",
+      zh: "瑞思升学规划中心为学生提供全方位升学规划服务，包括选课指导、背景提升、文书润色及大学申请全程跟踪。",
       en: "Rise Academic Planning Center provides comprehensive college planning services, including course selection, background enhancement, essay polishing, and application tracking.",
     },
     courses: ["rise-planning-us", "rise-planning-uk"],
