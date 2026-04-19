@@ -70,6 +70,8 @@ const commonButtons = siteContent.common.buttons;
                         // Link IELTS A/G to appropriate tab. Using first tab (IELTS Academic) as default
                         href += '?tab=academic'; 
                       }
+                    } else if (center.id === 'rise') {
+                      href = getRelativeLocaleUrl(locale, center.slug);
                     }
                     return (
                       <a 
