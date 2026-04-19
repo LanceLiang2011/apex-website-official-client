@@ -123,6 +123,21 @@ const ieltsSharedSchedule = [
   }
 ];
 
+const ieltsGeneralSchedule = ieltsSharedSchedule.map(section => {
+  if (section.id === 'writing') {
+    return {
+      ...section,
+      schedule: [
+        { lecture: 'Lecture 1', topic: { zh: '写作评分标准', en: 'Writing Criteria' } },
+        { lecture: 'Lecture 2', topic: { zh: '小作文书信如何写 1', en: 'Task 1 Email Writing Part 1' } },
+        { lecture: 'Lecture 3', topic: { zh: '小作文书信如何写 2', en: 'Task 1 Email Writing Part 2' } },
+        ...section.schedule.slice(3)
+      ]
+    };
+  }
+  return section;
+});
+
 
 const pteSchedule = [
   {
@@ -232,7 +247,7 @@ const categories: Category[] = [
           zh: '64课时，针对移民类雅思，稳扎稳打达到CLB 7。',
           en: '64 hours, clear path to CLB 7 for immigration.'
         },
-        subTabs: ieltsSharedSchedule
+        subTabs: ieltsGeneralSchedule
       },
       {
         id: 'ielts-g-9',
@@ -243,7 +258,7 @@ const categories: Category[] = [
           zh: '64课时，冲击CLB 9高分，移民加分必备。',
           en: '64 hours, aiming for CLB 9, essential for immigration points.'
         },
-        subTabs: ieltsSharedSchedule
+        subTabs: ieltsGeneralSchedule
       },
       {
         id: 'ielts-g-sim',
