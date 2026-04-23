@@ -1,0 +1,76 @@
+---
+import type { Locale } from '../../data/types';
+import { content as siteContent } from '../../data/content';
+import { tutors } from '../../data/tutors';
+import GlassmorphicBox from '../GlassmorphicBox.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+
+const tutorsContent = siteContent.home.tutors;
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="container mx-auto px-6 md:px-12 lg:px-20 xl:px-28 2xl:px-36 max-w-[1600px]">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4">
+        {tutorsContent.heading[locale]}
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        {tutorsContent.subheading[locale]}
+      </p>
+    </div>
+
+    <!-- Tutors Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      {tutors.map((tutor) => (
+        <div class="group relative h-[380px] sm:h-[400px] lg:h-[420px] rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow duration-300">
+          <!-- Image (Full height) -->
+          <img 
+            src={tutor.image} 
+            alt={tutor.name} 
+            class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
+
+          <!-- Overlay (Slides in from bottom) -->
+          <div class="absolute inset-x-0 bottom-0 transform translate-y-[101%] group-hover:translate-y-0 transition-transform duration-300 ease-out h-[90%] sm:h-[85%]">
+             <GlassmorphicBox class="w-full h-full p-5 flex flex-col justify-start text-center overflow-y-auto custom-scrollbar" blur="md" bgOpacity={85} borderOpacity={20} mode="dark">
+                <h3 class="text-xl font-bold text-white mb-1">{tutor.name}</h3>
+                <p class="text-blue-200 font-medium text-xs mb-2">{tutor.center[locale]}</p>
+                <p class="text-blue-300 font-medium text-sm mb-3">{tutor.role[locale]}</p>
+                <div class="text-white text-xs space-y-1.5 opacity-90 text-left">
+                  {tutor.credentials[locale].map((credential) => (
+                    <p class="leading-relaxed flex items-start">
+                      <span class="mr-1.5 mt-0.5">•</span>
+                      <span>{credential}</span>
+                    </p>
+                  ))}
+                </div>
+             </GlassmorphicBox>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Custom Scrollbar for the overlay content */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+</style>

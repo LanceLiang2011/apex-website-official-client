@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import TutorsSection from '../home/TutorsSection.astro';
+import TutorGridSection from '../home/TutorGridSection.astro';
 import type { Locale } from '../../data/types';
 
 interface Props {
@@ -138,7 +138,7 @@ const title = locale === 'zh' ? '关于我们 - Apex Education' : 'About Us - Ap
   </section>
 
   <!-- Team Section -->
-  <TutorsSection locale={locale} />
+  <TutorGridSection locale={locale} />
 
   <!-- Mission & Vision -->
   <section class="py-20 bg-white">
