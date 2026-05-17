@@ -65,7 +65,7 @@ export const ieltsTestCentreData = {
       },
     ],
     registerLink:
-      "https://ielts.idp.com/book/IELTS?countryId=35&testCentreId=14181&testVenueId=5731&testCentreLocationId=4291&testSessionDate=02/07/2026%2012:00:00%20AM&lang=en&isSelt=false&restrictToSpecifiedDate=true&testmoduleid=2&ref=bxsearch",
+      "https://ielts.idp.com/canada/test-centre/heartland-international-english-school-lead-academy",
   },
 
   introduction: {
@@ -151,8 +151,8 @@ export const ieltsTestCentreData = {
       en: "Test Formats",
     },
     description: {
-      zh: "根据您的偏好选择考试形式",
-      en: "Choose your preferred test format",
+      zh: "了解便捷高效的雅思机考模式",
+      en: "Learn about the efficient and convenient computer-based test format",
     },
     formats: [
       {
@@ -175,39 +175,7 @@ export const ieltsTestCentreData = {
           ],
         },
       },
-      {
-        icon: "paper",
-        title: {
-          zh: "纸笔考试",
-          en: "Paper-based",
-        },
-        description: {
-          zh: "传统纸笔作答方式",
-          en: "Traditional paper-based test format",
-        },
-        features: {
-          zh: ["传统考试形式", "手写作答", "每月多场考试", "13天出成绩"],
-          en: [
-            "Traditional format",
-            "Handwritten answers",
-            "Multiple tests monthly",
-            "Results in 13 days",
-          ],
-        },
-      },
     ],
-  },
-
-  registrationVideo: {
-    title: {
-      zh: "报名流程",
-      en: "Registration Process",
-    },
-    description: {
-      zh: "观看官方视频，了解详细的考试报名步骤",
-      en: "Watch the official video to learn the detailed registration steps",
-    },
-    videoUrl: "https://www.youtube.com/embed/nacxvsD6kUs",
   },
 
   centreInfo: {
@@ -300,17 +268,6 @@ export const ieltsTestCentreData = {
         description: {
           zh: "每月多场考试，考位供应稳定",
           en: "Multiple tests monthly with stable seat availability",
-        },
-      },
-      {
-        icon: "support",
-        title: {
-          zh: "中文服务",
-          en: "Chinese Support",
-        },
-        description: {
-          zh: "提供中文咨询服务，沟通无障碍",
-          en: "Chinese consultation services for barrier-free communication",
         },
       },
     ],

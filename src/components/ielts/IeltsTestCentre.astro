@@ -167,7 +167,7 @@ const registerLink = ieltsTestCentreData.hero.registerLink;
         </p>
       </div>
       
-      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-1 gap-8 max-w-2xl mx-auto">
         {ieltsTestCentreData.testFormats.formats.map((format) => (
           <div class="bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition-all">
             <div class="flex justify-center mb-6">
@@ -190,33 +190,6 @@ const registerLink = ieltsTestCentreData.hero.registerLink;
             </ul>
           </div>
         ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Registration Video -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="flex items-center justify-center mb-8">
-          <div class="w-1 h-10 bg-red-600 mr-4"></div>
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-            {ieltsTestCentreData.registrationVideo.title[locale]}
-          </h2>
-        </div>
-        <p class="text-center text-gray-600 mb-8">
-          {ieltsTestCentreData.registrationVideo.description[locale]}
-        </p>
-        <div class="relative w-full" style="padding-bottom: 56.25%;">
-          <iframe 
-            class="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
-            src={ieltsTestCentreData.registrationVideo.videoUrl}
-            title="IELTS Registration Process"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
       </div>
     </div>
   </section>
@@ -293,7 +266,7 @@ const registerLink = ieltsTestCentreData.hero.registerLink;
         </h2>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
         {ieltsTestCentreData.advantages.items.map((item) => (
           <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
             <div class="flex justify-center mb-4">
