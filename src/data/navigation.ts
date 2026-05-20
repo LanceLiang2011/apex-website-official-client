@@ -40,7 +40,7 @@ export const navItems: NavItem[] = [
     href: "/rise",
   },
   {
-    label: { zh: "IELTS 考试中心", en: "IELTS Test Centre" },
+    label: { zh: "IELTS 考试中心", en: "Heartland X Lead IELTS Test Centre" },
     href: "/ielts-test-centre",
   },
   {
